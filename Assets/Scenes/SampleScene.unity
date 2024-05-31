@@ -8869,6 +8869,30 @@ PrefabInstance:
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 1136316917}
+    - target: {fileID: 4677486773136886328, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677486773136886328, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677486773136886328, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024250489151088281, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -265
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024250489151088281, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024250489151088281, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 67.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6715325635345577969, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_Name
       value: Canvas
