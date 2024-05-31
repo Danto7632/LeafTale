@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class PlayerMove : MonoBehaviour {
-    private static PlayerMove instance;
+public class catMove : MonoBehaviour {
+    private static catMove instance;
 
     [Header("Player_Status")]
     public float horiaontalInput;
@@ -18,9 +18,10 @@ public class PlayerMove : MonoBehaviour {
     public Rigidbody2D rb;
     public SpriteRenderer sp;
     public CapsuleCollider2D capsule2D;
+    public Animator anim;
 
     [Header("Player_Condition")]
-    public RaycastHit2D[] isGroundeds = new RaycastHit2D[10];
+    public RaycastHit2D[] isGroundeds = new RaycastHit2D[24];
     public bool isGrounded;
     public bool isFacingRight;
     public bool isMoveAllow;
@@ -40,9 +41,12 @@ public class PlayerMove : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
+        anim = GetComponent<Animator>();
 
         isMoveAllow = true;
-        groundRayCount = 20;
+        groundRayCount = 12;
+        isFacingRight = true;
+        anim.SetBool("isGround", true);
 
         if(instance == null) {
             instance = this;
@@ -61,14 +65,14 @@ public class PlayerMove : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.M)) {
             GamePuased();
         }
-
+        
+        isPlayerGround();
         Jump();
-
         Flip();
     }
 
     void FixedUpdate() {
-        isPlayerGround();
+        catAnim();
 
         if(isFacingRight) {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
@@ -79,11 +83,11 @@ public class PlayerMove : MonoBehaviour {
     }
 
     void isPlayerGround() {
-        groundRayThickness = -1.0f;
+        groundRayThickness = -0.6f;
         for(int i = 0; i < groundRayCount; i++) {
-            groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y - 1.0f);
+            groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y - 0.5f);
             isGroundeds[i] = Physics2D.Raycast(groundRayVec, Vector2.down, 0.01f, groundLayer);
-            Debug.DrawRay(groundRayVec, Vector2.down * 1f, Color.green);
+            Debug.DrawRay(groundRayVec, Vector2.down * 0.5f, Color.green);
             if(isGroundeds[i].collider != null) {
                 isGrounded = true;
                 break;
@@ -105,9 +109,15 @@ public class PlayerMove : MonoBehaviour {
 
     void Flip() {
         if(isFacingRight && Input.GetKeyDown(KeyCode.LeftArrow)) {
+            Vector3 newScale = transform.localScale;
+            newScale.x *= -1;
+            transform.localScale = newScale;
             isFacingRight = false;
         }
         else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow)) {
+            Vector3 newScale = transform.localScale;
+            newScale.x *= -1;
+            transform.localScale = newScale;
             isFacingRight = true;
         }
     }
@@ -125,5 +135,7 @@ public class PlayerMove : MonoBehaviour {
         }
     }
 
-
+    public void catAnim() {
+        anim.SetBool("isGround", isGrounded);
+    }
 }
