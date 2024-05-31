@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StartTimer : MonoBehaviour {
     public GameObject player;
+    public GameObject readyTimer;
     public Text timerText;
 
     private int countdownValue = 5;
@@ -15,7 +16,10 @@ public class StartTimer : MonoBehaviour {
 
     public void Awake() {
         player = GameObject.FindWithTag("Player");
+        readyTimer = GameObject.Find("Timer");
         cat = player.GetComponent<catMove>();
+
+        timerText = readyTimer.GetComponent<Text>();
 
         timerText.enabled = true;
     }
