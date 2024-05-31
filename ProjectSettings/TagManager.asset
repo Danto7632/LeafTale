@@ -9,6 +9,7 @@ TagManager:
   - Background3
   - Background4
   - SpawnZone
+  - Trap
   - EndZone
   layers:
   - Default
