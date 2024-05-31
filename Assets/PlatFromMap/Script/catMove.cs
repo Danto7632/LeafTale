@@ -155,4 +155,5 @@ public class catMove : MonoBehaviour {
     public void catAnim() {
         anim.SetBool("isGround", isGrounded);
     }
+    
 }
