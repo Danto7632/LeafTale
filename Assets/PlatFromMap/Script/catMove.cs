@@ -39,15 +39,15 @@ public class catMove : MonoBehaviour {
     public LayerMask groundLayer;
     public LayerMask wallLayer;
 
-    private bool isPaused = false;
 
     void Awake() {
+        isMoveAllow = false;
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
 
-        isMoveAllow = true;
+        isMoveAllow = false;
         groundRayCount = 17;
         isFacingRight = true;
         anim.SetBool("isGround", true);
@@ -67,10 +67,6 @@ public class catMove : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.M)) {
-            GamePuased();
-        }
-        
         Jump();
         Flip();
     }
@@ -79,11 +75,13 @@ public class catMove : MonoBehaviour {
         isPlayerGround();
         catAnim();
 
-        if(isFacingRight) {
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        }
-        else {
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+        if(isMoveAllow) {
+            if(isFacingRight) {
+                rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            }
+            else {
+                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            }
         }
     }
 
@@ -139,20 +137,10 @@ public class catMove : MonoBehaviour {
         }
     }
 
-    #endregion  
-
-    public void GamePuased() {
-        if(isPaused) {
-            Time.timeScale = 1f;
-            isPaused = false;
-        }
-        else {
-            Time.timeScale = 0f;
-            isPaused = true;
-        }
-    }
+    #endregion
 
     public void catAnim() {
+        anim.SetBool("isReady", !isMoveAllow);
         anim.SetBool("isGround", isGrounded);
     }
 }

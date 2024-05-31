@@ -7,17 +7,23 @@ public class Timer : MonoBehaviour
 {
     public TMP_Text[] timeText;
     public TMP_Text gameOverText;
-    float time = 120f; // 제한 시간 120초
+    float time = 126f; // 제한 시간 125초
     int min, sec;
     
     void Start()
     {
+        StartCoroutine(delayTimer());
         // timeText 배열이 null이 아니고 크기가 2 이상인지 확인
-        if (timeText != null && timeText.Length >= 2)
+        if (timeText != null && timeText.Length >= 2 && gameOverText != null)
         {
             // 제한 시간 02:00으로 초기화
             timeText[0].text = "02";
-            timeText[1].text = "00";
+            timeText[1].text = "06";
+            timeText[0].enabled = false;
+            timeText[1].enabled = false;
+            gameOverText.enabled = false;
+
+            StartCoroutine(delayTimer());
         }
         else
         {
@@ -44,6 +50,18 @@ public class Timer : MonoBehaviour
         {
             timeText[0].text = min.ToString("00");
             timeText[1].text = sec.ToString("00");
+        }
+    }
+
+    IEnumerator delayTimer() {
+        yield return new WaitForSeconds(5f);
+
+        // timeText 배열과 gameOverText가 null이 아닌지 확인
+        if (timeText != null && timeText.Length >= 2 && gameOverText != null)
+        {
+            timeText[0].enabled = true;
+            timeText[1].enabled = true;
+            gameOverText.enabled = true;
         }
     }
 }
