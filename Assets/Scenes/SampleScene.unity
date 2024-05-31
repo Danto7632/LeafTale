@@ -8151,7 +8151,7 @@ GameObject:
   - component: {fileID: 512383996}
   - component: {fileID: 512383995}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Grid1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8656,17 +8656,12 @@ MonoBehaviour:
   Hp: 0
   moveSpeed: 10
   jumpForce: 12
+  newScale: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   sp: {fileID: 0}
   capsule2D: {fileID: 0}
   anim: {fileID: 0}
-  isLeftWalls: 00000000
-  isRightWalls: 00000000
   isGrounded: 0
-  isCoyoteLeft: 0
-  isCoyoteRight: 0
-  isAttachedToLeftWall: 0
-  isAttachedToRightWall: 0
   isFacingRight: 0
   isMoveAllow: 0
   groundRayThickness: 0
