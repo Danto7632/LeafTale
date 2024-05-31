@@ -16,12 +16,30 @@ public class SpawnPointManager : MonoBehaviour {
 
             switch(spawnCount) {
                 case 0 :
+                    if(!cat.isFacingRight) {
+                        cat.newScale = cat.transform.localScale;
+                        cat.newScale.x *= -1f;
+                        cat.transform.localScale = cat.newScale;
+                        cat.isFacingRight = true;
+                    }
                     other.transform.position = new Vector2(-18f, 2.8f);
                     break;
                 case 1 :
+                    if(!cat.isFacingRight) {
+                        cat.newScale = cat.transform.localScale;
+                        cat.newScale.x *= -1f;
+                        cat.transform.localScale = cat.newScale;
+                        cat.isFacingRight = true;
+                    }
                     other.transform.position = new Vector2(40f, 8.8f);
                     break;
                 case 2 :
+                    if(cat.isFacingRight) {
+                        cat.newScale = cat.transform.localScale;
+                        cat.newScale.x *= -1f;
+                        cat.transform.localScale = cat.newScale;
+                        cat.isFacingRight = false;
+                    }
                     other.transform.position = new Vector2(59f, 11f);
                     break;
             }

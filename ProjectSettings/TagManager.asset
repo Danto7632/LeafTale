@@ -10,6 +10,7 @@ TagManager:
   - Background4
   - SpawnZone
   - Trap
+  - EndZone
   layers:
   - Default
   - TransparentFX
