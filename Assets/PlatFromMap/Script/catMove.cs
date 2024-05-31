@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class PlayerMove : MonoBehaviour {
-    private static PlayerMove instance;
+public class catMove : MonoBehaviour {
+    private static catMove instance;
 
     [Header("Player_Status")]
     public float horiaontalInput;
@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour {
     public Rigidbody2D rb;
     public SpriteRenderer sp;
     public CapsuleCollider2D capsule2D;
+    public Animator anim;
 
     [Header("Player_Condition")]
     public RaycastHit2D[] isGroundeds = new RaycastHit2D[24];
@@ -40,9 +41,12 @@ public class PlayerMove : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
+        anim = GetComponent<Animator>();
 
         isMoveAllow = true;
-        groundRayCount = 24;
+        groundRayCount = 12;
+        isFacingRight = true;
+        anim.SetBool("isGround", true);
 
         if(instance == null) {
             instance = this;
@@ -68,6 +72,8 @@ public class PlayerMove : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        catAnim();
+
         if(isFacingRight) {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
@@ -77,7 +83,7 @@ public class PlayerMove : MonoBehaviour {
     }
 
     void isPlayerGround() {
-        groundRayThickness = -1.2f;
+        groundRayThickness = -0.6f;
         for(int i = 0; i < groundRayCount; i++) {
             groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y - 0.5f);
             isGroundeds[i] = Physics2D.Raycast(groundRayVec, Vector2.down, 0.01f, groundLayer);
@@ -103,9 +109,15 @@ public class PlayerMove : MonoBehaviour {
 
     void Flip() {
         if(isFacingRight && Input.GetKeyDown(KeyCode.LeftArrow)) {
+            Vector3 newScale = transform.localScale;
+            newScale.x *= -1;
+            transform.localScale = newScale;
             isFacingRight = false;
         }
         else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow)) {
+            Vector3 newScale = transform.localScale;
+            newScale.x *= -1;
+            transform.localScale = newScale;
             isFacingRight = true;
         }
     }
@@ -123,5 +135,7 @@ public class PlayerMove : MonoBehaviour {
         }
     }
 
-
+    public void catAnim() {
+        anim.SetBool("isGround", isGrounded);
+    }
 }
