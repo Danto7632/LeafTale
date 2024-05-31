@@ -154,4 +154,5 @@ public class catMove : MonoBehaviour {
             rb.velocity = Vector2.zero;
         }
     }
+    
 }
