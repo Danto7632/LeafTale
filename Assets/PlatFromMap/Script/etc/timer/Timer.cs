@@ -10,8 +10,16 @@ public class Timer : MonoBehaviour
     float time = 126f; // 제한 시간 125초
     int min, sec;
     
-    void Start()
-    {
+    void Start() {
+        timeText = new TMP_Text[2];
+
+        GameObject minObject = GameObject.Find("Sec");
+        GameObject secObject = GameObject.Find("Min");
+        GameObject colonObject = GameObject.Find("Colon");
+
+        timeText[0] = minObject.GetComponent<TMP_Text>();
+        timeText[1] = secObject.GetComponent<TMP_Text>();
+        gameOverText = colonObject.GetComponent<TMP_Text>();
         StartCoroutine(delayTimer());
         // timeText 배열이 null이 아니고 크기가 2 이상인지 확인
         if (timeText != null && timeText.Length >= 2 && gameOverText != null)
