@@ -23,6 +23,8 @@ public class catMove : MonoBehaviour {
     [Header("Player_Condition")]
     public RaycastHit2D[] isGroundeds = new RaycastHit2D[24];
     public bool isGrounded;
+    public bool isAttachedToLeftWall;
+    public bool isAttachedToRightWall;
     public bool isFacingRight;
     public bool isMoveAllow;
 
