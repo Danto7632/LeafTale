@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 94185802}
   m_Layer: 0
   m_Name: EndPoint
-  m_TagString: SpawnZone
+  m_TagString: EndZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94185800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -740.2671, y: -419.85345, z: 0.30801424}
+  m_LocalPosition: {x: -8, y: 25, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8940,6 +8940,7 @@ MonoBehaviour:
   isGrounded: 0
   isFacingRight: 0
   isMoveAllow: 0
+  isGameOver: 0
   groundRayThickness: 0
   wallRayThickness: 0
   groundRayCount: 0
