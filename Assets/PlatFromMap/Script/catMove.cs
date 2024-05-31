@@ -26,6 +26,7 @@ public class catMove : MonoBehaviour {
     public bool isGrounded;
     public bool isFacingRight;
     public bool isMoveAllow;
+    public bool isGameOver;
 
     [Header("RayCast")]
     Vector2 moveDirection;
@@ -39,15 +40,16 @@ public class catMove : MonoBehaviour {
     public LayerMask groundLayer;
     public LayerMask wallLayer;
 
-    private bool isPaused = false;
 
     void Awake() {
+        isMoveAllow = false;
+        isGameOver = false;
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
 
-        isMoveAllow = true;
+        isMoveAllow = false;
         groundRayCount = 17;
         isFacingRight = true;
         anim.SetBool("isGround", true);
@@ -67,10 +69,6 @@ public class catMove : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.M)) {
-            GamePuased();
-        }
-        
         Jump();
         Flip();
     }
@@ -79,11 +77,13 @@ public class catMove : MonoBehaviour {
         isPlayerGround();
         catAnim();
 
-        if(isFacingRight) {
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        }
-        else {
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+        if(isMoveAllow) {
+            if(isFacingRight) {
+                rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            }
+            else {
+                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            }
         }
     }
 
@@ -119,19 +119,19 @@ public class catMove : MonoBehaviour {
     #region PlayerMove
 
     void Jump() {
-        if(isGrounded && Input.GetButtonDown("Jump")) {
+        if(isGrounded && Input.GetButtonDown("Jump") && isMoveAllow) {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
 
     void Flip() {
-        if(isFacingRight && Input.GetKeyDown(KeyCode.LeftArrow)) {
+        if(isFacingRight && Input.GetKeyDown(KeyCode.LeftArrow) && isMoveAllow) {
             newScale = transform.localScale;
             newScale.x *= -1;
             transform.localScale = newScale;
             isFacingRight = false;
         }
-        else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow)) {
+        else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow) && isMoveAllow) {
             newScale = transform.localScale;
             newScale.x *= -1;
             transform.localScale = newScale;
@@ -139,20 +139,19 @@ public class catMove : MonoBehaviour {
         }
     }
 
-    #endregion  
-
-    public void GamePuased() {
-        if(isPaused) {
-            Time.timeScale = 1f;
-            isPaused = false;
-        }
-        else {
-            Time.timeScale = 0f;
-            isPaused = true;
-        }
-    }
+    #endregion
 
     public void catAnim() {
+        anim.SetBool("isReady", !isMoveAllow);
         anim.SetBool("isGround", isGrounded);
+        anim.SetBool("isGameOver", isGameOver);
+    }
+
+    public void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("EndZone")) {
+            isMoveAllow = false;
+            isGameOver = true;
+            rb.velocity = Vector2.zero;
+        }
     }
 }
