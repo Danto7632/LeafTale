@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnPointManager : MonoBehaviour {
+    public catMove cat;
     public int spawnCount;
 
     public void Start() {
@@ -11,6 +12,8 @@ public class SpawnPointManager : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player")) {
+            cat = other.gameObject.GetComponent<catMove>();
+
             switch(spawnCount) {
                 case 0 :
                     other.transform.position = new Vector2(-18f, 2.8f);

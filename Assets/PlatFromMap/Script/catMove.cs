@@ -13,6 +13,7 @@ public class catMove : MonoBehaviour {
     public float Hp;
     public float moveSpeed = 10f;
     public float jumpForce = 12f;
+    public Vector3 newScale;
 
     [Header("Player_Component")]
     public Rigidbody2D rb;
@@ -125,13 +126,13 @@ public class catMove : MonoBehaviour {
 
     void Flip() {
         if(isFacingRight && Input.GetKeyDown(KeyCode.LeftArrow)) {
-            Vector3 newScale = transform.localScale;
+            newScale = transform.localScale;
             newScale.x *= -1;
             transform.localScale = newScale;
             isFacingRight = false;
         }
         else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow)) {
-            Vector3 newScale = transform.localScale;
+            newScale = transform.localScale;
             newScale.x *= -1;
             transform.localScale = newScale;
             isFacingRight = true;
