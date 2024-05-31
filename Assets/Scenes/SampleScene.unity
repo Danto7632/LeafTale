@@ -8164,13 +8164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799ad9fc84980471299f80189d2ad078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 960567776}
   smoothSpeed: 20
   offset: {x: 0, y: 0}
-  limitMinX: -100
-  limitMaxX: 100
-  limitMinY: -100
-  limitMaxY: 100
 --- !u!81 &777356307
 AudioListener:
   m_ObjectHideFlags: 0
