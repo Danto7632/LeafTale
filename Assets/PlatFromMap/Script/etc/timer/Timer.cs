@@ -9,8 +9,9 @@ public class Timer : MonoBehaviour
     public TMP_Text gameOverText;
     float time = 126f; // 제한 시간 125초
     int min, sec;
-    
-    void Start() {
+
+    void Start()
+    {
         timeText = new TMP_Text[2];
 
         GameObject minObject = GameObject.Find("Sec");
@@ -38,9 +39,9 @@ public class Timer : MonoBehaviour
             Debug.LogError("timeText 배열이 null이거나 크기가 2보다 작습니다.");
         }
     }
-    
+
     void Update()
-    { 
+    {
         time -= Time.deltaTime;
 
         min = (int)time / 60;
@@ -61,7 +62,8 @@ public class Timer : MonoBehaviour
         }
     }
 
-    IEnumerator delayTimer() {
+    IEnumerator delayTimer()
+    {
         yield return new WaitForSeconds(5f);
 
         // timeText 배열과 gameOverText가 null이 아닌지 확인
