@@ -24,20 +24,15 @@ public class PlayerMove : MonoBehaviour {
     public bool isGrounded;
     public bool isFacingRight;
     public bool isMoveAllow;
-    public bool isCoyoteLeft;
-    public bool isCoyoteRight;
 
     [Header("RayCast")]
     Vector2 moveDirection;
     Vector2 groundRayVec;
-    Vector2 CoyoteLeftVec;
-    Vector2 CoyoteRightVec;
     public float groundRayThickness;
     public int groundRayCount;
 
     [Header("Layer")]
     public LayerMask groundLayer;
-    public LayerMask wallLayer;
 
     private bool isPaused = false;
 
@@ -84,7 +79,7 @@ public class PlayerMove : MonoBehaviour {
     }
 
     void isPlayerGround() {
-        groundRayThickness = -0.4f;
+        groundRayThickness = -1.0f;
         for(int i = 0; i < groundRayCount; i++) {
             groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y - 1.0f);
             isGroundeds[i] = Physics2D.Raycast(groundRayVec, Vector2.down, 0.01f, groundLayer);
