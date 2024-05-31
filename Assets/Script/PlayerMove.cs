@@ -42,7 +42,7 @@ public class PlayerMove : MonoBehaviour {
         capsule2D = GetComponent<CapsuleCollider2D>();
 
         isMoveAllow = true;
-        groundRayCount = 9;
+        groundRayCount = 20;
 
         if(instance == null) {
             instance = this;
@@ -83,7 +83,7 @@ public class PlayerMove : MonoBehaviour {
         for(int i = 0; i < groundRayCount; i++) {
             groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y - 1.0f);
             isGroundeds[i] = Physics2D.Raycast(groundRayVec, Vector2.down, 0.01f, groundLayer);
-            Debug.DrawRay(groundRayVec, Vector2.down * 0.01f, Color.green);
+            Debug.DrawRay(groundRayVec, Vector2.down * 1f, Color.green);
             if(isGroundeds[i].collider != null) {
                 isGrounded = true;
                 break;
