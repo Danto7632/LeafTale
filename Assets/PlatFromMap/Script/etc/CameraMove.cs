@@ -11,6 +11,11 @@ public class Cameramove : MonoBehaviour {
 
     private void Awake() {
         target = GameObject.FindWithTag("Player").transform;
+
+        limitMaxX = 100f;
+        limitMinX = -100f;
+        limitMaxY = 100f;
+        limitMinY = -100f;
     }
 
     private void Start() {
