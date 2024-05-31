@@ -23,8 +23,6 @@ public class catMove : MonoBehaviour {
     [Header("Player_Condition")]
     public RaycastHit2D[] isGroundeds = new RaycastHit2D[17];
     public bool isGrounded;
-    public bool isCoyoteLeft;
-    public bool isCoyoteRight;
     public bool isFacingRight;
     public bool isMoveAllow;
 
@@ -32,8 +30,6 @@ public class catMove : MonoBehaviour {
     Vector2 moveDirection;
     Vector2 groundRayVec;
     Vector2 wallRayVec;
-    Vector2 CoyoteLeftVec;
-    Vector2 CoyoteRightVec;
     public float groundRayThickness;
     public float wallRayThickness;
     public int groundRayCount;
@@ -93,9 +89,9 @@ public class catMove : MonoBehaviour {
     void isPlayerGround() {
         groundRayThickness = -0.8f;
         for(int i = 0; i < groundRayCount; i++) {
-            groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y - 1.0f);
-            isGroundeds[i] = Physics2D.Raycast(groundRayVec, Vector2.down, 0.01f, groundLayer);
-            Debug.DrawRay(groundRayVec, Vector2.down * 0.01f, Color.green);
+            groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y);
+            isGroundeds[i] = Physics2D.Raycast(groundRayVec, Vector2.down, 1f, groundLayer);
+            Debug.DrawRay(groundRayVec, Vector2.down * 1f, Color.green);
             if(isGroundeds[i].collider != null) {
                 isGrounded = true;
                 break;
@@ -112,38 +108,17 @@ public class catMove : MonoBehaviour {
 
         if(forwardHit.collider != null) {
             moveSpeed = 0f;
+            isGrounded = false;
         }
         else {
             moveSpeed = 10f;
-        }
-
-        if(forwardHit.collider == null) {
-            CoyoteLeftVec = new Vector2(this.transform.position.x - 0.8f, this.transform.position.y);
-            isCoyoteLeft = Physics2D.Raycast(CoyoteLeftVec, Vector2.down, 0.51f, groundLayer);
-            Debug.DrawRay(CoyoteLeftVec, Vector2.down * 0.51f, Color.green);
-            if(isCoyoteLeft) {
-                isGrounded = true;
-            }
-            else {
-                isGrounded = false;
-            }
-
-            CoyoteRightVec = new Vector2(this.transform.position.x + 0.8f, this.transform.position.y);
-            isCoyoteRight = Physics2D.Raycast(CoyoteRightVec, Vector2.down, 0.51f, groundLayer);
-            Debug.DrawRay(CoyoteRightVec, Vector2.down * 0.51f, Color.green);
-            if(isCoyoteRight) {
-                isGrounded = true;
-            }
-            else {
-                isGrounded = false;
-            }
         }
     }
 
     #region PlayerMove
 
     void Jump() {
-        if(isGrounded && Input.GetButtonDown("Jump") && isMoveAllow) {
+        if(isGrounded && Input.GetButtonDown("Jump")) {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
