@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 89d67259379436342adf6f399f0ba977
+guid: 51cb0963696eb794fae4048aa15e6666
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fan_0
+      name: Fire Trap - Level 3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d759134fa301a3b48a9c3320fe6a6a21
-      internalID: 1395802252
+      spriteID: 16cbd77d75f08b14ea99324c393e4fb3
+      internalID: -658346433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fan_1
+      name: Fire Trap - Level 3_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c21c9d88959334479a29814838039b3
-      internalID: -774246484
+      spriteID: 160a05958a229834d8473ddd2c09774c
+      internalID: -1631793314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fan_2
+      name: Fire Trap - Level 3_2
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60f9592dc434747418418d63633b1a85
-      internalID: -732202647
+      spriteID: 0bb16bb5520dfc241ae117beafa28fdd
+      internalID: 124080586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fan_3
+      name: Fire Trap - Level 3_3
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe004314ddf51aa419ed61afbff997e5
-      internalID: -393922832
+      spriteID: 2115a6d6f6e24bb429771e22e0e39a77
+      internalID: 557389881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fan_4
+      name: Fire Trap - Level 3_4
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a0e80c1dddabaa489a37ed9bb14956f
-      internalID: 1024937465
+      spriteID: 330c106654ab13340bdb7990d21f1e46
+      internalID: 1617585919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fan_5
+      name: Fire Trap - Level 3_5
       rect:
         serializedVersion: 2
         x: 160
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca84eef96ab6bc5488c9aa54e0336bac
-      internalID: -680362980
+      spriteID: f8befe41e82fa5040be0b05f2a2e82f7
+      internalID: 2075141415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fan_6
+      name: Fire Trap - Level 3_6
       rect:
         serializedVersion: 2
         x: 192
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32d72cebcf0ebd046b208ea1eaf26d14
-      internalID: -1430826853
+      spriteID: c59d05aa6d7bc6f499af87bde4c818ae
+      internalID: -1979911071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fan_7
+      name: Fire Trap - Level 3_7
       rect:
         serializedVersion: 2
         x: 224
         y: 0
         width: 32
-        height: 16
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,8 +271,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6454933d21f2b4d47b1b5c9378edfd76
-      internalID: -1158356584
+      spriteID: 43744da8055c50844a7c9d102e06d4f9
+      internalID: 123679778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Trap - Level 3_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c15967865b540a7478bfab244f1c2863
+      internalID: 561150190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Trap - Level 3_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8123c14495916c49bd51d25cb1a8b9e
+      internalID: -1235280750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Trap - Level 3_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 612ab1a9cba54fb459a3d1de98339595
+      internalID: 1825920490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Trap - Level 3_11
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd7a2ce02b90f841b337e3ddc997983
+      internalID: 651130737
       vertices: []
       indices: 
       edges: []
@@ -288,14 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fan_0: 1395802252
-      Fan_1: -774246484
-      Fan_2: -732202647
-      Fan_3: -393922832
-      Fan_4: 1024937465
-      Fan_5: -680362980
-      Fan_6: -1430826853
-      Fan_7: -1158356584
+      Fire Trap - Level 3_0: -658346433
+      Fire Trap - Level 3_1: -1631793314
+      Fire Trap - Level 3_10: 1825920490
+      Fire Trap - Level 3_11: 651130737
+      Fire Trap - Level 3_2: 124080586
+      Fire Trap - Level 3_3: 557389881
+      Fire Trap - Level 3_4: 1617585919
+      Fire Trap - Level 3_5: 2075141415
+      Fire Trap - Level 3_6: -1979911071
+      Fire Trap - Level 3_7: 123679778
+      Fire Trap - Level 3_8: 561150190
+      Fire Trap - Level 3_9: -1235280750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
