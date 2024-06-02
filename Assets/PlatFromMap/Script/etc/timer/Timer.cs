@@ -14,8 +14,8 @@ public class Timer : MonoBehaviour
     {
         timeText = new TMP_Text[2];
 
-        GameObject minObject = GameObject.Find("Sec");
-        GameObject secObject = GameObject.Find("Min");
+        GameObject minObject = GameObject.Find("Min");
+        GameObject secObject = GameObject.Find("Sec");
         GameObject colonObject = GameObject.Find("Colon");
 
         timeText[0] = minObject.GetComponent<TMP_Text>();
