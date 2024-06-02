@@ -31,7 +31,7 @@ public class SpawnPointManager : MonoBehaviour {
                         cat.transform.localScale = cat.newScale;
                         cat.isFacingRight = true;
                     }
-                    other.transform.position = new Vector2(40f, 8.8f);
+                    other.transform.position = new Vector2(28f, 7f);
                     break;
                 case 2 :
                     if(cat.isFacingRight) {
@@ -41,6 +41,15 @@ public class SpawnPointManager : MonoBehaviour {
                         cat.isFacingRight = false;
                     }
                     other.transform.position = new Vector2(59f, 11f);
+                    break;
+                case 3 :
+                    if(cat.isFacingRight) {
+                        cat.newScale = cat.transform.localScale;
+                        cat.newScale.x *= -1f;
+                        cat.transform.localScale = cat.newScale;
+                        cat.isFacingRight = false;
+                    }
+                    other.transform.position = new Vector2(26f, 17f);
                     break;
             }
         }
