@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class broomMove : MonoBehaviour {
     [Header("Player_Status")]
-    public int lineCount;
-    public float moveSpeed = 10f;
+    public float horiaontalInput;
+    public float verticalInput;
+    public float moveSpeed;
+    public float basicSpeed;
 
     [Header("Player_Component")]
     public Rigidbody2D rb;
@@ -15,10 +17,11 @@ public class broomMove : MonoBehaviour {
 
     [Header("Player_Condition")]
     public bool isHit;
+    public Vector2 moveDirection;
 
     void Awake() {
-        lineCount = 0;
-
+        moveSpeed = 8f;
+        basicSpeed = 10f;
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
@@ -26,34 +29,14 @@ public class broomMove : MonoBehaviour {
     }
 
     void Update() {
-        rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
         lineControl();
     }
 
     void lineControl() {
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && lineCount >= 0) {
-            StartCoroutine(changeLine("left"));
-            lineCount--;
-        }
+        horiaontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
-        if(Input.GetKeyDown(KeyCode.RightArrow) && lineCount <= 0) {
-            StartCoroutine(changeLine("right"));
-            lineCount++;
-        }
-    }
-
-    IEnumerator changeLine(string where) {
-        if(where == "left") {
-            rb.velocity = new Vector2(-5f, moveSpeed);
-            Debug.Log("Left");
-
-            yield return new WaitForSeconds(1f);
-        }
-        else {
-            rb.velocity = new Vector2(5f, moveSpeed);
-            Debug.Log("Right");
-
-            yield return new WaitForSeconds(1f);
-        }
+        moveDirection = new Vector2(horiaontalInput, verticalInput);
+        rb.velocity = new Vector2(moveDirection.x * moveSpeed, (moveDirection.y * moveSpeed) + basicSpeed);
     }
 }

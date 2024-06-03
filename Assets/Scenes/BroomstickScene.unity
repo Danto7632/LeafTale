@@ -306,14 +306,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83dfa1734d6ef4b01a73aa68afa0e2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineCount: 0
-  moveSpeed: 10
-  newScale: {x: 0, y: 0, z: 0}
+  horiaontalInput: 0
+  verticalInput: 0
+  moveSpeed: 3
+  basicSpeed: 5
   rb: {fileID: 0}
   sp: {fileID: 0}
   capsule2D: {fileID: 0}
   anim: {fileID: 0}
   isHit: 0
+  moveDirection: {x: 0, y: 0}
 --- !u!1 &1380832060
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,4 +423,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   xFixedPosition: 0
-  smoothSpeed: 1
+  smoothSpeed: 0.5
