@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class broomMove : MonoBehaviour {
+
     [Header("Player_Status")]
     public float horiaontalInput;
     public float verticalInput;
@@ -25,12 +26,12 @@ public class broomMove : MonoBehaviour {
     public float maxY;
 
     void Awake() {
-        moveSpeed = 8f;
-
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
+
+        moveSpeed = 8f;
 
         minX = -10f;
         maxX = 10f;
