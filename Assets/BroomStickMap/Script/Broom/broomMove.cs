@@ -46,12 +46,33 @@ public class broomMove : MonoBehaviour {
         horiaontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        moveDirection = new Vector2(horiaontalInput, verticalInput);
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        if(!isHit) {
+            moveDirection = new Vector2(horiaontalInput, verticalInput);
+            rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        }
 
         Vector2 clampedPosition = rb.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
         clampedPosition.y = Mathf.Clamp(clampedPosition.y, minY, maxY);
         rb.position = clampedPosition;
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("BroomEnemy")) {
+            StartCoroutine(hitDelay());
+        }
+    }
+
+    IEnumerator hitDelay() {
+        isHit = true;
+        rb.velocity = Vector2.zero;
+
+        sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
+
+
+        yield return new WaitForSeconds(1.5f);
+
+        isHit = false;
+        sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1f);
     }
 }
