@@ -7,7 +7,6 @@ public class broomMove : MonoBehaviour {
     public float horiaontalInput;
     public float verticalInput;
     public float moveSpeed;
-    public float basicSpeed;
 
     [Header("Player_Component")]
     public Rigidbody2D rb;
@@ -19,13 +18,24 @@ public class broomMove : MonoBehaviour {
     public bool isHit;
     public Vector2 moveDirection;
 
+    [Header("Movement_Limits")]
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+
     void Awake() {
         moveSpeed = 8f;
-        basicSpeed = 10f;
+
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
+
+        minX = -10f;
+        maxX = 10f;
+        minY = -2f;
+        maxY = 15f;
     }
 
     void Update() {
@@ -37,6 +47,11 @@ public class broomMove : MonoBehaviour {
         verticalInput = Input.GetAxis("Vertical");
 
         moveDirection = new Vector2(horiaontalInput, verticalInput);
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, (moveDirection.y * moveSpeed) + basicSpeed);
+        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+
+        Vector2 clampedPosition = rb.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, minY, maxY);
+        rb.position = clampedPosition;
     }
 }
