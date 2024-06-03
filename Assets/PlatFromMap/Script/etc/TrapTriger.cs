@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPointManager : MonoBehaviour
+public class TrapTriger : MonoBehaviour
 {
     public catMove cat;
     public int spawnCount;
+    GameObject spawn;
 
     public void Start()
     {
-        spawnCount = 0;
+        spawn = GameObject.Find("SpawnPoint");
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -17,6 +18,7 @@ public class SpawnPointManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             cat = other.gameObject.GetComponent<catMove>();
+            spawnCount=spawn.GetComponent<SpawnPointManager>().spawnCount;
 
             switch (spawnCount)
             {
