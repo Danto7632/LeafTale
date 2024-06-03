@@ -5,13 +5,14 @@ using UnityEngine;
 public class broomCamera : MonoBehaviour {
     public GameObject Player;
     public float xFixedPosition = 0f;
-    public float smoothSpeed = 1f;
+    public float smoothSpeed;
 
     void Awake() {
+        smoothSpeed = 0.1f;
         Player = GameObject.FindWithTag("Player");
     }
 
-    void LateUpdate() {
+    void FixedUpdate() {
         if (Player != null) {
             Vector3 desiredPosition = new Vector3(xFixedPosition, Player.transform.position.y + 3f, transform.position.z);
 

@@ -42,6 +42,10 @@ public class catMove : MonoBehaviour {
     public LayerMask wallLayer;
 
 
+    private float lastKeyPressTime = 0f;
+    private float keyPressInterval = 0.2f; // Adjust the interval as needed
+    private float speedIncrement = 5f;
+
     void Awake() {
         isMoveAllow = false;
         isGameOver = false;
@@ -75,17 +79,26 @@ public class catMove : MonoBehaviour {
         Jump();
         Flip();
 
-        if(isMoveAllow) {
-            if(Input.GetKeyDown(KeyCode.J)) {
-                if(isFacingRight && (currentSpeed < accelMaxForce)) {
-                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+        if (isMoveAllow) {
+            if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.T)) {
+                float currentTime = Time.time;
+                if (currentTime - lastKeyPressTime <= keyPressInterval) {
+                    if (isFacingRight && (currentSpeed < accelMaxForce)) {
+                        rb.AddForce(new Vector2(accelForce + speedIncrement, 0), ForceMode2D.Impulse);
+                    } else if (!isFacingRight && (currentSpeed > -accelMaxForce)) {
+                        rb.AddForce(new Vector2(-accelForce - speedIncrement, 0), ForceMode2D.Impulse);
+                    }
+                    speedIncrement += 1f; // Increment the speed
+                } else {
+                    // Reset the speed increment if the interval is too long
+                    speedIncrement = 1f;
                 }
-                else if(!isFacingRight && (currentSpeed > -accelMaxForce)){
-                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
-                }
+                lastKeyPressTime = currentTime;
             }
         }
     }
+
+
 
     void FixedUpdate() {
         isPlayerGround();
@@ -114,9 +127,11 @@ public class catMove : MonoBehaviour {
 
         if(forwardHit.collider != null) {
             moveSpeed = 0f;
+            isMoveAllow = false;
             isGrounded = false;
         }
         else {
+            isMoveAllow = true;
             moveSpeed = 10f;
         }
     }
@@ -164,6 +179,16 @@ public class catMove : MonoBehaviour {
             isGameOver = true;
             rb.velocity = Vector2.zero;
         }
+
+        if (other.gameObject.CompareTag("SpawnZone")) {
+            isMoveAllow = false;
+            rb.velocity = Vector2.zero;
+            StartCoroutine(spawnDelay()); // Start the coroutine here
+        }
     }
-    
+
+    IEnumerator spawnDelay() {
+        yield return new WaitForSeconds(0.5f);
+        isMoveAllow = true;
+    }
 }
