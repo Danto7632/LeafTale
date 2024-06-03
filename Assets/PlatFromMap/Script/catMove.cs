@@ -13,6 +13,8 @@ public class catMove : MonoBehaviour {
     public float Hp;
     public float moveSpeed = 10f;
     public float jumpForce = 12f;
+    public float accelForce = 2f;
+    public float accelMaxForce = 8f;
     public Vector3 newScale;
 
     [Header("Player_Component")]
@@ -69,22 +71,26 @@ public class catMove : MonoBehaviour {
     }
 
     void Update() {
+        float currentSpeed = rb.velocity.x;
+
         Jump();
         Flip();
+
+        if(isMoveAllow) {
+            if(Input.GetKeyDown(KeyCode.J)) {
+                if(isFacingRight && (currentSpeed < accelMaxForce)) {
+                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+                }
+                else if(!isFacingRight && (currentSpeed > -accelMaxForce)){
+                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+                }
+            }
+        }
     }
 
     void FixedUpdate() {
         isPlayerGround();
         catAnim();
-
-        if(isMoveAllow) {
-            if(isFacingRight) {
-                rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-            }
-            else {
-                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-            }
-        }
     }
 
     void isPlayerGround() {
