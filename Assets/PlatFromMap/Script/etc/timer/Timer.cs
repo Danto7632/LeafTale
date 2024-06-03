@@ -72,8 +72,8 @@ public class Timer : MonoBehaviour
         }
         else {
             gameOverText.fontSize = 30;
-            timeText[0].enabled = true;
-            timeText[1].enabled = true;
+            timeText[0].enabled = false;
+            timeText[1].enabled = false;
             gameOverText.text = "게임 클리어";
         }
     }

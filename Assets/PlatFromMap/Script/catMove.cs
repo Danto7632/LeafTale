@@ -149,7 +149,13 @@ public class catMove : MonoBehaviour {
 
     public void catAnim() {
         anim.SetBool("isReady", !isMoveAllow);
-        anim.SetBool("isGround", isGrounded);
+        if(rb.velocity.x == 0 && isMoveAllow) {
+            anim.SetBool("isIdle", true);
+        }
+        else if(rb.velocity.x != 0 && isMoveAllow) {
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isGround", isGrounded);
+        }
         anim.SetBool("isGameOver", isGameOver);
     }
 
