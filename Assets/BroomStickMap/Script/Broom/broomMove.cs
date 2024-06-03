@@ -6,7 +6,6 @@ public class broomMove : MonoBehaviour {
     [Header("Player_Status")]
     public int lineCount;
     public float moveSpeed = 10f;
-    public Vector3 newScale;
 
     [Header("Player_Component")]
     public Rigidbody2D rb;
@@ -26,12 +25,8 @@ public class broomMove : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
-    void Start() {
-        
-    }
-
     void Update() {
-        rb.velocity = new Vector2(0, moveSpeed);
+        rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
         lineControl();
     }
 
@@ -49,20 +44,16 @@ public class broomMove : MonoBehaviour {
 
     IEnumerator changeLine(string where) {
         if(where == "left") {
-            rb.velocity = new Vector2(-5f, rb.velocity.y);
+            rb.velocity = new Vector2(-5f, moveSpeed);
             Debug.Log("Left");
 
             yield return new WaitForSeconds(1f);
-
-            rb.velocity = new Vector2(0, rb.velocity.y);
         }
         else {
-            rb.velocity = new Vector2(5f, rb.velocity.y);
+            rb.velocity = new Vector2(5f, moveSpeed);
             Debug.Log("Right");
 
             yield return new WaitForSeconds(1f);
-
-            rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 }

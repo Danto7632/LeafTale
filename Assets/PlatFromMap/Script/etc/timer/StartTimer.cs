@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StartTimer : MonoBehaviour
 {
     public GameObject player;
     public GameObject readyTimer;
-    public Text timerText;
+    public TMP_Text timerText;
 
     private int countdownValue = 5;
     private float timer = 0f;
@@ -19,10 +20,10 @@ public class StartTimer : MonoBehaviour
     public void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        readyTimer = GameObject.Find("Timer");
+        readyTimer = GameObject.Find("StartTimer");
         cat = player.GetComponent<catMove>();
 
-        timerText = readyTimer.GetComponent<Text>();
+        timerText = readyTimer.GetComponent<TMP_Text>();
 
         timerText.enabled = true;
     }
