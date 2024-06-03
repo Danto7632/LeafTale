@@ -191,8 +191,4 @@ public class catMove : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         isMoveAllow = true;
     }
-<<<<<<< Updated upstream
 }
-=======
-} 
->>>>>>> Stashed changes
