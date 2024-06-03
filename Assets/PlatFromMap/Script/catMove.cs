@@ -10,7 +10,6 @@ public class catMove : MonoBehaviour {
 
     [Header("Player_Status")]
     public float horiaontalInput;
-    public float Hp;
     public float moveSpeed = 10f;
     public float jumpForce = 12f;
     public float accelForce = 2f;
