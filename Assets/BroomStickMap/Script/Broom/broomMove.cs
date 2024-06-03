@@ -6,7 +6,11 @@ public class broomMove : MonoBehaviour {
     [Header("Player_Status")]
     public float horiaontalInput;
     public float verticalInput;
+<<<<<<< Updated upstream
     public float moveSpeed;
+=======
+    public float moveSpeed = 10f;
+>>>>>>> Stashed changes
 
     [Header("Player_Component")]
     public Rigidbody2D rb;
@@ -25,7 +29,10 @@ public class broomMove : MonoBehaviour {
     public float maxY;
 
     void Awake() {
+<<<<<<< Updated upstream
         moveSpeed = 8f;
+=======
+>>>>>>> Stashed changes
 
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
@@ -45,6 +52,7 @@ public class broomMove : MonoBehaviour {
     void lineControl() {
         horiaontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+<<<<<<< Updated upstream
 
         if(!isHit) {
             moveDirection = new Vector2(horiaontalInput, verticalInput);
@@ -76,5 +84,21 @@ public class broomMove : MonoBehaviour {
 
         isHit = false;
         sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1f);
+=======
+
+        if(horiaontalInput < 0) {
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+        }
+        else {
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        }
+
+        if(verticalInput < 0) {
+            rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
+        }
+        else {
+            rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+        }
+>>>>>>> Stashed changes
     }
 }
