@@ -41,10 +41,8 @@ public class catMove : MonoBehaviour {
     public LayerMask groundLayer;
     public LayerMask wallLayer;
 
-
-    private float lastKeyPressTime = 0f;
-    private float keyPressInterval = 0.2f; // Adjust the interval as needed
-    private float speedIncrement = 5f;
+    private Queue<KeyValuePair<float, KeyCode>> keyPresses = new Queue<KeyValuePair<float, KeyCode>>();
+    public float inputDelay = 1.0f; // 1초 안에 키 입력이 교차로 이루어져야 함
 
     void Awake() {
         isMoveAllow = false;
@@ -58,6 +56,7 @@ public class catMove : MonoBehaviour {
         groundRayCount = 17;
         isFacingRight = true;
         anim.SetBool("isGround", true);
+        accelForce = 10f;
 
         if(instance == null) {
             instance = this;
@@ -79,26 +78,59 @@ public class catMove : MonoBehaviour {
         Jump();
         Flip();
 
-        if (isMoveAllow) {
-            if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.T)) {
-                float currentTime = Time.time;
-                if (currentTime - lastKeyPressTime <= keyPressInterval) {
-                    if (isFacingRight && (currentSpeed < accelMaxForce)) {
-                        rb.AddForce(new Vector2(accelForce + speedIncrement, 0), ForceMode2D.Impulse);
-                    } else if (!isFacingRight && (currentSpeed > -accelMaxForce)) {
-                        rb.AddForce(new Vector2(-accelForce - speedIncrement, 0), ForceMode2D.Impulse);
-                    }
-                    speedIncrement += 1f; // Increment the speed
-                } else {
-                    // Reset the speed increment if the interval is too long
-                    speedIncrement = 1f;
+        if(isMoveAllow) {
+            DetectKeyPress(KeyCode.R);
+            DetectKeyPress(KeyCode.T);
+
+            if (IsPatternComplete()) {
+                if(isFacingRight && (currentSpeed < accelMaxForce)) {
+                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
                 }
-                lastKeyPressTime = currentTime;
+                else if(!isFacingRight && (currentSpeed > -accelMaxForce)){
+                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+                }
+
+                keyPresses.Clear(); // 패턴이 완료되면 큐를 비웁니다.
             }
         }
     }
 
+    void DetectKeyPress(KeyCode key) {
+        if (Input.GetKeyDown(key)) {
+            keyPresses.Enqueue(new KeyValuePair<float, KeyCode>(Time.time, key));
+            CleanUpOldKeyPresses();
+        }
+    }
 
+    void CleanUpOldKeyPresses() {
+        while (keyPresses.Count > 0 && (Time.time - keyPresses.Peek().Key > inputDelay)) {
+            keyPresses.Dequeue();
+        }
+    }
+
+    bool IsPatternComplete() {
+        if (keyPresses.Count < 2) { // R과 T를 교차로 두 번 이상 입력해야 하므로, 패턴의 길이가 2 이상인지 확인합니다.
+            return false;
+        }
+
+        KeyValuePair<float, KeyCode>[] keyPressArray = keyPresses.ToArray();
+        int patternIndex = 0;
+
+        foreach (var keyPress in keyPressArray) {
+            if (keyPress.Value == KeyCode.R && patternIndex % 2 == 0) { // R과 T가 교차로 입력되어야 하므로, 인덱스가 짝수일 때 R 키를 확인합니다.
+                patternIndex++;
+            }
+            else if (keyPress.Value == KeyCode.T && patternIndex % 2 == 1) { // R과 T가 교차로 입력되어야 하므로, 인덱스가 홀수일 때 T 키를 확인합니다.
+                patternIndex++;
+            }
+
+            if (patternIndex >= 2) { // R과 T를 각각 하나씩 입력해야 하므로, 패턴이 2 이상일 때 완료된 것으로 간주합니다.
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     void FixedUpdate() {
         isPlayerGround();
@@ -127,11 +159,9 @@ public class catMove : MonoBehaviour {
 
         if(forwardHit.collider != null) {
             moveSpeed = 0f;
-            isMoveAllow = false;
             isGrounded = false;
         }
         else {
-            isMoveAllow = true;
             moveSpeed = 10f;
         }
     }
@@ -150,7 +180,7 @@ public class catMove : MonoBehaviour {
             newScale.x *= -1;
             transform.localScale = newScale;
             isFacingRight = false;
-        }
+                    }
         else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow) && isMoveAllow) {
             newScale = transform.localScale;
             newScale.x *= -1;
@@ -180,10 +210,11 @@ public class catMove : MonoBehaviour {
             rb.velocity = Vector2.zero;
         }
 
-        if (other.gameObject.CompareTag("SpawnZone")) {
+        if(other.gameObject.CompareTag("SpawnZone")) {
             isMoveAllow = false;
             rb.velocity = Vector2.zero;
-            StartCoroutine(spawnDelay()); // Start the coroutine here
+
+            StartCoroutine(spawnDelay());
         }
     }
 
@@ -192,3 +223,4 @@ public class catMove : MonoBehaviour {
         isMoveAllow = true;
     }
 }
+
