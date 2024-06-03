@@ -127,9 +127,11 @@ public class catMove : MonoBehaviour {
 
         if(forwardHit.collider != null) {
             moveSpeed = 0f;
+            isMoveAllow = false;
             isGrounded = false;
         }
         else {
+            isMoveAllow = true;
             moveSpeed = 10f;
         }
     }
