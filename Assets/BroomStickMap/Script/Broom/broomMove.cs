@@ -37,22 +37,32 @@ public class broomMove : MonoBehaviour {
 
     void lineControl() {
         if(Input.GetKeyDown(KeyCode.LeftArrow) && lineCount >= 0) {
-            this.gameObject.transform.position = new Vector2(this.transform.position.x - 5f, this.transform.position.y);
+            StartCoroutine(changeLine("left"));
             lineCount--;
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow) && lineCount <= 0) {
-            this.gameObject.transform.position = new Vector2(this.transform.position.x + 5f, this.transform.position.y);
+            StartCoroutine(changeLine("right"));
             lineCount++;
         }
     }
 
-    // IEnumerator changeLine(string where) {
-    //     // if(where == "left") {
-    //     //     rb.velocity = new Vector2(-5f, )
-    //     // }
-    //     // else {
+    IEnumerator changeLine(string where) {
+        if(where == "left") {
+            rb.velocity = new Vector2(-5f, rb.velocity.y);
+            Debug.Log("Left");
 
-    //     // }
-    // }
+            yield return new WaitForSeconds(1f);
+
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+        else {
+            rb.velocity = new Vector2(5f, rb.velocity.y);
+            Debug.Log("Right");
+
+            yield return new WaitForSeconds(1f);
+
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+    }
 }
