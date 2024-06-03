@@ -58,7 +58,7 @@ public class broomMove : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("BroomEnemy")) {
+        if(other.gameObject.CompareTag("BroomEnemy") && !isHit) {
             StartCoroutine(hitDelay());
         }
     }
@@ -66,6 +66,8 @@ public class broomMove : MonoBehaviour {
     IEnumerator hitDelay() {
         isHit = true;
         rb.velocity = Vector2.zero;
+
+        this.gameObject.transform.position = new Vector2(0, 0);
 
         sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
 
