@@ -174,7 +174,7 @@ public class catMove : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("EndZone")) {
+        if(other.gameObject.CompareTag("EndZone")) {
             isMoveAllow = false;
             isGameOver = true;
             rb.velocity = Vector2.zero;
@@ -191,4 +191,8 @@ public class catMove : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         isMoveAllow = true;
     }
+<<<<<<< Updated upstream
 }
+=======
+} 
+>>>>>>> Stashed changes
