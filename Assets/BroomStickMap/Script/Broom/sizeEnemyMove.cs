@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour {
+public class sizeEnemyMove : MonoBehaviour {
     public Rigidbody2D rb;
     public Animator anim;
 
@@ -13,6 +13,8 @@ public class EnemyMove : MonoBehaviour {
         anim = GetComponent<Animator>();
 
         moveSpeed = 10f;
+
+        StartCoroutine(sizeChange());
     }
 
     void Update() {
@@ -27,5 +29,21 @@ public class EnemyMove : MonoBehaviour {
         if(other.gameObject.CompareTag("Player")) {
             Destroy(this.gameObject);
         }
+    }
+
+    IEnumerator sizeChange() {
+        for(int i = 0; i < 10; i++) {
+            transform.localScale = new Vector2(transform.localScale.x + 0.1f, transform.localScale.y + 0.1f);
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        for(int i = 0; i < 10; i++) {
+            transform.localScale = new Vector2(transform.localScale.x - 0.1f, transform.localScale.y - 0.1f);
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        StartCoroutine(sizeChange());
     }
 }
