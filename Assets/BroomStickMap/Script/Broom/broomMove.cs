@@ -25,6 +25,8 @@ public class broomMove : MonoBehaviour {
     public float minY;
     public float maxY;
 
+    GameObject hp;
+
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
@@ -37,6 +39,8 @@ public class broomMove : MonoBehaviour {
         maxX = 6.5f;
         minY = -3f;
         maxY = 3f;
+
+        hp = GameObject.Find("Heart");
     }
 
     void Update() {
@@ -60,6 +64,7 @@ public class broomMove : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("BroomEnemy") && !isHit) {
+            hp.GetComponent<HeartUi>().SetHp(-1);
             StartCoroutine(hitDelay());
         }
     }

@@ -14,7 +14,7 @@ public class HeartUi : MonoBehaviour
     {
         Hp_Max = Heart.Length;
 
-        Hp = Hp_Max;
+        Hp = 5;
 
         for (int i = 0; i < Hp_Max; i++)
             if (Hp > i)
