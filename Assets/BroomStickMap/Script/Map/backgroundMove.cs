@@ -28,15 +28,15 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 nextPos = Vector3.down * speed * Time.deltaTime;
         transform.position = curPos+nextPos;
 
-        if (sprites[endIndex].position.y < viewHeight*(-1))
+        if (sprites[endIndex].position.y < viewHeight*(-1)-30)
         {
             Vector3 backSpritePos = sprites[startIndex].localPosition;
             Vector3 frontSpritePos = sprites[endIndex].localPosition;
-            sprites[endIndex].transform.localPosition = backSpritePos + Vector3.up * 10 ;
+            sprites[endIndex].transform.localPosition = backSpritePos + Vector3.up * 36;
 
             int startIndexSave = startIndex;
             startIndex = endIndex;
-            endIndex = startIndexSave-1 == -1 ? sprites.Length-1 : startIndexSave -1;
+            endIndex = (startIndexSave-1 == -1) ? sprites.Length-1 : startIndexSave -1;
         }
     }
 }
