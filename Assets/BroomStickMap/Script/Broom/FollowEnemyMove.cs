@@ -22,7 +22,7 @@ public class FollowEnemyMove : MonoBehaviour {
     }
 
     void Update() {
-        rb.velocity = direction * moveSpeed;
+        rb.velocity = new Vector2(direction.x * moveSpeed, -moveSpeed);
 
         if(this.gameObject.transform.position.y <= -10) {
             Destroy(this.gameObject);
@@ -38,11 +38,6 @@ public class FollowEnemyMove : MonoBehaviour {
     void DirectToPlayer() {
         Vector2 toDirect;
         toDirect = (player.transform.position - this.transform.position).normalized;
-
-        if(toDirect.y > 0) {
-            toDirect.y *= -1;
-        }
-
-        direction = toDirect;
+        direction = new Vector2(toDirect.x, direction.y);
     }
 }
