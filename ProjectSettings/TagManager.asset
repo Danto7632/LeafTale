@@ -12,6 +12,10 @@ TagManager:
   - Trap
   - EndZone
   - BroomEnemy
+  - RockTile
+  - PaperTile
+  - ScissorTile
+  - tileCheck
   layers:
   - Default
   - TransparentFX
