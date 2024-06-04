@@ -32,13 +32,11 @@ public class sizeEnemyMove : MonoBehaviour {
     void sizeChange() {
         if(transform.localScale.x <= (originSize.x * 2f) && !isDown) {
             transform.localScale = new Vector2(transform.localScale.x + 000.1f, transform.localScale.y + 000.1f);
-            Debug.Log("Big");
         }
         
         if(transform.localScale.x > (originSize.x * 2f) || isDown) {
             isDown = true;
             transform.localScale = new Vector2(transform.localScale.x - 000.1f, transform.localScale.y - 000.1f);
-            Debug.Log("Small");
         }
 
         if(transform.localScale.x <= originSize.x) {

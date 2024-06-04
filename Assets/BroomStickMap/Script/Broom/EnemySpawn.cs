@@ -24,7 +24,6 @@ public class EnemySpawn : MonoBehaviour {
         int randomEnemy = Random.Range(0, 3);
         float radomSpawnDelay = Random.Range(3f, 7f);
 
-        Debug.Log(randomNumber);
         Instantiate(enemyPrefab[randomEnemy], spawnPosition[num], Quaternion.identity);
 
         yield return new WaitForSeconds(radomSpawnDelay);
