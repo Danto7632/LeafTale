@@ -17,7 +17,7 @@ public class FollowEnemyMove : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        moveSpeed = 8f;
+        moveSpeed = 10f;
         direction = new Vector2(0, 0);
         Invoke("DirectToPlayer", 3f);
     }

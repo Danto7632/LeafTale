@@ -142,7 +142,6 @@ public class catMove : MonoBehaviour {
         for(int i = 0; i < groundRayCount; i++) {
             groundRayVec = new Vector2(transform.position.x + groundRayThickness, transform.position.y);
             isGroundeds[i] = Physics2D.Raycast(groundRayVec, Vector2.down, 1f, groundLayer);
-            Debug.DrawRay(groundRayVec, Vector2.down * 1f, Color.green);
             if(isGroundeds[i].collider != null) {
                 isGrounded = true;
                 break;
@@ -155,7 +154,6 @@ public class catMove : MonoBehaviour {
 
         Vector2 forwardVec = new Vector2(transform.position.x, transform.position.y);
         RaycastHit2D forwardHit = Physics2D.Raycast(forwardVec, Vector2.right * ((isFacingRight == true) ? 1f : -1f), 1.0f, wallLayer);
-        Debug.DrawRay(forwardVec, Vector2.right * ((isFacingRight == true) ? 1f : -1f), Color.blue, 0.3f); 
 
         if(forwardHit.collider != null) {
             moveSpeed = 0f;
