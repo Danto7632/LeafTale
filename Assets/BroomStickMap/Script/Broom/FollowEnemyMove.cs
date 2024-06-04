@@ -17,15 +17,15 @@ public class FollowEnemyMove : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        moveSpeed = 10f;
+        moveSpeed = 8f;
         direction = new Vector2(0, 0);
-        Invoke("DirectToPlayer", 1f);
+        Invoke("DirectToPlayer", 3f);
     }
 
     void Update() {
         rb.velocity = new Vector2(direction.x * moveSpeed, -moveSpeed);
 
-        if(this.gameObject.transform.position.y <= (player.transform.position.y - 5f)) {
+        if(this.gameObject.transform.position.y <= -4f) {
             Destroy(this.gameObject);
         }
     }

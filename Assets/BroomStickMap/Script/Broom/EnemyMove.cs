@@ -12,13 +12,13 @@ public class EnemyMove : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        moveSpeed = 10f;
+        moveSpeed = 8f;
     }
 
     void Update() {
         rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
 
-        if(this.gameObject.transform.position.y <= -10f) {
+        if(this.gameObject.transform.position.y <= -4) {
             Destroy(this.gameObject);
         }
     }

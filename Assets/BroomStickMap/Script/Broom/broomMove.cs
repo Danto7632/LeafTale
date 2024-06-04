@@ -33,10 +33,10 @@ public class broomMove : MonoBehaviour {
 
         moveSpeed = 8f;
 
-        minX = -8.5f;
-        maxX = 8.5f;
-        minY = -4f;
-        maxY = 4f;
+        minX = -6.5f;
+        maxX = 6.5f;
+        minY = -3f;
+        maxY = 3f;
     }
 
     void Update() {

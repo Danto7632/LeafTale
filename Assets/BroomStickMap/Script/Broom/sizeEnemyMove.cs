@@ -6,22 +6,43 @@ public class sizeEnemyMove : MonoBehaviour {
     public Rigidbody2D rb;
     public Animator anim;
 
+    public bool isDown;
     public float moveSpeed;
+    public Vector2 originSize;
     
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        moveSpeed = 10f;
+        isDown = false;
+        moveSpeed = 8f;
+        originSize = transform.localScale;
 
-        StartCoroutine(sizeChange());
+        InvokeRepeating("sizeChange", 0, 0.1f);
     }
 
     void Update() {
         rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
-
-        if(this.gameObject.transform.position.y <= -10f) {
+        
+        if(this.gameObject.transform.position.y <= -4f) {
             Destroy(this.gameObject);
+        }
+    }
+
+    void sizeChange() {
+        if(transform.localScale.x <= (originSize.x * 2f) && !isDown) {
+            transform.localScale = new Vector2(transform.localScale.x + 000.1f, transform.localScale.y + 000.1f);
+            Debug.Log("Big");
+        }
+        
+        if(transform.localScale.x > (originSize.x * 2f) || isDown) {
+            isDown = true;
+            transform.localScale = new Vector2(transform.localScale.x - 000.1f, transform.localScale.y - 000.1f);
+            Debug.Log("Small");
+        }
+
+        if(transform.localScale.x <= originSize.x) {
+            isDown = false;
         }
     }
 
@@ -29,21 +50,5 @@ public class sizeEnemyMove : MonoBehaviour {
         if(other.gameObject.CompareTag("Player")) {
             Destroy(this.gameObject);
         }
-    }
-
-    IEnumerator sizeChange() {
-        for(int i = 0; i < 10; i++) {
-            transform.localScale = new Vector2(transform.localScale.x + 0.1f, transform.localScale.y + 0.1f);
-
-            yield return new WaitForSeconds(0.2f);
-        }
-
-        for(int i = 0; i < 10; i++) {
-            transform.localScale = new Vector2(transform.localScale.x - 0.1f, transform.localScale.y - 0.1f);
-
-            yield return new WaitForSeconds(0.2f);
-        }
-
-        StartCoroutine(sizeChange());
     }
 }

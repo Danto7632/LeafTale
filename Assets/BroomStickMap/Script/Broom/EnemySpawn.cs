@@ -7,9 +7,9 @@ public class EnemySpawn : MonoBehaviour {
     public Vector2[] spawnPosition = new Vector2[3];
 
     void Start() {
-        spawnPosition[0] = new Vector2(-7.5f, 70);
+        spawnPosition[0] = new Vector2(-6f, 70);
         spawnPosition[1] = new Vector2(0, 70);
-        spawnPosition[2] = new Vector2(7.5f, 70);
+        spawnPosition[2] = new Vector2(6f, 70);
 
         for(int i = 0; i < 3; i++) {
             float radomSpawnDelay = Random.Range(0.5f, 2f);
