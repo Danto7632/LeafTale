@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5122858159300751266
 MonoBehaviour:
@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab:
-  - {fileID: 4159507832856371541, guid: d5ee5c6a331374827b02953da1828cb9, type: 3}
-  - {fileID: 909931894831354664, guid: ef62fbced00944599ad02cd8c274dbfa, type: 3}
-  - {fileID: 5217656250724290167, guid: 0df6bfd08450042fe83abb8584c2ab19, type: 3}
+  - {fileID: 2428580868117051945, guid: ae9a13104477021468cd4b101bac7e10, type: 3}
+  - {fileID: 2428580868117051945, guid: b09b91b0d3e49794693c2c8a2ea1694b, type: 3}
+  - {fileID: 2428580868117051945, guid: 925a11e1b2a77684f8f29773fd9cd79d, type: 3}
   spawnPosition:
   - {x: 0, y: 0}
   - {x: 0, y: 0}

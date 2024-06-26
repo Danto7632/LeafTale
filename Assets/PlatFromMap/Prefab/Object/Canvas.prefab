@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 2204319696560000094}
   - component: {fileID: 8297687369284779491}
   - component: {fileID: 1888009791922049977}
+  - component: {fileID: 6356700943400482304}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -324,7 +325,7 @@ RectTransform:
   - {fileID: 6164535456123165549}
   - {fileID: 600231331329632480}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -410,6 +411,20 @@ MonoBehaviour:
   catStatus: {fileID: 0}
   timeText: []
   gameOverText: {fileID: 0}
+--- !u!114 &6356700943400482304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3741174690068685401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e472c5dd2b5e6de458c589456f44f557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cat: {fileID: 0}
+  spawnCount: 0
 --- !u!1 &5787342610084652886
 GameObject:
   m_ObjectHideFlags: 0
