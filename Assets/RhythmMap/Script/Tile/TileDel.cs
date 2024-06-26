@@ -6,8 +6,11 @@ public class TileDel : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("tileCheck")) {
-            Destroy(gameObject, 1f);
-            Debug.Log("Fail");
+            Invoke("DeleteTile", 0.6f);
         }
+    }
+
+    void DeleteTile() {
+        Destroy(gameObject);
     }
 }
