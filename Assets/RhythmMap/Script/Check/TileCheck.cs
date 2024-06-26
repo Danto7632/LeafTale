@@ -59,4 +59,22 @@ public class TileCheck : MonoBehaviour {
             isScissor = true;
         }
     }
+
+    public void getLeap(string hands) {
+        if(hands == "ROCK") {
+            isRock = true;
+            isPaper = false;
+            isScissor = false;
+        }
+        else if(hands == "SCISSOR") {
+            isRock = false;
+            isPaper = false;
+            isScissor = true;
+        }
+        else if(hands == "PAPER") {
+            isRock = false;
+            isPaper = true;
+            isScissor = false;
+        }
+    }
 }
