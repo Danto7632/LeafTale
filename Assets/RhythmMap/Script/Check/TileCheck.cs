@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RightTileCheck : MonoBehaviour {
+public class TileCheck : MonoBehaviour {
     public GameObject rockTile;
     public GameObject paperTile;
     public GameObject scissorTile;
@@ -22,17 +22,17 @@ public class RightTileCheck : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.I)) {
+        if(Input.GetKeyDown(KeyCode.Q)) {
             isRock = true;
             isPaper = false;
             isScissor = false;
         }
-        else if(Input.GetKeyDown(KeyCode.O)) {
+        else if(Input.GetKeyDown(KeyCode.W)) {
             isRock = false;
             isPaper = true;
             isScissor = false;
         }
-        else if(Input.GetKeyDown(KeyCode.P)) {
+        else if(Input.GetKeyDown(KeyCode.E)) {
             isRock = false;
             isPaper = false;
             isScissor = true;
