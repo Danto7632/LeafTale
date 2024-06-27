@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StartTimer : MonoBehaviour
+public class StartTimer_Platform : MonoBehaviour
 {
     public GameObject player;
     public GameObject readyTimer;

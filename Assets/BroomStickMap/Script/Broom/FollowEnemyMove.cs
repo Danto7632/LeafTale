@@ -7,6 +7,8 @@ public class FollowEnemyMove : MonoBehaviour {
 
     public Rigidbody2D rb;
     public Animator anim;
+    
+    public broomMove broomStatus;
 
     public Vector2 direction;
 
@@ -14,8 +16,10 @@ public class FollowEnemyMove : MonoBehaviour {
     
     void Awake() {
         player = GameObject.FindWithTag("Player");
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        broomStatus = player.GetComponent<broomMove>();
 
         moveSpeed = 10f;
         direction = new Vector2(0, 0);
@@ -28,10 +32,14 @@ public class FollowEnemyMove : MonoBehaviour {
         if(this.gameObject.transform.position.y <= -4f) {
             Destroy(this.gameObject);
         }
+
+        if(broomStatus.isGameOver) {
+            Destroy(this.gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")) {
+        if(other.gameObject.CompareTag("Player") && !broomStatus.isHit) {
             Destroy(this.gameObject);
         }
     }

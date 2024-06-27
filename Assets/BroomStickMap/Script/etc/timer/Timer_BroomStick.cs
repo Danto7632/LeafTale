@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // TextMeshPro 클래스를 사용하려면 이 네임스페이스를 추가하세요
 
-public class Timer : MonoBehaviour
+public class Timer_BroomStick : MonoBehaviour
 {
-    public GameObject cat;
-    public catMove catStatus;
+    public GameObject broom;
+    public broomMove broomStatus;
 
     public TMP_Text[] timeText;
     public TMP_Text gameOverText;
-    float time = 126f; // 제한 시간 125초
+    public float time = 126f; // 제한 시간 125초
     int min, sec;
 
     void Awake() {
-        cat = GameObject.FindWithTag("Player");
-        catStatus = cat.GetComponent<catMove>();
+        time = 126f;
+
+        broom = GameObject.FindWithTag("Player");
+        broomStatus = broom.GetComponent<broomMove>();
     }
 
     void Start()
@@ -48,33 +50,28 @@ public class Timer : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if(!catStatus.isGameOver) {
+    void Update() {
+        if(broomStatus.isGameOver) {
+            time = 0;
+            gameOverText.text = "게임 오버"; // 게임 오버 텍스트를 표시합니다
+            // 추가로 업데이트를 비활성화하거나 게임 오버 로직을 처리할 수 있습니다
+            timeText[0].enabled = false;
+            timeText[1].enabled = false;
+        }
+        else if(!broomStatus.isGameOver && time <= 0) {
+            gameOverText.fontSize = 30;
+            timeText[0].enabled = false;
+            timeText[1].enabled = false;
+            gameOverText.text = "게임 클리어";
+        }
+        else if(!broomStatus.isGameOver && time > 0) {
             time -= Time.deltaTime;
 
             min = (int)time / 60;
             sec = (int)time % 60;
 
-            if (time <= 0)
-            {
-                time = 0;
-                gameOverText.text = "게임 오버"; // 게임 오버 텍스트를 표시합니다
-                // 추가로 업데이트를 비활성화하거나 게임 오버 로직을 처리할 수 있습니다
-            }   
-
-            // 타이머 텍스트 업데이트
-            if (timeText != null && timeText.Length >= 2)
-            {
-                timeText[0].text = min.ToString("00");
-                timeText[1].text = sec.ToString("00");
-            }
-        }
-        else {
-            gameOverText.fontSize = 30;
-            timeText[0].enabled = false;
-            timeText[1].enabled = false;
-            gameOverText.text = "게임 클리어";
+            timeText[0].text = min.ToString("00");
+            timeText[1].text = sec.ToString("00");
         }
     }
 

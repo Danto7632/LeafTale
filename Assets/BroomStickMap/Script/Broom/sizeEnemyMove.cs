@@ -9,10 +9,17 @@ public class sizeEnemyMove : MonoBehaviour {
     public bool isDown;
     public float moveSpeed;
     public Vector2 originSize;
+
+    public GameObject Player;
+    public broomMove broomStatus;
     
     void Awake() {
+        Player = GameObject.FindWithTag("Player");
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        broomStatus = Player.GetComponent<broomMove>();
 
         isDown = false;
         moveSpeed = 8f;
@@ -25,6 +32,10 @@ public class sizeEnemyMove : MonoBehaviour {
         rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
         
         if(this.gameObject.transform.position.y <= -4f) {
+            Destroy(this.gameObject);
+        }
+
+        if(broomStatus.isGameOver) {
             Destroy(this.gameObject);
         }
     }
@@ -45,7 +56,7 @@ public class sizeEnemyMove : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")) {
+        if(other.gameObject.CompareTag("Player") && !broomStatus.isHit) {
             Destroy(this.gameObject);
         }
     }

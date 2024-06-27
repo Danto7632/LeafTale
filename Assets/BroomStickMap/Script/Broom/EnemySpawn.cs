@@ -6,10 +6,16 @@ public class EnemySpawn : MonoBehaviour {
     public GameObject[] enemyPrefab = new GameObject[3];
     public Vector2[] spawnPosition = new Vector2[3];
 
+    public GameObject Player;
+    public broomMove broomStatus;
+
     void Start() {
         spawnPosition[0] = new Vector2(-6f, 70);
         spawnPosition[1] = new Vector2(0, 70);
         spawnPosition[2] = new Vector2(6f, 70);
+
+        Player = GameObject.FindWithTag("Player");
+        broomStatus = Player.GetComponent<broomMove>();
 
         for(int i = 0; i < 3; i++) {
             float radomSpawnDelay = Random.Range(0.5f, 2f);
@@ -24,7 +30,12 @@ public class EnemySpawn : MonoBehaviour {
         int randomEnemy = Random.Range(0, 3);
         float radomSpawnDelay = Random.Range(3f, 7f);
 
-        Instantiate(enemyPrefab[randomEnemy], spawnPosition[num], Quaternion.identity);
+        if(!broomStatus.isGameOver) {
+            Instantiate(enemyPrefab[randomEnemy], spawnPosition[num], Quaternion.identity);
+        }
+        else {
+            yield break;
+        }
 
         yield return new WaitForSeconds(radomSpawnDelay);
 
