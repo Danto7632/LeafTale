@@ -35,7 +35,7 @@ public class sizeEnemyMove : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
-        if(broomStatus.isGameOver) {
+        if(broomStatus.isGameOver || broomStatus.isGameClear) {
             Destroy(this.gameObject);
         }
     }

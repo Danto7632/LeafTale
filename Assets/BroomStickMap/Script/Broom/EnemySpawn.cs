@@ -30,7 +30,7 @@ public class EnemySpawn : MonoBehaviour {
         int randomEnemy = Random.Range(0, 3);
         float radomSpawnDelay = Random.Range(3f, 7f);
 
-        if(!broomStatus.isGameOver) {
+        if(!broomStatus.isGameOver || !broomStatus.isGameClear) {
             Instantiate(enemyPrefab[randomEnemy], spawnPosition[num], Quaternion.identity);
         }
         else {

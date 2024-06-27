@@ -20,6 +20,7 @@ public class broomMove : MonoBehaviour {
     public bool isHit;
     public bool isMoveAllow;
     public bool isGameOver;
+    public bool isGameClear;
     public Vector2 moveDirection;
 
     [Header("Movement_Limits")]
@@ -39,6 +40,7 @@ public class broomMove : MonoBehaviour {
 
         isHit = false;
         isGameOver = false;
+        isGameClear = false;
 
         minX = -6.5f;
         maxX = 6.5f;
@@ -47,8 +49,10 @@ public class broomMove : MonoBehaviour {
     }
 
     void Update() {
-        if(!isGameOver) {
-            lineControl();
+        lineControl();
+
+        if(isGameClear) {
+            isMoveAllow = false;
         }
     }
 

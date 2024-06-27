@@ -14,7 +14,7 @@ public class Timer_BroomStick : MonoBehaviour
     int min, sec;
 
     void Awake() {
-        time = 126f;
+        time = 30f;
 
         broom = GameObject.FindWithTag("Player");
         broomStatus = broom.GetComponent<broomMove>();
@@ -62,6 +62,7 @@ public class Timer_BroomStick : MonoBehaviour
             gameOverText.fontSize = 30;
             timeText[0].enabled = false;
             timeText[1].enabled = false;
+            broomStatus.isGameClear = true;
             gameOverText.text = "게임 클리어";
         }
         else if(!broomStatus.isGameOver && time > 0) {
