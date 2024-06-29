@@ -16,7 +16,9 @@ public class EnemySpawn : MonoBehaviour {
 
         Player = GameObject.FindWithTag("Player");
         broomStatus = Player.GetComponent<broomMove>();
+    }
 
+    public void StartSpawn() {
         for(int i = 0; i < 3; i++) {
             float radomSpawnDelay = Random.Range(0.5f, 2f);
             StartCoroutine(spawnEnemies(i, radomSpawnDelay));

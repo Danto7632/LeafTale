@@ -1,8 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Leap;
+using Leap.Unity;
 
 public class broomMove : MonoBehaviour {
+    [Header("LeapMotion")]
+    private LeapServiceProvider leapProvider;
+
+    public bool isLeapOn;
+    public bool isFirstGameStart;
+
+    public Hand hand;
+
+    public float horizonLeapSpeed;
+    public float verticalLeapSpeed;
 
     [Header("Player_Status")]
     public float horiaontalInput;
@@ -10,13 +23,14 @@ public class broomMove : MonoBehaviour {
     public float moveSpeed;
 
     [Header("Player_Component")]
-    public LeapSwing leapSwing;
     public Rigidbody2D rb;
     public SpriteRenderer sp;
     public CapsuleCollider2D capsule2D;
     public Animator anim;
-    //
-    public GameObject LeapSwingManager;
+
+    public StartTimer_BroomStick onTimer;
+    public Timer_BroomStick gameTimer;
+    public EnemySpawn enemySpawn;
 
     [Header("Player_Condition")]
     public int Hp;
@@ -25,8 +39,6 @@ public class broomMove : MonoBehaviour {
     public bool isGameOver;
     public bool isGameClear;
     public Vector2 moveDirection;
-    public bool isLeft;
-    public bool isRight;
 
     [Header("Movement_Limits")]
     public float minX;
@@ -34,16 +46,18 @@ public class broomMove : MonoBehaviour {
     public float minY;
     public float maxY;
 
-    GameObject hp;
+    [Header("Text")]
+    public Text leapOnText;
 
     void Awake() {
-        LeapSwingManager = GameObject.Find("LeapMotionManager");
-
-        leapSwing = LeapSwingManager.GetComponent<LeapSwing>();
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
+
+        onTimer = GameObject.Find("StartTimer").GetComponent<StartTimer_BroomStick>();
+        gameTimer = GameObject.Find("Canvas").GetComponent<Timer_BroomStick>();
+        enemySpawn = GameObject.Find("EnemySpawn").GetComponent<EnemySpawn>();
 
         moveSpeed = 8f;
         Hp = 5;
@@ -57,11 +71,22 @@ public class broomMove : MonoBehaviour {
         minY = -3f;
         maxY = 3f;
 
-        hp = GameObject.Find("Heart");
+        //leap
+        leapProvider = FindObjectOfType<LeapServiceProvider>();
+
+        leapOnText = GameObject.Find("leapOnText").GetComponent<Text>();
+        leapProvider.OnUpdateFrame += OnUpdateFrame;
+
+        isLeapOn = false;
+        isFirstGameStart = false;
+
+        leapOnText.enabled = true;
     }
 
     void Update() {
-        lineControl();
+        if(!isGameOver && !isLeapOn) {
+            lineControl();
+        }
 
         if(isGameClear) {
             isMoveAllow = false;
@@ -69,18 +94,12 @@ public class broomMove : MonoBehaviour {
     }
 
     void lineControl() {
-        if(!isHit && isMoveAllow && leapSwing.isMoving) {
-            if(isLeft) {
-                moveDirection = new Vector2(leapSwing.direction.x * 1000f, 0);
-                rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
-            }
-            else if(isRight) {
-                moveDirection = new Vector2(leapSwing.direction.x * 1000f, 0);
-                rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
-            }
-            else if(!isLeft && !isRight) {
-                moveDirection = Vector2.zero;
-            }
+        horiaontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+
+        if(!isHit && isMoveAllow) {
+            moveDirection = new Vector2(horiaontalInput, verticalInput);
+            rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
 
         Vector2 clampedPosition = rb.position;
@@ -91,7 +110,6 @@ public class broomMove : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("BroomEnemy") && !isHit) {
-            hp.GetComponent<HeartUi>().SetHp(-1);
             StartCoroutine(hitDelay());
             Debug.Log("Hit");
         }
@@ -101,27 +119,132 @@ public class broomMove : MonoBehaviour {
         Debug.Log("Really Hit");
         Hp--;
         if(Hp <= 0) {
-            isGameOver = true;
-            isMoveAllow = false;
-
-            this.gameObject.transform.position = new Vector2(0, 0);
-
-            sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
-
-            yield break;
+            GameOver();
         }
 
         isHit = true;
         rb.velocity = Vector2.zero;
 
-        this.gameObject.transform.position = new Vector2(0, -3);
+        yield return StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
 
-        sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
-
+        StartCoroutine(BlinkPlayer());
 
         yield return new WaitForSeconds(1.5f);
 
         isHit = false;
         sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1f);
     }
+
+    IEnumerator BlinkPlayer() {
+        float blinkDuration = 1.5f;
+        float blinkInterval = 0.1f;
+        float blinkTimer = 0.0f;
+
+        while (blinkTimer < blinkDuration) {
+            sp.enabled = !sp.enabled;
+
+            yield return new WaitForSeconds(blinkInterval);
+
+            blinkTimer += blinkInterval;
+        }
+
+        sp.enabled = true;
+    }
+
+    IEnumerator MoveSmoothly(Vector2 startPosition, Vector2 targetPosition, float duration) {
+        float elapsed = 0f;
+
+        while (elapsed < duration) {
+            float t = elapsed / duration;
+            rb.position = Vector2.Lerp(startPosition, targetPosition, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.position = targetPosition;
+    }
+
+    public void GameOver() {
+        isGameOver = true;
+        isMoveAllow = false;
+
+        StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
+
+        sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
+    }
+    
+
+    #region LeapMotion
+
+    void OnUpdateFrame(Frame frame) {
+        if (frame.Hands.Count > 0) {
+            hand = frame.Hands[0];
+
+            if(IsFist(hand) && !isLeapOn) {
+                Debug.Log("주먹이 감지되었습니다. 5초 후 게임이 시작됩니다.");
+                leapOnText.enabled = false;
+
+                StartCoroutine(RunGame());
+            }
+        }
+        else {
+            Debug.Log("손이 감지되지 않았습니다");
+        }
+
+        DetectHandTilt(hand);
+    }
+
+    bool IsFist(Hand hand) {
+        return hand.GrabStrength > 0.9f;
+    }
+
+    IEnumerator RunGame() {
+        yield return new WaitForSeconds(1.0f);
+
+        Debug.Log("시작!");
+        if(!isFirstGameStart) {
+            onTimer.StartCountdown();
+            gameTimer.StartTimer();
+            enemySpawn.StartSpawn();
+            isFirstGameStart = true;
+        }
+        isLeapOn = true;
+    }
+
+    void DetectHandTilt(Hand hand) {
+        if(isLeapOn && isMoveAllow && !isHit) {
+            Vector3 palmNormal = hand.PalmNormal;
+
+            if (palmNormal.x > 0.2f || palmNormal.x < -0.2f) {
+                horizonLeapSpeed = palmNormal.x;
+            }
+            else {
+                horizonLeapSpeed = 0f;
+            }
+
+
+            if (palmNormal.z > 0.2f || palmNormal.z < -0.2f) {
+                verticalLeapSpeed = palmNormal.z;
+            }
+            else {
+                verticalLeapSpeed = 0f;
+            }
+
+            moveDirection = new Vector2(horizonLeapSpeed, verticalLeapSpeed);
+            rb.velocity = new Vector2(moveDirection.x * moveSpeed * -1f, moveDirection.y * moveSpeed * -1f);
+
+            Vector2 clampedPosition = rb.position;
+
+            clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
+            clampedPosition.y = Mathf.Clamp(clampedPosition.y, minY, maxY);
+
+            rb.position = clampedPosition;
+        }
+        else {
+            horizonLeapSpeed = 0f;
+            verticalLeapSpeed = 0f;
+        }
+    }
+
+    #endregion
 }
