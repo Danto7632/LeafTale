@@ -10,10 +10,13 @@ public class broomMove : MonoBehaviour {
     public float moveSpeed;
 
     [Header("Player_Component")]
+    public LeapSwing leapSwing;
     public Rigidbody2D rb;
     public SpriteRenderer sp;
     public CapsuleCollider2D capsule2D;
     public Animator anim;
+    //
+    public GameObject LeapSwingManager;
 
     [Header("Player_Condition")]
     public int Hp;
@@ -22,6 +25,8 @@ public class broomMove : MonoBehaviour {
     public bool isGameOver;
     public bool isGameClear;
     public Vector2 moveDirection;
+    public bool isLeft;
+    public bool isRight;
 
     [Header("Movement_Limits")]
     public float minX;
@@ -32,6 +37,9 @@ public class broomMove : MonoBehaviour {
     GameObject hp;
 
     void Awake() {
+        LeapSwingManager = GameObject.Find("LeapMotionManager");
+
+        leapSwing = LeapSwingManager.GetComponent<LeapSwing>();
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
@@ -61,12 +69,18 @@ public class broomMove : MonoBehaviour {
     }
 
     void lineControl() {
-        horiaontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-
-        if(!isHit && isMoveAllow) {
-            moveDirection = new Vector2(horiaontalInput, verticalInput);
-            rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        if(!isHit && isMoveAllow && leapSwing.isMoving) {
+            if(isLeft) {
+                moveDirection = new Vector2(leapSwing.direction.x * 1000f, 0);
+                rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
+            }
+            else if(isRight) {
+                moveDirection = new Vector2(leapSwing.direction.x * 1000f, 0);
+                rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
+            }
+            else if(!isLeft && !isRight) {
+                moveDirection = Vector2.zero;
+            }
         }
 
         Vector2 clampedPosition = rb.position;
