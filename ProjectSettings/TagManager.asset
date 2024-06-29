@@ -16,6 +16,7 @@ TagManager:
   - PaperTile
   - ScissorTile
   - tileCheck
+  - Coin
   layers:
   - Default
   - TransparentFX
