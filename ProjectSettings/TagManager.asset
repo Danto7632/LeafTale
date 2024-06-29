@@ -16,7 +16,8 @@ TagManager:
   - PaperTile
   - ScissorTile
   - tileCheck
-  - Coin
+  - tileCheckL
+  - tileCheckR
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - 
-  - 
+  - PhysicalHands
+  - PhysicalHandsReset
   - 
   - 
   - 

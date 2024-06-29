@@ -16,7 +16,11 @@ public class broomMove : MonoBehaviour {
     public Animator anim;
 
     [Header("Player_Condition")]
+    public int Hp;
     public bool isHit;
+    public bool isMoveAllow;
+    public bool isGameOver;
+    public bool isGameClear;
     public Vector2 moveDirection;
 
     [Header("Movement_Limits")]
@@ -25,6 +29,8 @@ public class broomMove : MonoBehaviour {
     public float minY;
     public float maxY;
 
+    GameObject hp;
+
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
@@ -32,22 +38,33 @@ public class broomMove : MonoBehaviour {
         anim = GetComponent<Animator>();
 
         moveSpeed = 8f;
+        Hp = 5;
+
+        isHit = false;
+        isGameOver = false;
+        isGameClear = false;
 
         minX = -6.5f;
         maxX = 6.5f;
         minY = -3f;
         maxY = 3f;
+
+        hp = GameObject.Find("Heart");
     }
 
     void Update() {
         lineControl();
+
+        if(isGameClear) {
+            isMoveAllow = false;
+        }
     }
 
     void lineControl() {
         horiaontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if(!isHit) {
+        if(!isHit && isMoveAllow) {
             moveDirection = new Vector2(horiaontalInput, verticalInput);
             rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
@@ -60,15 +77,30 @@ public class broomMove : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("BroomEnemy") && !isHit) {
+            hp.GetComponent<HeartUi>().SetHp(-1);
             StartCoroutine(hitDelay());
+            Debug.Log("Hit");
         }
     }
 
     IEnumerator hitDelay() {
+        Debug.Log("Really Hit");
+        Hp--;
+        if(Hp <= 0) {
+            isGameOver = true;
+            isMoveAllow = false;
+
+            this.gameObject.transform.position = new Vector2(0, 0);
+
+            sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
+
+            yield break;
+        }
+
         isHit = true;
         rb.velocity = Vector2.zero;
 
-        this.gameObject.transform.position = new Vector2(0, 0);
+        this.gameObject.transform.position = new Vector2(0, -3);
 
         sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
 

@@ -10,11 +10,17 @@ public class NewBehaviourScript : MonoBehaviour
     public Transform[] sprites;
     float viewHeight;
 
+    public GameObject Player;
+    public broomMove broomStatus;
+
     // Start is called before the first frame update
 
     private void Awake()
     {
         viewHeight = Camera.main.orthographicSize * 2;
+
+        Player = GameObject.FindWithTag("Player");
+        broomStatus = Player.GetComponent<broomMove>();
     }
     void Start()
     {
@@ -28,7 +34,7 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 nextPos = Vector3.down * speed * Time.deltaTime;
         transform.position = curPos+nextPos;
 
-        if (sprites[endIndex].position.y < viewHeight*(-1)-30)
+        if (sprites[endIndex].position.y < viewHeight*(-1)-30 && !broomStatus.isGameOver)
         {
             Vector3 backSpritePos = sprites[startIndex].localPosition;
             Vector3 frontSpritePos = sprites[endIndex].localPosition;

@@ -7,6 +7,10 @@ public class TileCheck : MonoBehaviour {
     public bool isPaper;
     public bool isScissor;
 
+    public GameObject rockPrefab;
+    public GameObject paperPrefab;
+    public GameObject scissorPrefab;
+
     public void Awake() {
         isRock = true;
         isPaper = false;
@@ -76,5 +80,9 @@ public class TileCheck : MonoBehaviour {
             isPaper = true;
             isScissor = false;
         }
+
+        rockPrefab.SetActive(isRock);
+        paperPrefab.SetActive(isPaper);
+        scissorPrefab.SetActive(isScissor);
     }
 }
