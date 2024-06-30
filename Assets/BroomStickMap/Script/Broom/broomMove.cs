@@ -86,10 +86,12 @@ public class broomMove : MonoBehaviour {
     void Update() {
         if(!isGameOver && !isLeapOn) {
             lineControl();
+            StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
         }
 
         if(isGameClear) {
             isMoveAllow = false;
+            StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
         }
     }
 
