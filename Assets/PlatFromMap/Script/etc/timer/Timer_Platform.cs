@@ -42,10 +42,6 @@ public class Timer_Platform : MonoBehaviour
 
             StartCoroutine(delayTimer());
         }
-        else
-        {
-            Debug.LogError("timeText 배열이 null이거나 크기가 2보다 작습니다.");
-        }
     }
 
     void Update()
