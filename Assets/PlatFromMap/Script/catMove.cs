@@ -52,8 +52,7 @@ public class catMove : MonoBehaviour {
     private bool isRightMovingUp = false;
     private bool isRightMovingDown = false; 
 
-    private bool isHandFlippedDown = false;
-    private bool isHandFlippedUp = false;
+    public bool isHandFlipped;
 
     private bool shouldPrintLURD = false; // 왼손이 위로, 오른손이 아래로 움직임을 출력해야 할지 여부
     private bool shouldPrintLDRU = false; // 왼손이 아래로, 오른손이 위로 움직임을 출력해야 할지 여부
@@ -83,8 +82,7 @@ public class catMove : MonoBehaviour {
         isRightMovingUp = false;
         isRightMovingDown = false; 
 
-        isHandFlippedDown = false;
-        isHandFlippedUp = false;
+        isHandFlipped = false;
 
         shouldPrintLURD = false; // 왼손이 위로, 오른손이 아래로 움직임을 출력해야 할지 여부
         shouldPrintLDRU = false; // 왼손이 아래로, 오른손이 위로 움직임을 출력해야 할지 여부
@@ -280,7 +278,7 @@ public class catMove : MonoBehaviour {
                 Vector3 handDirection = (currentHandPosition - previousHandPosition).normalized;
                 float handSpeed = hand.PalmVelocity.magnitude;
 
-                if (handSpeed > 3f) {
+                if (handSpeed > 4f) {
                     if (hand.IsLeft) {
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
                             if (handDirection.y > 0) {
@@ -363,22 +361,15 @@ public class catMove : MonoBehaviour {
             Vector3 palmNormal = hand.PalmNormal;
 
             if(isGrounded && isMoveAllow) {
-                if (palmNormal.y < -0.5f && !isHandFlippedUp && !isHandFlippedDown) {
-                    // 손바닥이 아래를 보고 있는 상태
-                    isHandFlippedDown = true;
-                    isHandFlippedUp = false;
-                    Debug.Log("Left hand palm facing down");
-                }
-                else if (palmNormal.y > 0.5f && isHandFlippedDown && !isHandFlippedUp) {
+                if (palmNormal.y > 0.5f && !isHandFlipped) {
                     // 손바닥이 위로 향하게 된 상태
-                    isHandFlippedUp = true;
-                    isHandFlippedDown = false;
+                    isHandFlipped = true;
+
                     Debug.Log("Left hand palm facing up");
                 }
-                else if (palmNormal.y < -0.5f && isHandFlippedUp&& !isHandFlippedDown) {
+                else if (palmNormal.y < -0.5f && isHandFlipped) {
+                    isHandFlipped = false;
                     // 손바닥이 다시 아래로 향하게 된 상태
-                    isHandFlippedDown = true;
-                    isHandFlippedUp = false;
                     Debug.Log("Left hand palm facing down again");
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 }

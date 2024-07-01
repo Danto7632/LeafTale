@@ -46,6 +46,9 @@ public class broomMove : MonoBehaviour {
     public float minY;
     public float maxY;
 
+    [Header("Timer")]
+    GameObject timer;
+    public int time_subtract = 3;
     [Header("Text")]
     public Text leapOnText;
 
@@ -71,6 +74,8 @@ public class broomMove : MonoBehaviour {
         minY = -3f;
         maxY = 3f;
 
+        //hp = GameObject.Find("Heart");
+        timer = GameObject.Find("Time");
         //leap
         leapProvider = FindObjectOfType<LeapServiceProvider>();
 
@@ -112,6 +117,7 @@ public class broomMove : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("BroomEnemy") && !isHit) {
+            //hp.GetComponent<HeartUi>().SetHp(-1);
             StartCoroutine(hitDelay());
             Debug.Log("Hit");
         }
@@ -119,6 +125,7 @@ public class broomMove : MonoBehaviour {
 
     IEnumerator hitDelay() {
         Debug.Log("Really Hit");
+        timer.GetComponent<TimerBar_BroomStick>().timeLeft -= time_subtract;
         Hp--;
         if(Hp <= 0) {
             GameOver();
