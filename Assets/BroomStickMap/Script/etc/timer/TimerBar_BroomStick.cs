@@ -8,6 +8,7 @@ public class TimerBar_BroomStick : MonoBehaviour
     public float maxTime = 30f;
     public float timeLeft;
     bool flag = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,7 @@ public class TimerBar_BroomStick : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 0;
+                GameObject.Find("Player").GetComponent<broomMove>().GameOver();
                 Debug.Log("≈∏¿” ≥°");
                 flag = false;
             }
