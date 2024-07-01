@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using Leap;
+using Leap.Unity;
 
 public class catMove : MonoBehaviour {
-    private static catMove instance;
-
     [Header("Player_Status")]
     public float horiaontalInput;
     public float moveSpeed = 10f;
@@ -21,6 +21,7 @@ public class catMove : MonoBehaviour {
     public SpriteRenderer sp;
     public CapsuleCollider2D capsule2D;
     public Animator anim;
+    float currentSpeed;
 
     [Header("Player_Condition")]
     public RaycastHit2D[] isGroundeds = new RaycastHit2D[17];
@@ -40,9 +41,28 @@ public class catMove : MonoBehaviour {
     [Header("Layer")]
     public LayerMask groundLayer;
     public LayerMask wallLayer;
+    
+    [Header("LeapMotion")]
+    private LeapServiceProvider leapProvider;
+    private Vector3 previousLeftHandPosition = Vector3.zero;
+    private Vector3 previousRightHandPosition = Vector3.zero;
+
+    private bool isLeftMovingUp = false;
+    private bool isLeftMovingDown = false;
+    private bool isRightMovingUp = false;
+    private bool isRightMovingDown = false; 
+
+    private bool isHandFlippedDown = false;
+    private bool isHandFlippedUp = false;
+
+    private bool shouldPrintLURD = false; // 왼손이 위로, 오른손이 아래로 움직임을 출력해야 할지 여부
+    private bool shouldPrintLDRU = false; // 왼손이 아래로, 오른손이 위로 움직임을 출력해야 할지 여부
+
+    private bool isClapDetected = false;
+
 
     private Queue<KeyValuePair<float, KeyCode>> keyPresses = new Queue<KeyValuePair<float, KeyCode>>();
-    public float inputDelay = 1.0f; // 1초 안에 키 입력이 교차로 이루어져야 함
+    public float inputDelay = 1.0f;
 
     void Awake() {
         isMoveAllow = false;
@@ -58,22 +78,30 @@ public class catMove : MonoBehaviour {
         anim.SetBool("isGround", true);
         accelForce = 10f;
 
-        if(instance == null) {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else if(instance != this) {
-            Destroy(this.gameObject);
-        }
+        isLeftMovingUp = false;
+        isLeftMovingDown = false;
+        isRightMovingUp = false;
+        isRightMovingDown = false; 
+
+        isHandFlippedDown = false;
+        isHandFlippedUp = false;
+
+        shouldPrintLURD = false; // 왼손이 위로, 오른손이 아래로 움직임을 출력해야 할지 여부
+        shouldPrintLDRU = false; // 왼손이 아래로, 오른손이 위로 움직임을 출력해야 할지 여부
+
+        isClapDetected = false;
     }
 
     void Start() {
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Ground");
+
+        leapProvider = FindObjectOfType<LeapServiceProvider>();
+        leapProvider.OnUpdateFrame += OnUpdateFrame;
     }
 
     void Update() {
-        float currentSpeed = rb.velocity.x;
+        currentSpeed = rb.velocity.x;
 
         Jump();
         Flip();
@@ -178,7 +206,7 @@ public class catMove : MonoBehaviour {
             newScale.x *= -1;
             transform.localScale = newScale;
             isFacingRight = false;
-                    }
+        }
         else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow) && isMoveAllow) {
             newScale = transform.localScale;
             newScale.x *= -1;
@@ -214,11 +242,191 @@ public class catMove : MonoBehaviour {
 
             StartCoroutine(spawnDelay());
         }
+
+        if(other.gameObject.CompareTag("Coin")) // 코인 먹었을 때
+        {
+            other.gameObject.SetActive(false); // 코인 사라짐
+        }
     }
 
     IEnumerator spawnDelay() {
         yield return new WaitForSeconds(0.5f);
         isMoveAllow = true;
     }
+
+
+    #region LeapMotion
+
+    void OnDestroy() {
+        if (leapProvider != null) {
+            leapProvider.OnUpdateFrame -= OnUpdateFrame;
+        }
+    }
+
+    void OnUpdateFrame(Frame frame) {
+        if(isMoveAllow) {
+            catMovingUPDOWN(frame);
+        }
+        catJumpFlip(frame);
+        catFlipClap(frame);
+    }
+
+    void catMovingUPDOWN(Frame frame) {
+        foreach (Hand hand in frame.Hands) {
+            Vector3 currentHandPosition = hand.PalmPosition;
+            Vector3 previousHandPosition = hand.IsLeft ? previousLeftHandPosition : previousRightHandPosition;
+
+            if (previousHandPosition != Vector3.zero) {
+                Vector3 handDirection = (currentHandPosition - previousHandPosition).normalized;
+                float handSpeed = hand.PalmVelocity.magnitude;
+
+                if (handSpeed > 3f) {
+                    if (hand.IsLeft) {
+                        if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
+                            if (handDirection.y > 0) {
+                                isLeftMovingUp = true; // 왼손이 위로
+                                isLeftMovingDown = false;
+                            }
+                            else {
+                                isLeftMovingDown = true; // 왼손이 아래로
+                                isLeftMovingUp = false;
+                            }
+                        }
+                    }
+                    else if (hand.IsRight) {
+                        if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
+                            if (handDirection.y > 0) {
+                                isRightMovingUp = true; // 오른손이 위로
+                                isRightMovingDown = false;
+                            }
+                            else {
+                                isRightMovingDown = true; // 오른손이 아래로
+                                isRightMovingUp = false;
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                if (hand.IsLeft) {
+                    previousLeftHandPosition = currentHandPosition;
+                }
+                else if (hand.IsRight) {
+                    previousRightHandPosition = currentHandPosition;
+                }
+            }
+        }
+
+        // 번갈아가며 움직일 때 콘솔 출력
+        if (isLeftMovingUp && isRightMovingDown && !shouldPrintLURD) {
+            Debug.Log("왼손이 위로, 오른손이 아래로 움직임");
+            shouldPrintLURD = true;
+            shouldPrintLDRU = false;
+
+            if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
+                rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+            }
+            else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
+                rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+            }
+        }
+        else if (isLeftMovingDown && isRightMovingUp && !shouldPrintLDRU) {
+            Debug.Log("왼손이 아래로, 오른손이 위로 움직임");
+            shouldPrintLURD = false;
+            shouldPrintLDRU = true;
+
+            if(isFacingRight && (currentSpeed < accelMaxForce)) {
+                rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+            }
+            else if(!isFacingRight && (currentSpeed > -accelMaxForce)){
+                rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+            }
+        }
+
+        // 움직임이 멈추면 상태 초기화
+        if (!(isLeftMovingUp || isLeftMovingDown)) {
+            shouldPrintLURD = false;
+        }
+        if (!(isRightMovingUp || isRightMovingDown)) {
+            shouldPrintLDRU = false;
+        }
+
+        // 모든 움직임 상태 초기화
+        isLeftMovingUp = false;
+        isLeftMovingDown = false;
+        isRightMovingUp = false;
+        isRightMovingDown = false;
+    }
+
+    void catJumpFlip(Frame frame) {
+        foreach (Hand hand in frame.Hands) {
+            Vector3 palmNormal = hand.PalmNormal;
+
+            if(isGrounded && isMoveAllow) {
+                if (palmNormal.y < -0.5f && !isHandFlippedUp && !isHandFlippedDown) {
+                    // 손바닥이 아래를 보고 있는 상태
+                    isHandFlippedDown = true;
+                    isHandFlippedUp = false;
+                    Debug.Log("Left hand palm facing down");
+                }
+                else if (palmNormal.y > 0.5f && isHandFlippedDown && !isHandFlippedUp) {
+                    // 손바닥이 위로 향하게 된 상태
+                    isHandFlippedUp = true;
+                    isHandFlippedDown = false;
+                    Debug.Log("Left hand palm facing up");
+                }
+                else if (palmNormal.y < -0.5f && isHandFlippedUp&& !isHandFlippedDown) {
+                    // 손바닥이 다시 아래로 향하게 된 상태
+                    isHandFlippedDown = true;
+                    isHandFlippedUp = false;
+                    Debug.Log("Left hand palm facing down again");
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                }
+            }
+        }
+    }
+
+    void catFlipClap(Frame frame) {
+        Hand leftHand = null;
+        Hand rightHand = null;
+
+        foreach (Hand hand in frame.Hands) {
+            if (hand.IsLeft)
+                leftHand = hand;
+            else if (hand.IsRight)
+                rightHand = hand;
+        }
+
+        if (leftHand != null && rightHand != null) {
+            Vector3 leftPalmPosition = leftHand.PalmPosition;
+            Vector3 rightPalmPosition = rightHand.PalmPosition;
+
+            float clapDistanceThreshold = 0.5f;
+            float handsDistance = Vector3.Distance(leftPalmPosition, rightPalmPosition);
+
+            if (handsDistance < clapDistanceThreshold && !isClapDetected) {
+                isClapDetected = true; // 손이 맞대어졌음을 감지
+            }
+            else if (handsDistance >= clapDistanceThreshold && isClapDetected) {
+            // 손이 맞대어졌다가 떨어짐을 감지
+                if (isFacingRight && isMoveAllow) {
+                    newScale = transform.localScale;
+                    newScale.x *= -1;
+                    transform.localScale = newScale;
+                    isFacingRight = false;
+                }
+                else if (!isFacingRight && isMoveAllow) {
+                    newScale = transform.localScale;
+                    newScale.x *= -1;
+                    transform.localScale = newScale;
+                    isFacingRight = true;
+                }
+
+                isClapDetected = false; // 상태 초기화
+            }
+        }
+    }
+
+    #endregion
 }
 

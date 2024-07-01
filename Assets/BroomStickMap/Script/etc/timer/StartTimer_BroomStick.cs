@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,8 +17,7 @@ public class StartTimer_BroomStick : MonoBehaviour
 
     public broomMove broom;
 
-    public void Awake()
-    {
+    public void Awake() {
         player = GameObject.FindWithTag("Player");
         readyTimer = GameObject.Find("StartTimer");
         broom = player.GetComponent<broomMove>();
@@ -28,16 +26,14 @@ public class StartTimer_BroomStick : MonoBehaviour
 
         timerText.enabled = true;
         timerBar = GameObject.Find("Time").GetComponent<TimerBar_BroomStick>();
+        timerText.enabled = false;
     }
 
-    void Start()
-    {
-        StartCountdown();
-    }
-
-    void StartCountdown()
+    public void StartCountdown()
     {
         timer = Time.time;
+
+        timerText.enabled = true;
 
         StartCoroutine(CountdownCoroutine());
     }
