@@ -7,8 +7,8 @@ public class LeapMotionController : MonoBehaviour {
     public GameObject TileCheckerR; // 오른손 타일 체커
 
     private LeapServiceProvider leapProvider;
-    private TileCheck tileL;
-    private TileCheck tileR;
+    private TileCheckL tileL;
+    private TileCheckR tileR;
 
     public bool isFistL;
     public bool isPalmL;
@@ -26,8 +26,8 @@ public class LeapMotionController : MonoBehaviour {
         TileCheckerR = GameObject.FindWithTag("tileCheckR");
 
         // 타일 체커의 TileCheck 스크립트 참조
-        tileL = TileCheckerL.GetComponent<TileCheck>();
-        tileR = TileCheckerR.GetComponent<TileCheck>();
+        tileL = TileCheckerL.GetComponent<TileCheckL>();
+        tileR = TileCheckerR.GetComponent<TileCheckR>();
 
         isFistL = false;
         isFistR = false;
