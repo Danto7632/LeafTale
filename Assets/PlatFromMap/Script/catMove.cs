@@ -263,14 +263,15 @@ public class catMove : MonoBehaviour {
 
                 if (handSpeed > 5f && !isClapDetected) {
                     if (hand.IsLeft && leftOn) {
+                        accelForce *= 2f;
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
                             if (handDirection.y > 0) {
 
                                 if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
-                                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+                                    rb.velocity = new Vector2(accelForce, 0);
                                 }
                                 else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
-                                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+                                    rb.velocity = new Vector2(-accelForce, 0);
                                 }
                             }
                         }
@@ -281,10 +282,10 @@ public class catMove : MonoBehaviour {
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
                             if (handDirection.y > 0) {
                                 if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
-                                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+                                    rb.velocity = new Vector2(accelForce, 0);
                                 }
                                 else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
-                                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+                                    rb.velocity = new Vector2(-accelForce, 0);
                                 }
                             }
                         }
@@ -310,15 +311,11 @@ public class catMove : MonoBehaviour {
 
                 if (isGrounded && isMoveAllow) {
                     if (palmNormal.y > 0.5f && !isHandFlipped) {
-                        Debug.Log("Left hand palm facing up");
-                        // 손바닥이 위로 향하게 된 상태
                         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                         isHandFlipped = true;
                     }    
                     else if (palmNormal.y < -0.5f && isHandFlipped) {
                         isHandFlipped = false;
-                        // 손바닥이 다시 아래로 향하게 된 상태
-                        Debug.Log("Left hand palm facing down again");
                     }
                 }
 
@@ -359,7 +356,7 @@ public class catMove : MonoBehaviour {
                     isFacingRight = true;
                 }
 
-                rb.velocity = Vector2.zero;
+                rb.velocity = new Vector2(0, rb.velocity.y);
 
                 isClapDetected = true; // 손이 맞대어졌음을 감지
             }

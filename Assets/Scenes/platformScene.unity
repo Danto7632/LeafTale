@@ -1152,10 +1152,10 @@ MonoBehaviour:
   target: {fileID: 960567776}
   smoothSpeed: 20
   offset: {x: 0, y: 0}
-  limitMinX: 0
-  limitMaxX: 0
+  limitMinX: -7.9
+  limitMaxX: 66.4
   limitMinY: 0
-  limitMaxY: 0
+  limitMaxY: 30.4
 --- !u!81 &777356307
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1223,7 +1223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777356305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.5, y: -4.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1666,7 +1666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horiaontalInput: 0
-  moveSpeed: 20
   jumpForce: 12
   accelForce: 2
   accelMaxForce: 8
@@ -1688,6 +1687,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 0
+  isHandFlipped: 0
+  leftOn: 0
   inputDelay: 1
 --- !u!212 &960567775
 SpriteRenderer:
