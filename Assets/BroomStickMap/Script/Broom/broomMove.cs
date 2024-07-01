@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using Leap;
 using Leap.Unity;
 
-public class broomMove : MonoBehaviour {
+public class broomMove : MonoBehaviour
+{
     [Header("LeapMotion")]
     private LeapServiceProvider leapProvider;
 
@@ -32,7 +33,6 @@ public class broomMove : MonoBehaviour {
     public EnemySpawn enemySpawn;
 
     [Header("Player_Condition")]
-    public int Hp;
     public bool isHit;
     public bool isMoveAllow;
     public bool isGameOver;
@@ -48,7 +48,12 @@ public class broomMove : MonoBehaviour {
     [Header("Text")]
     public Text leapOnText;
 
-    void Awake() {
+    [Header("Timer")]
+    GameObject timer;
+    public int time_subtract = 3;
+
+    void Awake()
+    {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         capsule2D = GetComponent<CapsuleCollider2D>();
@@ -58,7 +63,6 @@ public class broomMove : MonoBehaviour {
         enemySpawn = GameObject.Find("EnemySpawn").GetComponent<EnemySpawn>();
 
         moveSpeed = 8f;
-        Hp = 5;
 
         isHit = false;
         isGameOver = false;
@@ -79,24 +83,28 @@ public class broomMove : MonoBehaviour {
         isFirstGameStart = false;
 
         leapOnText.enabled = true;
+
+        timer = GameObject.Find("Time");
     }
 
-    void Update() {
-        if(!isGameOver) {
-            lineControl();
-        }
+    void Update()
+    {
+        lineControl();
 
-        if(isGameClear) {
+        if (isGameClear)
+        {
             isMoveAllow = false;
             StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
         }
     }
 
-    void lineControl() {
+    void lineControl()
+    {
         horiaontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if(!isHit && isMoveAllow) {
+        if (!isHit && isMoveAllow)
+        {
             moveDirection = new Vector2(horiaontalInput, verticalInput);
             rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
@@ -107,19 +115,18 @@ public class broomMove : MonoBehaviour {
         rb.position = clampedPosition;
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("BroomEnemy") && !isHit) {
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("BroomEnemy") && !isHit)
+        {
             //hp.GetComponent<HeartUi>().SetHp(-1);
             StartCoroutine(hitDelay());
         }
     }
 
-    IEnumerator hitDelay() {
-        Hp--;
-        if(Hp <= 0) {
-            GameOver();
-        }
-
+    IEnumerator hitDelay()
+    {
+        timer.GetComponent<TimerBar_BroomStick>().timeLeft -= time_subtract;
         isHit = true;
         rb.velocity = Vector2.zero;
 
@@ -133,12 +140,14 @@ public class broomMove : MonoBehaviour {
         sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1f);
     }
 
-    IEnumerator BlinkPlayer() {
+    IEnumerator BlinkPlayer()
+    {
         float blinkDuration = 1.5f;
         float blinkInterval = 0.1f;
         float blinkTimer = 0.0f;
 
-        while (blinkTimer < blinkDuration) {
+        while (blinkTimer < blinkDuration)
+        {
             sp.enabled = !sp.enabled;
 
             yield return new WaitForSeconds(blinkInterval);
@@ -149,10 +158,12 @@ public class broomMove : MonoBehaviour {
         sp.enabled = true;
     }
 
-    IEnumerator MoveSmoothly(Vector2 startPosition, Vector2 targetPosition, float duration) {
+    IEnumerator MoveSmoothly(Vector2 startPosition, Vector2 targetPosition, float duration)
+    {
         float elapsed = 0f;
 
-        while (elapsed < duration) {
+        while (elapsed < duration)
+        {
             float t = elapsed / duration;
             rb.position = Vector2.Lerp(startPosition, targetPosition, t);
             elapsed += Time.deltaTime;
@@ -162,7 +173,8 @@ public class broomMove : MonoBehaviour {
         rb.position = targetPosition;
     }
 
-    public void GameOver() {
+    public void GameOver()
+    {
         isGameOver = true;
         isMoveAllow = false;
 
@@ -170,41 +182,49 @@ public class broomMove : MonoBehaviour {
 
         sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0f);
     }
-    
+
 
     #region LeapMotion
 
-    void OnUpdateFrame(Frame frame) {
-        if (frame.Hands.Count > 0) {
+    void OnUpdateFrame(Frame frame)
+    {
+        if (frame.Hands.Count > 0)
+        {
             hand = frame.Hands[0];
 
-            if(IsFist(hand) && !isLeapOn) {
+            if (IsFist(hand) && !isLeapOn)
+            {
                 leapOnText.enabled = false;
 
                 StartCoroutine(RunGame());
             }
         }
 
-        else if(Input.GetKeyDown(KeyCode.P)) {
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
             leapOnText.enabled = false;
 
             StartCoroutine(RunGame());
         }
-        else {
+        else
+        {
             rb.velocity = Vector2.zero;
         }
 
         DetectHandTilt(hand);
     }
 
-    bool IsFist(Hand hand) {
+    bool IsFist(Hand hand)
+    {
         return hand.GrabStrength > 0.9f;
     }
 
-    IEnumerator RunGame() {
+    IEnumerator RunGame()
+    {
         yield return new WaitForSeconds(1.0f);
 
-        if(!isFirstGameStart) {
+        if (!isFirstGameStart)
+        {
             onTimer.StartCountdown();
             enemySpawn.StartSpawn();
             isFirstGameStart = true;
@@ -212,22 +232,28 @@ public class broomMove : MonoBehaviour {
         isLeapOn = true;
     }
 
-    void DetectHandTilt(Hand hand) {
-        if(isLeapOn && isMoveAllow && !isHit) {
+    void DetectHandTilt(Hand hand)
+    {
+        if (isLeapOn && isMoveAllow && !isHit)
+        {
             Vector3 palmNormal = hand.PalmNormal;
 
-            if (palmNormal.x > 0.2f || palmNormal.x < -0.2f) {
+            if (palmNormal.x > 0.2f || palmNormal.x < -0.2f)
+            {
                 horizonLeapSpeed = palmNormal.x;
             }
-            else {
+            else
+            {
                 horizonLeapSpeed = 0f;
             }
 
 
-            if (palmNormal.z > 0.2f || palmNormal.z < -0.2f) {
+            if (palmNormal.z > 0.2f || palmNormal.z < -0.2f)
+            {
                 verticalLeapSpeed = palmNormal.z;
             }
-            else {
+            else
+            {
                 verticalLeapSpeed = 0f;
             }
 
@@ -241,7 +267,8 @@ public class broomMove : MonoBehaviour {
 
             rb.position = clampedPosition;
         }
-        else {
+        else
+        {
             horizonLeapSpeed = 0f;
             verticalLeapSpeed = 0f;
         }
