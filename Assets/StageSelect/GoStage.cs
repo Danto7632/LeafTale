@@ -3,21 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement; // Add this line to access SceneManager
 
 public class GoStage : MonoBehaviour
 {
     public GameObject tempBtn;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SelectLevel()
     {
@@ -25,24 +15,23 @@ public class GoStage : MonoBehaviour
         switch (tempBtn.name)
         {
             case "Level (1)":
-                Debug.Log("1¹ø ½ºÅ×ÀÌÁö·Î ÀÌµ¿");
+                SceneManager.LoadScene("BroomstickScene");
                 break;
             case "Level (2)":
-                Debug.Log("2¹ø ½ºÅ×ÀÌÁö·Î ÀÌµ¿");
+                SceneManager.LoadScene("platformScene");
                 break;
             case "Level (3)":
-                Debug.Log("3¹ø ½ºÅ×ÀÌÁö·Î ÀÌµ¿");
+                SceneManager.LoadScene("RhythmScene");
                 break;
             case "Level (4)":
-                Debug.Log("4¹ø ½ºÅ×ÀÌÁö·Î ÀÌµ¿");
+                // Add more cases as needed
                 break;
             case "Level (5)":
-                Debug.Log("5¹ø ½ºÅ×ÀÌÁö·Î ÀÌµ¿");
+                // Add more cases as needed
                 break;
             default:
-                Debug.Log("¹öÆ° ÀÌ¸§À» Àß¸ø ÁÖ¾ú½À´Ï´Ù.");
+                Debug.Log("í•´ë‹¹í•˜ëŠ” ì”¬ì´ ì—†ìŠµë‹ˆë‹¤.");
                 break;
         }
-
     }
 }
