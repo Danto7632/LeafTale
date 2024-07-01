@@ -13,6 +13,7 @@ public class StartTimer_BroomStick : MonoBehaviour
     private int countdownValue = 5;
     private float timer = 0f;
     private float interval = 1f;
+    TimerBar_BroomStick timerBar;
 
     public broomMove broom;
 
@@ -23,6 +24,8 @@ public class StartTimer_BroomStick : MonoBehaviour
 
         timerText = readyTimer.GetComponent<TMP_Text>();
 
+        timerText.enabled = true;
+        timerBar = GameObject.Find("Time").GetComponent<TimerBar_BroomStick>();
         timerText.enabled = false;
     }
 
@@ -48,7 +51,7 @@ public class StartTimer_BroomStick : MonoBehaviour
 
         timerText.text = "GO!";
         broom.isMoveAllow = true;
-
+        timerBar.StartCoroutine(timerBar.StartTimer());
         yield return new WaitForSeconds(0.5f);
         timerText.enabled = false;
     }
