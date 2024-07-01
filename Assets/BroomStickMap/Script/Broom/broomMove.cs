@@ -29,7 +29,6 @@ public class broomMove : MonoBehaviour {
     public Animator anim;
 
     public StartTimer_BroomStick onTimer;
-    public Timer_BroomStick gameTimer;
     public EnemySpawn enemySpawn;
 
     [Header("Player_Condition")]
@@ -46,9 +45,6 @@ public class broomMove : MonoBehaviour {
     public float minY;
     public float maxY;
 
-    [Header("Timer")]
-    GameObject timer;
-    public int time_subtract = 3;
     [Header("Text")]
     public Text leapOnText;
 
@@ -59,7 +55,6 @@ public class broomMove : MonoBehaviour {
         anim = GetComponent<Animator>();
 
         onTimer = GameObject.Find("StartTimer").GetComponent<StartTimer_BroomStick>();
-        gameTimer = GameObject.Find("Canvas").GetComponent<Timer_BroomStick>();
         enemySpawn = GameObject.Find("EnemySpawn").GetComponent<EnemySpawn>();
 
         moveSpeed = 8f;
@@ -74,8 +69,6 @@ public class broomMove : MonoBehaviour {
         minY = -3f;
         maxY = 3f;
 
-        //hp = GameObject.Find("Heart");
-        timer = GameObject.Find("Time");
         //leap
         leapProvider = FindObjectOfType<LeapServiceProvider>();
 
@@ -89,9 +82,8 @@ public class broomMove : MonoBehaviour {
     }
 
     void Update() {
-        if(!isGameOver && !isLeapOn) {
+        if(!isGameOver) {
             lineControl();
-            StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
         }
 
         if(isGameClear) {
@@ -119,13 +111,10 @@ public class broomMove : MonoBehaviour {
         if(other.gameObject.CompareTag("BroomEnemy") && !isHit) {
             //hp.GetComponent<HeartUi>().SetHp(-1);
             StartCoroutine(hitDelay());
-            Debug.Log("Hit");
         }
     }
 
     IEnumerator hitDelay() {
-        Debug.Log("Really Hit");
-        timer.GetComponent<TimerBar_BroomStick>().timeLeft -= time_subtract;
         Hp--;
         if(Hp <= 0) {
             GameOver();
@@ -190,14 +179,19 @@ public class broomMove : MonoBehaviour {
             hand = frame.Hands[0];
 
             if(IsFist(hand) && !isLeapOn) {
-                Debug.Log("주먹이 감지되었습니다. 5초 후 게임이 시작됩니다.");
                 leapOnText.enabled = false;
 
                 StartCoroutine(RunGame());
             }
         }
+
+        else if(Input.GetKeyDown(KeyCode.P)) {
+            leapOnText.enabled = false;
+
+            StartCoroutine(RunGame());
+        }
         else {
-            Debug.Log("손이 감지되지 않았습니다");
+            rb.velocity = Vector2.zero;
         }
 
         DetectHandTilt(hand);
@@ -210,10 +204,8 @@ public class broomMove : MonoBehaviour {
     IEnumerator RunGame() {
         yield return new WaitForSeconds(1.0f);
 
-        Debug.Log("시작!");
         if(!isFirstGameStart) {
             onTimer.StartCountdown();
-            gameTimer.StartTimer();
             enemySpawn.StartSpawn();
             isFirstGameStart = true;
         }

@@ -44,10 +44,6 @@ public class Timer_BroomStick : MonoBehaviour
             timeText[1].enabled = false;
             gameOverText.enabled = false;
         }
-        else
-        {
-            Debug.LogError("timeText 배열이 null이거나 크기가 2보다 작습니다.");
-        }
 
         isStartTimer = true;
     }
