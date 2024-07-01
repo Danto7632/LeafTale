@@ -10,7 +10,6 @@ using Leap.Unity;
 public class catMove : MonoBehaviour {
     [Header("Player_Status")]
     public float horiaontalInput;
-    public float moveSpeed = 10f;
     public float jumpForce = 12f;
     public float accelForce = 2f;
     public float accelMaxForce = 8f;
@@ -47,15 +46,9 @@ public class catMove : MonoBehaviour {
     private Vector3 previousLeftHandPosition = Vector3.zero;
     private Vector3 previousRightHandPosition = Vector3.zero;
 
-    private bool isLeftMovingUp = false;
-    private bool isLeftMovingDown = false;
-    private bool isRightMovingUp = false;
-    private bool isRightMovingDown = false; 
-
     public bool isHandFlipped;
 
-    private bool shouldPrintLURD = false; // 왼손이 위로, 오른손이 아래로 움직임을 출력해야 할지 여부
-    private bool shouldPrintLDRU = false; // 왼손이 아래로, 오른손이 위로 움직임을 출력해야 할지 여부
+    public bool leftOn;
 
     private bool isClapDetected = false;
 
@@ -77,15 +70,9 @@ public class catMove : MonoBehaviour {
         anim.SetBool("isGround", true);
         accelForce = 10f;
 
-        isLeftMovingUp = false;
-        isLeftMovingDown = false;
-        isRightMovingUp = false;
-        isRightMovingDown = false; 
-
         isHandFlipped = false;
 
-        shouldPrintLURD = false; // 왼손이 위로, 오른손이 아래로 움직임을 출력해야 할지 여부
-        shouldPrintLDRU = false; // 왼손이 아래로, 오른손이 위로 움직임을 출력해야 할지 여부
+        leftOn = true;
 
         isClapDetected = false;
     }
@@ -182,11 +169,7 @@ public class catMove : MonoBehaviour {
         RaycastHit2D forwardHit = Physics2D.Raycast(forwardVec, Vector2.right * ((isFacingRight == true) ? 1f : -1f), 1.0f, wallLayer);
 
         if(forwardHit.collider != null) {
-            moveSpeed = 0f;
             isGrounded = false;
-        }
-        else {
-            moveSpeed = 10f;
         }
     }
 
@@ -278,30 +261,34 @@ public class catMove : MonoBehaviour {
                 Vector3 handDirection = (currentHandPosition - previousHandPosition).normalized;
                 float handSpeed = hand.PalmVelocity.magnitude;
 
-                if (handSpeed > 4f) {
-                    if (hand.IsLeft) {
+                if (handSpeed > 5f && !isClapDetected) {
+                    if (hand.IsLeft && leftOn) {
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
                             if (handDirection.y > 0) {
-                                isLeftMovingUp = true; // 왼손이 위로
-                                isLeftMovingDown = false;
-                            }
-                            else {
-                                isLeftMovingDown = true; // 왼손이 아래로
-                                isLeftMovingUp = false;
+
+                                if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
+                                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+                                }
+                                else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
+                                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+                                }
                             }
                         }
+                        leftOn = false;
                     }
-                    else if (hand.IsRight) {
+
+                    if (hand.IsRight && !leftOn) {
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
                             if (handDirection.y > 0) {
-                                isRightMovingUp = true; // 오른손이 위로
-                                isRightMovingDown = false;
-                            }
-                            else {
-                                isRightMovingDown = true; // 오른손이 아래로
-                                isRightMovingUp = false;
+                                if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
+                                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+                                }
+                                else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
+                                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+                                }
                             }
                         }
+                        leftOn = true;
                     }
                 }
             }
@@ -314,65 +301,28 @@ public class catMove : MonoBehaviour {
                 }
             }
         }
-
-        // 번갈아가며 움직일 때 콘솔 출력
-        if (isLeftMovingUp && isRightMovingDown && !shouldPrintLURD) {
-            Debug.Log("왼손이 위로, 오른손이 아래로 움직임");
-            shouldPrintLURD = true;
-            shouldPrintLDRU = false;
-
-            if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
-                rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
-            }
-            else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
-                rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
-            }
-        }
-        else if (isLeftMovingDown && isRightMovingUp && !shouldPrintLDRU) {
-            Debug.Log("왼손이 아래로, 오른손이 위로 움직임");
-            shouldPrintLURD = false;
-            shouldPrintLDRU = true;
-
-            if(isFacingRight && (currentSpeed < accelMaxForce)) {
-                rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
-            }
-            else if(!isFacingRight && (currentSpeed > -accelMaxForce)){
-                rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
-            }
-        }
-
-        // 움직임이 멈추면 상태 초기화
-        if (!(isLeftMovingUp || isLeftMovingDown)) {
-            shouldPrintLURD = false;
-        }
-        if (!(isRightMovingUp || isRightMovingDown)) {
-            shouldPrintLDRU = false;
-        }
-
-        // 모든 움직임 상태 초기화
-        isLeftMovingUp = false;
-        isLeftMovingDown = false;
-        isRightMovingUp = false;
-        isRightMovingDown = false;
     }
 
     void catJumpFlip(Frame frame) {
         foreach (Hand hand in frame.Hands) {
-            Vector3 palmNormal = hand.PalmNormal;
+            if (hand.IsLeft) { // 왼손만 감지하도록 조건 추가
+                Vector3 palmNormal = hand.PalmNormal;
 
-            if(isGrounded && isMoveAllow) {
-                if (palmNormal.y > 0.5f && !isHandFlipped) {
-                    // 손바닥이 위로 향하게 된 상태
-                    isHandFlipped = true;
+                if (isGrounded && isMoveAllow) {
+                    if (palmNormal.y > 0.5f && !isHandFlipped) {
+                        Debug.Log("Left hand palm facing up");
+                        // 손바닥이 위로 향하게 된 상태
+                        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                        isHandFlipped = true;
+                    }    
+                    else if (palmNormal.y < -0.5f && isHandFlipped) {
+                        isHandFlipped = false;
+                        // 손바닥이 다시 아래로 향하게 된 상태
+                        Debug.Log("Left hand palm facing down again");
+                    }
+                }
 
-                    Debug.Log("Left hand palm facing up");
-                }
-                else if (palmNormal.y < -0.5f && isHandFlipped) {
-                    isHandFlipped = false;
-                    // 손바닥이 다시 아래로 향하게 된 상태
-                    Debug.Log("Left hand palm facing down again");
-                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                }
+                break; // 한 손만 감지한 후 루프 종료
             }
         }
     }
@@ -396,10 +346,6 @@ public class catMove : MonoBehaviour {
             float handsDistance = Vector3.Distance(leftPalmPosition, rightPalmPosition);
 
             if (handsDistance < clapDistanceThreshold && !isClapDetected) {
-                isClapDetected = true; // 손이 맞대어졌음을 감지
-            }
-            else if (handsDistance >= clapDistanceThreshold && isClapDetected) {
-            // 손이 맞대어졌다가 떨어짐을 감지
                 if (isFacingRight && isMoveAllow) {
                     newScale = transform.localScale;
                     newScale.x *= -1;
@@ -413,6 +359,12 @@ public class catMove : MonoBehaviour {
                     isFacingRight = true;
                 }
 
+                rb.velocity = Vector2.zero;
+
+                isClapDetected = true; // 손이 맞대어졌음을 감지
+            }
+            else if (handsDistance >= clapDistanceThreshold && isClapDetected) {
+            // 손이 맞대어졌다가 떨어짐을 감지
                 isClapDetected = false; // 상태 초기화
             }
         }
