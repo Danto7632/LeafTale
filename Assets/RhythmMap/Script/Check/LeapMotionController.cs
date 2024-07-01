@@ -10,6 +10,14 @@ public class LeapMotionController : MonoBehaviour {
     private TileCheck tileL;
     private TileCheck tileR;
 
+    public bool isFistL;
+    public bool isPalmL;
+    public bool isScissorsL;
+
+    public bool isFistR;
+    public bool isPalmR;
+    public bool isScissorsR;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
 
@@ -20,6 +28,15 @@ public class LeapMotionController : MonoBehaviour {
         // 타일 체커의 TileCheck 스크립트 참조
         tileL = TileCheckerL.GetComponent<TileCheck>();
         tileR = TileCheckerR.GetComponent<TileCheck>();
+
+        isFistL = false;
+        isFistR = false;
+
+        isPalmL = false;
+        isPalmR = false;
+
+        isFistL = false;
+        isFistR = false;
     }
 
     void Update() {
@@ -36,71 +53,71 @@ public class LeapMotionController : MonoBehaviour {
     }
 
     void DetectLeftHandPose(Hand hand) {
-        bool isFist = true;
-        bool isPalm = true;
-        bool isScissors = false;
+        if (hand.GrabStrength > 0.9f) {
+            isFistL = true;
 
-        // 가위 인식
-        if (hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended &&
-            !hand.Fingers[0].IsExtended && !hand.Fingers[3].IsExtended && !hand.Fingers[4].IsExtended) {
-            isScissors = true;
+            isScissorsL = false;
+            isPalmL = false;
         }
+        else {
+            if(!hand.Fingers[0].IsExtended && !hand.Fingers[3].IsExtended && !hand.Fingers[4].IsExtended && 
+                hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended) {
+                isScissorsL = true;
 
-        // 주먹 인식
-        foreach (Finger finger in hand.Fingers) {
-            if (finger.IsExtended) {
-                isFist = false;
+                isFistL = false;
+                isPalmL = false;
             }
-        }
+            else if(hand.Fingers[0].IsExtended && hand.Fingers[3].IsExtended && hand.Fingers[4].IsExtended) {
+                isPalmL = true;
 
-        // 평평한 손바닥 인식
-        foreach (Finger finger in hand.Fingers) {
-            if (!finger.IsExtended) {
-                isPalm = false;
+                isScissorsL = false;
+                isFistL = false;
             }
         }
 
         // 왼손 타일 체커에 동작 전달
-        if (isFist) {
+        if (isFistL) {
             tileL.getLeap("ROCK");
-        } else if (isPalm) {
+        }
+        if (isPalmL) {
             tileL.getLeap("PAPER");
-        } else if (isScissors) {
+        } 
+        if (isScissorsL) {
             tileL.getLeap("SCISSOR");
         }
     }
 
     void DetectRightHandPose(Hand hand) {
-        bool isFist = true;
-        bool isPalm = true;
-        bool isScissors = false;
+        if (hand.GrabStrength > 0.9f) {
+            isFistR = true;
 
-        // 가위 인식
-        if (hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended &&
-            !hand.Fingers[0].IsExtended && !hand.Fingers[3].IsExtended && !hand.Fingers[4].IsExtended) {
-            isScissors = true;
+            isScissorsR = false;
+            isPalmR = false;
         }
+        else {
+            if(!hand.Fingers[0].IsExtended && !hand.Fingers[3].IsExtended && !hand.Fingers[4].IsExtended && 
+                hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended) {
+                isScissorsR = true;
 
-        // 주먹 인식
-        foreach (Finger finger in hand.Fingers) {
-            if (finger.IsExtended) {
-                isFist = false;
+                isFistR = false;
+                isPalmR = false;
             }
-        }
+            else if(hand.Fingers[0].IsExtended && hand.Fingers[3].IsExtended && hand.Fingers[4].IsExtended) {
+                isPalmR = true;
 
-        // 평평한 손바닥 인식
-        foreach (Finger finger in hand.Fingers) {
-            if (!finger.IsExtended) {
-                isPalm = false;
+                isScissorsR = false;
+                isFistR = false;
             }
         }
 
         // 오른손 타일 체커에 동작 전달
-        if (isFist) {
+        if (isFistR) {
             tileR.getLeap("ROCK");
-        } else if (isPalm) {
+        }
+        if (isPalmR) {
             tileR.getLeap("PAPER");
-        } else if (isScissors) {
+        }
+        if (isScissorsR) {
             tileR.getLeap("SCISSOR");
         }
     }
