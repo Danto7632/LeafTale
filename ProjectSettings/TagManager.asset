@@ -29,9 +29,9 @@ TagManager:
   - Enemy
   - PhysicalHands
   - PhysicalHandsReset
-  - 
-  - 
-  - 
+  - PaperTile
+  - RockTile
+  - ScissorsTile
   - 
   - 
   - 
