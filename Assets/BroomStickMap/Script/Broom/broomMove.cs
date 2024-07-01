@@ -31,6 +31,7 @@ public class broomMove : MonoBehaviour
 
     public StartTimer_BroomStick onTimer;
     public EnemySpawn enemySpawn;
+    public TimerSpawn timerSpawn;
 
     [Header("Player_Condition")]
     public bool isHit;
@@ -61,6 +62,7 @@ public class broomMove : MonoBehaviour
 
         onTimer = GameObject.Find("StartTimer").GetComponent<StartTimer_BroomStick>();
         enemySpawn = GameObject.Find("EnemySpawn").GetComponent<EnemySpawn>();
+        timerSpawn = GameObject.Find("TimerSpawn").GetComponent<TimerSpawn>();
 
         moveSpeed = 8f;
 
@@ -115,12 +117,14 @@ public class broomMove : MonoBehaviour
         rb.position = clampedPosition;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("BroomEnemy") && !isHit)
-        {
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("BroomEnemy") && !isHit) {
             //hp.GetComponent<HeartUi>().SetHp(-1);
             StartCoroutine(hitDelay());
+        }
+
+        if(other.gameObject.CompareTag("PlusTimer") && !isHit) {
+            Debug.Log("시간 증가");
         }
     }
 
@@ -186,10 +190,8 @@ public class broomMove : MonoBehaviour
 
     #region LeapMotion
 
-    void OnUpdateFrame(Frame frame)
-    {
-        if (frame.Hands.Count > 0)
-        {
+    void OnUpdateFrame(Frame frame) {
+        if (frame.Hands.Count > 0) {
             hand = frame.Hands[0];
 
             if (IsFist(hand) && !isLeapOn)
@@ -200,8 +202,7 @@ public class broomMove : MonoBehaviour
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.P))
-        {
+        else if (Input.GetKeyDown(KeyCode.P)) {
             leapOnText.enabled = false;
 
             StartCoroutine(RunGame());
@@ -219,14 +220,14 @@ public class broomMove : MonoBehaviour
         return hand.GrabStrength > 0.9f;
     }
 
-    IEnumerator RunGame()
-    {
+    IEnumerator RunGame() {
         yield return new WaitForSeconds(1.0f);
 
         if (!isFirstGameStart)
         {
             onTimer.StartCountdown();
             enemySpawn.StartSpawn();
+            timerSpawn.StartSpawn();
             isFirstGameStart = true;
         }
         isLeapOn = true;
