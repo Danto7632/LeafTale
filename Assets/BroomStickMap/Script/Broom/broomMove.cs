@@ -51,7 +51,6 @@ public class broomMove : MonoBehaviour
 
     [Header("Timer")]
     GameObject timer;
-    public int time_subtract = 3;
 
     void Awake()
     {
@@ -125,12 +124,13 @@ public class broomMove : MonoBehaviour
 
         if(other.gameObject.CompareTag("PlusTimer") && !isHit) {
             Debug.Log("시간 증가");
+            timer.GetComponent<TimerBar_BroomStick>().timeLeft += timer.GetComponent<TimerBar_BroomStick>().time_add;
         }
     }
 
     IEnumerator hitDelay()
     {
-        timer.GetComponent<TimerBar_BroomStick>().timeLeft -= time_subtract;
+        timer.GetComponent<TimerBar_BroomStick>().timeLeft -= timer.GetComponent<TimerBar_BroomStick>().time_subtract;
         isHit = true;
         rb.velocity = Vector2.zero;
 

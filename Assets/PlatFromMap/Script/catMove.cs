@@ -215,6 +215,7 @@ public class catMove : MonoBehaviour {
             isMoveAllow = false;
             isGameOver = true;
             rb.velocity = Vector2.zero;
+            GameObject.Find("GameClear").GetComponent<GameClear>().Clear(GameObject.Find("GameManager").GetComponent<GameManager>().score);
         }
 
         if(other.gameObject.CompareTag("SpawnZone")) {
@@ -223,9 +224,10 @@ public class catMove : MonoBehaviour {
 
             StartCoroutine(spawnDelay());
         }
-
+        
         if(other.gameObject.CompareTag("Coin")) // 코인 먹었을 때
         {
+            GameManager.instance.AddScore(2);
             other.gameObject.SetActive(false); // 코인 사라짐
         }
     }
