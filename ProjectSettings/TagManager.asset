@@ -18,6 +18,7 @@ TagManager:
   - tileCheck
   - tileCheckL
   - tileCheckR
+  - PlusTimer
   layers:
   - Default
   - TransparentFX
@@ -29,9 +30,9 @@ TagManager:
   - Enemy
   - PhysicalHands
   - PhysicalHandsReset
-  - 
-  - 
-  - 
+  - PaperTile
+  - RockTile
+  - ScissorsTile
   - 
   - 
   - 
