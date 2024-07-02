@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public TMP_Text scoreText;
 
-    private int score = 0;
+    public int score = 0;
 
     void Awake()
     {

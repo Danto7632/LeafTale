@@ -15,7 +15,7 @@ public class GameClear : MonoBehaviour
     {
         textScore = GameObject.Find("GameScore").GetComponent<TMP_Text>();
         pos = GetComponent<RectTransform>();
-        pos.anchoredPosition = new Vector2(0, 400);
+        pos.anchoredPosition = new Vector2(0, 1000);
     }
     // Update is called once per framed
     void Update()
