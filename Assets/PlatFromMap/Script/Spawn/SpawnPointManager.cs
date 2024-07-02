@@ -31,16 +31,6 @@ public class SpawnPointManager : MonoBehaviour
                     other.transform.position = new Vector2(-18f, 4f);
                     break;
                 case 1:
-                    if (!cat.isFacingRight)
-                    {
-                        cat.newScale = cat.transform.localScale;
-                        cat.newScale.x *= -1f;
-                        cat.transform.localScale = cat.newScale;
-                        cat.isFacingRight = true;
-                    }
-                    other.transform.position = new Vector2(28f, 7f);
-                    break;
-                case 2:
                     if (cat.isFacingRight)
                     {
                         cat.newScale = cat.transform.localScale;
@@ -48,7 +38,17 @@ public class SpawnPointManager : MonoBehaviour
                         cat.transform.localScale = cat.newScale;
                         cat.isFacingRight = false;
                     }
-                    other.transform.position = new Vector2(59f, 11f);
+                    other.transform.position = new Vector2(65f, 11f);
+                    break;
+                case 2:
+                    if (!cat.isFacingRight)
+                    {
+                        cat.newScale = cat.transform.localScale;
+                        cat.newScale.x *= -1f;
+                        cat.transform.localScale = cat.newScale;
+                        cat.isFacingRight = true;
+                    }
+                    other.transform.position = new Vector2(-13f, 16f);
                     break;
                 case 3:
                     if (cat.isFacingRight)
@@ -58,7 +58,7 @@ public class SpawnPointManager : MonoBehaviour
                         cat.transform.localScale = cat.newScale;
                         cat.isFacingRight = false;
                     }
-                    other.transform.position = new Vector2(26f, 17f);
+                    other.transform.position = new Vector2(67f, 23f);
                     break;
             }
         }

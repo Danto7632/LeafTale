@@ -223,9 +223,10 @@ public class catMove : MonoBehaviour {
 
             StartCoroutine(spawnDelay());
         }
-
+        
         if(other.gameObject.CompareTag("Coin")) // 코인 먹었을 때
         {
+            GameManager.instance.AddScore(2);
             other.gameObject.SetActive(false); // 코인 사라짐
         }
     }

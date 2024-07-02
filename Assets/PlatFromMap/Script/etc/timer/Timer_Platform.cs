@@ -10,12 +10,15 @@ public class Timer_Platform : MonoBehaviour
 
     public TMP_Text[] timeText;
     public TMP_Text gameOverText;
+    public TMP_Text scoreText;
+
     float time = 126f; // 제한 시간 125초
     int min, sec;
 
     void Awake() {
         cat = GameObject.FindWithTag("Player");
         catStatus = cat.GetComponent<catMove>();
+        scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
     }
 
     void Start()
@@ -39,6 +42,7 @@ public class Timer_Platform : MonoBehaviour
             timeText[0].enabled = false;
             timeText[1].enabled = false;
             gameOverText.enabled = false;
+            scoreText.enabled = false;
 
             StartCoroutine(delayTimer());
         }
@@ -86,6 +90,7 @@ public class Timer_Platform : MonoBehaviour
             timeText[0].enabled = true;
             timeText[1].enabled = true;
             gameOverText.enabled = true;
+            scoreText.enabled = true;
         }
     }
 }
