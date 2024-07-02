@@ -8,6 +8,8 @@ public class TimerSpawn : MonoBehaviour {
 
     public broomMove broomStatus;
 
+    private int maxItems = 0;
+
     void Start() {
         broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
     }
@@ -28,8 +30,9 @@ public class TimerSpawn : MonoBehaviour {
         int randomNumber = Random.Range(0, 3);
         float radomSpawnDelay = Random.Range(3f, 7f);
 
-        if(!broomStatus.isGameOver || !broomStatus.isGameClear) {
+        if((!broomStatus.isGameOver || !broomStatus.isGameClear) && maxItems < 3 ) {
             Instantiate(timerPrefab, spawnPosition, Quaternion.identity);
+            maxItems++;
         }
         else {
             yield break;
