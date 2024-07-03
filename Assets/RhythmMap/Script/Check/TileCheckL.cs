@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TileCheckL : MonoBehaviour {
     public bool isRock;
@@ -11,10 +12,17 @@ public class TileCheckL : MonoBehaviour {
     public GameObject paperPrefab;
     public GameObject scissorPrefab;
 
+    public GameObject greatText;
+    public GameObject sosoText;
+    public GameObject failText;
+    public GameObject noteEffect;
+    
     public RaycastHit2D[] isTileCheck = new RaycastHit2D[3];
     public Vector2[] tileRayVec = new Vector2[3];
 
     public string layerName;
+
+    ComboManager theCombo;
 
     public void Awake() {
         isRock = false;
@@ -24,6 +32,8 @@ public class TileCheckL : MonoBehaviour {
         tileRayVec[0] = new Vector2(-1.5f, 1f);
         tileRayVec[1] = new Vector2(-1.0f, 1f);
         tileRayVec[2] = new Vector2(-0.2f, 1f);
+
+        theCombo = FindObjectOfType<ComboManager>();
     }
 
     public void getLeap(string hands) {
@@ -66,16 +76,24 @@ public class TileCheckL : MonoBehaviour {
                 switch(i) {
                     case 0 :
                         Debug.Log("Great");
+                        theCombo.IncreaseCombo();
+                        greatText.SetActive(true);
+                        noteEffect.SetActive(true);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
                     case 1 :
                         Debug.Log("Soso");
+                        theCombo.IncreaseCombo();
+                        sosoText.SetActive(true);
+                        noteEffect.SetActive(true);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
                 }
             }
             else if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
                 Debug.Log("Fail");
+                theCombo.ResetCombo();
+                failText.SetActive(true);
                 Destroy(isTileCheck[i].collider.gameObject);
             }
         }
