@@ -31,28 +31,30 @@ public class TileCheckL : MonoBehaviour {
     }
 
     public void getLeap(string hands) {
-        if(hands == "ROCK") {
-            isRock = true;
-            isPaper = false;
-            isScissor = false;
-            layerName = "RockTile";
-        }
-        else if(hands == "SCISSOR") {
-            isRock = false;
-            isPaper = false;
-            isScissor = true;
-            layerName = "ScissorsTile";
-        }
-        else if(hands == "PAPER") {
-            isRock = false;
-            isPaper = true;
-            isScissor = false;
-            layerName = "PaperTile";
-        }
+        if(BeforeGame.isGameStart) {
+            if(hands == "ROCK") {
+                isRock = true;
+                isPaper = false;
+                isScissor = false;
+                layerName = "RockTile";
+            }
+            else if(hands == "SCISSOR") {
+                isRock = false;
+                isPaper = false;
+                isScissor = true;
+                layerName = "ScissorsTile";
+            }
+            else if(hands == "PAPER") {
+                isRock = false;
+                isPaper = true;
+                isScissor = false;
+                layerName = "PaperTile";
+            }
 
-        rockPrefab.SetActive(isRock);
-        paperPrefab.SetActive(isPaper);
-        scissorPrefab.SetActive(isScissor);
+            rockPrefab.SetActive(isRock);
+            paperPrefab.SetActive(isPaper);
+            scissorPrefab.SetActive(isScissor);
+        }
     }
 
     void Update() {

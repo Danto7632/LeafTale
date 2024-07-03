@@ -10,8 +10,9 @@ public class LeftTileMove : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update() {
-        rb.velocity = new Vector2(2f, 0);
+        if(BeforeGame.isGameStart) {
+            rb.velocity = new Vector2(2f, 0);
+        }
     }
 }
