@@ -16,6 +16,8 @@ public class TileCheckL : MonoBehaviour {
 
     public string layerName;
 
+    public GameObject score;
+
     public void Awake() {
         isRock = false;
         isPaper = false;
@@ -24,6 +26,8 @@ public class TileCheckL : MonoBehaviour {
         tileRayVec[0] = new Vector2(-1.5f, 1f);
         tileRayVec[1] = new Vector2(-1.0f, 1f);
         tileRayVec[2] = new Vector2(-0.2f, 1f);
+
+        score = GameObject.Find("GameManager");
     }
 
     public void getLeap(string hands) {
@@ -66,15 +70,18 @@ public class TileCheckL : MonoBehaviour {
                 switch(i) {
                     case 0 :
                         Debug.Log("Great");
+                        score.GetComponent<RhythmScore>().NodeHit(2);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
                     case 1 :
                         Debug.Log("Soso");
+                        score.GetComponent<RhythmScore>().NodeHit(1);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
                 }
             }
             else if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
+                score.GetComponent<RhythmScore>().NodeHit(0);
                 Debug.Log("Fail");
                 Destroy(isTileCheck[i].collider.gameObject);
             }
