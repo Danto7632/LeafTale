@@ -35,25 +35,29 @@ public class TileCheckR : MonoBehaviour {
         tileRayVec[2] = new Vector2(0.2f, 1f);
 
         theCombo = FindObjectOfType<ComboManager>();
+        score = GameObject.Find("GameManager");
     }
-        score = GameObject.Find("GameManager"); 
-}
 
-    public void getLeap(string hands) {
-        if(BeforeGame.isGameStart) {
-            if(hands == "ROCK") {
+    public void getLeap(string hands)
+    {
+        if (BeforeGame.isGameStart)
+        {
+            if (hands == "ROCK")
+            {
                 isRock = true;
                 isPaper = false;
                 isScissor = false;
                 layerName = "RockTile";
             }
-            else if(hands == "SCISSOR") {
+            else if (hands == "SCISSOR")
+            {
                 isRock = false;
                 isPaper = false;
                 isScissor = true;
                 layerName = "ScissorsTile";
             }
-            else if(hands == "PAPER") {
+            else if (hands == "PAPER")
+            {
                 isRock = false;
                 isPaper = true;
                 isScissor = false;
@@ -66,8 +70,10 @@ public class TileCheckR : MonoBehaviour {
         }
     }
 
-    void Update() {
-        for(int i = 0; i < 3; i++) {
+    void Update()
+    {
+        for (int i = 0; i < 3; i++)
+        {
             Vector2 origin = tileRayVec[i];
             Vector2 direction = Vector2.down;
             float distance = 1f;
@@ -76,9 +82,11 @@ public class TileCheckR : MonoBehaviour {
 
             isTileCheck[i] = Physics2D.Raycast(origin, direction, distance);
 
-            if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer == LayerMask.NameToLayer(layerName)) {
-                switch(i) {
-                    case 0 :
+            if (isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer == LayerMask.NameToLayer(layerName))
+            {
+                switch (i)
+                {
+                    case 0:
                         Debug.Log("Great");
                         theCombo.IncreaseCombo();
                         greatText.SetActive(true);
@@ -86,7 +94,7 @@ public class TileCheckR : MonoBehaviour {
                         score.GetComponent<RhythmScore>().NodeHit(2);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
-                    case 1 :
+                    case 1:
                         Debug.Log("Soso");
                         theCombo.IncreaseCombo();
                         sosoText.SetActive(true);
@@ -96,7 +104,8 @@ public class TileCheckR : MonoBehaviour {
                         break;
                 }
             }
-            else if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
+            else if (isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2)
+            {
                 Debug.Log("Fail");
                 theCombo.ResetCombo();
                 failText.SetActive(true);
@@ -106,3 +115,5 @@ public class TileCheckR : MonoBehaviour {
         }
     }
 }
+         
+    
