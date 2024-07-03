@@ -28,12 +28,7 @@ public class StartTimer_Platform : MonoBehaviour
         timerText.enabled = true;
     }
 
-    void Start()
-    {
-        StartCountdown();
-    }
-
-    void StartCountdown()
+    public void StartCountdown()
     {
         timer = Time.time;
 

@@ -32,20 +32,14 @@ public class Timer_Platform : MonoBehaviour
         timeText[0] = minObject.GetComponent<TMP_Text>();
         timeText[1] = secObject.GetComponent<TMP_Text>();
         gameOverText = colonObject.GetComponent<TMP_Text>();
-        StartCoroutine(delayTimer());
-        // timeText 배열이 null이 아니고 크기가 2 이상인지 확인
-        if (timeText != null && timeText.Length >= 2 && gameOverText != null)
-        {
-            // 제한 시간 02:00으로 초기화
-            timeText[0].text = "02";
-            timeText[1].text = "06";
-            timeText[0].enabled = false;
-            timeText[1].enabled = false;
-            gameOverText.enabled = false;
-            scoreText.enabled = false;
 
-            StartCoroutine(delayTimer());
-        }
+        timeText[0].text = "02";
+        timeText[1].text = "06";
+        timeText[0].enabled = false;
+        timeText[1].enabled = false;
+        gameOverText.enabled = false;
+        scoreText.enabled = false;
+
     }
 
     void Update()
@@ -78,6 +72,10 @@ public class Timer_Platform : MonoBehaviour
             timeText[1].enabled = false;
             gameOverText.text = "게임 클리어";
         }
+    }
+
+    public void timerStart() {
+        StartCoroutine(delayTimer());
     }
 
     IEnumerator delayTimer()

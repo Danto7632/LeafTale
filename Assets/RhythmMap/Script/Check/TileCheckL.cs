@@ -23,6 +23,7 @@ public class TileCheckL : MonoBehaviour {
     public string layerName;
 
     ComboManager theCombo;
+    public GameObject score;
 
     public void Awake() {
         isRock = false;
@@ -34,31 +35,34 @@ public class TileCheckL : MonoBehaviour {
         tileRayVec[2] = new Vector2(-0.2f, 1f);
 
         theCombo = FindObjectOfType<ComboManager>();
+        score = GameObject.Find("GameManager");
     }
 
     public void getLeap(string hands) {
-        if(hands == "ROCK") {
-            isRock = true;
-            isPaper = false;
-            isScissor = false;
-            layerName = "RockTile";
-        }
-        else if(hands == "SCISSOR") {
-            isRock = false;
-            isPaper = false;
-            isScissor = true;
-            layerName = "ScissorsTile";
-        }
-        else if(hands == "PAPER") {
-            isRock = false;
-            isPaper = true;
-            isScissor = false;
-            layerName = "PaperTile";
-        }
+        if(BeforeGame.isGameStart) {
+            if(hands == "ROCK") {
+                isRock = true;
+                isPaper = false;
+                isScissor = false;
+                layerName = "RockTile";
+            }
+            else if(hands == "SCISSOR") {
+                isRock = false;
+                isPaper = false;
+                isScissor = true;
+                layerName = "ScissorsTile";
+            }
+            else if(hands == "PAPER") {
+                isRock = false;
+                isPaper = true;
+                isScissor = false;
+                layerName = "PaperTile";
+            }
 
-        rockPrefab.SetActive(isRock);
-        paperPrefab.SetActive(isPaper);
-        scissorPrefab.SetActive(isScissor);
+            rockPrefab.SetActive(isRock);
+            paperPrefab.SetActive(isPaper);
+            scissorPrefab.SetActive(isScissor);
+        }
     }
 
     void Update() {
@@ -79,6 +83,7 @@ public class TileCheckL : MonoBehaviour {
                         theCombo.IncreaseCombo();
                         greatText.SetActive(true);
                         noteEffect.SetActive(true);
+                        score.GetComponent<RhythmScore>().NodeHit(2);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
                     case 1 :
@@ -86,11 +91,13 @@ public class TileCheckL : MonoBehaviour {
                         theCombo.IncreaseCombo();
                         sosoText.SetActive(true);
                         noteEffect.SetActive(true);
+                        score.GetComponent<RhythmScore>().NodeHit(1);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
                 }
             }
             else if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
+                score.GetComponent<RhythmScore>().NodeHit(0);
                 Debug.Log("Fail");
                 theCombo.ResetCombo();
                 failText.SetActive(true);

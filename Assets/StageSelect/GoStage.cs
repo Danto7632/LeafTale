@@ -5,28 +5,24 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement; // Add this line to access SceneManager
 
-public class GoStage : MonoBehaviour
-{
-    public GameObject tempBtn;
+public class GoStage : MonoBehaviour {
 
-    public void SelectLevel()
-    {
-        tempBtn = EventSystem.current.currentSelectedGameObject;
-        switch (tempBtn.name)
-        {
-            case "Level (1)":
+
+    public void SelectLevel() {
+        switch (ScrollStage.btnIndex) {
+            case 0:
                 SceneManager.LoadScene("BroomstickScene");
                 break;
-            case "Level (2)":
+            case 1:
                 SceneManager.LoadScene("platformScene");
                 break;
-            case "Level (3)":
+            case 2:
                 SceneManager.LoadScene("RhythmScene");
                 break;
-            case "Level (4)":
+            case 3:
                 // Add more cases as needed
                 break;
-            case "Level (5)":
+            case 4:
                 // Add more cases as needed
                 break;
             default:
