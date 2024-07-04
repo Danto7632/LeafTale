@@ -29,7 +29,7 @@ public class RhythmScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void NodeHit(int addScore)
