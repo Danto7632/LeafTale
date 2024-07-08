@@ -55,6 +55,7 @@ public class Timer_Platform : MonoBehaviour
                 time = 0;
                 gameOverText.text = "게임 오버"; // 게임 오버 텍스트를 표시합니다
                 // 추가로 업데이트를 비활성화하거나 게임 오버 로직을 처리할 수 있습니다
+                GameObject.Find("GameClear").GetComponent<GameClear>().Clear(GameObject.Find("GameManager").GetComponent<GameManager>().score);
                 timeText[0].enabled = false;
                 timeText[1].enabled = false;
             }   
