@@ -11,9 +11,11 @@ public class catMove : MonoBehaviour {
     [Header("Player_Status")]
     public float horiaontalInput;
     public float jumpForce = 12f;
-    public float accelForce = 2f;
-    public float accelMaxForce = 8f;
+    public float accelForce;
     public Vector3 newScale;
+    public int UDCount;
+    public int FlipCount;
+    public int ClapCount;
 
     [Header("Player_Component")]
     public Rigidbody2D rb;
@@ -52,6 +54,11 @@ public class catMove : MonoBehaviour {
 
     private bool isClapDetected = false;
 
+    public Text UDText;
+    public Text FlipText;
+    public Text ClapText;
+    
+
 
     private Queue<KeyValuePair<float, KeyCode>> keyPresses = new Queue<KeyValuePair<float, KeyCode>>();
     public float inputDelay = 1.0f;
@@ -68,13 +75,21 @@ public class catMove : MonoBehaviour {
         groundRayCount = 17;
         isFacingRight = true;
         anim.SetBool("isGround", true);
-        accelForce = 10f;
+        accelForce = 15f;
 
         isHandFlipped = false;
 
         leftOn = true;
 
         isClapDetected = false;
+
+        UDCount = 0;
+        FlipCount = 0;
+        ClapCount = 0;
+
+        UDText = GameObject.Find("UDText").GetComponent<Text>();
+        FlipText = GameObject.Find("FlipText").GetComponent<Text>();
+        ClapText = GameObject.Find("ClapText").GetComponent<Text>();
     }
 
     void Start() {
@@ -96,16 +111,20 @@ public class catMove : MonoBehaviour {
             DetectKeyPress(KeyCode.T);
 
             if (IsPatternComplete()) {
-                if(isFacingRight && (currentSpeed < accelMaxForce)) {
+                if(isFacingRight) {
                     rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
                 }
-                else if(!isFacingRight && (currentSpeed > -accelMaxForce)){
+                else if(!isFacingRight){
                     rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
                 }
 
                 keyPresses.Clear(); // 패턴이 완료되면 큐를 비웁니다.
             }
         }
+
+        UDText.text = "UpAndDown : " + UDCount;
+        FlipText.text = "Jump : " + FlipCount;
+        ClapText.text = "Flip : " + ClapCount; 
     }
 
     void DetectKeyPress(KeyCode key) {
@@ -265,16 +284,17 @@ public class catMove : MonoBehaviour {
 
                 if (handSpeed > 5f && !isClapDetected) {
                     if (hand.IsLeft && leftOn) {
-                        accelForce *= 2f;
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
                             if (handDirection.y > 0) {
 
-                                if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
-                                    rb.velocity = new Vector2(accelForce, 0);
+                                if(isFacingRight && isMoveAllow) {
+                                    rb.velocity = new Vector2(accelForce, rb.velocity.y);
                                 }
-                                else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
-                                    rb.velocity = new Vector2(-accelForce, 0);
+                                else if(!isFacingRight && isMoveAllow){
+                                    rb.velocity = new Vector2(-accelForce, rb.velocity.y);
                                 }
+
+                                UDCount++;
                             }
                         }
                         leftOn = false;
@@ -283,13 +303,14 @@ public class catMove : MonoBehaviour {
                     if (hand.IsRight && !leftOn) {
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
                             if (handDirection.y > 0) {
-                                if(isFacingRight && (currentSpeed < accelMaxForce) && isMoveAllow) {
-                                    rb.velocity = new Vector2(accelForce, 0);
+                                if(isFacingRight && isMoveAllow) {
+                                    rb.velocity = new Vector2(accelForce, rb.velocity.y);
                                 }
-                                else if(!isFacingRight && (currentSpeed > -accelMaxForce) && isMoveAllow){
-                                    rb.velocity = new Vector2(-accelForce, 0);
+                                else if(!isFacingRight && isMoveAllow){
+                                    rb.velocity = new Vector2(-accelForce, rb.velocity.y);
                                 }
                             }
+                            UDCount++;
                         }
                         leftOn = true;
                     }
@@ -315,6 +336,7 @@ public class catMove : MonoBehaviour {
                     if (palmNormal.y > 0.5f && !isHandFlipped) {
                         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                         isHandFlipped = true;
+                        FlipCount++;
                     }    
                     else if (palmNormal.y < -0.5f && isHandFlipped) {
                         isHandFlipped = false;
@@ -359,7 +381,7 @@ public class catMove : MonoBehaviour {
                 }
 
                 rb.velocity = new Vector2(0, rb.velocity.y);
-
+                ClapCount++;
                 isClapDetected = true; // 손이 맞대어졌음을 감지
             }
             else if (handsDistance >= clapDistanceThreshold && isClapDetected) {
