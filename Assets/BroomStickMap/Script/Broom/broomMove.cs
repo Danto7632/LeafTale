@@ -18,6 +18,12 @@ public class broomMove : MonoBehaviour
     public float horizonLeapSpeed;
     public float verticalLeapSpeed;
 
+    [Header("Wrist Movement Tracking")]
+    public Vector3 previousWristPosition;
+    public float totalWristMovement;
+    public Text wristMovementText;
+    public float movementThreshold = 0.01f;  // 작은 움직임을 무시하기 위한 임계값
+
     [Header("Player_Status")]
     public float horiaontalInput;
     public float verticalInput;
@@ -86,14 +92,20 @@ public class broomMove : MonoBehaviour
         leapOnText.enabled = true;
 
         timer = GameObject.Find("Time");
+
+        previousWristPosition = Vector3.zero;
+        totalWristMovement = 0f;
+        wristMovementText = GameObject.Find("WristMovementText").GetComponent<Text>();
+        movementThreshold = 0.01f;  // 작은 움직임을 무시하기 위한 임계값 초기화
     }
 
     void Update()
     {
-        lineControl();
+        if(!isLeapOn) {
+            lineControl();
+        }
 
-        if (isGameClear)
-        {
+        if (isGameClear) {
             isMoveAllow = false;
             StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
         }
@@ -200,19 +212,19 @@ public class broomMove : MonoBehaviour
 
                 StartCoroutine(RunGame());
             }
+
+            DetectHandTilt(hand);
+        }
+        else {
+            rb.velocity = Vector2.zero;
+            isLeapOn = false;
         }
 
-        else if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P) && !isLeapOn) {
             leapOnText.enabled = false;
 
             StartCoroutine(RunGame());
         }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
-
-        DetectHandTilt(hand);
     }
 
     bool IsFist(Hand hand)
@@ -233,10 +245,9 @@ public class broomMove : MonoBehaviour
         isLeapOn = true;
     }
 
-    void DetectHandTilt(Hand hand)
-    {
-        if (isLeapOn && isMoveAllow && !isHit)
-        {
+    void DetectHandTilt(Hand hand) {
+        if (isLeapOn && isMoveAllow && !isHit) {
+            TrackWristMovement(hand);
             Vector3 palmNormal = hand.PalmNormal;
 
             if (palmNormal.x > 0.2f || palmNormal.x < -0.2f)
@@ -273,6 +284,19 @@ public class broomMove : MonoBehaviour
             horizonLeapSpeed = 0f;
             verticalLeapSpeed = 0f;
         }
+    }
+
+    void TrackWristMovement(Hand hand) {
+        Vector3 currentWristPosition = hand.WristPosition;
+        if (previousWristPosition != Vector3.zero) { // 초기값을 제외한 계산
+            float movement = Vector3.Distance(previousWristPosition, currentWristPosition);
+            if (movement > movementThreshold) { // 임계값보다 큰 움직임만 계산
+                totalWristMovement += movement;
+            }
+        }
+        previousWristPosition = currentWristPosition;
+
+        wristMovementText.text = $"Wrist Movement: {totalWristMovement:F2} units";
     }
 
     #endregion
