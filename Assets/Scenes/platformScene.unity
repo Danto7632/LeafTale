@@ -16384,9 +16384,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 37874921298801515, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743442853187961051, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3547816072126681690, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_Name
       value: Grid1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053457048427049750, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4844506779918219902, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_Size.x
@@ -43367,6 +43379,10 @@ PrefabInstance:
     - target: {fileID: 5530026035232035929, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_Tiles.Array.data[1122].second.m_TileSpriteIndex
       value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815160784225550368, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8675737929365376206, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_RootOrder
