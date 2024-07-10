@@ -112,10 +112,10 @@ public class catMove : MonoBehaviour {
 
             if (IsPatternComplete()) {
                 if(isFacingRight) {
-                    rb.AddForce(new Vector2(accelForce, 0), ForceMode2D.Impulse);
+                    rb.velocity = new Vector2(accelForce, rb.velocity.y);
                 }
                 else if(!isFacingRight){
-                    rb.AddForce(new Vector2(-accelForce, 0), ForceMode2D.Impulse);
+                    rb.velocity = new Vector2(-accelForce, rb.velocity.y);
                 }
 
                 keyPresses.Clear(); // 패턴이 완료되면 큐를 비웁니다.

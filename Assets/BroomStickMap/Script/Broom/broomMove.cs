@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Leap;
 using Leap.Unity;
 
@@ -53,6 +54,8 @@ public class broomMove : MonoBehaviour
     public float maxY;
 
     [Header("Text")]
+    public GameObject explainPanel;
+    public TMP_Text explainText;
     public Text leapOnText;
 
     [Header("Timer")]
@@ -68,6 +71,8 @@ public class broomMove : MonoBehaviour
         onTimer = GameObject.Find("StartTimer").GetComponent<StartTimer_BroomStick>();
         enemySpawn = GameObject.Find("EnemySpawn").GetComponent<EnemySpawn>();
         timerSpawn = GameObject.Find("TimerSpawn").GetComponent<TimerSpawn>();
+        explainPanel = GameObject.Find("ExplainPanel");
+        explainText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
 
         moveSpeed = 8f;
 
@@ -206,9 +211,11 @@ public class broomMove : MonoBehaviour
         if (frame.Hands.Count > 0) {
             hand = frame.Hands[0];
 
-            if (IsFist(hand) && !isLeapOn)
+            if (IsPointingPose(hand) && !isLeapOn)
             {
                 leapOnText.enabled = false;
+                explainPanel.gameObject.SetActive(false);
+                explainText.enabled = false;
 
                 StartCoroutine(RunGame());
             }
@@ -222,14 +229,23 @@ public class broomMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P) && !isLeapOn) {
             leapOnText.enabled = false;
+            explainPanel.gameObject.SetActive(false);
+            explainText.enabled = false;
 
             StartCoroutine(RunGame());
         }
     }
 
-    bool IsFist(Hand hand)
-    {
-        return hand.GrabStrength > 0.9f;
+    bool IsPointingPose(Hand hand) {
+        foreach (Finger finger in hand.Fingers) {
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
+                if (!finger.IsExtended) return false;
+            }
+            else {
+                if (finger.IsExtended) return false;
+            }
+        }
+        return true;
     }
 
     IEnumerator RunGame() {
