@@ -22834,6 +22834,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 782215315}
     m_Modifications:
+    - target: {fileID: 2559145891435188088, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7de2112ad879940629c042b23ba7ef93, type: 3}
+    - target: {fileID: 5204903568083165720, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5204903568083165720, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322179467749272919, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_margin.z
+      value: 0.40798953
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322179467749272919, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
+    - target: {fileID: 6322179467749272919, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322179467749272919, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6028403922861178144, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
+    - target: {fileID: 6322179467749272919, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403223953538915726, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403223953538915726, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
+    - target: {fileID: 6403223953538915726, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403223953538915726, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6028403922861178144, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
+    - target: {fileID: 6403223953538915726, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8897207537567935158, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
       propertyPath: m_Name
       value: GameClear
@@ -22935,6 +22987,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 782215315}
     m_Modifications:
+    - target: {fileID: 156338183444183849, guid: e1f0098d70c864eed9c53e936a177a26, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 78031afbb174b49f9ab249a54f807120, type: 3}
+    - target: {fileID: 156338183444183849, guid: e1f0098d70c864eed9c53e936a177a26, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3860261206733175423, guid: e1f0098d70c864eed9c53e936a177a26, type: 3}
       propertyPath: m_Name
       value: leapOnText
