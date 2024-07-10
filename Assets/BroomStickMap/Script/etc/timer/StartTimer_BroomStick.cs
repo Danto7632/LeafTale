@@ -20,10 +20,10 @@ public class StartTimer_BroomStick : MonoBehaviour
     public void Awake() {
         player = GameObject.FindWithTag("Player");
         readyTimer = GameObject.Find("StartTimer");
+
         broom = player.GetComponent<broomMove>();
 
         timerText = readyTimer.GetComponent<TMP_Text>();
-
         timerBar = GameObject.Find("Time").GetComponent<TimerBar_BroomStick>();
 
         timerText.enabled = false;
