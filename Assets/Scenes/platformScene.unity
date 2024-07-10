@@ -17186,9 +17186,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1503626208414519480, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 1503626208414519480, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1743442853187961051, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790806904093141186, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790806904093141186, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 3547816072126681690, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_Name
@@ -44178,9 +44194,25 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[1122].second.m_TileSpriteIndex
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 6242357650127603683, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242357650127603683, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.81
+      objectReference: {fileID: 0}
     - target: {fileID: 6815160784225550368, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861164651978391634, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861164651978391634, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.78
       objectReference: {fileID: 0}
     - target: {fileID: 8675737929365376206, guid: 5f76e3a344e74924595bec2d63c91b1a, type: 3}
       propertyPath: m_RootOrder
