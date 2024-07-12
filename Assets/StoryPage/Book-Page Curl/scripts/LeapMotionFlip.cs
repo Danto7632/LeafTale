@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leap;
 using Leap.Unity;
+using UnityEngine.SceneManagement;
 
 public class LeapMotionFlip : MonoBehaviour {
     private LeapServiceProvider leapProvider;
@@ -13,6 +14,9 @@ public class LeapMotionFlip : MonoBehaviour {
     float swipeDistanceThreshold;
 
     bool isFisting;
+    bool isPointing;
+    float pointingStartTime;
+
 
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
@@ -46,6 +50,22 @@ public class LeapMotionFlip : MonoBehaviour {
 
             Vector3 currentHandPos = hand.PalmPosition;
 
+            if (IsPointingPose(hand)) {
+                if (!isPointing) {
+                    isPointing = true;
+                    pointingStartTime = Time.time;
+                } else if (Time.time - pointingStartTime > 3f) {
+                    SceneManager.LoadScene("StageSelect");
+                }
+            }
+            else {
+                isPointing = false;
+            }
+            
+            if(Input.GetKeyDown("p")) {
+                SceneManager.LoadScene("StageSelect");
+            }
+
             if (IsFist(hand)) {
                 if (!isFisting) {
                     isFisting = true;
@@ -78,5 +98,17 @@ public class LeapMotionFlip : MonoBehaviour {
 
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
+    }
+
+    bool IsPointingPose(Hand hand) {
+        foreach (Finger finger in hand.Fingers) {
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
+                if (!finger.IsExtended) return false;
+            }
+            else {
+                if (finger.IsExtended) return false;
+            }
+        }
+        return true;
     }
 }

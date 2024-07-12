@@ -19,6 +19,9 @@ public class broomMove : MonoBehaviour
     public float horizonLeapSpeed;
     public float verticalLeapSpeed;
 
+    public bool isPointing;
+    public float pointingStartTime;
+
     [Header("Wrist Movement Tracking")]
     public Vector3 previousWristPosition;
     public float totalWristMovement;
@@ -140,7 +143,6 @@ public class broomMove : MonoBehaviour
         }
 
         if(other.gameObject.CompareTag("PlusTimer") && !isHit) {
-            Debug.Log("시간 증가");
             timer.GetComponent<TimerBar_BroomStick>().timeLeft += timer.GetComponent<TimerBar_BroomStick>().time_add;
         }
     }
@@ -211,13 +213,18 @@ public class broomMove : MonoBehaviour
         if (frame.Hands.Count > 0) {
             hand = frame.Hands[0];
 
-            if (IsPointingPose(hand) && !isLeapOn)
-            {
-                leapOnText.enabled = false;
-                explainPanel.gameObject.SetActive(false);
-                explainText.enabled = false;
+            if (IsPointingPose(hand) && !isLeapOn) {
+                if (!isPointing) {
+                    isPointing = true;
+                    pointingStartTime = Time.time;
+                }
+                else if (Time.time - pointingStartTime > 3f) {
+                    leapOnText.enabled = false;
+                    explainPanel.gameObject.SetActive(false);
+                    explainText.enabled = false;
 
-                StartCoroutine(RunGame());
+                    StartCoroutine(RunGame());
+                }
             }
 
             DetectHandTilt(hand);

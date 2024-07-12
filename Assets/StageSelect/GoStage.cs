@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement; // Add this line to access SceneManager
+using UnityEngine.SceneManagement;
 
 public class GoStage : MonoBehaviour {
-
-
-    public void SelectLevel() {
+    public static void SelectLevel() {
         switch (ScrollStage.btnIndex) {
             case 0:
                 SceneManager.LoadScene("BroomstickScene");

@@ -21,6 +21,8 @@ public class ScrollStage : MonoBehaviour
     public Vector3 prevHandPos;
     public float swipeDistanceThreshold;
     public bool isFisting;
+    public bool isPointing;
+    public float pointingStartTime;
 
 
     // Start is called before the first frame update
@@ -125,6 +127,18 @@ public class ScrollStage : MonoBehaviour
 
             pos = new float[transform.childCount];
             float stageDistance = 1f / (pos.Length  - 1f);
+
+            if (IsPointingPose(hand)) {
+                if (!isPointing) {
+                    isPointing = true;
+                    pointingStartTime = Time.time;
+                } else if (Time.time - pointingStartTime > 3f) {
+                    GoStage.SelectLevel();
+                }
+            }
+            else {
+                isPointing = false;
+            }
         
             for (int i = 0; i<pos.Length; i++)
             {
@@ -163,5 +177,17 @@ public class ScrollStage : MonoBehaviour
 
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
+    }
+
+    bool IsPointingPose(Hand hand) {
+        foreach (Finger finger in hand.Fingers) {
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
+                if (!finger.IsExtended) return false;
+            }
+            else {
+                if (finger.IsExtended) return false;
+            }
+        }
+        return true;
     }
 }

@@ -122,7 +122,7 @@ public class catMove : MonoBehaviour {
             }
         }
 
-        UDText.text = "UpAndDown : " + UDCount;
+        UDText.text = "Run : " + UDCount;
         FlipText.text = "Jump : " + FlipCount;
         ClapText.text = "Flip : " + ClapCount; 
     }

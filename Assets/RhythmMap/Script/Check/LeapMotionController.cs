@@ -40,67 +40,70 @@ public class LeapMotionController : MonoBehaviour {
     }
 
     void Update() {
-        Frame frame = leapProvider.CurrentFrame;
+        if(BeforeGame.isGameStart) {
+            Frame frame = leapProvider.CurrentFrame;
 
-        // 각 손에 대해 동작 감지 및 처리
-        foreach (Hand hand in frame.Hands) {
-            if (hand.IsLeft) {
-                DetectLeftHandPose(hand); // 왼손 동작 처리
-            } else if (hand.IsRight) {
-                DetectRightHandPose(hand); // 오른손 동작 처리
+            // 각 손에 대해 동작 감지 및 처리
+            foreach (Hand hand in frame.Hands) {
+                if (hand.IsLeft) {
+                    DetectLeftHandPose(hand); // 왼손 동작 처리
+                }
+                else if (hand.IsRight) {
+                    DetectRightHandPose(hand); // 오른손 동작 처리
+                }
+            }   
+
+            if(Input.GetKeyDown(KeyCode.Q)) {
+                isFistL = true;
+                isPalmL = false;
+                isScissorsL = false;
+            }   
+            else if(Input.GetKeyDown(KeyCode.W)) {
+                isFistL = false;
+                isPalmL = true;
+                isScissorsL = false;
             }
-        }
+            else if(Input.GetKeyDown(KeyCode.E)) {
+                isFistL = false;
+                isPalmL = false;
+                isScissorsL = true;
+           }   
 
-        if(Input.GetKeyDown(KeyCode.Q)) {
-            isFistL = true;
-            isPalmL = false;
-            isScissorsL = false;
-        }
-        else if(Input.GetKeyDown(KeyCode.W)) {
-            isFistL = false;
-            isPalmL = true;
-            isScissorsL = false;
-        }
-        else if(Input.GetKeyDown(KeyCode.E)) {
-            isFistL = false;
-            isPalmL = false;
-            isScissorsL = true;
-        }
+            if(Input.GetKeyDown(KeyCode.I)) {
+                isFistR = true;
+                isPalmR = false;
+                isScissorsR = false;
+            }
+            else if(Input.GetKeyDown(KeyCode.O)) {
+                isFistR = false;
+                isPalmR= true;
+                isScissorsR = false;
+            }
+            else if(Input.GetKeyDown(KeyCode.P)) {
+                isFistR = false;
+                isPalmR = false;
+                isScissorsR = true;
+            }
 
-        if(Input.GetKeyDown(KeyCode.I)) {
-            isFistR = true;
-            isPalmR = false;
-            isScissorsR = false;
-        }
-        else if(Input.GetKeyDown(KeyCode.O)) {
-            isFistR = false;
-            isPalmR= true;
-            isScissorsR = false;
-        }
-        else if(Input.GetKeyDown(KeyCode.P)) {
-            isFistR = false;
-            isPalmR = false;
-            isScissorsR = true;
-        }
+            if (isFistL) {
+                tileL.getLeap("ROCK");
+            }
+            if (isPalmL) {
+                tileL.getLeap("PAPER");
+            }    
+            if (isScissorsL) {
+                tileL.getLeap("SCISSOR");
+            }
 
-        if (isFistL) {
-            tileL.getLeap("ROCK");
-        }
-        if (isPalmL) {
-            tileL.getLeap("PAPER");
-        } 
-        if (isScissorsL) {
-            tileL.getLeap("SCISSOR");
-        }
-
-        if (isFistR) {
-            tileR.getLeap("ROCK");
-        }
-        if (isPalmR) {
-            tileR.getLeap("PAPER");
-        }
-        if (isScissorsR) {
-            tileR.getLeap("SCISSOR");
+            if (isFistR) {
+                tileR.getLeap("ROCK");
+            }
+            if (isPalmR) {
+                tileR.getLeap("PAPER");
+            }
+            if (isScissorsR) {
+                tileR.getLeap("SCISSOR");
+            }
         }
     }
 

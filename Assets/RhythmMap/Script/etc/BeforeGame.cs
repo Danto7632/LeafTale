@@ -14,6 +14,11 @@ public class BeforeGame : MonoBehaviour {
 
     public static bool isGameStart;
 
+    public bool isPointing;
+    public float pointingStartTime;
+    
+    public static float elapsedTime;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -21,7 +26,9 @@ public class BeforeGame : MonoBehaviour {
         explainPanel = GameObject.Find("ExplainPanel");
         BeforeGameStartText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
 
-        isGameStart = false;    
+        isGameStart = false;
+
+        elapsedTime = 0f;
     }
 
     void OnDestroy() {
@@ -31,13 +38,29 @@ public class BeforeGame : MonoBehaviour {
     }
 
     void OnUpdateFrame(Frame frame) {
-        if(!isGameStart && frame.Hands.Count > 1) {
+        if(!isGameStart && frame.Hands.Count > 0) {
             Hand hand = frame.Hands[0];
-            if(IsPointingPose(hand)) {
-                BeforeGameStartText.enabled = false;
-                explainPanel.gameObject.SetActive(false);
 
-                isGameStart = true;
+            if (IsPointingPose(hand)) {
+                if (!isPointing) {
+                    isPointing = true;
+                    pointingStartTime = Time.time;
+                }
+                else {
+                    elapsedTime = Time.time - pointingStartTime;
+
+                    if (elapsedTime > 3f) {
+                        BeforeGameStartText.enabled = false;
+                        explainPanel.gameObject.SetActive(false);
+
+                        isGameStart = true;
+                        Debug.Log("Game started!");
+                    }
+                }
+            }
+            else {
+                elapsedTime = 0f;
+                isPointing = false;
             }
         }
     }
