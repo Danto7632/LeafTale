@@ -43,11 +43,13 @@ public class BeforeGame : MonoBehaviour {
 
             if (IsPointingPose(hand)) {
                 if (!isPointing) {
-                    isPointing = true;
                     pointingStartTime = Time.time;
+
+                    isPointing = true;
                 }
                 else {
                     elapsedTime = Time.time - pointingStartTime;
+                    StartBar.ChangeHealthBarAmount(elapsedTime / 3);
 
                     if (elapsedTime > 3f) {
                         BeforeGameStartText.enabled = false;
@@ -61,6 +63,8 @@ public class BeforeGame : MonoBehaviour {
             else {
                 elapsedTime = 0f;
                 isPointing = false;
+
+                StartBar.ChangeHealthBarAmount(elapsedTime);
             }
         }
     }

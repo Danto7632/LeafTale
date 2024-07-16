@@ -231,7 +231,6 @@ public class broomMove : MonoBehaviour
         }
         else {
             rb.velocity = Vector2.zero;
-            isLeapOn = false;
         }
 
         if (Input.GetKeyDown(KeyCode.P) && !isLeapOn) {
