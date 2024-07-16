@@ -63,6 +63,7 @@ public class broomMove : MonoBehaviour
 
     [Header("Timer")]
     GameObject timer;
+    public static float elapsedTime;
 
     void Awake()
     {
@@ -213,18 +214,28 @@ public class broomMove : MonoBehaviour
         if (frame.Hands.Count > 0) {
             hand = frame.Hands[0];
 
-            if (IsPointingPose(hand) && !isLeapOn) {
+            if (IsPointingPose(hand)) {
                 if (!isPointing) {
-                    isPointing = true;
                     pointingStartTime = Time.time;
-                }
-                else if (Time.time - pointingStartTime > 3f) {
-                    leapOnText.enabled = false;
-                    explainPanel.gameObject.SetActive(false);
-                    explainText.enabled = false;
 
-                    StartCoroutine(RunGame());
+                    isPointing = true;
                 }
+                else {
+                    elapsedTime = Time.time - pointingStartTime;
+                    StartBar.ChangeHealthBarAmount(elapsedTime / 3);
+
+                    if (elapsedTime > 3f) {
+                        explainPanel.gameObject.SetActive(false);
+
+                        Debug.Log("Game started!");
+                    }
+                }
+            }
+            else {
+                elapsedTime = 0f;
+                isPointing = false;
+
+                StartBar.ChangeHealthBarAmount(elapsedTime);
             }
 
             DetectHandTilt(hand);

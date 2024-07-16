@@ -19,6 +19,8 @@ public class GameStart : MonoBehaviour {
     public bool isPointing;
     public float pointingStartTime;
 
+    public static float elapsedTime;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -44,17 +46,32 @@ public class GameStart : MonoBehaviour {
 
             if (IsPointingPose(hand)) {
                 if (!isPointing) {
-                    isPointing = true;
                     pointingStartTime = Time.time;
+
+                    isPointing = true;
                 }
-                else if (Time.time - pointingStartTime > 3f) {
-                    BeforeGameStartText.enabled = false;
-                    explainPanel.gameObject.SetActive(false);
-                    startTimer_Platform.StartCountdown();
-                    timer_Platform.timerStart();
-                    isGameStart = true;
+                else {
+                    elapsedTime = Time.time - pointingStartTime;
+                    StartBar.ChangeHealthBarAmount(elapsedTime / 3);
+
+                    if (elapsedTime > 3f) {
+                        explainPanel.gameObject.SetActive(false);
+                        BeforeGameStartText.enabled = false;
+                        startTimer_Platform.StartCountdown();
+                        timer_Platform.timerStart();
+                        isGameStart = true;
+
+                        Debug.Log("Game started!");
+                    }
                 }
             }
+            else {
+                elapsedTime = 0f;
+                isPointing = false;
+
+                StartBar.ChangeHealthBarAmount(elapsedTime);
+            }
+
         }
     }
 
