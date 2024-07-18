@@ -225,8 +225,10 @@ public class broomMove : MonoBehaviour
                     StartBar.ChangeHealthBarAmount(elapsedTime / 3);
 
                     if (elapsedTime > 3f) {
+                        leapOnText.enabled = false;
                         explainPanel.gameObject.SetActive(false);
-
+                        explainText.enabled = false;
+                        StartCoroutine(RunGame());
                         Debug.Log("Game started!");
                     }
                 }
@@ -329,7 +331,7 @@ public class broomMove : MonoBehaviour
         }
         previousWristPosition = currentWristPosition;
 
-        wristMovementText.text = $"Wrist Movement: {totalWristMovement:F2} units";
+        wristMovementText.text = $"Wrist Movement: {totalWristMovement:F2}";
     }
 
     #endregion
