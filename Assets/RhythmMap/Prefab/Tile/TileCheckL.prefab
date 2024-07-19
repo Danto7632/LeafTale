@@ -34,7 +34,7 @@ Transform:
   - {fileID: 2389777694701944781}
   - {fileID: 2742665722165406455}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4298636889864761547
 MonoBehaviour:
@@ -63,6 +63,12 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   layerName: 
+  score: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  instAnimator:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &3129831323311204779
 GameObject:
   m_ObjectHideFlags: 0

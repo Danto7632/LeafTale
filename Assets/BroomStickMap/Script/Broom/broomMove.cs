@@ -229,6 +229,7 @@ public class broomMove : MonoBehaviour
                         explainPanel.gameObject.SetActive(false);
                         explainText.enabled = false;
                         StartCoroutine(RunGame());
+                        isLeapOn = true;
                         Debug.Log("Game started!");
                     }
                 }
@@ -270,14 +271,12 @@ public class broomMove : MonoBehaviour
     IEnumerator RunGame() {
         yield return new WaitForSeconds(1.0f);
 
-        if (!isFirstGameStart)
-        {
+        if (!isFirstGameStart) {
             onTimer.StartCountdown();
             enemySpawn.StartSpawn();
             timerSpawn.StartSpawn();
             isFirstGameStart = true;
         }
-        isLeapOn = true;
     }
 
     void DetectHandTilt(Hand hand) {
