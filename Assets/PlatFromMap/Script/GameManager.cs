@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -42,5 +41,13 @@ public class GameManager : MonoBehaviour
     {
         score += newScore;
         scoreText.text = "Á¡¼ö : " + score; 
+    }
+
+    public void EndGame(int time, int maxTime)
+    {
+        double finScore;
+        score += time;
+        finScore = (score / (100.0 + maxTime))*100.0;
+        GameObject.Find("GameClear").GetComponent<GameClear>().Clear((int)finScore);
     }
 }

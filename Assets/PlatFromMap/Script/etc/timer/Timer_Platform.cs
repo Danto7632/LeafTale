@@ -12,8 +12,12 @@ public class Timer_Platform : MonoBehaviour
     public TMP_Text gameOverText;
     public TMP_Text scoreText;
 
-    float time = 126f; // 제한 시간 125초
+    public float time = 126f; // 제한 시간 125초
+    public int maxTime;
+    public int currentTime;
     int min, sec;
+    bool overFlag = true;
+    bool clearFlag = true;
 
     void Awake() {
         cat = GameObject.FindWithTag("Player");
@@ -40,6 +44,7 @@ public class Timer_Platform : MonoBehaviour
         gameOverText.enabled = false;
         scoreText.enabled = false;
 
+        maxTime = (int)time;
     }
 
     void Update()
@@ -55,7 +60,12 @@ public class Timer_Platform : MonoBehaviour
                 time = 0;
                 gameOverText.text = "게임 오버"; // 게임 오버 텍스트를 표시합니다
                 // 추가로 업데이트를 비활성화하거나 게임 오버 로직을 처리할 수 있습니다
-                GameObject.Find("GameClear").GetComponent<GameClear>().Clear(GameObject.Find("GameManager").GetComponent<GameManager>().score);
+                currentTime = (int)time;
+                if (overFlag)
+                {
+                    GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(currentTime, maxTime);
+                    overFlag = false;
+                }
                 timeText[0].enabled = false;
                 timeText[1].enabled = false;
             }   
@@ -72,6 +82,13 @@ public class Timer_Platform : MonoBehaviour
             timeText[0].enabled = false;
             timeText[1].enabled = false;
             gameOverText.text = "게임 클리어";
+            
+            currentTime = (int)time;
+            if (clearFlag)
+            {
+                GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(currentTime, maxTime);
+                clearFlag = false;
+            }
         }
     }
 

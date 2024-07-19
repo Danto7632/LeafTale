@@ -234,7 +234,7 @@ public class catMove : MonoBehaviour {
             isMoveAllow = false;
             isGameOver = true;
             rb.velocity = Vector2.zero;
-            GameObject.Find("GameClear").GetComponent<GameClear>().Clear(GameObject.Find("GameManager").GetComponent<GameManager>().score);
+
         }
 
         if(other.gameObject.CompareTag("SpawnZone")) {
