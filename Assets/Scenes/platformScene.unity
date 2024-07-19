@@ -1166,6 +1166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReadyTimer
       objectReference: {fileID: 0}
+    - target: {fileID: 7511315174559321222, guid: 8846f9503c06144b283451ba29e080fd, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9101650927008870650, guid: 8846f9503c06144b283451ba29e080fd, type: 3}
       propertyPath: m_RootOrder
       value: 3
