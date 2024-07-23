@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using TMPro;
 
 public class Login : MonoBehaviour
@@ -11,14 +12,27 @@ public class Login : MonoBehaviour
 
     [Header("Login")]
     public GameObject loginPanel;
+    public TMP_InputField idInput;
+    public TMP_InputField pwInput;
     public UnityEngine.UI.Button loginButton;
+    public TMP_Text loginFail;
 
     private TMP_Text pressStartText;
     private bool isFadingOut = false;
     private Camera mainCamera;
 
+    private string url;
+
+    [System.Serializable]
+    public class LoginData
+    {
+        public string memberId;
+        public string password;
+    }
+
     void Start()
     {
+        url = "http://43.203.0.69:8080/api/login";
         mainCamera = Camera.main;
     }
 
@@ -32,10 +46,61 @@ public class Login : MonoBehaviour
 
     public void LoginBtn()
     {
-        loginPanel.SetActive(false);
-        rank.SetActive(true);
-        pressStart.SetActive(true);
-        StartCoroutine(BlinkText());
+        StartCoroutine(AccountLogin());
+    }
+
+    IEnumerator AccountLogin()
+    {
+        var loginData = new LoginData
+        {
+            memberId = idInput.text,
+            password = pwInput.text
+        };
+
+        string jsonData = JsonUtility.ToJson(loginData);
+
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+
+        UnityWebRequest www = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+        www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        www.downloadHandler = new DownloadHandlerBuffer();
+        www.SetRequestHeader("Content-Type", "application/json");
+
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+        {
+            loginFail.gameObject.SetActive(true);
+            loginFail.text = "Connection Error";
+            idInput.text = "";
+            pwInput.text = "";
+            print(www.downloadHandler.text);
+            Debug.Log("Response Code: " + www.responseCode);
+            Debug.Log("Request Error: " + www.error);
+        }
+        else
+        {
+            Debug.Log("Response Code: " + www.responseCode);
+            Debug.Log("Response: " + www.downloadHandler.text);
+            if (www.responseCode == 200 && www.downloadHandler.text == "true")
+            {
+                loginFail.gameObject.SetActive(false);
+                PlayerPrefs.SetString("userID", idInput.text);
+                PlayerPrefs.Save();
+
+                loginPanel.SetActive(false);
+                rank.SetActive(true);
+                pressStart.SetActive(true);
+                StartCoroutine(BlinkText());
+            }
+            else if (www.responseCode == 200 && www.downloadHandler.text != "true")
+            {
+                loginFail.gameObject.SetActive(true);
+                loginFail.text = "아이디나 비밀번호를 잘못 입력하였습니다.\n아이디와 비밀번호를 올바르게 입력해주세요.";
+                idInput.text = "";
+                pwInput.text = "";
+            }
+        }
     }
 
     IEnumerator BlinkText()
