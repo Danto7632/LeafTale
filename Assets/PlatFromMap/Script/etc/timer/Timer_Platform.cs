@@ -1,41 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // TextMeshPro 클래스를 사용하려면 이 네임스페이스를 추가하세요
+using TMPro;
 
-public class Timer_Platform : MonoBehaviour
-{
-    public GameObject cat;
+public class Timer_Platform : MonoBehaviour {
     public catMove catStatus;
 
     public TMP_Text[] timeText;
     public TMP_Text gameOverText;
     public TMP_Text scoreText;
 
-    public float time = 126f; // 제한 시간 125초
+    public float time;
+
     public int maxTime;
     public int currentTime;
-    int min, sec;
-    bool overFlag = true;
-    bool clearFlag = true;
+    public int min;
+    public int sec;
+
+    public bool overFlag = true;
+    public bool clearFlag = true;
 
     void Awake() {
-        cat = GameObject.FindWithTag("Player");
-        catStatus = cat.GetComponent<catMove>();
+        catStatus = GameObject.FindWithTag("Player").GetComponent<catMove>();
         scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
+
+        time = 126f;
+        overFlag = true;
+        clearFlag = true;
     }
 
-    void Start()
-    {
+    void Start() {
         timeText = new TMP_Text[2];
 
-        GameObject minObject = GameObject.Find("Min");
-        GameObject secObject = GameObject.Find("Sec");
-        GameObject colonObject = GameObject.Find("Colon");
-
-        timeText[0] = minObject.GetComponent<TMP_Text>();
-        timeText[1] = secObject.GetComponent<TMP_Text>();
-        gameOverText = colonObject.GetComponent<TMP_Text>();
+        timeText[0] = GameObject.Find("Min").GetComponent<TMP_Text>();
+        timeText[1] = GameObject.Find("Sec").GetComponent<TMP_Text>();
+        gameOverText = GameObject.Find("Colon").GetComponent<TMP_Text>();
 
         timeText[0].text = "02";
         timeText[1].text = "06";
@@ -47,32 +46,28 @@ public class Timer_Platform : MonoBehaviour
         maxTime = (int)time;
     }
 
-    void Update()
-    {
+    void Update() {
         if(!catStatus.isGameOver) {
             time -= Time.deltaTime;
 
             min = (int)time / 60;
             sec = (int)time % 60;
 
-            if (time <= 0)
-            {
+            if (time <= 0) {
                 time = 0;
-                gameOverText.text = "게임 오버"; // 게임 오버 텍스트를 표시합니다
-                // 추가로 업데이트를 비활성화하거나 게임 오버 로직을 처리할 수 있습니다
+                gameOverText.text = "게임 오버";
                 currentTime = (int)time;
-                if (overFlag)
-                {
+
+                if (overFlag) {
                     GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(currentTime, maxTime);
                     overFlag = false;
                 }
+
                 timeText[0].enabled = false;
                 timeText[1].enabled = false;
             }   
 
-            // 타이머 텍스트 업데이트
-            if (timeText != null && timeText.Length >= 2)
-            {
+            if (timeText != null && timeText.Length >= 2) {
                 timeText[0].text = min.ToString("00");
                 timeText[1].text = sec.ToString("00");
             }
@@ -84,8 +79,8 @@ public class Timer_Platform : MonoBehaviour
             gameOverText.text = "게임 클리어";
             
             currentTime = (int)time;
-            if (clearFlag)
-            {
+
+            if (clearFlag) {
                 GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(currentTime, maxTime);
                 clearFlag = false;
             }
@@ -96,13 +91,10 @@ public class Timer_Platform : MonoBehaviour
         StartCoroutine(delayTimer());
     }
 
-    IEnumerator delayTimer()
-    {
+    IEnumerator delayTimer() {
         yield return new WaitForSeconds(5f);
 
-        // timeText 배열과 gameOverText가 null이 아닌지 확인
-        if (timeText != null && timeText.Length >= 2 && gameOverText != null)
-        {
+        if (timeText != null && timeText.Length >= 2 && gameOverText != null) {
             timeText[0].enabled = true;
             timeText[1].enabled = true;
             gameOverText.enabled = true;

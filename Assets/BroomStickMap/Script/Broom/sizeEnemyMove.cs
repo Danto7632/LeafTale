@@ -5,21 +5,17 @@ using UnityEngine;
 public class sizeEnemyMove : MonoBehaviour {
     public Rigidbody2D rb;
     public Animator anim;
-
-    public bool isDown;
-    public float moveSpeed;
-    public Vector2 originSize;
-
-    public GameObject Player;
     public broomMove broomStatus;
+
+    public Vector2 originSize;
+    public float moveSpeed;
+    public bool isDown;
     
     void Awake() {
-        Player = GameObject.FindWithTag("Player");
-
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        broomStatus = Player.GetComponent<broomMove>();
+        broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
 
         isDown = false;
         moveSpeed = 8f;

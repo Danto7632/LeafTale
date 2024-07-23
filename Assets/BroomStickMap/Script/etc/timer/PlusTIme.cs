@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class PlusTime : MonoBehaviour {
     public Rigidbody2D rb;
+    public broomMove broomStatus;
 
     public float moveSpeed;
-
-    public GameObject Player;
-    public broomMove broomStatus;
     
     void Awake() {
-        Player = GameObject.FindWithTag("Player");
-
         rb = GetComponent<Rigidbody2D>();
-        broomStatus = Player.GetComponent<broomMove>();
+        broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
 
         moveSpeed = 8f;
     }

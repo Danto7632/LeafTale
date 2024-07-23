@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour {
-    public GameObject[] enemyPrefab = new GameObject[3];
-    public Vector2[] spawnPosition = new Vector2[3];
-
-    public GameObject Player;
     public broomMove broomStatus;
 
+    public GameObject[] enemyPrefab = new GameObject[3];
+    public Vector2[] spawnPosition;
+
     void Start() {
+        broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
+
+        spawnPosition = new Vector2[3];
+        
         spawnPosition[0] = new Vector2(-6f, 70);
         spawnPosition[1] = new Vector2(0, 70);
         spawnPosition[2] = new Vector2(6f, 70);
-
-        Player = GameObject.FindWithTag("Player");
-        broomStatus = Player.GetComponent<broomMove>();
     }
 
     public void StartSpawn() {

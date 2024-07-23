@@ -5,105 +5,73 @@ using UnityEngine.UI;
 using Leap;
 using Leap.Unity;
 
-public class ScrollStage : MonoBehaviour
-{
+public class ScrollStage : MonoBehaviour {
+    private LeapServiceProvider leapProvider;
+    public Hand prevHand;
+    public Button tmpButton;
+
     public GameObject scrollbar;
-    float scroll_pos = 0;
-    float[] pos;
-    private Button tmpButton;
+
+    public float swipeDistanceThreshold;
+    public float pointingStartTime;
+    public float scroll_pos;
+    public float[] pos;
+
+    public bool isFisting;
+    public bool isPointing;
+
+    public Vector3 prevHandPos;
 
     public static int btnIndex;
 
-
-    [Header("LeapMotion")]
-    private LeapServiceProvider leapProvider;
-    public Hand prevHand;
-    public Vector3 prevHandPos;
-    public float swipeDistanceThreshold;
-    public bool isFisting;
-    public bool isPointing;
-    public float pointingStartTime;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {   
-        scrollbar = GameObject.Find("Scrollbar Horizontal");
-
-        //LeapMotion
+    void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
 
+        scrollbar = GameObject.Find("Scrollbar Horizontal");
+
         isFisting = false;
 
+        scroll_pos = 0;
         swipeDistanceThreshold = 3f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         pos = new float[transform.childCount];
         float distance = 1f / (pos.Length  - 1f);
 
-        for (int i = 0; i<pos.Length; i++)
-        {
+        for (int i = 0; i<pos.Length; i++) {
             pos[i] = distance * i;
         }
 
-        // 방향키 입력 처리
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            scroll_pos = Mathf.Min(scroll_pos + distance, 1f); // 오른쪽 화살표를 누르면 다음 위치로 이동
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            scroll_pos = Mathf.Max(scroll_pos - distance, 0f); // 왼쪽 화살표를 누르면 이전 위치로 이동
-        }
+        if (Input.GetKeyDown(KeyCode.RightArrow)) scroll_pos = Mathf.Min(scroll_pos + distance, 1f);
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) scroll_pos = Mathf.Max(scroll_pos - distance, 0f);
 
-        // 마우스 입력 처리
-        if (Input.GetMouseButton(0))
-        {
-            scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
-        }
+        if (Input.GetMouseButton(0)) scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
 
-        if (Input.GetMouseButton(0))
-        {
-            scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
-        }
+        if (Input.GetMouseButton(0)) scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
 
-        else
-        {
-            for(int i = 0; i< pos.Length; i++)
-            {
-                if(scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2))
-                {
+        else {
+            for(int i = 0; i< pos.Length; i++) {
+                if(scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2)) {
                     scrollbar.GetComponent<Scrollbar>().value = Mathf.Lerp(scrollbar.GetComponent<Scrollbar>().value, pos[i], 0.1f);
                 }
             }
 
-            for (int i = 0; i<pos.Length; i++)
-            {
-                if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2))
-                {
+            for (int i = 0; i<pos.Length; i++) {
+                if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2)) {
                     transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f, 1f), 0.1f);
-                    for(int a = 0; a<pos.Length; a++)
-                    {
-                        if (a != i)
-                        {
+                    for(int a = 0; a<pos.Length; a++) {
+                        if (a != i) {
                             transform.GetChild(a).localScale = Vector2.Lerp(transform.GetChild(a).localScale, new Vector2(0.8f, 0.8f), 0.1f);
                             tmpButton = transform.GetChild(a).GetComponent<Button>();
-                            if(tmpButton.interactable != false)
-                            {
-                                tmpButton.interactable = false;
-                            }
+
+                            if(tmpButton.interactable != false) tmpButton.interactable = false;
                         }
-                        else
-                        {
+                        else {
                             tmpButton = transform.GetChild(a).GetComponent<Button>();
-                            if (tmpButton.interactable != true)
-                            {
-                                tmpButton.interactable = true;
-                            }
+
+                            if (tmpButton.interactable != true) tmpButton.interactable = true;
                         }
 
                         btnIndex = i;
@@ -114,9 +82,7 @@ public class ScrollStage : MonoBehaviour
     }
 
     void OnDestroy() {
-        if (leapProvider != null) {
-            leapProvider.OnUpdateFrame -= OnUpdateFrame;
-        }
+        if (leapProvider != null) leapProvider.OnUpdateFrame -= OnUpdateFrame;
     }
 
     void OnUpdateFrame(Frame frame) {
@@ -132,7 +98,8 @@ public class ScrollStage : MonoBehaviour
                 if (!isPointing) {
                     isPointing = true;
                     pointingStartTime = Time.time;
-                } else if (Time.time - pointingStartTime > 3f) {
+                }
+                else if (Time.time - pointingStartTime > 3f) {
                     GoStage.SelectLevel();
                 }
             }
@@ -140,8 +107,7 @@ public class ScrollStage : MonoBehaviour
                 isPointing = false;
             }
         
-            for (int i = 0; i<pos.Length; i++)
-            {
+            for (int i = 0; i<pos.Length; i++) {
                 pos[i] = stageDistance * i;
             }
 

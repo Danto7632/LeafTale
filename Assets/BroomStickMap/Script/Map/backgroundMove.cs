@@ -2,47 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
-{
-    public float speed;
-    public int startIndex;
-    public int endIndex;
-    public Transform[] sprites;
-    float viewHeight;
-
-    public GameObject Player;
+public class NewBehaviourScript : MonoBehaviour {
     public broomMove broomStatus;
 
-    // Start is called before the first frame update
+    public Transform[] sprites;
 
-    private void Awake()
-    {
-        viewHeight = Camera.main.orthographicSize * 2;
+    public int startIndex;
+    public int endIndex;
+    public float speed;
+    public float viewHeight;
 
-        Player = GameObject.FindWithTag("Player");
-        broomStatus = Player.GetComponent<broomMove>();
-    }
-    void Start()
-    {
+
+    public void Awake() {
+        broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
+
         speed = 10;
+        viewHeight = Camera.main.orthographicSize * 2;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Vector3 curPos = transform.position;
         Vector3 nextPos = Vector3.down * speed * Time.deltaTime;
-        transform.position = curPos+nextPos;
 
-        if (sprites[endIndex].position.y < viewHeight*(-1)-30 && !broomStatus.isGameOver)
-        {
+        transform.position = curPos + nextPos;
+
+        if (sprites[endIndex].position.y < viewHeight * (-1) - 30 && !broomStatus.isGameOver) {
             Vector3 backSpritePos = sprites[startIndex].localPosition;
             Vector3 frontSpritePos = sprites[endIndex].localPosition;
+
             sprites[endIndex].transform.localPosition = backSpritePos + Vector3.up * 36;
 
             int startIndexSave = startIndex;
+
             startIndex = endIndex;
-            endIndex = (startIndexSave-1 == -1) ? sprites.Length-1 : startIndexSave -1;
+            endIndex = (startIndexSave - 1 == -1) ? sprites.Length - 1 : startIndexSave - 1;
         }
     }
 }

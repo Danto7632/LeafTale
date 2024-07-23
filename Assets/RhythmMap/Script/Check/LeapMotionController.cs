@@ -3,12 +3,9 @@ using Leap;
 using Leap.Unity;
 
 public class LeapMotionController : MonoBehaviour {
-    public GameObject TileCheckerL; // 왼손 타일 체커
-    public GameObject TileCheckerR; // 오른손 타일 체커
-
-    private LeapServiceProvider leapProvider;
-    private TileCheckL tileL;
-    private TileCheckR tileR;
+    public LeapServiceProvider leapProvider;
+    public TileCheckL tileL;
+    public TileCheckR tileR;
 
     public bool isFistL;
     public bool isPalmL;
@@ -21,13 +18,8 @@ public class LeapMotionController : MonoBehaviour {
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
 
-        // 각 타일 체커를 찾아서 연결
-        TileCheckerL = GameObject.FindWithTag("tileCheckL");
-        TileCheckerR = GameObject.FindWithTag("tileCheckR");
-
-        // 타일 체커의 TileCheck 스크립트 참조
-        tileL = TileCheckerL.GetComponent<TileCheckL>();
-        tileR = TileCheckerR.GetComponent<TileCheckR>();
+        tileL = GameObject.FindWithTag("tileCheckL").GetComponent<TileCheckL>();
+        tileR = GameObject.FindWithTag("tileCheckR").GetComponent<TileCheckR>();
 
         isFistL = false;
         isFistR = false;
@@ -43,14 +35,9 @@ public class LeapMotionController : MonoBehaviour {
         if(BeforeGame.isGameStart) {
             Frame frame = leapProvider.CurrentFrame;
 
-            // 각 손에 대해 동작 감지 및 처리
             foreach (Hand hand in frame.Hands) {
-                if (hand.IsLeft) {
-                    DetectLeftHandPose(hand); // 왼손 동작 처리
-                }
-                else if (hand.IsRight) {
-                    DetectRightHandPose(hand); // 오른손 동작 처리
-                }
+                if (hand.IsLeft) DetectLeftHandPose(hand);
+                else if (hand.IsRight) DetectRightHandPose(hand);
             }   
 
             if(Input.GetKeyDown(KeyCode.Q)) {
@@ -85,25 +72,13 @@ public class LeapMotionController : MonoBehaviour {
                 isScissorsR = true;
             }
 
-            if (isFistL) {
-                tileL.getLeap("ROCK");
-            }
-            if (isPalmL) {
-                tileL.getLeap("PAPER");
-            }    
-            if (isScissorsL) {
-                tileL.getLeap("SCISSOR");
-            }
+            if (isFistL) tileL.getLeap("ROCK");
+            if (isPalmL) tileL.getLeap("PAPER");
+            if (isScissorsL) tileL.getLeap("SCISSOR");
 
-            if (isFistR) {
-                tileR.getLeap("ROCK");
-            }
-            if (isPalmR) {
-                tileR.getLeap("PAPER");
-            }
-            if (isScissorsR) {
-                tileR.getLeap("SCISSOR");
-            }
+            if (isFistR) tileR.getLeap("ROCK");
+            if (isPalmR) tileR.getLeap("PAPER");
+            if (isScissorsR) tileR.getLeap("SCISSOR");
         }
     }
 
@@ -130,16 +105,9 @@ public class LeapMotionController : MonoBehaviour {
             }
         }
 
-        // 왼손 타일 체커에 동작 전달
-        if (isFistL) {
-            tileL.getLeap("ROCK");
-        }
-        if (isPalmL) {
-            tileL.getLeap("PAPER");
-        } 
-        if (isScissorsL) {
-            tileL.getLeap("SCISSOR");
-        }
+        if (isFistL) tileL.getLeap("ROCK");
+        if (isPalmL) tileL.getLeap("PAPER"); 
+        if (isScissorsL) tileL.getLeap("SCISSOR");
     }
 
     void DetectRightHandPose(Hand hand) {
@@ -165,15 +133,8 @@ public class LeapMotionController : MonoBehaviour {
             }
         }
 
-        // 오른손 타일 체커에 동작 전달
-        if (isFistR) {
-            tileR.getLeap("ROCK");
-        }
-        if (isPalmR) {
-            tileR.getLeap("PAPER");
-        }
-        if (isScissorsR) {
-            tileR.getLeap("SCISSOR");
-        }
+        if (isFistR) tileR.getLeap("ROCK");
+        if (isPalmR) tileR.getLeap("PAPER");
+        if (isScissorsR) tileR.getLeap("SCISSOR");
     }
 }

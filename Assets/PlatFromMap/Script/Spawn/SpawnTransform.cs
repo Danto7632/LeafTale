@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnTransform : MonoBehaviour {
     public SpawnPointManager spawnPoint;
+    
     public bool isFirstTouch = false;
 
     void Start() {

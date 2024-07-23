@@ -7,17 +7,17 @@ using Leap;
 using Leap.Unity;
 
 public class GameStart : MonoBehaviour {
-    private LeapServiceProvider leapProvider;
-    public GameObject explainPanel;
-    public TMP_Text BeforeGameStartText;
-
+    public LeapServiceProvider leapProvider;
     public StartTimer_Platform startTimer_Platform;
     public Timer_Platform timer_Platform;
 
-    public bool isGameStart;
+    public GameObject explainPanel;
+    public TMP_Text BeforeGameStartText;
 
-    public bool isPointing;
     public float pointingStartTime;
+
+    public bool isGameStart;
+    public bool isPointing;
 
     public static float elapsedTime;
 
@@ -26,8 +26,8 @@ public class GameStart : MonoBehaviour {
         leapProvider.OnUpdateFrame += OnUpdateFrame;
 
         explainPanel = GameObject.Find("ExplainPanel");
-        BeforeGameStartText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
 
+        BeforeGameStartText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
         startTimer_Platform = GameObject.Find("StartTimer").GetComponent<StartTimer_Platform>();
         timer_Platform = GameObject.Find("Canvas").GetComponent<Timer_Platform>();
 
@@ -35,9 +35,7 @@ public class GameStart : MonoBehaviour {
     }
 
     void OnDestroy() {
-        if (leapProvider != null) {
-            leapProvider.OnUpdateFrame -= OnUpdateFrame;
-        }
+        if (leapProvider != null) leapProvider.OnUpdateFrame -= OnUpdateFrame;
     }
 
     void OnUpdateFrame(Frame frame) {
@@ -60,8 +58,6 @@ public class GameStart : MonoBehaviour {
                         startTimer_Platform.StartCountdown();
                         timer_Platform.timerStart();
                         isGameStart = true;
-
-                        Debug.Log("Game started!");
                     }
                 }
             }
@@ -71,19 +67,16 @@ public class GameStart : MonoBehaviour {
 
                 StartBar.ChangeHealthBarAmount(elapsedTime);
             }
-
         }
     }
 
     void Update() {
-        if(!isGameStart) {
-            if(Input.GetKeyDown(KeyCode.P)) {
-                BeforeGameStartText.enabled = false;
-                explainPanel.gameObject.SetActive(false);
-                startTimer_Platform.StartCountdown();
-                timer_Platform.timerStart();
-                isGameStart = true;
-            }
+        if(!isGameStart && Input.GetKeyDown(KeyCode.P)) {
+            BeforeGameStartText.enabled = false;
+            explainPanel.gameObject.SetActive(false);
+            startTimer_Platform.StartCountdown();
+            timer_Platform.timerStart();
+            isGameStart = true;
         }
     }
 
