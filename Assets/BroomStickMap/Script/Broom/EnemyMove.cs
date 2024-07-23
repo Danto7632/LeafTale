@@ -5,18 +5,14 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour {
     public Rigidbody2D rb;
     public Animator anim;
+    public broomMove broomStatus;
 
     public float moveSpeed;
-
-    public GameObject Player;
-    public broomMove broomStatus;
     
     void Awake() {
-        Player = GameObject.FindWithTag("Player");
-
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        broomStatus = Player.GetComponent<broomMove>();
+        broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
 
         moveSpeed = 8f;
     }

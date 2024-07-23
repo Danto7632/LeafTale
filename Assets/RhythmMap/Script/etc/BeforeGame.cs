@@ -26,15 +26,13 @@ public class BeforeGame : MonoBehaviour {
         explainPanel = GameObject.Find("ExplainPanel");
         BeforeGameStartText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
 
-        isGameStart = false;
-
         elapsedTime = 0f;
+        
+        isGameStart = false;
     }
 
     void OnDestroy() {
-        if (leapProvider != null) {
-            leapProvider.OnUpdateFrame -= OnUpdateFrame;
-        }
+        if (leapProvider != null) leapProvider.OnUpdateFrame -= OnUpdateFrame;
     }
 
     void OnUpdateFrame(Frame frame) {

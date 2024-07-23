@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TimerSpawn : MonoBehaviour {
-    public GameObject timerPrefab;
-    public Vector2 spawnPosition;
-
     public broomMove broomStatus;
 
-    private int maxItems = 0;
+    public GameObject timerPrefab;
+
+    public Vector2 spawnPosition;
+    private int maxItems;
 
     void Start() {
         broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
+
+        maxItems = 0;
     }
 
     public void StartSpawn() {

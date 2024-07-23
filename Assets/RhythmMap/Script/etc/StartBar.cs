@@ -11,11 +11,7 @@ public class StartBar : MonoBehaviour {
     public static void ChangeHealthBarAmount(float amount) {
         barImage.fillAmount = amount;
 
-        if (barImage.fillAmount == 0f || barImage.fillAmount == 1f) {
-            barImage.enabled = false;
-        }
-        else {
-            barImage.enabled = true;
-        }
+        if (barImage.fillAmount == 0f || barImage.fillAmount == 1f) barImage.enabled = false;
+        else barImage.enabled = true;
     }
 }

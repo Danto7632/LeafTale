@@ -4,9 +4,9 @@ using UnityEngine;
 using TMPro;
 
 public class TileCheckL : MonoBehaviour {
-    public bool isRock;
-    public bool isPaper;
-    public bool isScissor;
+    public ComboManager theCombo;
+    public Animator playerAnimator;
+    public Animator[] instAnimator = new Animator[3];
 
     public GameObject rockPrefab;
     public GameObject paperPrefab;
@@ -16,19 +16,21 @@ public class TileCheckL : MonoBehaviour {
     public GameObject sosoText;
     public GameObject failText;
     public GameObject noteEffect;
+
+    public GameObject score;
+
+    public string layerName;
+    public bool isRock;
+    public bool isPaper;
+    public bool isScissor;
     
     public RaycastHit2D[] isTileCheck = new RaycastHit2D[3];
     public Vector2[] tileRayVec = new Vector2[3];
 
-    public string layerName;
-
-    ComboManager theCombo;
-    public GameObject score;
-
-    public Animator playerAnimator;
-    public Animator[] instAnimator = new Animator[3];
-
     public void Awake() {
+        theCombo = FindObjectOfType<ComboManager>();
+        score = GameObject.Find("GameManager");
+
         isRock = false;
         isPaper = false;
         isScissor = false;
@@ -36,10 +38,6 @@ public class TileCheckL : MonoBehaviour {
         tileRayVec[0] = new Vector2(-1.5f, 1f);
         tileRayVec[1] = new Vector2(-1.0f, 1f);
         tileRayVec[2] = new Vector2(-0.2f, 1f);
-
-        theCombo = FindObjectOfType<ComboManager>();
-        score = GameObject.Find("GameManager");
-
     }
 
     public void getLeap(string hands) {
@@ -73,25 +71,22 @@ public class TileCheckL : MonoBehaviour {
         for(int i = 0; i < 3; i++) {
             Vector2 origin = tileRayVec[i];
             Vector2 direction = Vector2.down;
+
             float distance = 1f;
 
-            Debug.DrawRay(origin, direction * distance, Color.red);
-
             isTileCheck[i] = Physics2D.Raycast(origin, direction, distance);
-            
 
             if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer == LayerMask.NameToLayer(layerName)) {
                 switch(i) {
                     case 0 :
-                        Debug.Log("Great");
                         theCombo.IncreaseCombo();
                         greatText.SetActive(true);
                         noteEffect.SetActive(true);
                         score.GetComponent<RhythmScore>().NodeHit(2);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
+                        
                     case 1 :
-                        Debug.Log("Soso");
                         theCombo.IncreaseCombo();
                         sosoText.SetActive(true);
                         noteEffect.SetActive(true);
@@ -99,25 +94,22 @@ public class TileCheckL : MonoBehaviour {
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
                 }
-                if (layerName == "RockTile")
-                {
+
+                if (layerName == "RockTile") {
                     playerAnimator.SetTrigger("PlayerCello");
                     instAnimator[0].SetTrigger("Cello");
                 }
-                else if (layerName == "ScissorsTile")
-                {
+                else if (layerName == "ScissorsTile") {
                     playerAnimator.SetTrigger("PlayerTimpani");
                     instAnimator[1].SetTrigger("Timpani");
                 }
-                else
-                {
+                else {
                     playerAnimator.SetTrigger("PlayerPiano");
                     instAnimator[2].SetTrigger("Piano");
                 }
             }
             else if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
                 score.GetComponent<RhythmScore>().NodeHit(0);
-                Debug.Log("Fail");
                 theCombo.ResetCombo();
                 failText.SetActive(true);
                 Destroy(isTileCheck[i].collider.gameObject);

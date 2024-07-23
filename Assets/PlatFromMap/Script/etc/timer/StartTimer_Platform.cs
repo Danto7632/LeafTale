@@ -5,40 +5,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StartTimer_Platform : MonoBehaviour
-{
-    public GameObject player;
-    public GameObject readyTimer;
+public class StartTimer_Platform : MonoBehaviour {
+    public catMove cat;
     public TMP_Text timerText;
 
-    private int countdownValue = 5;
-    private float timer = 0f;
-    private float interval = 1f;
+    public int countdownValue;
+    public float timer;
+    public float interval;
 
-    public catMove cat;
+    public void Awake() {
+        cat = GameObject.FindWithTag("Player").GetComponent<catMove>();
+        timerText = GameObject.Find("StartTimer").GetComponent<TMP_Text>();
 
-    public void Awake()
-    {
-        player = GameObject.FindWithTag("Player");
-        readyTimer = GameObject.Find("StartTimer");
-        cat = player.GetComponent<catMove>();
-
-        timerText = readyTimer.GetComponent<TMP_Text>();
+        countdownValue = 5;
+        timer = 0f;
+        interval = 1f;
 
         timerText.enabled = true;
     }
 
-    public void StartCountdown()
-    {
+    public void StartCountdown() {
         timer = Time.time;
 
         StartCoroutine(CountdownCoroutine());
     }
 
-    System.Collections.IEnumerator CountdownCoroutine()
-    {
-        while (countdownValue > 0)
-        {
+    System.Collections.IEnumerator CountdownCoroutine() {
+        while (countdownValue > 0) {
             timerText.text = countdownValue.ToString();
 
             yield return new WaitForSeconds(interval);
@@ -50,6 +43,7 @@ public class StartTimer_Platform : MonoBehaviour
         cat.isMoveAllow = true;
 
         yield return new WaitForSeconds(0.5f);
+        
         timerText.enabled = false;
     }
 }

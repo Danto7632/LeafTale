@@ -8,23 +8,25 @@ using UnityEngine.SceneManagement;
 public class GoStage : MonoBehaviour {
     public static void SelectLevel() {
         switch (ScrollStage.btnIndex) {
-            case 0:
+            case 0 :
                 SceneManager.LoadScene("BroomstickScene");
                 break;
-            case 1:
+
+            case 1 :
                 SceneManager.LoadScene("platformScene");
                 break;
-            case 2:
+
+            case 2 :
                 SceneManager.LoadScene("RhythmScene");
                 break;
-            case 3:
-                // Add more cases as needed
+
+            case 3 :
                 break;
-            case 4:
-                // Add more cases as needed
+
+            case 4 :
                 break;
-            default:
-                Debug.Log("해당하는 씬이 없습니다.");
+
+            default :
                 break;
         }
     }

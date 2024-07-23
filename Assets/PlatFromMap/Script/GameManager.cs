@@ -4,47 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     public static GameManager instance;
+
     public TMP_Text scoreText;
 
     public int score = 0;
 
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Debug.LogWarning("æ¿ø° µŒ∞≥ ¿ÃªÛ¿« ∞‘¿” ∏≈¥œ¿˙∞° ¡∏¿Á«’¥œ¥Ÿ!");
-            Destroy(gameObject);
-        }
+    void Awake() {
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
+        
 
         scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void AddScore(int newScore)
-    {
+    public void AddScore(int newScore) {
         score += newScore;
-        scoreText.text = "¡°ºˆ : " + score; 
+        scoreText.text = "Ï†êÏàò : " + score; 
     }
 
-    public void EndGame(int time, int maxTime)
-    {
+    public void EndGame(int time, int maxTime) {
         double finScore;
         score += time;
         finScore = (score / (100.0 + maxTime))*100.0;

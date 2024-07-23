@@ -4,9 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class TileCheckR : MonoBehaviour {
-    public bool isRock;
-    public bool isPaper;
-    public bool isScissor;
+    public ComboManager theCombo;
 
     public GameObject rockPrefab;
     public GameObject paperPrefab;
@@ -17,15 +15,20 @@ public class TileCheckR : MonoBehaviour {
     public GameObject failText;
     public GameObject noteEffect;
 
+    public GameObject score;
+
+    public string layerName;
+    public bool isRock;
+    public bool isPaper;
+    public bool isScissor;
+
     public RaycastHit2D[] isTileCheck = new RaycastHit2D[3];
     public Vector2[] tileRayVec = new Vector2[3];
 
-    public string layerName;
-    public GameObject score;
-
-    ComboManager theCombo;
-
     public void Awake() {
+        theCombo = FindObjectOfType<ComboManager>();
+        score = GameObject.Find("GameManager");
+
         isRock = false;
         isPaper = false;
         isScissor = false;
@@ -33,31 +36,23 @@ public class TileCheckR : MonoBehaviour {
         tileRayVec[0] = new Vector2(1.5f, 1f);
         tileRayVec[1] = new Vector2(1.0f, 1f);
         tileRayVec[2] = new Vector2(0.2f, 1f);
-
-        theCombo = FindObjectOfType<ComboManager>();
-        score = GameObject.Find("GameManager");
     }
 
-    public void getLeap(string hands)
-    {
-        if (BeforeGame.isGameStart)
-        {
-            if (hands == "ROCK")
-            {
+    public void getLeap(string hands) {
+        if (BeforeGame.isGameStart) {
+            if (hands == "ROCK") {
                 isRock = true;
                 isPaper = false;
                 isScissor = false;
                 layerName = "RockTile";
             }
-            else if (hands == "SCISSOR")
-            {
+            else if (hands == "SCISSOR") {
                 isRock = false;
                 isPaper = false;
                 isScissor = true;
                 layerName = "ScissorsTile";
             }
-            else if (hands == "PAPER")
-            {
+            else if (hands == "PAPER") {
                 isRock = false;
                 isPaper = true;
                 isScissor = false;
@@ -70,32 +65,26 @@ public class TileCheckR : MonoBehaviour {
         }
     }
 
-    void Update()
-    {
-        for (int i = 0; i < 3; i++)
-        {
+    void Update() {
+        for (int i = 0; i < 3; i++) {
             Vector2 origin = tileRayVec[i];
             Vector2 direction = Vector2.down;
-            float distance = 1f;
 
-            Debug.DrawRay(origin, direction * distance, Color.red);
+            float distance = 1f;
 
             isTileCheck[i] = Physics2D.Raycast(origin, direction, distance);
 
-            if (isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer == LayerMask.NameToLayer(layerName))
-            {
-                switch (i)
-                {
-                    case 0:
-                        Debug.Log("Great");
+            if (isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer == LayerMask.NameToLayer(layerName)) {
+                switch (i) {
+                    case 0 :
                         theCombo.IncreaseCombo();
                         greatText.SetActive(true);
                         noteEffect.SetActive(true);
                         score.GetComponent<RhythmScore>().NodeHit(2);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
-                    case 1:
-                        Debug.Log("Soso");
+
+                    case 1 :
                         theCombo.IncreaseCombo();
                         sosoText.SetActive(true);
                         noteEffect.SetActive(true);
@@ -104,9 +93,7 @@ public class TileCheckR : MonoBehaviour {
                         break;
                 }
             }
-            else if (isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2)
-            {
-                Debug.Log("Fail");
+            else if (isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
                 theCombo.ResetCombo();
                 failText.SetActive(true);
                 score.GetComponent<RhythmScore>().NodeHit(0);
