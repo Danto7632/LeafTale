@@ -5,8 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
 
-public class Login : MonoBehaviour
-{
+public class Login : MonoBehaviour {
+    private TMP_Text pressStartText;
+    private Camera mainCamera;
+
     public GameObject rank;
     public GameObject pressStart;
 
@@ -18,7 +20,7 @@ public class Login : MonoBehaviour
     public TMP_Text loginFail;
 
     private TMP_Text pressStartText;
-    private bool isFadingOut = false;
+    private bool isFadingOut;
     private Camera mainCamera;
 
     private string url;
@@ -34,14 +36,11 @@ public class Login : MonoBehaviour
     {
         url = "http://43.203.0.69:8080/api/login";
         mainCamera = Camera.main;
+        isFadingOut = false;
     }
 
-    void Update()
-    {
-        if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0))
-        {
-            StartCoroutine(LoadSceneAfterDelay("StoryPage", 3f));
-        }
+    void Update() {
+        if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0)) StartCoroutine(LoadSceneAfterDelay("StoryPage", 3f));
     }
 
     public void LoginBtn()
@@ -103,68 +102,55 @@ public class Login : MonoBehaviour
         }
     }
 
-    IEnumerator BlinkText()
-    {
+    IEnumerator BlinkText() {
         pressStartText = pressStart.GetComponent<TMP_Text>();
         Color originalColor = pressStartText.color;
+
         float alpha = 1f;
 
-        while (true)
-        {
-            if (isFadingOut)
-            {
-                alpha -= Time.deltaTime;
-            }
-            else
-            {
-                alpha += Time.deltaTime;
-            }
+        while (true) {
+            if (isFadingOut) alpha -= Time.deltaTime;
+            else alpha += Time.deltaTime;
 
             alpha = Mathf.Clamp01(alpha);
             pressStartText.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
 
-            if (alpha >= 1f)
-            {
+            if (alpha >= 1f) {
                 isFadingOut = true;
-                yield return new WaitForSeconds(0.1f); // 0.1초 대기
+                yield return new WaitForSeconds(0.1f);
             }
-            else if (alpha <= 0f)
-            {
+            else if (alpha <= 0f) {
                 isFadingOut = false;
-                yield return new WaitForSeconds(0.1f); // 0.1초 대기
+                yield return new WaitForSeconds(0.1f);
             }
 
             yield return null;
         }
     }
 
-    IEnumerator LoadSceneAfterDelay(string sceneName, float delay)
-    {
-        pressStart.SetActive(false); // Press Start를 invisible로 만듦
+    IEnumerator LoadSceneAfterDelay(string sceneName, float delay) {
+        pressStart.SetActive(false);
 
-        // ani1, ani2, ani3 코루틴을 순차적으로 실행
         yield return StartCoroutine(anima(delay / 3, -3f, -1f, 4f));
         yield return StartCoroutine(anima(delay / 3, 2f, 1f, 3f));
         yield return StartCoroutine(anima(delay / 3, -1f, -1f, 2f));
 
-        SceneManager.LoadScene(sceneName); // 다음 씬으로 전환
+        SceneManager.LoadScene(sceneName);
     }
 
-    IEnumerator anima(float duration, float x, float y, float size)
-    {
+    IEnumerator anima(float duration, float x, float y, float size) {
         float elapsedTime = 0f;
         float initialSize = mainCamera.orthographicSize;
         Vector3 initialPosition = mainCamera.transform.position;
+
         float targetSize = size;
         Vector3 targetPosition = new Vector3(x, y, initialPosition.z);
 
-        while (elapsedTime < duration)
-        {
+        while (elapsedTime < duration) {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
 
-            // 떨림 효과 추가
-            float shakeAmount = 0.03f; // 떨림 강도
+            float shakeAmount = 0.03f;
             Vector3 shakeOffset = new Vector3(Random.Range(-shakeAmount, shakeAmount), Random.Range(-shakeAmount, shakeAmount), 0);
 
             mainCamera.orthographicSize = Mathf.Lerp(initialSize, targetSize, t);

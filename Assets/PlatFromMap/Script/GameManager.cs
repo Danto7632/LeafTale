@@ -7,21 +7,15 @@ using TMPro;
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
-    public TMP_Text scoreText;
-
     public int score = 0;
 
     void Awake() {
         if (instance == null) instance = this;
         else Destroy(gameObject);
-        
-
-        scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
     }
 
     public void AddScore(int newScore) {
         score += newScore;
-        scoreText.text = "점수 : " + score; 
     }
 
     public void EndGame(int time, int maxTime) {
