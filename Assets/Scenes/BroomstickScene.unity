@@ -2229,15 +2229,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdba5a8d8d6af154f8b1822ca07e3237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  startIndex: 2
-  endIndex: 0
-  sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Player: {fileID: 0}
   broomStatus: {fileID: 0}
+  sprites:
+  - {fileID: 1522618030}
+  - {fileID: 2027682696}
+  startIndex: 1
+  endIndex: 0
+  speed: 0
+  viewHeight: 0
 --- !u!212 &1522618032
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2432,15 +2431,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdba5a8d8d6af154f8b1822ca07e3237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  startIndex: 2
-  endIndex: 0
-  sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Player: {fileID: 0}
   broomStatus: {fileID: 0}
+  sprites:
+  - {fileID: 1522618030}
+  - {fileID: 2027682696}
+  startIndex: 1
+  endIndex: 0
+  speed: 0
+  viewHeight: 0
 --- !u!212 &2027682698
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class NewBehaviourScript : MonoBehaviour {
         broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
 
         speed = 10;
-        viewHeight = Camera.main.orthographicSize * 2;
+        viewHeight = 22.0f;
     }
 
     void Update() {
@@ -26,16 +26,16 @@ public class NewBehaviourScript : MonoBehaviour {
 
         transform.position = curPos + nextPos;
 
-        if (sprites[endIndex].position.y < viewHeight * (-1) - 30 && !broomStatus.isGameOver) {
+        if (sprites[endIndex].position.y < viewHeight * (-1) && !broomStatus.isGameOver) {
             Vector3 backSpritePos = sprites[startIndex].localPosition;
             Vector3 frontSpritePos = sprites[endIndex].localPosition;
 
-            sprites[endIndex].transform.localPosition = backSpritePos + Vector3.up * 36;
+            sprites[endIndex].transform.localPosition = backSpritePos + Vector3.up * 31.3f;
 
             int startIndexSave = startIndex;
 
             startIndex = endIndex;
-            endIndex = (startIndexSave - 1 == -1) ? sprites.Length - 1 : startIndexSave - 1;
+            endIndex = startIndexSave;
         }
     }
 }
