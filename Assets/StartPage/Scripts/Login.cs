@@ -19,9 +19,7 @@ public class Login : MonoBehaviour {
     public UnityEngine.UI.Button loginButton;
     public TMP_Text loginFail;
 
-    private TMP_Text pressStartText;
     private bool isFadingOut;
-    private Camera mainCamera;
 
     private string url;
 
@@ -71,7 +69,6 @@ public class Login : MonoBehaviour {
         {
             loginFail.gameObject.SetActive(true);
             loginFail.text = "Connection Error";
-            idInput.text = "";
             pwInput.text = "";
             print(www.downloadHandler.text);
             Debug.Log("Response Code: " + www.responseCode);
@@ -96,7 +93,6 @@ public class Login : MonoBehaviour {
             {
                 loginFail.gameObject.SetActive(true);
                 loginFail.text = "아이디나 비밀번호를 잘못 입력하였습니다.\n아이디와 비밀번호를 올바르게 입력해주세요.";
-                idInput.text = "";
                 pwInput.text = "";
             }
         }
