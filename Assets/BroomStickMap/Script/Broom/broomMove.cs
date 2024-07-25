@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,10 +23,8 @@ public class broomMove : MonoBehaviour {
     public float pointingStartTime;
 
     [Header("Wrist Movement Tracking")]
-    public Vector3 previousWristPosition;
     public float totalWristMovement;
     public Text wristMovementText;
-    public float movementThreshold;
 
     [Header("Player_Status")]
     public float horiaontalInput;
@@ -97,9 +96,7 @@ public class broomMove : MonoBehaviour {
         isFirstGameStart = false;
         leapOnText.enabled = true;
 
-        previousWristPosition = Vector3.zero;
         totalWristMovement = 0f;
-        movementThreshold = 0.01f;
     }
 
     void Update() {
@@ -263,19 +260,22 @@ public class broomMove : MonoBehaviour {
 
     void DetectHandTilt(Hand hand) {
         if (isLeapOn && isMoveAllow && !isHit) {
-            TrackWristMovement(hand);
             Vector3 palmNormal = hand.PalmNormal;
 
-            if (palmNormal.x > 0.2f || palmNormal.x < -0.2f) {
+            if (palmNormal.x > 0.3f || palmNormal.x < -0.3f) {
                 horizonLeapSpeed = palmNormal.x;
+                totalWristMovement += Math.Abs(palmNormal.x) / 100f;
+                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}";
             }
             else {
                 horizonLeapSpeed = 0f;
             }
 
 
-            if (palmNormal.z > 0.2f || palmNormal.z < -0.2f) {
+            if (palmNormal.z > 0.3f || palmNormal.z < -0.3f) {
                 verticalLeapSpeed = palmNormal.z;
+                totalWristMovement += Math.Abs(palmNormal.z) / 100f;
+                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}";
             }
             else {
                 verticalLeapSpeed = 0f;
@@ -297,21 +297,6 @@ public class broomMove : MonoBehaviour {
         }
     }
 
-    void TrackWristMovement(Hand hand) {
-        Vector3 currentWristPosition = hand.WristPosition;
-
-        if (previousWristPosition != Vector3.zero) {
-            float movement = Vector3.Distance(previousWristPosition, currentWristPosition);
-
-            if (movement > movementThreshold) {
-                totalWristMovement += movement;
-            }
-        }
-        previousWristPosition = currentWristPosition;
-
-        wristMovementText.text = $"Wrist Movement: {totalWristMovement:F2}";
-    }
-
     bool IsPointingPose(Hand hand) {
         foreach (Finger finger in hand.Fingers) {
             if (finger.Type == Finger.FingerType.TYPE_INDEX) {
@@ -327,3 +312,4 @@ public class broomMove : MonoBehaviour {
 
     #endregion
 }
+

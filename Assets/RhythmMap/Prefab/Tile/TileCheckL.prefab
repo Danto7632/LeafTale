@@ -48,9 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b044205d172d14cbdbc03385b93bf7b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRock: 0
-  isPaper: 0
-  isScissor: 0
+  theCombo: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  instAnimator:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   rockPrefab: {fileID: 4845676630310152384}
   paperPrefab: {fileID: 3129831323311204779}
   scissorPrefab: {fileID: 7281417594895674988}
@@ -58,17 +61,15 @@ MonoBehaviour:
   sosoText: {fileID: 0}
   failText: {fileID: 0}
   noteEffect: {fileID: 6665978577670874076}
+  score: {fileID: 0}
+  layerName: 
+  isRock: 0
+  isPaper: 0
+  isScissor: 0
   tileRayVec:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  layerName: 
-  score: {fileID: 0}
-  playerAnimator: {fileID: 0}
-  instAnimator:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &3129831323311204779
 GameObject:
   m_ObjectHideFlags: 0

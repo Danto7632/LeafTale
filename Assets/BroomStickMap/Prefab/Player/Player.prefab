@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 323323361
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7918f7fc7a0f0504cb6191aac009e5fc, type: 3}
+  m_Sprite: {fileID: -921551294, guid: 41c2c803622aa4f42bf15947144e2a54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.15, y: 0.4}
+  m_Size: {x: 1.3333334, y: 2.6666667}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -127,6 +127,251 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83dfa1734d6ef4b01a73aa68afa0e2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLeapOn: 0
+  isFirstGameStart: 0
+  hand:
+    FrameId: 0
+    Id: 0
+    Fingers:
+    - bones:
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      Type: 0
+      Id: 0
+      HandId: 0
+      TipPosition: {x: 0, y: 0, z: 0}
+      Direction: {x: 0, y: 0, z: 0}
+      Width: 0
+      Length: 0
+      IsExtended: 0
+      TimeVisible: 0
+    - bones:
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      Type: 0
+      Id: 0
+      HandId: 0
+      TipPosition: {x: 0, y: 0, z: 0}
+      Direction: {x: 0, y: 0, z: 0}
+      Width: 0
+      Length: 0
+      IsExtended: 0
+      TimeVisible: 0
+    - bones:
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      Type: 0
+      Id: 0
+      HandId: 0
+      TipPosition: {x: 0, y: 0, z: 0}
+      Direction: {x: 0, y: 0, z: 0}
+      Width: 0
+      Length: 0
+      IsExtended: 0
+      TimeVisible: 0
+    - bones:
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      Type: 0
+      Id: 0
+      HandId: 0
+      TipPosition: {x: 0, y: 0, z: 0}
+      Direction: {x: 0, y: 0, z: 0}
+      Width: 0
+      Length: 0
+      IsExtended: 0
+      TimeVisible: 0
+    - bones:
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      - PrevJoint: {x: 0, y: 0, z: 0}
+        NextJoint: {x: 0, y: 0, z: 0}
+        Center: {x: 0, y: 0, z: 0}
+        Direction: {x: 0, y: 0, z: 0}
+        Length: 0
+        Width: 0
+        Type: -1
+        Rotation: {x: 0, y: 0, z: 0, w: 0}
+      Type: 0
+      Id: 0
+      HandId: 0
+      TipPosition: {x: 0, y: 0, z: 0}
+      Direction: {x: 0, y: 0, z: 0}
+      Width: 0
+      Length: 0
+      IsExtended: 0
+      TimeVisible: 0
+    PalmPosition: {x: 0, y: 0, z: 0}
+    PalmVelocity: {x: 0, y: 0, z: 0}
+    PalmNormal: {x: 0, y: 0, z: 0}
+    Direction: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    GrabStrength: 0
+    PinchStrength: 0
+    PinchDistance: 0
+    PalmWidth: 0
+    StabilizedPalmPosition: {x: 0, y: 0, z: 0}
+    WristPosition: {x: 0, y: 0, z: 0}
+    TimeVisible: 0
+    Confidence: 0
+    IsLeft: 0
+    Arm:
+      PrevJoint: {x: 0, y: 0, z: 0}
+      NextJoint: {x: 0, y: 0, z: 0}
+      Center: {x: 0, y: 0, z: 0}
+      Direction: {x: 0, y: 0, z: 0}
+      Length: 0
+      Width: 0
+      Type: -1
+      Rotation: {x: 0, y: 0, z: 0, w: 0}
+  horizonLeapSpeed: 0
+  verticalLeapSpeed: 0
+  isPointing: 0
+  pointingStartTime: 0
+  totalWristMovement: 0
+  wristMovementText: {fileID: 0}
   horiaontalInput: 0
   verticalInput: 0
   moveSpeed: 3
@@ -134,15 +379,21 @@ MonoBehaviour:
   sp: {fileID: 0}
   capsule2D: {fileID: 0}
   anim: {fileID: 0}
-  Hp: 0
+  onTimer: {fileID: 0}
+  enemySpawn: {fileID: 0}
+  timerSpawn: {fileID: 0}
   isHit: 0
   isMoveAllow: 0
   isGameOver: 0
+  isGameClear: 0
   moveDirection: {x: 0, y: 0}
   minX: -8
   maxX: 8
   minY: -5
   maxY: 5
+  explainPanel: {fileID: 0}
+  explainText: {fileID: 0}
+  leapOnText: {fileID: 0}
 --- !u!95 &3604422402211334085
 Animator:
   serializedVersion: 5
@@ -153,7 +404,7 @@ Animator:
   m_GameObject: {fileID: 7451766030104980832}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3cac8c5b445628d43bee24e420f97a18, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
