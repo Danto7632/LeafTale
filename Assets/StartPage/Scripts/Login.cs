@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Text;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,8 +23,10 @@ public class Login : MonoBehaviour {
     public TMP_Text loginFail;
 
     private bool isFadingOut;
-
     private string url;
+    
+    private static readonly byte[] key = Encoding.UTF8.GetBytes("Id28e3PsN258b1R4");
+    private static readonly byte[] iv = Encoding.UTF8.GetBytes("D5oC29U1v94eBp7m");
 
     [System.Serializable]
     public class LoginData
@@ -81,8 +86,7 @@ public class Login : MonoBehaviour {
             if (www.responseCode == 200 && www.downloadHandler.text == "true")
             {
                 loginFail.gameObject.SetActive(false);
-                PlayerPrefs.SetString("userID", idInput.text);
-                PlayerPrefs.Save();
+                SaveEncryptedData("userID", idInput.text);
 
                 loginPanel.SetActive(false);
                 rank.SetActive(true);
@@ -147,7 +151,7 @@ public class Login : MonoBehaviour {
             float t = elapsedTime / duration;
 
             float shakeAmount = 0.03f;
-            Vector3 shakeOffset = new Vector3(Random.Range(-shakeAmount, shakeAmount), Random.Range(-shakeAmount, shakeAmount), 0);
+            Vector3 shakeOffset = new Vector3(UnityEngine.Random.Range(-shakeAmount, shakeAmount), UnityEngine.Random.Range(-shakeAmount, shakeAmount), 0);
 
             mainCamera.orthographicSize = Mathf.Lerp(initialSize, targetSize, t);
             mainCamera.transform.position = Vector3.Lerp(initialPosition, targetPosition, t) + shakeOffset;
@@ -157,5 +161,53 @@ public class Login : MonoBehaviour {
 
         mainCamera.orthographicSize = targetSize;
         mainCamera.transform.position = targetPosition;
+    }
+
+    public static void SaveEncryptedData(string keyName, string data) // 아이디 암호화해서 저장
+    {
+        using (Aes aesAlg = Aes.Create())
+        {
+            aesAlg.Key = key;
+            aesAlg.IV = iv;
+
+            // 암호화 키와 초기화 벡터를 이용하여, 암호화를 진행할 encryptor 생성
+            ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+            byte[] encryptedData = null;
+
+            // 일반 데이터를 암호화
+            byte[] bytesToEncrypt = Encoding.UTF8.GetBytes(data);
+            encryptedData = encryptor.TransformFinalBlock(bytesToEncrypt, 0, bytesToEncrypt.Length);
+
+            // 암호화 데이터를 문자열로 변환하여 저장 
+            string encryptedString = Convert.ToBase64String(encryptedData);
+            PlayerPrefs.SetString(keyName, encryptedString);
+            PlayerPrefs.Save();
+        }
+    }
+    public static string LoadEncryptedData(string keyName) // 아이디 복호화 후 불러오기
+    {
+        string encryptedString = PlayerPrefs.GetString(keyName);
+        if (!string.IsNullOrEmpty(encryptedString))
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+
+                //암호화 키와 초기화 벡터를 이용하여 복호화를 진행할 decryptor 생성
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                // 데이터 복호화
+                byte[] encryptedData = Convert.FromBase64String(encryptedString);
+                byte[] decryptedData = decryptor.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+
+                // 복호화된 데이터를 이용하여 저장된 데이터 반환
+                return Encoding.UTF8.GetString(decryptedData);
+            }
+        }
+        else
+        {
+            return null;
+        }
     }
 }
