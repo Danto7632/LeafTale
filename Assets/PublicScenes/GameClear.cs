@@ -6,20 +6,29 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using Leap;
+using Leap.Unity;
 
 public class GameClear : MonoBehaviour {
+    public LeapServiceProvider leapProvider;
+    public Hand hand;
+
     public RectTransform pos;
 
     public TMP_Text textScore;
     public string text;
     public bool clear;
+    public bool isPointing;
 
     private string url;
     private Scene scene;
     private int current_gameid;
 
+    public float elapsedTime;
+    public float pointingStartTime;
+
     [System.Serializable]
-    public class ScoreData // º¯°æµÉ ¼öµµ
+    public class ScoreData
     {
         public int gameId;
         public string playerId;
@@ -38,10 +47,36 @@ public class GameClear : MonoBehaviour {
         url = "http://43.203.0.69:8080/api/gamePMData";
 
         scene = SceneManager.GetActiveScene();
+
+        leapProvider = FindObjectOfType<LeapServiceProvider>();
+        leapProvider.OnUpdateFrame += OnUpdateFrame;
+
+        isPointing = false;
+        elapsedTime = 0f;
     }
 
     void Update() {
         if(clear && Input.GetKeyDown("p")) SceneManager.LoadScene("StageSelect");
+    }
+
+    void OnUpdateFrame(Frame frame) {
+        if (frame.Hands.Count > 0) {
+            hand = frame.Hands[0];
+            if(IsPointingPose(hand)) {
+                if (!isPointing) {
+                    pointingStartTime = Time.time;
+
+                    isPointing = true;
+                }
+                else {
+                    elapsedTime = Time.time - pointingStartTime;
+
+                    if (elapsedTime > 3f && clear) {
+                        SceneManager.LoadScene("StageSelect");
+                    }
+                }
+            }
+        }
     }
 
     public void Clear(int score) {
@@ -51,16 +86,16 @@ public class GameClear : MonoBehaviour {
         clear = true;
 
         if (scene.name == "platformScene")
-            current_gameid = 1; // ÀÚ·áÇüÀÌ³ª ´ëÀÔ°ªÀÌ ¹Ù²ð ¼ö ÀÖÀ½
+            current_gameid = 1; // ï¿½Ú·ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         else if (scene.name == "BroomstickScene")
-            current_gameid = 2; // ÀÚ·áÇüÀÌ³ª ´ëÀÔ°ªÀÌ ¹Ù²ð ¼ö ÀÖÀ½
+            current_gameid = 2; // ï¿½Ú·ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         else if (scene.name == "RhythmScene")
-            current_gameid = 3; // ÀÚ·áÇüÀÌ³ª ´ëÀÔ°ªÀÌ ¹Ù²ð ¼ö ÀÖÀ½
+            current_gameid = 3; // ï¿½Ú·ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         //StartCoroutine(ScoreSave(current_gameid, score));
     }
 
-    IEnumerator ScoreSave(int cgameId, int score) // gameId ÀÚ·áÇü ¹Ù²ð ¼öµµ
+    IEnumerator ScoreSave(int cgameId, int score) // gameId ï¿½Ú·ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         var scoreData = new ScoreData
         {
@@ -90,15 +125,27 @@ public class GameClear : MonoBehaviour {
         {
             Debug.Log("Response Code: " + www.responseCode);
             Debug.Log("Response: " + www.downloadHandler.text);
-            if (www.responseCode == 200 && www.downloadHandler.text == "true") // ¼öÁ¤/Á¦°ÅÇÒ ¼öµµ
+            if (www.responseCode == 200 && www.downloadHandler.text == "true") // ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             {
                
             }
-            else if (www.responseCode == 200 && www.downloadHandler.text != "true") // ¼öÁ¤/Á¦°ÅÇÒ ¼öµµ
+            else if (www.responseCode == 200 && www.downloadHandler.text != "true") // ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             {
                 
             }
         }
     }
-    
+
+    bool IsPointingPose(Hand hand) {
+        foreach (Finger finger in hand.Fingers) {
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
+                if (!finger.IsExtended) return false;
+            }
+            else {
+                if (finger.IsExtended) return false;
+            }
+        }
+        
+        return true;
+    }
 }

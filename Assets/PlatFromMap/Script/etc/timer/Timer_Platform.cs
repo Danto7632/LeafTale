@@ -8,7 +8,6 @@ public class Timer_Platform : MonoBehaviour {
 
     public TMP_Text[] timeText;
     public TMP_Text gameOverText;
-    public TMP_Text scoreText;
 
     public float time;
 
@@ -22,7 +21,6 @@ public class Timer_Platform : MonoBehaviour {
 
     void Awake() {
         catStatus = GameObject.FindWithTag("Player").GetComponent<catMove>();
-        scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
 
         time = 126f;
         overFlag = true;
@@ -41,7 +39,6 @@ public class Timer_Platform : MonoBehaviour {
         timeText[0].enabled = false;
         timeText[1].enabled = false;
         gameOverText.enabled = false;
-        scoreText.enabled = false;
 
         maxTime = (int)time;
     }
@@ -98,7 +95,6 @@ public class Timer_Platform : MonoBehaviour {
             timeText[0].enabled = true;
             timeText[1].enabled = true;
             gameOverText.enabled = true;
-            scoreText.enabled = true;
         }
     }
 }
