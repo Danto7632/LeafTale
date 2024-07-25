@@ -57,7 +57,7 @@ public class GameClear : MonoBehaviour {
         else if (scene.name == "RhythmScene")
             current_gameid = 3; // 자료형이나 대입값이 바뀔 수 있음
 
-        StartCoroutine(ScoreSave(current_gameid, score));
+        //StartCoroutine(ScoreSave(current_gameid, score));
     }
 
     IEnumerator ScoreSave(int cgameId, int score) // gameId 자료형 바뀔 수도

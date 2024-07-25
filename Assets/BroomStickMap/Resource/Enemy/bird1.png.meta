@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a4bef31b5abbe5246a86af7a038a794e
+guid: 8ee3617d4a287024ca9c9c3ce3a757be
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,330 +123,276 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FlightEnemy_0
+      name: bird1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 150
-        height: 150
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 1, y: 5}
-        - {x: -6, y: 12}
-        - {x: -15, y: 13}
-        - {x: -18, y: 11}
-        - {x: -18, y: -4}
-        - {x: -14, y: -4}
-        - {x: -11, y: 1}
-        - {x: -4, y: 1}
-        - {x: -4, y: -8}
-        - {x: 2, y: -17}
-        - {x: 14, y: -11}
-        - {x: 14, y: -7}
-        - {x: 10, y: -6}
-        - {x: 13, y: 1}
-        - {x: 21, y: 5}
-        - {x: 25, y: 14}
-        - {x: 24, y: 16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22712010177efc34ca3537c9bb5da43a
-      internalID: 1841869628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FlightEnemy_1
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 0
-        width: 150
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 14, y: 10}
-        - {x: 2, y: 6}
+      - - {x: 3, y: 6}
+        - {x: 3, y: 13}
         - {x: -4, y: 13}
-        - {x: -9, y: 12}
-        - {x: -17, y: 14}
-        - {x: -20, y: -1}
-        - {x: -13, y: -3}
-        - {x: -8, y: 2}
-        - {x: -1, y: -4}
-        - {x: -5, y: -7}
-        - {x: -1, y: -18}
-        - {x: 14, y: -13}
-        - {x: 12, y: -3}
-        - {x: 16, y: 5}
-        - {x: 21, y: 5}
-        - {x: 24, y: 9}
-        - {x: 21, y: 17}
+        - {x: -4, y: 6}
+        - {x: -23, y: 2}
+        - {x: -13, y: -4}
+        - {x: -4, y: -5}
+        - {x: -1, y: -10}
+        - {x: 3, y: -5}
+        - {x: 15, y: -3}
+        - {x: 23, y: 2}
       tessellationDetail: 0
       bones: []
-      spriteID: 8f5941085dd3b5543a72f4eb78b81aa5
-      internalID: 1740945093
+      spriteID: 7d4d18d1acb5028439acfed0c52b0c29
+      internalID: 1959538554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FlightEnemy_2
+      name: bird1_1
       rect:
         serializedVersion: 2
-        x: 300
+        x: 64
         y: 0
-        width: 150
-        height: 150
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -15, y: 9}
-        - {x: -18, y: 4}
-        - {x: -15, y: -2}
-        - {x: -9, y: 0}
-        - {x: -4, y: -2}
-        - {x: -1, y: -5}
-        - {x: -5, y: -7}
-        - {x: -5, y: -13}
-        - {x: 13, y: -15}
-        - {x: 15, y: -11}
-        - {x: 12, y: -7}
-        - {x: 13, y: 0}
-        - {x: 14, y: 3}
-        - {x: 21, y: 6}
-        - {x: 23, y: 11}
-        - {x: 20, y: 15}
-        - {x: 9, y: 6}
-        - {x: 1, y: 4}
-        - {x: -3, y: 8}
-        - {x: -3, y: 12}
-        - {x: -8, y: 9}
-        - {x: -13, y: 14}
-        - {x: -16, y: 11}
+      - - {x: -4, y: 13}
+        - {x: -4, y: 6}
+        - {x: -23, y: -3}
+        - {x: -23, y: -5}
+        - {x: -14, y: -5}
+        - {x: -10, y: -7}
+        - {x: -7, y: -5}
+        - {x: -4, y: -5}
+        - {x: -1, y: -10}
+        - {x: 3, y: -5}
+        - {x: 6, y: -5}
+        - {x: 9, y: -7}
+        - {x: 13, y: -5}
+        - {x: 22, y: -5}
+        - {x: 16, y: 0}
+        - {x: 3, y: 6}
+        - {x: 3, y: 13}
       tessellationDetail: 0
       bones: []
-      spriteID: 0d12452e8374eab44ab54fa5f38fa509
-      internalID: 1116133123
+      spriteID: 8394f7f4e6ed02c4dafa0d9252e44906
+      internalID: 48634322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FlightEnemy_3
+      name: bird1_2
       rect:
         serializedVersion: 2
-        x: 450
+        x: 128
         y: 0
-        width: 150
-        height: 150
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 14, y: 4}
-        - {x: 6, y: 4}
-        - {x: -2, y: 3}
-        - {x: -6, y: 6}
-        - {x: -7, y: 10}
-        - {x: -14, y: 11}
-        - {x: -18, y: 2}
-        - {x: -15, y: -2}
-        - {x: -9, y: 0}
-        - {x: -2, y: -3}
-        - {x: -1, y: -7}
-        - {x: -5, y: -9}
-        - {x: -4, y: -14}
-        - {x: 3, y: -14}
-        - {x: 9, y: -14}
-        - {x: 14, y: -15}
-        - {x: 15, y: -11}
-        - {x: 10, y: -9}
-        - {x: 12, y: -4}
-        - {x: 14, y: 0}
-        - {x: 21, y: -1}
-        - {x: 23, y: 5}
-        - {x: 21, y: 8}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 412357d2242fa6143a054f196069b2fb
-      internalID: -1256230193
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FlightEnemy_4
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 150
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 19, y: 7}
-        - {x: 13, y: 2}
-        - {x: 10, y: 5}
-        - {x: 1, y: 5}
-        - {x: 0, y: 2}
-        - {x: -5, y: 3}
-        - {x: -7, y: 7}
-        - {x: -13, y: 9}
-        - {x: -18, y: 6}
-        - {x: -17, y: -1}
-        - {x: -2, y: -4}
-        - {x: -1, y: -7}
-        - {x: -4, y: -7}
-        - {x: -4, y: -12}
-        - {x: -4, y: -15}
-        - {x: 2, y: -15}
-        - {x: 5, y: -12}
-        - {x: 13, y: -14}
-        - {x: 14, y: -11}
-        - {x: 13, y: -9}
-        - {x: 10, y: -7}
-        - {x: 13, y: -2}
-        - {x: 22, y: 0}
-        - {x: 22, y: 5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5a1fea34a72fdd499774889e4f3bb50
-      internalID: -638174923
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FlightEnemy_5
-      rect:
-        serializedVersion: 2
-        x: 750
-        y: 0
-        width: 150
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 9, y: 7}
-        - {x: 1, y: 5}
-        - {x: -7, y: 3}
-        - {x: -8, y: 8}
-        - {x: -17, y: 8}
-        - {x: -19, y: 2}
-        - {x: -17, y: -3}
-        - {x: -2, y: -3}
+      - - {x: -4, y: 13}
+        - {x: -4, y: 5}
+        - {x: -9, y: -1}
+        - {x: -18, y: -5}
+        - {x: -21, y: -12}
+        - {x: -24, y: -15}
+        - {x: -13, y: -11}
+        - {x: -9, y: -11}
         - {x: -4, y: -6}
-        - {x: -4, y: -12}
-        - {x: 1, y: -16}
-        - {x: 13, y: -14}
-        - {x: 14, y: -9}
-        - {x: 10, y: -7}
-        - {x: 13, y: -4}
-        - {x: 21, y: -3}
-        - {x: 24, y: -1}
-        - {x: 22, y: 4}
-        - {x: 13, y: 2}
+        - {x: -1, y: -10}
+        - {x: 2, y: -6}
+        - {x: 8, y: -11}
+        - {x: 23, y: -15}
+        - {x: 20, y: -12}
+        - {x: 16, y: -4}
+        - {x: 7, y: -1}
+        - {x: 3, y: 5}
+        - {x: 3, y: 13}
       tessellationDetail: 0
       bones: []
-      spriteID: f8f4e48ff975e4f4da97a8066c5192a9
-      internalID: -390384565
+      spriteID: 80ac47c45e9298c4bb28489f92e9a9a8
+      internalID: -1395042109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FlightEnemy_6
+      name: bird1_3
       rect:
         serializedVersion: 2
-        x: 899
+        x: 192
         y: 0
-        width: 150
-        height: 150
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 25, y: -2}
-        - {x: 22, y: 3}
-        - {x: 11, y: 7}
-        - {x: 2, y: 7}
-        - {x: -2, y: 4}
-        - {x: -17, y: 1}
-        - {x: -14, y: -6}
-        - {x: -12, y: -9}
-        - {x: -5, y: -7}
-        - {x: -1, y: -12}
-        - {x: 4, y: -18}
-        - {x: 15, y: -11}
-        - {x: 15, y: -8}
-        - {x: 11, y: -5}
-        - {x: 14, y: -1}
-        - {x: 21, y: -5}
+      - - {x: -4, y: 13}
+        - {x: -4, y: 6}
+        - {x: -23, y: -3}
+        - {x: -23, y: -5}
+        - {x: -14, y: -5}
+        - {x: -10, y: -7}
+        - {x: -7, y: -5}
+        - {x: -4, y: -5}
+        - {x: -1, y: -10}
+        - {x: 3, y: -5}
+        - {x: 6, y: -5}
+        - {x: 9, y: -7}
+        - {x: 13, y: -5}
+        - {x: 22, y: -5}
+        - {x: 22, y: -3}
+        - {x: 3, y: 6}
+        - {x: 3, y: 13}
       tessellationDetail: 0
       bones: []
-      spriteID: 4dbb63567fa373a479ecb7d4bcc2b157
-      internalID: -1440786357
+      spriteID: 83a87cfe08dd95e448afa15886a84162
+      internalID: 1740117924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FlightEnemy_7
+      name: bird1_4
       rect:
         serializedVersion: 2
-        x: 1050
+        x: 256
         y: 0
-        width: 150
-        height: 150
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 21, y: 5}
-        - {x: 19, y: 6}
-        - {x: 12, y: 5}
-        - {x: 9, y: 7}
-        - {x: 2, y: 7}
-        - {x: -6, y: 5}
-        - {x: -17, y: 5}
-        - {x: -17, y: -2}
-        - {x: -4, y: -2}
-        - {x: -4, y: -8}
-        - {x: -2, y: -10}
-        - {x: 2, y: -12}
-        - {x: 0, y: -18}
-        - {x: 3, y: -18}
-        - {x: 7, y: -9}
-        - {x: 12, y: -12}
-        - {x: 15, y: -9}
-        - {x: 14, y: -6}
-        - {x: 10, y: -5}
-        - {x: 13, y: 0}
-        - {x: 20, y: -2}
-        - {x: 24, y: 2}
+      - - {x: 3, y: 6}
+        - {x: 3, y: 13}
+        - {x: -4, y: 13}
+        - {x: -4, y: 6}
+        - {x: -24, y: 1}
+        - {x: -15, y: -3}
+        - {x: -4, y: -5}
+        - {x: -1, y: -10}
+        - {x: 3, y: -5}
+        - {x: 14, y: -3}
+        - {x: 23, y: 2}
       tessellationDetail: 0
       bones: []
-      spriteID: 33d8d11352f9bda4fad2ba993938228e
-      internalID: 153229810
+      spriteID: 342795d9f66fae541b830ed4620e5da9
+      internalID: -2000372957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird1_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -4, y: 13}
+        - {x: -4, y: 6}
+        - {x: -16, y: 5}
+        - {x: -12, y: -1}
+        - {x: -4, y: -4}
+        - {x: -1, y: -10}
+        - {x: 4, y: -4}
+        - {x: 11, y: -2}
+        - {x: 16, y: 5}
+        - {x: 3, y: 6}
+        - {x: 3, y: 13}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32026282c15e3fe40a61b9efd96efe03
+      internalID: 675992750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird1_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -4, y: 13}
+        - {x: -4, y: 6}
+        - {x: -12, y: 5}
+        - {x: -8, y: -2}
+        - {x: -3, y: -6}
+        - {x: -1, y: -10}
+        - {x: 2, y: -6}
+        - {x: 8, y: -2}
+        - {x: 11, y: 5}
+        - {x: 3, y: 6}
+        - {x: 3, y: 13}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8229b7e56b3e0cd4fa8b9b4238a0435c
+      internalID: -1519846282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird1_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -4, y: 13}
+        - {x: -4, y: 6}
+        - {x: -16, y: 5}
+        - {x: -11, y: -2}
+        - {x: -4, y: -4}
+        - {x: -1, y: -10}
+        - {x: 4, y: -4}
+        - {x: 11, y: -2}
+        - {x: 17, y: 5}
+        - {x: 3, y: 6}
+        - {x: 3, y: 13}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8abf4ec078e7874aa211dde1026f19e
+      internalID: -1017377567
       vertices: []
       indices: 
       edges: []
@@ -462,14 +408,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      FlightEnemy_0: 1841869628
-      FlightEnemy_1: 1740945093
-      FlightEnemy_2: 1116133123
-      FlightEnemy_3: -1256230193
-      FlightEnemy_4: -638174923
-      FlightEnemy_5: -390384565
-      FlightEnemy_6: -1440786357
-      FlightEnemy_7: 153229810
+      bird1_0: 1959538554
+      bird1_1: 48634322
+      bird1_2: -1395042109
+      bird1_3: 1740117924
+      bird1_4: -2000372957
+      bird1_5: 675992750
+      bird1_6: -1519846282
+      bird1_7: -1017377567
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
