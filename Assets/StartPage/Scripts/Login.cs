@@ -45,33 +45,40 @@ public class Login : MonoBehaviour {
     void Update() {
         if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0)) StartCoroutine(LoadSceneAfterDelay("StoryPage", 3f));
     }
-
-    public void LoginBtn()
+    // 로그인 버튼 누르면 API 통신으로 로그인 진행되는 코루틴 실행 
+    public void LoginBtn() 
     {
         StartCoroutine(AccountLogin());
     }
 
     IEnumerator AccountLogin()
     {
+        // API 통신으로 보낼 데이터 객체 생성
         var loginData = new LoginData
         {
             memberId = idInput.text,
             password = pwInput.text
         };
 
+        // 객체를 JSON 데이터로 변환
         string jsonData = JsonUtility.ToJson(loginData);
 
+        // JSON 데이터를 UTF-8 인코딩된 바이트 배열로 변환
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
+        // UnityWebRequest 생성 및 설정 (해당 API url에 POST 방식으로 아이디와 비밀번호 전송)
         UnityWebRequest www = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
         www.uploadHandler = new UploadHandlerRaw(bodyRaw);
         www.downloadHandler = new DownloadHandlerBuffer();
         www.SetRequestHeader("Content-Type", "application/json");
 
+        // 요청 전송
         yield return www.SendWebRequest();
 
+        // 응답 처리
         if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
+            // 연결 오류 시 응답 처리
             loginFail.gameObject.SetActive(true);
             loginFail.text = "Connection Error";
             pwInput.text = "";
@@ -81,12 +88,14 @@ public class Login : MonoBehaviour {
         }
         else
         {
+            // 정상 연결되었을 시 응답 처리
             Debug.Log("Response Code: " + www.responseCode);
             Debug.Log("Response: " + www.downloadHandler.text);
             if (www.responseCode == 200 && www.downloadHandler.text == "true")
             {
                 loginFail.gameObject.SetActive(false);
-                SaveEncryptedData("userID", idInput.text);
+                // 아이디 암호화해서 로컬 저장하는 사용자 지정 함수 (점수 데이터 전송할 때 같이 전송하기 위함)
+                SaveEncryptedData("userID", idInput.text); 
 
                 loginPanel.SetActive(false);
                 rank.SetActive(true);
