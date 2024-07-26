@@ -27,14 +27,19 @@ public class RhythmScore : MonoBehaviour {
     }
 
     public void NodeHit(int addScore) {
-        float finScore;
 
         score += addScore;
         allNodeCount--;
 
         if (allNodeCount == 0) {
-            finScore = score * (100.0F / (allNode * 2.0F));
-            Clear.GetComponent<GameClear>().Clear((int)(finScore));
+            Invoke("ScoreUp", 3.0f);
         }
+    }
+
+    void ScoreUp()
+    {
+        float finScore;
+        finScore = score * (100.0F / (allNode * 2.0F));
+        Clear.GetComponent<GameClear>().Clear((int)(finScore));
     }
 }
