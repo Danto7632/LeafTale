@@ -143,7 +143,7 @@ public class ScrollStage : MonoBehaviour {
 
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
-    }
+    } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
 
     bool IsPointingPose(Hand hand) {
         foreach (Finger finger in hand.Fingers) {

@@ -250,43 +250,65 @@ public class catMove : MonoBehaviour {
     }
 
     void catMovingUPDOWN(Frame frame) {
+        // 프레임에 있는 모든 손에 대해 반복문 실행
         foreach (Hand hand in frame.Hands) {
+            // 손바닥의 현재 위치를 3D 좌표로 저장
             Vector3 currentHandPosition = hand.PalmPosition;
+            // 왼손인지 오른손인지에 따라 이전 손바닥 위치를 설정
             Vector3 previousHandPosition = hand.IsLeft ? previousLeftHandPosition : previousRightHandPosition;
 
+            // 이전 손 위치가 초기화된 상태가 아닌 경우
             if (previousHandPosition != Vector3.zero) {
+                // 현재 손 위치와 이전 손 위치의 차이를 통해 이동 방향 계산
                 Vector3 handDirection = (currentHandPosition - previousHandPosition).normalized;
+                // 손의 속도를 계산
                 float handSpeed = hand.PalmVelocity.magnitude;
 
+                // 손의 속도가 일정 속도 이상이고 박수 탐지가 되지 않은 경우
                 if (handSpeed > 5f && !isClapDetected) {
+                    // 왼손이 활성화된 상태인 경우
                     if (hand.IsLeft && leftOn) {
+                        // 수직 방향의 움직임이 수평 방향보다 큰 경우
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
+                            // 손이 위쪽으로 움직인 경우
                             if (handDirection.y > 0) {
+                                // 오른쪽을 향하고 있고 움직임이 허용된 경우
                                 if(isFacingRight && isMoveAllow) rb.velocity = new Vector2(accelForce, rb.velocity.y);
+                                // 왼쪽을 향하고 있고 움직임이 허용된 경우
                                 else if(!isFacingRight && isMoveAllow) rb.velocity = new Vector2(-accelForce, rb.velocity.y);
 
+                                // 위아래 움직임 카운트를 증가시킴
                                 UDCount++;
                             }
                         }
 
+                        // 왼손 비활성화
                         leftOn = false;
                     }
 
+                    // 오른손이 활성화된 상태인 경우
                     if (hand.IsRight && !leftOn) {
+                        // 수직 방향의 움직임이 수평 방향보다 큰 경우
                         if (Mathf.Abs(handDirection.y) > Mathf.Abs(handDirection.x)) {
+                            // 손이 위쪽으로 움직인 경우
                             if (handDirection.y > 0) {
+                                // 오른쪽을 향하고 있고 움직임이 허용된 경우
                                 if(isFacingRight && isMoveAllow) rb.velocity = new Vector2(accelForce, rb.velocity.y);
+                                // 왼쪽을 향하고 있고 움직임이 허용된 경우
                                 else if(!isFacingRight && isMoveAllow) rb.velocity = new Vector2(-accelForce, rb.velocity.y);
                             }
 
+                            // 위아래 움직임 카운트를 증가시킴
                             UDCount++;
                         }
 
+                        // 오른손 비활성화
                         leftOn = true;
                     }
                 }
             }
 
+            // 이전 손 위치가 초기화된 상태인 경우 현재 손 위치로 설정
             else {
                 if (hand.IsLeft) previousLeftHandPosition = currentHandPosition;
                 else if (hand.IsRight) previousRightHandPosition = currentHandPosition;
@@ -296,51 +318,70 @@ public class catMove : MonoBehaviour {
     }
 
     void catJumpFlip(Frame frame) {
+        // 프레임에 있는 모든 손에 대해 반복문 실행
         foreach (Hand hand in frame.Hands) {
+            // 왼손일 경우 실행
             if (hand.IsLeft) {
+                // 손바닥의 법선을 3D 좌표로 저장
                 Vector3 palmNormal = hand.PalmNormal;
 
+                // 객체가 땅에 있고 움직임이 허용된 경우
                 if (isGrounded && isMoveAllow) {
+                    // 손바닥이 위를 향하고 있고 손이 뒤집히지 않은 경우
                     if (palmNormal.y > 0.5f && !isHandFlipped) {
+                        // 객체에게 점프 속도를 부여
                         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                        isHandFlipped = true;
-                        FlipCount++;
-                    }    
+                        isHandFlipped = true; // 손이 뒤집힌 상태로 설정
+                        FlipCount++; // 뒤집기 횟수 증가
+                    }
+                    // 손바닥이 아래를 향하고 있고 손이 뒤집힌 상태인 경우
                     else if (palmNormal.y < -0.5f && isHandFlipped) {
-                        isHandFlipped = false;
+                        isHandFlipped = false; // 손이 뒤집히지 않은 상태로 설정
                     }
                 }
 
+                // 왼손을 발견하면 반복문 종료
                 break;
             }
         }
     }
 
     void catFlipClap(Frame frame) {
-        Hand leftHand = null;
-        Hand rightHand = null;
+        Hand leftHand = null; // 왼손을 저장할 변수 초기화
+        Hand rightHand = null; // 오른손을 저장할 변수 초기화
 
+        // 프레임에 있는 모든 손에 대해 반복문 실행
         foreach (Hand hand in frame.Hands) {
+            // 왼손일 경우 leftHand 변수에 저장
             if (hand.IsLeft) leftHand = hand;
+            // 오른손일 경우 rightHand 변수에 저장
             else if (hand.IsRight) rightHand = hand;
         }
 
+        // 왼손과 오른손이 모두 존재할 경우
         if (leftHand != null && rightHand != null) {
+            // 왼손과 오른손의 손바닥 위치를 3D 좌표로 저장
             Vector3 leftPalmPosition = leftHand.PalmPosition;
             Vector3 rightPalmPosition = rightHand.PalmPosition;
 
-            float clapDistanceThreshold = 0.5f;
+            float clapDistanceThreshold = 0.5f; // 박수 인식 거리 임계값
+            // 왼손과 오른손 사이의 거리를 계산
             float handsDistance = Vector3.Distance(leftPalmPosition, rightPalmPosition);
 
+            // 손 사이의 거리가 임계값보다 작고 박수가 인식되지 않은 경우
             if (handsDistance < clapDistanceThreshold && !isClapDetected) {
+                // 오른쪽을 향하고 있고 움직임이 허용된 경우
                 if (isFacingRight && isMoveAllow) {
+                    // 객체의 스케일을 반전시켜 왼쪽으로 방향을 변경
                     newScale = transform.localScale;
                     newScale.x *= -1;
 
                     transform.localScale = newScale;
                     isFacingRight = false;
                 }
+                // 왼쪽을 향하고 있고 움직임이 허용된 경우
                 else if (!isFacingRight && isMoveAllow) {
+                    // 객체의 스케일을 반전시켜 오른쪽으로 방향을 변경
                     newScale = transform.localScale;
                     newScale.x *= -1;
 
@@ -348,13 +389,15 @@ public class catMove : MonoBehaviour {
                     isFacingRight = true;
                 }
 
+                // 객체의 수평 속도를 0으로 설정하여 정지
                 rb.velocity = new Vector2(0, rb.velocity.y);
-                ClapCount++;
+                ClapCount++; // 박수 횟수 증가
 
-                isClapDetected = true;
+                isClapDetected = true; // 박수 인식 상태로 설정
             }
+            // 손 사이의 거리가 임계값보다 크고 박수가 인식된 상태인 경우
             else if (handsDistance >= clapDistanceThreshold && isClapDetected) {
-                isClapDetected = false;
+                isClapDetected = false; // 박수 인식 상태 해제
             }
         }
     }

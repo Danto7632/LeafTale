@@ -83,58 +83,64 @@ public class LeapMotionController : MonoBehaviour {
     }
 
     void DetectLeftHandPose(Hand hand) {
-        if (hand.GrabStrength > 0.9f) {
+        if (IsFist(hand)) {
             isFistL = true;
 
             isScissorsL = false;
             isPalmL = false;
-        }
+        } //주먹 손동작을 하고 있는지 확인
         else {
             if(!hand.Fingers[0].IsExtended && !hand.Fingers[3].IsExtended && !hand.Fingers[4].IsExtended && 
-                hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended) {
+                hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended) { //손가락중 검지, 중지가 펴져있는지 확인
                 isScissorsL = true;
 
                 isFistL = false;
-                isPalmL = false;
-            }
-            else if(hand.Fingers[0].IsExtended && hand.Fingers[3].IsExtended && hand.Fingers[4].IsExtended) {
+                isPalmL = false; 
+            } //가위 손동작을 하고 있는지 확인
+            else if(hand.Fingers[0].IsExtended && hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended && 
+                hand.Fingers[3].IsExtended && hand.Fingers[4].IsExtended) { //손가락이 전부 펴져있는지 확인
                 isPalmL = true;
 
                 isScissorsL = false;
                 isFistL = false;
-            }
+            } //보 손동작을 하고 있는지 확인
         }
 
         if (isFistL) tileL.getLeap("ROCK");
         if (isPalmL) tileL.getLeap("PAPER"); 
-        if (isScissorsL) tileL.getLeap("SCISSOR");
+        if (isScissorsL) tileL.getLeap("SCISSOR"); //어느 손동작인지 따라 함수를 실행
     }
 
     void DetectRightHandPose(Hand hand) {
-        if (hand.GrabStrength > 0.9f) {
+        if (IsFist(hand)) {
             isFistR = true;
 
             isScissorsR = false;
             isPalmR = false;
-        }
+        } //주먹 손동작을 하고 있는지 확인
         else {
             if(!hand.Fingers[0].IsExtended && !hand.Fingers[3].IsExtended && !hand.Fingers[4].IsExtended && 
-                hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended) {
+                hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended) { //손가락중 검지, 중지가 펴져있는지 확인
                 isScissorsR = true;
 
                 isFistR = false;
                 isPalmR = false;
-            }
-            else if(hand.Fingers[0].IsExtended && hand.Fingers[3].IsExtended && hand.Fingers[4].IsExtended) {
+            } //가위 손동작을 하고 있는지 확인
+            else if(hand.Fingers[0].IsExtended && hand.Fingers[1].IsExtended && hand.Fingers[2].IsExtended && 
+                hand.Fingers[3].IsExtended && hand.Fingers[4].IsExtended) { //손가락이 전부 펴져있는지 확인
                 isPalmR = true;
 
                 isScissorsR = false;
                 isFistR = false;
-            }
+            } //보 손동작을 하고 있는지 확인
         }
 
         if (isFistR) tileR.getLeap("ROCK");
         if (isPalmR) tileR.getLeap("PAPER");
-        if (isScissorsR) tileR.getLeap("SCISSOR");
+        if (isScissorsR) tileR.getLeap("SCISSOR"); //어느 손동작인지 따라 함수를 실행
     }
+
+    bool IsFist(Hand hand) {
+        return hand.GrabStrength > 0.9f;
+    } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
 }

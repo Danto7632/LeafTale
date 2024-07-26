@@ -201,20 +201,20 @@ public class broomMove : MonoBehaviour {
     #region LeapMotion
 
     void OnUpdateFrame(Frame frame) {
-        if (frame.Hands.Count > 0) {
-            hand = frame.Hands[0];
+        if (frame.Hands.Count > 0) { //사용자가 손을 인식하고 있는지
+            hand = frame.Hands[0]; // 인식한 손 중 맨 처음에 인식한 손 하나를 hand변수에 참조
 
-            if (IsPointingPose(hand)) {
+            if (IsPointingPose(hand)) { //인식한 손이 가르키는 손동작을 하고 있는지 확인
                 if (!isPointing) {
                     pointingStartTime = Time.time;
 
                     isPointing = true;
-                }
+                } //특정 손동작을 인식한 시간을 저장
                 else {
                     elapsedTime = Time.time - pointingStartTime;
                     StartBar.ChangeHealthBarAmount(elapsedTime / 3);
 
-                    if (elapsedTime > 3f) {
+                    if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
                         leapOnText.enabled = false;
                         explainPanel.gameObject.SetActive(false);
                         explainText.enabled = false;
@@ -244,7 +244,7 @@ public class broomMove : MonoBehaviour {
             explainText.enabled = false;
 
             StartCoroutine(RunGame());
-        }
+        } //립모션이 아닌 키보드로 플레이하는 경우 P키를 눌러 시작
     }
 
     IEnumerator RunGame() {
@@ -259,30 +259,30 @@ public class broomMove : MonoBehaviour {
     }
 
     void DetectHandTilt(Hand hand) {
-        if (isLeapOn && isMoveAllow && !isHit) {
-            Vector3 palmNormal = hand.PalmNormal;
+        if (isLeapOn && isMoveAllow && !isHit) { //립모션에 손이 인식되어 있는지 확인, 게임 속 플레이어가 움직일 수 있는 상태인지 확인
+            Vector3 palmNormal = hand.PalmNormal; //손바닥이 어느 방향으로 위치해있는지 3D좌표로 저장
 
-            if (palmNormal.x > 0.3f || palmNormal.x < -0.3f) {
+            if (palmNormal.x > 0.3f || palmNormal.x < -0.3f) { //손바닥의 좌우 기울기를 확인하여 특정 각도 이상 넘어가면 각도의 값을 저장
                 horizonLeapSpeed = palmNormal.x;
                 totalWristMovement += Math.Abs(palmNormal.x) / 100f;
-                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}";
+                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}"; //기울기에 따라 점수가 추가
             }
             else {
                 horizonLeapSpeed = 0f;
             }
 
 
-            if (palmNormal.z > 0.3f || palmNormal.z < -0.3f) {
+            if (palmNormal.z > 0.3f || palmNormal.z < -0.3f) { //손바닥의 상하 기울기를 확인하여 특정 각도 이상 넘어가면 각도의 값을 저장
                 verticalLeapSpeed = palmNormal.z;
                 totalWristMovement += Math.Abs(palmNormal.z) / 100f;
-                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}";
+                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}"; //기울기에 따라 점수가 추가
             }
             else {
                 verticalLeapSpeed = 0f;
             }
 
             moveDirection = new Vector2(horizonLeapSpeed, verticalLeapSpeed);
-            rb.velocity = new Vector2(moveDirection.x * moveSpeed * -1f, moveDirection.y * moveSpeed * -1f);
+            rb.velocity = new Vector2(moveDirection.x * moveSpeed * -1f, moveDirection.y * moveSpeed * -1f); //기울기에 따라 게임 속 플레이어를 이동
 
             Vector2 clampedPosition = rb.position;
 
@@ -298,16 +298,16 @@ public class broomMove : MonoBehaviour {
     }
 
     bool IsPointingPose(Hand hand) {
-        foreach (Finger finger in hand.Fingers) {
+        foreach (Finger finger in hand.Fingers) { //손의 손가락을 모두 가져와 반복문 실행
             if (finger.Type == Finger.FingerType.TYPE_INDEX) {
                 if (!finger.IsExtended) return false;
-            }
+            } //검지가 펴져있지 않다면 false를 반환
             else {
                 if (finger.IsExtended) return false;
-            }
+            } //검지를 제외한 다른 손가락이 펴져있다면 false를 반환
         }
         
-        return true;
+        return true; //검지만 펴져있다면 true를 반환
     }
 
     #endregion
