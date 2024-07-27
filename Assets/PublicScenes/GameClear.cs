@@ -94,6 +94,9 @@ public class GameClear : MonoBehaviour {
 
         //StartCoroutine(ScoreSave(current_gameid, score));
 
+        string dateKey = "HighScoreDate_" + current_gameid;
+        string scoreKey = "HighScore_" + current_gameid;
+
         string savedDateStr = PlayerPrefs.GetString(dateKey, "");
         int highScore = PlayerPrefs.GetInt(scoreKey, 0);
 
