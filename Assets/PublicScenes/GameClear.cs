@@ -93,6 +93,14 @@ public class GameClear : MonoBehaviour {
             current_gameid = 3; // �ڷ����̳� ���԰��� �ٲ� �� ����
 
         //StartCoroutine(ScoreSave(current_gameid, score));
+
+        int highScore = PlayerPrefs.GetInt("HighScore_" + current_gameid, 0);
+
+        if(score > highScore) {
+            PlayerPrefs.SetInt("HighScore_" + current_gameid, score);
+
+            StartCoroutine(ScoreSave(current_gameid, score));
+        }
     }
 
     IEnumerator ScoreSave(int cgameId, int score) // gameId �ڷ��� �ٲ� ����
