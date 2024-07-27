@@ -44,7 +44,7 @@ public class GameClear : MonoBehaviour {
 
         clear = false;
 
-        url = "http://43.203.0.69:8080/api/gamePMData";
+        url = "http://43.203.0.69:8080/api/Pmdata/score";
 
         scene = SceneManager.GetActiveScene();
 
@@ -94,12 +94,21 @@ public class GameClear : MonoBehaviour {
 
         //StartCoroutine(ScoreSave(current_gameid, score));
 
-        int highScore = PlayerPrefs.GetInt("HighScore_" + current_gameid, 0);
+        string savedDateStr = PlayerPrefs.GetString(dateKey, "");
+        int highScore = PlayerPrefs.GetInt(scoreKey, 0);
 
-        if(score > highScore) {
-            PlayerPrefs.SetInt("HighScore_" + current_gameid, score);
-
-            StartCoroutine(ScoreSave(current_gameid, score));
+        DateTime savedDate;
+        if (DateTime.TryParse(savedDateStr, out savedDate) && savedDate.Date == DateTime.Now.Date) {
+            if (score > highScore) {
+                PlayerPrefs.SetInt(scoreKey, score);
+                PlayerPrefs.SetString(dateKey, DateTime.Now.ToString());
+                StartCoroutine(ScoreSave(current_gameid, score));
+            }
+            else {
+                PlayerPrefs.SetInt(scoreKey, score);
+                PlayerPrefs.SetString(dateKey, DateTime.Now.ToString());
+                StartCoroutine(ScoreSave(current_gameid, score));
+            }
         }
     }
 
