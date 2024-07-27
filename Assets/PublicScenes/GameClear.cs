@@ -94,8 +94,10 @@ public class GameClear : MonoBehaviour {
 
         //StartCoroutine(ScoreSave(current_gameid, score));
 
-        string dateKey = "HighScoreDate_" + current_gameid;
-        string scoreKey = "HighScore_" + current_gameid;
+        string playerId = Login.LoadEncryptedData("userID");
+
+        string dateKey = "HighScoreDate_" + current_gameid + "_" + playerId;
+        string scoreKey = "HighScore_" + current_gameid + "_" + playerId;
 
         string savedDateStr = PlayerPrefs.GetString(dateKey, "");
         int highScore = PlayerPrefs.GetInt(scoreKey, 0);
@@ -105,17 +107,17 @@ public class GameClear : MonoBehaviour {
             if (score > highScore) {
                 PlayerPrefs.SetInt(scoreKey, score);
                 PlayerPrefs.SetString(dateKey, DateTime.Now.ToString());
-                StartCoroutine(ScoreSave(current_gameid, score));
             }
-            else {
-                PlayerPrefs.SetInt(scoreKey, score);
-                PlayerPrefs.SetString(dateKey, DateTime.Now.ToString());
-                StartCoroutine(ScoreSave(current_gameid, score));
-            }
+        }   
+        else {
+            PlayerPrefs.SetInt(scoreKey, score);
+            PlayerPrefs.SetString(dateKey, DateTime.Now.ToString());
         }
+
+        StartCoroutine(ScoreSave(current_gameid, playerId, score));
     }
 
-    IEnumerator ScoreSave(int cgameId, int score) // gameId �ڷ��� �ٲ� ����
+    IEnumerator ScoreSave(int cgameId, string playerId, int score) // gameId �ڷ��� �ٲ� ����
     {
         var scoreData = new ScoreData
         {
