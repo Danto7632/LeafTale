@@ -9,14 +9,12 @@ public class NewBehaviourScript : MonoBehaviour {
 
     public int startIndex;
     public int endIndex;
-    public float speed;
+    public float speed = 10;
     public float viewHeight;
 
 
     public void Awake() {
         broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
-
-        speed = 10;
         viewHeight = 22.0f;
     }
 
