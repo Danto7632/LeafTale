@@ -11,6 +11,7 @@ public class NewBehaviourScript : MonoBehaviour {
     public int endIndex;
     public float speed = 10;
     public float viewHeight;
+    
 
 
     public void Awake() {
@@ -18,22 +19,37 @@ public class NewBehaviourScript : MonoBehaviour {
         viewHeight = 22.0f;
     }
 
+    public void Start()
+    {
+        StartCoroutine("BackMove");
+    }
+
     void Update() {
-        Vector3 curPos = transform.position;
-        Vector3 nextPos = Vector3.down * speed * Time.deltaTime;
+        
+    }
 
-        transform.position = curPos + nextPos;
+    IEnumerator BackMove()
+    {
+        while (true)
+        {
+            Vector3 curPos = transform.position;
+            Vector3 nextPos = Vector3.down * speed * Time.deltaTime;
 
-        if (sprites[endIndex].position.y < viewHeight * (-1) && !broomStatus.isGameOver) {
-            Vector3 backSpritePos = sprites[startIndex].localPosition;
-            Vector3 frontSpritePos = sprites[endIndex].localPosition;
+            transform.position = curPos + nextPos;
 
-            sprites[endIndex].transform.localPosition = backSpritePos + Vector3.up * 31.3f;
+            if (sprites[endIndex].position.y < viewHeight * (-1) && !broomStatus.isGameClear)
+            {
+                Vector3 backSpritePos = sprites[startIndex].localPosition;
+                Vector3 frontSpritePos = sprites[endIndex].localPosition;
 
-            int startIndexSave = startIndex;
+                sprites[endIndex].transform.localPosition = backSpritePos + Vector3.up * 31.3f;
 
-            startIndex = endIndex;
-            endIndex = startIndexSave;
+                int startIndexSave = startIndex;
+
+                startIndex = endIndex;
+                endIndex = startIndexSave;
+            }
+            yield return null;
         }
     }
 }
