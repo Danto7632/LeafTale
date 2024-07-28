@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RhythmScore : MonoBehaviour {
+public class RhythmScore : MonoBehaviour
+{
     public GameObject LeftNode;
     public GameObject RightNode;
     public GameObject Clear;
@@ -13,25 +14,44 @@ public class RhythmScore : MonoBehaviour {
     public int allNode;
     public int score;
 
-    void Start() {
+    private PatternSpawner patternSpawner;
+
+    void Start()
+    {
         LeftNode = GameObject.Find("LeftNode");
         RightNode = GameObject.Find("RightNode");
         Clear = GameObject.Find("GameClear");
 
-        leftNodeCount = LeftNode.transform.childCount;
-        rightNodeCount = RightNode.transform.childCount;
+        patternSpawner = GameObject.Find("PatternSpawner").GetComponent<PatternSpawner>();
+
+        leftNodeCount = CountValidNodes(patternSpawner.LeftPattern);
+        rightNodeCount = CountValidNodes(patternSpawner.RightPattern);
 
         allNodeCount = leftNodeCount + rightNodeCount;
         allNode = allNodeCount;
         score = 0;
     }
 
-    public void NodeHit(int addScore) {
+    int CountValidNodes(List<int> pattern)
+    {
+        int count = 0;
+        foreach (int value in pattern)
+        {
+            if (value != 0)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 
+    public void NodeHit(int addScore)
+    {
         score += addScore;
         allNodeCount--;
 
-        if (allNodeCount == 0) {
+        if (allNodeCount == 0)
+        {
             Invoke("ScoreUp", 3.0f);
         }
     }
