@@ -49,6 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theCombo: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  instAnimator:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   rockPrefab: {fileID: 7279232708595351897}
   paperPrefab: {fileID: 8870292744352799910}
   scissorPrefab: {fileID: 4290349080651238428}
