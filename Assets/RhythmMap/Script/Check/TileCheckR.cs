@@ -5,6 +5,8 @@ using TMPro;
 
 public class TileCheckR : MonoBehaviour {
     public ComboManager theCombo;
+    public Animator playerAnimator;
+    public Animator[] instAnimator = new Animator[3];
 
     public GameObject rockPrefab;
     public GameObject paperPrefab;
@@ -91,6 +93,19 @@ public class TileCheckR : MonoBehaviour {
                         score.GetComponent<RhythmScore>().NodeHit(1);
                         Destroy(isTileCheck[i].collider.gameObject);
                         break;
+                }
+
+                if (layerName == "RockTile") {
+                    playerAnimator.SetTrigger("PlayerCello");
+                    instAnimator[0].SetTrigger("Cello");
+                }
+                else if (layerName == "ScissorsTile") {
+                    playerAnimator.SetTrigger("PlayerTimpani");
+                    instAnimator[1].SetTrigger("Timpani");
+                }
+                else {
+                    playerAnimator.SetTrigger("PlayerPiano");
+                    instAnimator[2].SetTrigger("Piano");
                 }
             }
             else if (isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
