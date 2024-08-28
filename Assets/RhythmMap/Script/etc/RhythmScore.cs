@@ -30,6 +30,9 @@ public class RhythmScore : MonoBehaviour
         allNodeCount = leftNodeCount + rightNodeCount;
         allNode = allNodeCount;
         score = 0;
+        
+        allNode = 18;
+        allNodeCount = 18;
     }
 
     int CountValidNodes(List<int> pattern)

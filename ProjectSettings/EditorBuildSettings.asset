@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageSelect.unity
     guid: 8a20fec7ee1c39e4ba30308da9275a53
+  - enabled: 1
+    path: Assets/Scenes/HandSample.unity
+    guid: ceeef5f347b10844f900c423c790fd7d
   m_configObjects: {}
