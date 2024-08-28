@@ -102,7 +102,7 @@ public class GameClear : MonoBehaviour {
                     elapsedTime = Time.time - pointingStartTime;
 
                     if (elapsedTime > 3f && clear) {
-                       //SceneManager.LoadScene("StageSelect");
+                        // SceneManager.LoadScene("StageSelect");
                     }
                 }
             }
