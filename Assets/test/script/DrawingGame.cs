@@ -93,41 +93,35 @@ public class DrawingGame : MonoBehaviour
 
     private Vector3[] CreateSquare(Vector3 center, float size)
     {
-        Vector3[] points = new Vector3[5]; // 5개의 점: 4개의 코너 + 마지막 점으로 처음 점과 연결
+        Vector3[] points = new Vector3[5]; // +1 to close the square
         float halfSize = size / 2;
-
         points[0] = new Vector3(-halfSize, -halfSize, 0) + center; // Bottom-left
         points[1] = new Vector3(halfSize, -halfSize, 0) + center;  // Bottom-right
         points[2] = new Vector3(halfSize, halfSize, 0) + center;   // Top-right
         points[3] = new Vector3(-halfSize, halfSize, 0) + center;   // Top-left
-        points[4] = points[0]; // Closing the loop
-
+        points[4] = points[0]; // Close the square
         return points;
     }
 
     private Vector3[] CreateStar(Vector3 center, float size, int points)
     {
-        Vector3[] starPoints = new Vector3[points * 2 + 1]; // 각 점 사이의 점 포함
+        Vector3[] starPoints = new Vector3[points * 2 + 1]; // +1 to close the star
         float angleStep = Mathf.PI * 2 / points;
-        float innerRadius = size / 2;
-        float outerRadius = size;
+        float innerSize = size * 0.5f; // 내측 별의 크기 (조정 가능)
 
         for (int i = 0; i < points; i++)
         {
             float angle = i * angleStep;
-            float x = Mathf.Cos(angle);
-            float y = Mathf.Sin(angle);
-
-            // Outer points
-            starPoints[i * 2] = new Vector3(x * outerRadius, y * outerRadius, 0) + center;
-
+            float outerX = Mathf.Cos(angle) * size;
+            float outerY = Mathf.Sin(angle) * size;
+            starPoints[i * 2] = new Vector3(outerX, outerY, 0) + center; // Outer points
+            
             // Inner points
-            angle += angleStep / 2; // Move to the inner points
-            x = Mathf.Cos(angle) * innerRadius;
-            y = Mathf.Sin(angle) * innerRadius;
-            starPoints[i * 2 + 1] = new Vector3(x, y, 0) + center;
+            angle += angleStep / 2;
+            float innerX = Mathf.Cos(angle) * innerSize;
+            float innerY = Mathf.Sin(angle) * innerSize;
+            starPoints[i * 2 + 1] = new Vector3(innerX, innerY, 0) + center; // Inner points
         }
-
         starPoints[points * 2] = starPoints[0]; // Close the star
         return starPoints;
     }
