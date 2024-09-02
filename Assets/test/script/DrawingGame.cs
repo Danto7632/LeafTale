@@ -247,7 +247,7 @@ public class DrawingGame : MonoBehaviour
         {
             // 손이 감지되지 않을 때 시각화 비활성화
             handVisualizer.SetActive(false);
-            isInitialPositionSet = false; // 손이 사라지면 초기 위치 재설정
+            // isInitialPositionSet 재설정 코드 제거
         }
     }
 
