@@ -46,6 +46,10 @@ public class DrawingGame : MonoBehaviour
             float accuracy = CalculateAccuracy();
             resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
         }
+
+        if(Input.GetKeyDown(KeyCode.P)) {
+            DrawPerfectShape();
+        }
     }
 
     public void SetReferenceShape(Shape shape)
@@ -68,6 +72,7 @@ public class DrawingGame : MonoBehaviour
     {
         referenceShape.positionCount = shapePoints.Length;
         referenceShape.SetPositions(shapePoints);
+        referenceShape.loop = true; // 도형의 끝점을 시작점과 연결
         referenceShape.gameObject.SetActive(true); // 도형이 보이도록 설정
     }
 
@@ -129,29 +134,48 @@ public class DrawingGame : MonoBehaviour
     private float CalculateAccuracy()
     {
         float totalDistance = 0f;
-        int pointCount = playerPoints.Count;
-        
-        if (pointCount == 0)
-            return 0f; // 그린 점이 없을 경우 정확도 0
-        
-        for (int i = 0; i < pointCount; i++)
+
+        // 참조 도형의 점 개수만큼 반복
+        for (int i = 0; i < referenceShape.positionCount; i++)
         {
             float minDistance = float.MaxValue;
-            
-            for (int j = 0; j < referenceShape.positionCount; j++)
+
+            // 참조 도형의 각 점과 플레이어가 그린 점들 중 가장 가까운 점을 비교
+            for (int j = 0; j < playerPoints.Count; j++)
             {
-                float distance = Vector3.Distance(playerPoints[i], referenceShape.GetPosition(j));
+                float distance = Vector2.Distance(playerPoints[j], referenceShape.GetPosition(i));
                 if (distance < minDistance)
                 {
                     minDistance = distance;
                 }
             }
-            
             totalDistance += minDistance;
         }
 
-        float averageDistance = totalDistance / pointCount;
-        float maxPossibleDistance = 1f; // 조정 가능한 임계값, 필요에 따라 수정 가능
+        float averageDistance = totalDistance / referenceShape.positionCount;
+        float maxPossibleDistance = 2.5f; // 조정 가능한 임계값
+
+        Debug.Log(playerPoints.Count);
+
         return Mathf.Clamp01(1f - averageDistance / maxPossibleDistance);
+    }
+
+    public void DrawPerfectShape()
+    {
+        // 참조 도형의 점들과 동일한 점들을 플레이어의 그린 점들로 설정
+        playerPoints.Clear();
+        for (int i = 0; i < referenceShape.positionCount; i++)
+        {
+            Vector3 refPoint = referenceShape.GetPosition(i);
+            playerPoints.Add(new Vector2(refPoint.x, refPoint.y));
+        }
+
+        // LineRenderer 업데이트
+        playerDrawing.positionCount = playerPoints.Count;
+        playerDrawing.SetPositions(playerPoints.ConvertAll(p => new Vector3(p.x, p.y, 0)).ToArray());
+
+        // 정확도 100% 표시
+        float accuracy = CalculateAccuracy();
+        resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
     }
 }
