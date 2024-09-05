@@ -1,5 +1,4 @@
-public enum Shape
-{
+public enum Shape {
     Circle,
     Square,
     Star
