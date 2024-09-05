@@ -51,8 +51,8 @@ public class PatternSpawner : MonoBehaviour
         };
 
         // 패턴 초기화 (테스트용)
-        RightPattern = new List<int> { 1, 0, 3, 2, 3 };
-        LeftPattern = new List<int> { 3, 1, 2, 0, 3 };
+        RightPattern = new List<int> { 1, 0, 3, 2, 3, 0, 3, 3, 2, 1, 0, 1};
+        LeftPattern = new List<int> { 3, 1, 2, 0, 3, 2, 2, 1, 3, 2, 1, 0 };
 
         // 오브젝트 한 번에 생성
         SpawnObjects(RightPattern, RightNode.transform, ref rightSpawnPosition, 5, rightPrefabNames);
