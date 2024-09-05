@@ -140,7 +140,7 @@ public class Login : MonoBehaviour {
     IEnumerator LoadSceneAfterDelay(string sceneName, float delay) {
         pressStart.SetActive(false);
 
-        yield return StartCoroutine(anima(delay / 3, -3f, -1f, 4f));
+        yield return StartCoroutine(anima(delay / 3, -1f, -1f, 4f));
         yield return StartCoroutine(anima(delay / 3, 2f, 1f, 3f));
         yield return StartCoroutine(anima(delay / 3, -1f, -1f, 2f));
 
