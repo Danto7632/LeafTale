@@ -19,6 +19,8 @@ TagManager:
   - tileCheckL
   - tileCheckR
   - PlusTimer
+  - soil
+  - targetV
   layers:
   - Default
   - TransparentFX
