@@ -105,6 +105,7 @@ public class DrawingGame : MonoBehaviour
                 resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
                 if(accuracy * 100f >= 90f) {
                     shapeSelector.nextStage(false);
+                    Debug.Log("no");
                     maxScore = 100f;
                 }
             }
@@ -188,6 +189,7 @@ public class DrawingGame : MonoBehaviour
                     resultText.gameObject.SetActive(true);
                     resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
                     if(accuracy * 100f >= 90f) {
+                        Debug.Log("Yes");
                         shapeSelector.nextStage(false);
                         maxScore = 100f;
                     }

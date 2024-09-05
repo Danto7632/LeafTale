@@ -8,7 +8,6 @@ public class ShapeSelector : MonoBehaviour {
 
     public TMP_Text startTimer;
     public TMP_Text gameTimer;
-    public Canvas canvas;
 
     public LineRenderer referenceShape;
     public LineRenderer playerDrawing;
@@ -17,6 +16,8 @@ public class ShapeSelector : MonoBehaviour {
 
     public bool isPlaying;
     public bool isNext;
+
+    private Coroutine stageTimerCoroutine;
 
     private void Start() {
         drawingGame = GameObject.Find("DrawingGame").GetComponent<DrawingGame>();
@@ -38,24 +39,31 @@ public class ShapeSelector : MonoBehaviour {
     }
 
     public void nextStage(bool isFirst) {
-        if(isFirst) {
+        // 중복 실행 방지
+        if (stageTimerCoroutine != null) {
+            StopCoroutine(stageTimerCoroutine);
+            stageTimerCoroutine = null;
+        }
+
+        isPlaying = false;
+        if (isFirst) {
             StartCoroutine(SelectShape((Shape)shapeCount));
             StartCoroutine(timer());
 
             shapeCount++;
         }
         else {
-            if(shapeCount < 3) {
+            if (shapeCount < 3) {
                 drawingGame.resultText.text = "Complete!";
                 drawingGame.sumScore += drawingGame.maxScore;
                 drawingGame.accuracy = 0f;
                 StartCoroutine(delayStage());
             }
             else {
-                isPlaying = false;
                 referenceShape.gameObject.SetActive(false);
                 playerDrawing.gameObject.SetActive(false);
                 startTimer.gameObject.SetActive(true);
+                gameTimer.gameObject.SetActive(false);
                 drawingGame.resultText.gameObject.SetActive(false);
                 drawingGame.playerPoints.Clear();
                 drawingGame.playerDrawing.positionCount = 0;
@@ -66,7 +74,6 @@ public class ShapeSelector : MonoBehaviour {
     }
 
     IEnumerator delayStage() {
-        StopCoroutine(stageTimer());
         isPlaying = false;
 
         yield return new WaitForSeconds(2f);
@@ -75,13 +82,14 @@ public class ShapeSelector : MonoBehaviour {
         StartCoroutine(timer());
 
         shapeCount++;
-
     }
 
     IEnumerator SelectShape(Shape shape) {
+        Debug.Log("go");
         referenceShape.gameObject.SetActive(false);
         playerDrawing.gameObject.SetActive(false);
         startTimer.gameObject.SetActive(true);
+        gameTimer.gameObject.SetActive(false);
         drawingGame.resultText.gameObject.SetActive(false);
         drawingGame.playerPoints.Clear();
         drawingGame.playerDrawing.positionCount = 0;
@@ -90,10 +98,16 @@ public class ShapeSelector : MonoBehaviour {
 
         yield return new WaitForSeconds(3f);
 
-        StartCoroutine(stageTimer());
+        // 중복 실행 방지
+        if (stageTimerCoroutine != null) {
+            StopCoroutine(stageTimerCoroutine);
+        }
+
+        stageTimerCoroutine = StartCoroutine(stageTimer());
         referenceShape.gameObject.SetActive(true);
         playerDrawing.gameObject.SetActive(true);
         startTimer.gameObject.SetActive(false);
+        gameTimer.gameObject.SetActive(true);
 
         isPlaying = true;
 
@@ -110,7 +124,7 @@ public class ShapeSelector : MonoBehaviour {
         }
     }
 
-    IEnumerator stageTimer() {
+    public IEnumerator stageTimer() {
         drawingGame.countdownTimer = 30;
 
         while (drawingGame.countdownTimer >= 0) {
