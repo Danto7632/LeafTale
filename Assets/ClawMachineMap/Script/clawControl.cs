@@ -15,7 +15,7 @@ public class clawControl : MonoBehaviour
 
     void Awake()
     {
-        //powerBar = GameObject.Find("powerValue");
+        powerBar = GameObject.Find("powerValue");
     }
 
     void Start()
@@ -25,14 +25,12 @@ public class clawControl : MonoBehaviour
         machine = gameObject.GetComponent<Rigidbody2D>();
         clawsOpen = true;
         gameOver = false;
-
-        Debug.Log("clawControl ½ÇÇà");
     }
 
     // Update is called once per frame
     void Update()
     {
-        while (!gameOver)
+        if (!gameOver)
         {
             //down
             if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -93,6 +91,25 @@ public class clawControl : MonoBehaviour
             //        gameObject.transform.Translate(0, speed, 0);
             //    }
             //}
+            
+            if (!goDown)
+            {
+                if (gameObject.transform.position.y < 3.5f)
+                {
+                    gameObject.transform.Translate(0, speed - .005f, 0);
+                }
+            }
+            if (clawsOpen)
+            {
+                if (Lclaw.transform.eulerAngles.z > 300)
+                {
+                    Lclaw.transform.Rotate(0, 0, -0.5f);
+                }
+                if (Rclaw.transform.eulerAngles.z < 60)
+                {
+                    Rclaw.transform.Rotate(0, 0, 0.5f);
+                }
+            }
             if (goDown || goLeft || goRight || !clawsOpen)
             {
                 if (goDown)
@@ -104,13 +121,6 @@ public class clawControl : MonoBehaviour
                     else if (gameObject.transform.position.y > 3.0f)
                     {
                         gameObject.transform.Translate(0, -speed, 0);
-                    }
-                }
-                if (!goDown)
-                {
-                    if (gameObject.transform.position.y < 3.5f)
-                    {
-                        gameObject.transform.Translate(0, speed - .005f, 0);
                     }
                 }
                 if (goLeft)
@@ -131,17 +141,6 @@ public class clawControl : MonoBehaviour
                         gameObject.transform.Translate(speed, 0, 0);
                     }
                 }
-                if (clawsOpen)
-                {
-                    if (Lclaw.transform.eulerAngles.z > 300)
-                    {
-                        Lclaw.transform.Rotate(0, 0, -0.5f);
-                    }
-                    if (Rclaw.transform.eulerAngles.z < 60)
-                    {
-                        Rclaw.transform.Rotate(0, 0, 0.5f);
-                    }
-                }
                 if (!clawsOpen)
                 {
                     if (Lclaw.transform.eulerAngles.z < 353)
@@ -153,7 +152,7 @@ public class clawControl : MonoBehaviour
                         Rclaw.transform.Rotate(0, 0, -1f);
                     }
                 }
-                //powerBar.GetComponent<powerBar>().usePower();
+                powerBar.GetComponent<powerBar>().usePower();
             }
         }
     }
