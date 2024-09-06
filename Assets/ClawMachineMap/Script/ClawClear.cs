@@ -35,7 +35,7 @@ public class ClawClear : MonoBehaviour
         wvPoint = 20.0f;
         clearCount = 0;
 
-        //·£´ý Ã¤¼Ò »Ì±â 1~9
+        //ï¿½ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ ï¿½Ì±ï¿½ 1~9
         vNumber[0] = Random.Range(1, 10);
         vNumber[1] = Random.Range(1, 10);
         vNumber[2] = Random.Range(1, 10);
@@ -56,19 +56,19 @@ public class ClawClear : MonoBehaviour
             vNumber[2] = Random.Range(1, 10);
         }
 
-        //·£´ýÃ¤¼Ò ¼¼ÆÃ
+        //ï¿½ï¿½ï¿½ï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         for(int i = 0; i < 3; i++)
         {
             sVegetable = vegetables.transform.GetChild(vNumber[i] - 1).gameObject;
-            Debug.Log($"{i+1}¹øÂ° Ã¤¼Ò : {vNumber[i]},{sVegetable.name}"); //ÄÜ¼Ö
+            Debug.Log($"{i+1}ï¿½ï¿½Â° Ã¤ï¿½ï¿½ : {vNumber[i]},{sVegetable.name}"); //ï¿½Ü¼ï¿½
 
-            //ÀÌ¹ÌÁö ¼¼ÆÃ
+            //ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             sVegetable.tag = "targetV";
             targetVS = box.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();
             targetVS.sprite = sVegetable.GetComponent<SpriteRenderer>().sprite;
             targetVS.color = new Color(0.3f, 0.3f, 0.3f, 1);
         }
-        Debug.Log("ClawClear ½ÇÇà");
+        Debug.Log("ClawClear ï¿½ï¿½ï¿½ï¿½");
     }
 
     // Update is called once per frame
@@ -78,6 +78,9 @@ public class ClawClear : MonoBehaviour
         {
             clawScore = clawScore * 100.0f / 90.0f;
             Debug.Log(clawScore);
+            GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);
+            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
+            clawControl.gameOver = true;
             clearCount++;
         }
     }
@@ -91,7 +94,7 @@ public class ClawClear : MonoBehaviour
         objName = enterObj.name;
         if (enterObj.CompareTag("soil"))
         {
-            Debug.Log("ÈëÈë");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½");
             clawScore -= sPoint;
             if (clawScore < 0)
             {
@@ -100,7 +103,7 @@ public class ClawClear : MonoBehaviour
         }
         else if(enterObj.CompareTag("targetV"))
         {
-            Debug.Log($"{objName}Å¬¸®¾î");
+            Debug.Log($"{objName}Å¬ï¿½ï¿½ï¿½ï¿½");
             for(int i=0; i < 3; i++)
             {
                 if(int.Parse(objName.Substring(objName.Length - 1)) == vNumber[i])
@@ -113,7 +116,7 @@ public class ClawClear : MonoBehaviour
         }
         else
         {
-            Debug.Log("Àß¸øµÈ °úÀÏ");
+            Debug.Log("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
             clawScore -= wvPoint;
             if (clawScore < 0)
             {

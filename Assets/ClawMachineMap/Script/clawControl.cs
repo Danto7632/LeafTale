@@ -9,20 +9,24 @@ public class clawControl : MonoBehaviour
     public LeapServiceProvider leapProvider;
 
     // Start is called before the first frame update
-    GameObject powerBar;
+    public GameObject powerBar;
 
     public bool clawsOpen;
     public bool goDown, goLeft, goRight;
     Rigidbody2D Rclaw, Lclaw, machine;
-    float speed = 0.02f;
-    public bool gameOver;
+    float speed = 0.01f;
+    public static bool gameOver;
     public bool isLeapOn;
+
+    public bool isStart;
 
     public Hand hand;
 
     void Awake()
     {
         powerBar = GameObject.Find("powerValue");
+
+        isStart = false;
     }
 
     void Start()
@@ -33,6 +37,8 @@ public class clawControl : MonoBehaviour
         Rclaw = GameObject.Find("clawRight").GetComponent<Rigidbody2D>();
         Lclaw = GameObject.Find("clawLeft").GetComponent<Rigidbody2D>();
         machine = gameObject.GetComponent<Rigidbody2D>();
+
+        powerBar.gameObject.SetActive(false);
         clawsOpen = true;
         gameOver = false;
         isLeapOn = false;
@@ -41,7 +47,7 @@ public class clawControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameOver)
+        if (!gameOver && isStart)
         {
             // Leap Motion이 활성화되었을 때만 Leap Motion을 사용
             if (isLeapOn)
@@ -249,7 +255,7 @@ public class clawControl : MonoBehaviour
         }
 
         // 상하 기울기 감지
-        if (palmNormal.z < -0.3f) {
+        if (palmNormal.z < -0.5f) {
             goDown = true;
         }
         else {

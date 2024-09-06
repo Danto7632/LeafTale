@@ -42,6 +42,11 @@ public class LeapMotionFlip : MonoBehaviour {
         if(Input.GetKey(KeyCode.RightArrow)) {
             autoFlip.FlipRightPage();
         }
+
+        if(Input.GetKeyDown("p")) {
+            Debug.Log("처음 스토리...");
+            SceneManager.LoadScene("BroomstickScene");
+        }
     }
 
     void OnUpdateFrame(Frame frame) {
@@ -55,15 +60,12 @@ public class LeapMotionFlip : MonoBehaviour {
                     isPointing = true;
                     pointingStartTime = Time.time;
                 } else if (Time.time - pointingStartTime > 3f) {
-                    SceneManager.LoadScene("StageSelect");
+                    Debug.Log("처음 스토리..");
+                    SceneManager.LoadScene("BroomstickScene");
                 }
             }
             else {
                 isPointing = false;
-            }
-            
-            if(Input.GetKeyDown("p")) {
-                SceneManager.LoadScene("StageSelect");
             }
 
             if (IsFist(hand)) {

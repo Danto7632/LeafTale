@@ -103,10 +103,9 @@ public class DrawingGame : MonoBehaviour
                 accuracy = CalculateAccuracy();
                 resultText.gameObject.SetActive(true);
                 resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
-                if(accuracy * 100f >= 90f) {
+                if(accuracy * 100f >= 90f && countdownTimer > 0) {
                     shapeSelector.nextStage(false);
-                    Debug.Log("no");
-                    maxScore = 100f;
+                    sumScore += 100f;
                 }
             }
 
@@ -116,6 +115,7 @@ public class DrawingGame : MonoBehaviour
 
             if(countdownTimer <= 0) {
                 shapeSelector.nextStage(false);
+                sumScore += maxScore;
             }
             else {
                 if(maxScore <= accuracy * 100f) {
@@ -189,9 +189,8 @@ public class DrawingGame : MonoBehaviour
                     resultText.gameObject.SetActive(true);
                     resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
                     if(accuracy * 100f >= 90f) {
-                        Debug.Log("Yes");
+                        sumScore += 100f;
                         shapeSelector.nextStage(false);
-                        maxScore = 100f;
                     }
                 }
             }
