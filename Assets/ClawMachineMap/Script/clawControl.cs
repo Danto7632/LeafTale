@@ -12,7 +12,7 @@ public class clawControl : MonoBehaviour
     GameObject powerBar;
 
     public bool clawsOpen;
-    bool goDown, goLeft, goRight;
+    public bool goDown, goLeft, goRight;
     Rigidbody2D Rclaw, Lclaw, machine;
     float speed = 0.02f;
     public bool gameOver;
@@ -43,19 +43,45 @@ public class clawControl : MonoBehaviour
     {
         if (!gameOver)
         {
+            // Leap Motion이 활성화되었을 때만 Leap Motion을 사용
             if (isLeapOn)
             {
-                // Leap Motion에 의한 이동만 처리
                 MoveBasedOnLeapMotion();
             }
             else
             {
-                // 키보드 입력 처리
+                // 키보드 입력을 처리하고, 이동을 수행
                 HandleKeyboardInput();
+                MoveClaw(); // 키보드에 따른 이동 처리
             }
 
             // 클로 이동 및 닫힘 처리
             HandleClawMovement();
+        }
+    }
+
+    // 키보드 입력에 따른 이동 처리 함수 추가
+    void MoveClaw()
+    {
+        // down
+        if (goDown && gameObject.transform.position.y > -3.0f)
+        {
+            gameObject.transform.Translate(0, -speed, 0);
+        }
+        // left
+        if (goLeft && gameObject.transform.position.x > -6.32f)
+        {
+            gameObject.transform.Translate(-speed, 0, 0);
+        }
+        // right
+        if (goRight && gameObject.transform.position.x < 6f)
+        {   
+            gameObject.transform.Translate(speed, 0, 0);
+        }
+
+        if (gameObject.transform.position.y < 3.5f && !goDown)
+        {
+            gameObject.transform.Translate(0, speed - .005f, 0);
         }
     }
 
@@ -188,7 +214,9 @@ public class clawControl : MonoBehaviour
             }
 
             // 손바닥 기울기에 따른 동작 처리
-            DetectHandTilt(hand);
+            if(isLeapOn) {
+                DetectHandTilt(hand);
+            }
         }
         else
         {
