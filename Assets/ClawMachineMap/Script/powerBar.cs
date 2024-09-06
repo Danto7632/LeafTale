@@ -20,8 +20,7 @@ public class powerBar : MonoBehaviour
 
         maxPower = 60f;
         powerLeft = maxPower;
-        powerUsing = 2.0f;
-        Debug.Log("powerBar ½ÇÇà");
+        powerUsing = 0.003f;
     }
 
     // Update is called once per frame
@@ -33,13 +32,14 @@ public class powerBar : MonoBehaviour
     {
         if (powerLeft > 0)
         {
+            powerLeft = Mathf.Clamp(powerLeft, 0.0F, maxPower);
             powerLeft -= powerUsing;
             power.fillAmount = powerLeft / maxPower;
         }
         else
         {
             power.fillAmount = 0;
-            //GameObject.Find("Claw").GetComponent<clawControl>().gameOver = true;
+            GameObject.Find("Claw").GetComponent<clawControl>().gameOver = true;
         }
     }
 }

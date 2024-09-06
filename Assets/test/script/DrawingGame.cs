@@ -9,17 +9,6 @@ public class DrawingGame : MonoBehaviour
 {
     private LeapServiceProvider leapProvider;
 
-    public LineRenderer referenceShape; // 참조 모양 (원 또는 사각형)
-    public LineRenderer playerDrawing;  // 플레이어가 그린 모양
-    public TMP_Text resultText;         // 정확도를 표시할 TextMeshPro 텍스트
-
-    public Vector2[] circleShape;
-    public Vector2[] squareShape;
-    public Vector2[] starShape;
-
-    private List<Vector2> playerPoints = new List<Vector2>(); // 플레이어가 그린 점들
-    private bool isDrawing = false; // 그리기 중 여부
-
     private Controller leapController; // Leap Motion 컨트롤러
     private GameObject handVisualizer; // 손의 위치를 시각화할 오브젝트
 
@@ -32,14 +21,36 @@ public class DrawingGame : MonoBehaviour
     public RectTransform[] shapeBtns;
     public CircleCollider2D handCollider;
 
+    public LineRenderer referenceShape; // 참조 모양 (원 또는 사각형)
+    public LineRenderer playerDrawing;  // 플레이어가 그린 모양
+    public TMP_Text resultText;         // 정확도를 표시할 TextMeshPro 텍스트
+
+    public int circleMaxPoints = 100;   // 원을 그릴 때 최대 점의 수
+    public int squareMaxPoints = 50;    // 사각형을 그릴 때 최대 점의 수
+    public int starMaxPoints = 150;     // 별을 그릴 때 최대 점의 수
+
+    public List<Vector3> playerPoints = new List<Vector3>(); // 플레이어가 그린 점들
+    private bool isDrawing = false; // 그리기 중 여부
+    private int maxPoints;          // 현재 선택된 도형에 따른 최대 점의 수
+
+    public ShapeSelector shapeSelector;
+
+    public int countdownTimer;
+
+    public float maxScore;
+    public float sumScore;
+
+    public float accuracy;
+    
     private void Start()
     {
-        referenceShape.gameObject.SetActive(false); // 게임 시작 시 도형 비활성화
-        playerDrawing.gameObject.SetActive(true);
 
         // Sorting Order 설정
         SetLineRendererSortingOrder(referenceShape, 0);
         SetLineRendererSortingOrder(playerDrawing, 1);
+
+        // 초기 도형 색상 설정
+        SetLineRendererColor(referenceShape, Color.blue); // 초기 도형 색상 파란색
 
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -51,51 +62,69 @@ public class DrawingGame : MonoBehaviour
         shapeBtns = new RectTransform[3];
         handCollider = handVisualizer.GetComponent<CircleCollider2D>();
 
-        shapeBtns[0] = GameObject.Find("CircleButton").GetComponent<RectTransform>();
-        shapeBtns[1] = GameObject.Find("SquareButton").GetComponent<RectTransform>();
-        shapeBtns[2] = GameObject.Find("StarButton").GetComponent<RectTransform>();
-        isBtnClicked = false;
+        shapeSelector = GameObject.Find("ShapeSelector").GetComponent<ShapeSelector>();
+
+        maxScore = 0f;
+        sumScore = 0f;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isBtnClicked) // 마우스 왼쪽 버튼을 누를 때
-        {
-            // 새 그림을 그릴 때 기존 점들 초기화
-            playerPoints.Clear();
-            playerDrawing.positionCount = 0;
-            isDrawing = true;
-        }
-
-        if (Input.GetMouseButton(0) && isDrawing && isBtnClicked) // 마우스 왼쪽 버튼을 누르고 있을 때
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            playerPoints.Add(mousePos);
-            playerDrawing.positionCount = playerPoints.Count;
-
-            // LineRenderer는 여전히 Vector3를 사용하므로 변환 필요
-            Vector3[] playerPositions = playerPoints.Select(p => new Vector3(p.x, p.y, 0)).ToArray();
-            playerDrawing.SetPositions(playerPositions);
-        }
-    
-        if (Input.GetMouseButtonUp(0) && isBtnClicked) // 마우스를 놓을 때
-        {
-            isDrawing = false;
-            float accuracy = CalculateAccuracy();
-            resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
-        }
-
-        if(Input.GetKeyDown(KeyCode.P)) {
-            DrawPerfectShape();
-        }
-
-        foreach (var shapeBtn in shapeBtns)
-        {
-            if (IsOverlap(shapeBtn, handCollider))
+        if(shapeSelector.isPlaying) {
+            if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 버튼을 누를 때
             {
-                Debug.Log($"UI 버튼 {shapeBtn.name}와 2D 오브젝트가 겹칩니다.");
-                return; // 하나의 버튼이 겹치면 더 이상 체크하지 않음
+                // 새 그림을 그릴 때 기존 점들 초기화
+                playerPoints.Clear();
+                playerDrawing.positionCount = 0;
+                isDrawing = true;
+            }   
+
+            if (Input.GetMouseButton(0) && isDrawing) // 마우스 왼쪽 버튼을 누르고 있을 때
+            {
+                // 점의 개수가 최대치를 초과하지 않도록 조건을 추가
+                if (playerPoints.Count < maxPoints)
+                {
+                    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mousePos.z = 0; // 2D 게임이므로 Z 축을 0으로 고정
+
+                    // 플레이어가 마우스를 움직이면 새로운 점을 추가
+                    if (playerPoints.Count == 0 || Vector3.Distance(playerPoints[playerPoints.Count - 1], mousePos) > 0.01f)
+                    {
+                        playerPoints.Add(mousePos);
+                        playerDrawing.positionCount = playerPoints.Count;
+                        playerDrawing.SetPositions(playerPoints.ToArray());
+                    }
+                }
             }
+
+            if (Input.GetMouseButtonUp(0)) // 마우스를 놓을 때
+            {
+                isDrawing = false;
+                accuracy = CalculateAccuracy();
+                resultText.gameObject.SetActive(true);
+                resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
+                if(accuracy * 100f >= 90f) {
+                    shapeSelector.nextStage(false);
+                    Debug.Log("no");
+                    maxScore = 100f;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.P)) {
+                DrawPerfectShape();
+            }
+
+            if(countdownTimer <= 0) {
+                shapeSelector.nextStage(false);
+            }
+            else {
+                if(maxScore <= accuracy * 100f) {
+                    maxScore = accuracy * 100f;
+                }
+            }
+        }
+        else {
+            maxScore = 0f;
         }
     }
 
@@ -103,7 +132,7 @@ public class DrawingGame : MonoBehaviour
     public Vector3 maxLimit = new Vector3(8, 4.5f, 0);  // 최대 위치
 
     private void OnUpdateFrame(Frame frame) {
-        if (frame.Hands.Count > 0 && isBtnClicked) // 손이 화면에 있을 때
+        if (frame.Hands.Count > 0 && isBtnClicked && shapeSelector.isPlaying) // 손이 화면에 있을 때
         {
             Hand primaryHand = frame.Hands[0]; // 첫 번째 손 선택
 
@@ -155,12 +184,23 @@ public class DrawingGame : MonoBehaviour
                 // playerPoints가 비어있지 않을 때만 CalculateAccuracy 호출
                 if (playerPoints.Count > 0)
                 {
-                    float accuracy = CalculateAccuracy();
+                    isDrawing = false;
+                    accuracy = CalculateAccuracy();
+                    resultText.gameObject.SetActive(true);
                     resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
+                    if(accuracy * 100f >= 90f) {
+                        Debug.Log("Yes");
+                        shapeSelector.nextStage(false);
+                        maxScore = 100f;
+                    }
                 }
-                else
-                {
-                    resultText.text = "No drawing detected!";
+            }
+            if(countdownTimer <= 0) {
+                shapeSelector.nextStage(false);
+            }
+            else {
+                if(maxScore <= accuracy * 100f) {
+                    maxScore = accuracy * 100f;
                 }
             }
         }
@@ -172,6 +212,32 @@ public class DrawingGame : MonoBehaviour
         }
     }
 
+    public void SetReferenceShape(Shape shape)
+    {
+        switch (shape)
+        {
+            case Shape.Circle:
+                SetReferenceShape(CreateCircle(Vector3.zero, 3f, 100));
+                maxPoints = circleMaxPoints; // 원에 대한 최대 점 수 설정
+                break;
+            case Shape.Square:
+                SetReferenceShape(CreateSquare(Vector3.zero, 5f));
+                maxPoints = squareMaxPoints; // 사각형에 대한 최대 점 수 설정
+                break;
+            case Shape.Star:
+                SetReferenceShape(CreateStar(Vector3.zero, 3f, 5));
+                maxPoints = starMaxPoints; // 별에 대한 최대 점 수 설정
+                break;
+        }
+    }
+
+    private void SetReferenceShape(Vector3[] shapePoints)
+    {
+        referenceShape.positionCount = shapePoints.Length;
+        referenceShape.SetPositions(shapePoints);
+        referenceShape.gameObject.SetActive(true); // 도형이 보이도록 설정
+    }
+
     private void SetLineRendererSortingOrder(LineRenderer lineRenderer, int order)
     {
         Material material = new Material(Shader.Find("Sprites/Default"));
@@ -179,87 +245,74 @@ public class DrawingGame : MonoBehaviour
         lineRenderer.material = material;
     }
 
-    public void SetReferenceShape(Shape shape)
+    private void SetLineRendererColor(LineRenderer lineRenderer, Color color)
     {
-        switch (shape)
-        {
-            case Shape.Circle:
-                SetReferenceShape(CreateCircle(Vector2.zero, 5f, 100));
-                break;
-            case Shape.Square:
-                SetReferenceShape(CreateSquare(Vector2.zero, 6f));
-                break;
-            case Shape.Star:
-                SetReferenceShape(CreateStar(Vector2.zero, 5f, 5));
-                break;
-        }
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
     }
 
-    private void SetReferenceShape(Vector2[] shapePoints)
+    private Vector3[] CreateCircle(Vector3 center, float radius, int segments)
     {
-        // 도형의 점 개수에 따라 포인트 수 설정
-        referenceShape.positionCount = shapePoints.Length + 1; // 마지막 점을 추가하여 닫히게 만듦
-        Vector3[] positions = shapePoints.Select(p => new Vector3(p.x, p.y, 0)).ToArray();
-        referenceShape.SetPositions(positions);
-        referenceShape.SetPosition(shapePoints.Length, positions[0]); // 마지막 점을 시작점으로 설정
-        referenceShape.loop = true; // 도형의 끝점을 시작점과 연결
-        referenceShape.gameObject.SetActive(true); // 도형이 보이도록 설정
-    }
-
-    private Vector2[] CreateCircle(Vector2 center, float radius, int segments)
-    {
-        Vector2[] points = new Vector2[segments];
+        Vector3[] points = new Vector3[segments + 1]; // +1 to close the circle
+        float angleStep = 2 * Mathf.PI / segments;
         for (int i = 0; i < segments; i++)
         {
-            float angle = 2 * Mathf.PI * i / segments;
-            points[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius + center;
+            float angle = angleStep * i;
+            points[i] = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius + center;
         }
+        points[segments] = points[0]; // Close the circle
         return points;
     }
 
-    private Vector2[] CreateSquare(Vector2 center, float size)
+    private Vector3[] CreateSquare(Vector3 center, float size)
     {
-        Vector2[] points = new Vector2[4];
-        points[0] = new Vector2(-size / 2, -size / 2) + center;
-        points[1] = new Vector2(size / 2, -size / 2) + center;
-        points[2] = new Vector2(size / 2, size / 2) + center;
-        points[3] = new Vector2(-size / 2, size / 2) + center;
+        Vector3[] points = new Vector3[5]; // 5점 사용 (Square는 4점 + 시작점으로 닫기 위해 1점 추가)
+        float halfSize = size / 2;
+        points[0] = new Vector3(-halfSize, -halfSize, 0) + center; // Bottom-left
+        points[1] = new Vector3(halfSize, -halfSize, 0) + center;  // Bottom-right
+        points[2] = new Vector3(halfSize, halfSize, 0) + center;   // Top-right
+        points[3] = new Vector3(-halfSize, halfSize, 0) + center;  // Top-left
+        points[4] = points[0]; // 첫 번째 점으로 돌아가서 사각형을 닫음
+
         return points;
     }
 
-    private Vector2[] CreateStar(Vector2 center, float size, int points)
+    private Vector3[] CreateStar(Vector3 center, float size, int points)
     {
-        Vector2[] starPoints = new Vector2[points * 2];
+        Vector3[] starPoints = new Vector3[points * 2 + 1]; // +1 to close the star
         float angleStep = Mathf.PI * 2 / points;
+        float innerSize = size * 0.5f; // 내측 별의 크기 (조정 가능)
+
         for (int i = 0; i < points; i++)
         {
             float angle = i * angleStep;
-            float x = Mathf.Cos(angle);
-            float y = Mathf.Sin(angle);
-            starPoints[i * 2] = new Vector2(x * size, y * size) + center;
+            float outerX = Mathf.Cos(angle) * size;
+            float outerY = Mathf.Sin(angle) * size;
+            starPoints[i * 2] = new Vector3(outerX, outerY, 0) + center; // Outer points
+            
+            // Inner points
             angle += angleStep / 2;
-            x = Mathf.Cos(angle) * (size / 2);
-            y = Mathf.Sin(angle) * (size / 2);
-            starPoints[i * 2 + 1] = new Vector2(x, y) + center;
+            float innerX = Mathf.Cos(angle) * innerSize;
+            float innerY = Mathf.Sin(angle) * innerSize;
+            starPoints[i * 2 + 1] = new Vector3(innerX, innerY, 0) + center; // Inner points
         }
+        starPoints[points * 2] = starPoints[0]; // Close the star
         return starPoints;
     }
 
     private float CalculateAccuracy()
     {
         float totalDistance = 0f;
-        Vector3[] refPositions = new Vector3[referenceShape.positionCount];
-        referenceShape.GetPositions(refPositions);
 
         // 참조 도형의 점 개수만큼 반복
-        for (int i = 0; i < refPositions.Length; i++)
+        for (int i = 0; i < referenceShape.positionCount; i++)
         {
             float minDistance = float.MaxValue;
 
             // 참조 도형의 각 점과 플레이어가 그린 점들 중 가장 가까운 점을 비교
             for (int j = 0; j < playerPoints.Count; j++)
             {
-                float distance = Vector2.Distance(playerPoints[j], new Vector2(refPositions[i].x, refPositions[i].y));
+                float distance = Vector2.Distance(playerPoints[j], referenceShape.GetPosition(i));
                 if (distance < minDistance)
                 {
                     minDistance = distance;
@@ -268,7 +321,7 @@ public class DrawingGame : MonoBehaviour
             totalDistance += minDistance;
         }
 
-        float averageDistance = totalDistance / refPositions.Length;
+        float averageDistance = totalDistance / referenceShape.positionCount;
         float maxPossibleDistance = 2.5f; // 조정 가능한 임계값
 
         return Mathf.Clamp01(1f - averageDistance / maxPossibleDistance);
@@ -278,20 +331,15 @@ public class DrawingGame : MonoBehaviour
     {
         // 참조 도형의 점들과 동일한 점들을 플레이어의 그린 점들로 설정
         playerPoints.Clear();
-        Vector3[] refPoints = new Vector3[referenceShape.positionCount];
-        referenceShape.GetPositions(refPoints);
-
-        for (int i = 0; i < refPoints.Length - 1; i++) // 마지막 점은 제외
+        for (int i = 0; i < referenceShape.positionCount; i++)
         {
-            Vector3 refPoint = refPoints[i];
+            Vector3 refPoint = referenceShape.GetPosition(i);
             playerPoints.Add(new Vector2(refPoint.x, refPoint.y));
         }
 
         // LineRenderer 업데이트
-        playerDrawing.positionCount = playerPoints.Count + 1; // 마지막 점을 추가하여 닫히게 만듦
-        Vector3[] playerPositions = playerPoints.Select(p => new Vector3(p.x, p.y, 0)).ToArray();
-        playerDrawing.SetPositions(playerPositions);
-        playerDrawing.SetPosition(playerPoints.Count, playerPositions[0]); // 마지막 점을 시작점으로 설정
+        playerDrawing.positionCount = playerPoints.Count;
+        playerDrawing.SetPositions(playerPoints.ConvertAll(p => new Vector3(p.x, p.y, 0)).ToArray());
 
         // 정확도 100% 표시
         float accuracy = CalculateAccuracy();
@@ -330,44 +378,4 @@ public class DrawingGame : MonoBehaviour
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
     } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
-
-
-    private bool IsOverlap(RectTransform uiRect, CircleCollider2D objectCollider)
-    {
-        // UI 버튼의 월드 좌표 경계 박스 계산
-        Rect uiRectWorld = RectTransformToWorldRect(uiRect);
-
-        // 2D 오브젝트의 월드 좌표 원의 중심과 반지름 계산
-        Vector2 circleCenter = (Vector2)objectCollider.transform.position;
-        float circleRadius = objectCollider.radius * Mathf.Max(objectCollider.transform.localScale.x, objectCollider.transform.localScale.y);
-
-        // UI 버튼의 경계 박스와 원의 겹침 여부 확인
-        return IsRectOverlapCircle(uiRectWorld, circleCenter, circleRadius);
-    }
-
-    private Rect RectTransformToWorldRect(RectTransform rectTransform)
-    {
-        Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners);
-
-        // Rect의 좌상단과 우하단 좌표를 기반으로 Rect를 생성
-        Vector2 min = corners[0];
-        Vector2 max = corners[2];
-        return new Rect(min, max - min);
-    }
-
-    private bool IsRectOverlapCircle(Rect rect, Vector2 circleCenter, float circleRadius)
-    {
-        // 원의 중심을 사각형의 가장 가까운 점으로 클램프
-        Vector2 closestPoint = new Vector2(
-            Mathf.Clamp(circleCenter.x, rect.xMin, rect.xMax),
-            Mathf.Clamp(circleCenter.y, rect.yMin, rect.yMax)
-        );
-
-        // 원의 중심과 가장 가까운 점 간의 거리 계산
-        float distance = Vector2.Distance(circleCenter, closestPoint);
-
-        // 거리와 반지름을 비교하여 겹침 여부 판단
-        return distance <= circleRadius;
-    }
 }

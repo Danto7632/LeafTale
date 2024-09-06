@@ -7,6 +7,13 @@ public class ClawClear : MonoBehaviour
     int[] vNumber = new int[3];
     int currentN;
 
+    public double clawScore;
+    public double maxScore;
+    public double vPoint;
+    public double sPoint;
+    public double wvPoint;
+    public int clearCount;
+
     GameObject vegetables;
     GameObject sVegetable;
     GameObject box;
@@ -21,6 +28,13 @@ public class ClawClear : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        clawScore = 0.0f;
+        vPoint = 30.0f;
+        maxScore = vPoint * 3;
+        sPoint = 3.0f;
+        wvPoint = 20.0f;
+        clearCount = 0;
+
         //罚待 盲家 惶扁 1~9
         vNumber[0] = Random.Range(1, 10);
         vNumber[1] = Random.Range(1, 10);
@@ -60,7 +74,12 @@ public class ClawClear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(clearCount == 3)
+        {
+            clawScore = clawScore * 100.0f / 90.0f;
+            Debug.Log(clawScore);
+            clearCount++;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D enterObject)
@@ -73,6 +92,11 @@ public class ClawClear : MonoBehaviour
         if (enterObj.CompareTag("soil"))
         {
             Debug.Log("入入");
+            clawScore -= sPoint;
+            if (clawScore < 0)
+            {
+                clawScore = 0;
+            }
         }
         else if(enterObj.CompareTag("targetV"))
         {
@@ -84,10 +108,17 @@ public class ClawClear : MonoBehaviour
                     box.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                 }
             }
+            clawScore += vPoint;
+            clearCount++;
         }
         else
         {
             Debug.Log("肋给等 苞老");
+            clawScore -= wvPoint;
+            if (clawScore < 0)
+            {
+                clawScore = 0;
+            }
         }
         Destroy(enterObj);
     }
