@@ -16,13 +16,13 @@ public class Timer_Platform : MonoBehaviour {
     public int min;
     public int sec;
 
-    public bool overFlag = true;
-    public bool clearFlag = true;
+    public bool overFlag;
+    public bool clearFlag;
 
     void Awake() {
         catStatus = GameObject.FindWithTag("Player").GetComponent<catMove>();
 
-        time = 126f;
+        time = 120f;
         overFlag = true;
         clearFlag = true;
     }
@@ -35,7 +35,7 @@ public class Timer_Platform : MonoBehaviour {
         gameOverText = GameObject.Find("Colon").GetComponent<TMP_Text>();
 
         timeText[0].text = "02";
-        timeText[1].text = "06";
+        timeText[1].text = "00";
         timeText[0].enabled = false;
         timeText[1].enabled = false;
         gameOverText.enabled = false;
@@ -44,7 +44,7 @@ public class Timer_Platform : MonoBehaviour {
     }
 
     void Update() {
-        if(!catStatus.isGameOver) {
+        if(!catStatus.isGameOver && catStatus.isMoveAllow) {
             time -= Time.deltaTime;
 
             min = (int)time / 60;
@@ -69,7 +69,7 @@ public class Timer_Platform : MonoBehaviour {
                 timeText[1].text = sec.ToString("00");
             }
         }
-        else {
+        else if(catStatus.isGameOver) {
             gameOverText.fontSize = 30;
             timeText[0].enabled = false;
             timeText[1].enabled = false;

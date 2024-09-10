@@ -30,6 +30,8 @@ public class GameClear : MonoBehaviour {
     public float elapsedTime;
     public float pointingStartTime;
 
+    public UnityEngine.UI.Image gaugeImage;
+
     [System.Serializable]
     public class GetData
     {
@@ -73,7 +75,7 @@ public class GameClear : MonoBehaviour {
         textScore = GameObject.Find("GameScore").GetComponent<TMP_Text>();
         pos = GetComponent<RectTransform>();
 
-        pos.anchoredPosition = new Vector2(0, 1000);
+        pos.anchoredPosition = new Vector2(0, 10000);
 
         clear = false;
 
@@ -93,14 +95,14 @@ public class GameClear : MonoBehaviour {
 
     void Update() {
         if(clear && Input.GetKeyDown("p")) {
-            if(StoryOrStage.instance.currentMode == "stage") {
+            if(StoryOrStage.instance == null) {
+                SceneManager.LoadScene("StageSelect");
+            }
+            else if(StoryOrStage.instance.currentMode == "stage") {
                 SceneManager.LoadScene("StageSelect");
             } 
             else if(StoryOrStage.instance.currentMode == "story") {
                 storyOrder();
-            }
-            else {
-                SceneManager.LoadScene("StageSelect");
             }
         }
     }
@@ -111,24 +113,34 @@ public class GameClear : MonoBehaviour {
             if(IsPointingPose(hand)) {
                 if (!isPointing) {
                     pointingStartTime = Time.time;
-
                     isPointing = true;
                 }
                 else {
                     elapsedTime = Time.time - pointingStartTime;
 
+                    if (gaugeImage != null) {
+                        gaugeImage.fillAmount = Mathf.Clamp01(elapsedTime / 3f);
+                    }
+
                     if (elapsedTime > 3f && clear) {
                         isNext = false;
-                        if(StoryOrStage.instance.currentMode == "stage") {
+                        if(StoryOrStage.instance == null) {
                             SceneManager.LoadScene("StageSelect");
-                        }            
+                        }
+                        else if(StoryOrStage.instance.currentMode == "stage") {
+                            SceneManager.LoadScene("StageSelect");
+                        } 
                         else if(StoryOrStage.instance.currentMode == "story") {
                             storyOrder();
                         }
-                        else {
-                            SceneManager.LoadScene("StageSelect");
-                        }
                     }
+                }
+            }
+            else {
+                if (gaugeImage != null) {
+                    elapsedTime = 0f;
+                    gaugeImage.fillAmount = 0f;
+                    isPointing = false;
                 }
             }
         }
