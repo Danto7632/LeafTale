@@ -55,7 +55,6 @@ public class ShapeSelector : MonoBehaviour {
         else {
             if (shapeCount < 3) {
                 drawingGame.resultText.text = "Complete!";
-                drawingGame.sumScore += drawingGame.maxScore;
                 drawingGame.accuracy = 0f;
                 StartCoroutine(delayStage());
             }
@@ -69,6 +68,8 @@ public class ShapeSelector : MonoBehaviour {
                 drawingGame.playerDrawing.positionCount = 0;
                 startTimer.text = "Done";
                 gameTimer.text = drawingGame.sumScore.ToString();
+                GameManager.instance.AddScore((int)(drawingGame.sumScore / 3f));
+                GameObject.Find("GameManage").GetComponent<GameManager>().EndGame(0, 0);
             }
         }
     }
@@ -85,7 +86,6 @@ public class ShapeSelector : MonoBehaviour {
     }
 
     IEnumerator SelectShape(Shape shape) {
-        Debug.Log("go");
         referenceShape.gameObject.SetActive(false);
         playerDrawing.gameObject.SetActive(false);
         startTimer.gameObject.SetActive(true);

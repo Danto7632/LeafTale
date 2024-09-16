@@ -21,9 +21,11 @@ public class GoStage : MonoBehaviour {
                 break;
 
             case 3 :
+                SceneManager.LoadScene("test");
                 break;
-
+                
             case 4 :
+                SceneManager.LoadScene("ClawMachineScenes");
                 break;
 
             default :

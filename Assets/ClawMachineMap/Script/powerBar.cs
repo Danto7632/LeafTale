@@ -7,6 +7,8 @@ public class powerBar : MonoBehaviour
 {
     Image power;
 
+    public ClawClear clawClear;
+
     public float maxPower;
     float powerLeft;
     public float powerUsing;
@@ -21,6 +23,8 @@ public class powerBar : MonoBehaviour
         maxPower = 60f;
         powerLeft = maxPower;
         powerUsing = 0.003f;
+
+        clawClear = GameObject.Find("box").GetComponent<ClawClear>();
     }
 
     // Update is called once per frame
@@ -39,7 +43,9 @@ public class powerBar : MonoBehaviour
         else
         {
             power.fillAmount = 0;
-            GameObject.Find("Claw").GetComponent<clawControl>().gameOver = true;
+            GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
+            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
+            clawControl.gameOver = true;
         }
     }
 }

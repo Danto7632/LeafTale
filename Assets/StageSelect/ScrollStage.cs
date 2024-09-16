@@ -24,6 +24,8 @@ public class ScrollStage : MonoBehaviour {
 
     public static int btnIndex;
 
+    public UnityEngine.UI.Image gaugeImage;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -34,6 +36,8 @@ public class ScrollStage : MonoBehaviour {
 
         scroll_pos = 0;
         swipeDistanceThreshold = 3f;
+
+        ResetGauge();
     }
 
     void Update() {
@@ -92,7 +96,7 @@ public class ScrollStage : MonoBehaviour {
             Vector3 currentHandPos = hand.PalmPosition;
 
             pos = new float[transform.childCount];
-            float stageDistance = 1f / (pos.Length  - 1f);
+            float stageDistance = 1f / (pos.Length - 1f);
 
             if (IsPointingPose(hand)) {
                 if (!isPointing) {
@@ -102,12 +106,14 @@ public class ScrollStage : MonoBehaviour {
                 else if (Time.time - pointingStartTime > 3f) {
                     GoStage.SelectLevel();
                 }
+                UpdateGauge(Time.time - pointingStartTime);
             }
             else {
+                ResetGauge();
                 isPointing = false;
             }
-        
-            for (int i = 0; i<pos.Length; i++) {
+
+            for (int i = 0; i < pos.Length; i++) {
                 pos[i] = stageDistance * i;
             }
 
@@ -135,7 +141,7 @@ public class ScrollStage : MonoBehaviour {
                     }
                 }
             }
-            else {
+            else {  
                 isFisting = false;
             }
         }
@@ -155,5 +161,17 @@ public class ScrollStage : MonoBehaviour {
             }
         }
         return true;
+    }
+
+    void UpdateGauge(float time) {
+        if (gaugeImage != null) {
+            gaugeImage.fillAmount = Mathf.Clamp01(time / 3f);
+        }
+    }
+
+    void ResetGauge() {
+        if (gaugeImage != null) {
+            gaugeImage.fillAmount = 0f;
+        }
     }
 }

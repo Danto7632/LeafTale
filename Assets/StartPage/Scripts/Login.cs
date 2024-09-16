@@ -43,7 +43,14 @@ public class Login : MonoBehaviour {
     }
 
     void Update() {
-        if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0)) StartCoroutine(LoadSceneAfterDelay("StoryPage", 3f));
+        if (StoryOrStage.instance != null) {
+            if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == "story") StartCoroutine(LoadSceneAfterDelay("StoryPage", 3f));
+            if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == "stage") StartCoroutine(LoadSceneAfterDelay("StageSelect", 3f));
+            
+            if(pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == null) {
+                Debug.Log("Select Story OR Stage");
+            }
+        }
     }
     // 로그인 버튼 누르면 API 통신으로 로그인 진행되는 코루틴 실행 
     public void LoginBtn() 
