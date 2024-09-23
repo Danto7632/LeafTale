@@ -151,6 +151,7 @@ public class Login : MonoBehaviour {
         yield return StartCoroutine(anima(delay / 3, 2f, 1f, 3f));
         yield return StartCoroutine(anima(delay / 3, -1f, -1f, 2f));
 
+        StoryOrStage.instance.nextStory = "Explain";
         SceneManager.LoadScene(sceneName);
     }
 

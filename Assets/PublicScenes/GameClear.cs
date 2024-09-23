@@ -148,22 +148,9 @@ public class GameClear : MonoBehaviour {
 
     public void storyOrder() {
         Debug.Log(sceneName + "의 클리어 후 스토리...");
-        if (sceneName == "BroomstickScene") {
-            SceneManager.LoadScene("platformScene");
-        }
-        else if (sceneName == "platformScene") {
-            SceneManager.LoadScene("RhythmScene");
-        }
-        else if (sceneName == "RhythmScene") {
-            SceneManager.LoadScene("test");
-        }
-        else if (sceneName == "test") {
-            SceneManager.LoadScene("ClawMachineScenes");
-        }
-        else if (sceneName == "ClawMachineScenes") {
-            Debug.Log("모두 클리어");
-            SceneManager.LoadScene("EndGame");
-        }
+
+        StoryOrStage.instance.nextStory = sceneName;
+        SceneManager.LoadScene("StoryPage");
     }
 
     public void Clear(int score) {

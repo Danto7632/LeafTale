@@ -7,7 +7,8 @@ public class StoryOrStage : MonoBehaviour
     public static StoryOrStage instance { get; private set; }
 
     public string currentMode;
-
+    public string nextStory;
+    
     private void Awake()
     {
         // 싱글턴 인스턴스 설정
