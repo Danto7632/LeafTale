@@ -64,5 +64,14 @@ public class RhythmScore : MonoBehaviour
         float finScore;
         finScore = score * (100.0F / (allNode * 2.0F));
         Clear.GetComponent<GameClear>().Clear((int)(finScore));
+        try
+        {
+            EndingValue.EndingSet(2);
+        }
+        catch
+        {
+            Debug.Log("EndingValue 오브젝트에 값을 전달하지 못했습니다.");
+        }
+        
     }
 }
