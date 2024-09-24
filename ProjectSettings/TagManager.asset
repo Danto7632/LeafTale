@@ -21,6 +21,7 @@ TagManager:
   - PlusTimer
   - soil
   - targetV
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -35,8 +36,8 @@ TagManager:
   - PaperTile
   - RockTile
   - ScissorsTile
-  - 
-  - 
+  - Box
+  - Veg
   - 
   - 
   - 

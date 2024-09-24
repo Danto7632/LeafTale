@@ -70,12 +70,12 @@ public class clawControl : MonoBehaviour
     void MoveClaw()
     {
         // down
-        if (goDown && gameObject.transform.position.y > -3.0f)
+        if (goDown && gameObject.transform.position.y > -3.0f && !FireLine.isDownLine)
         {
             gameObject.transform.Translate(0, -speed, 0);
         }
         // left
-        if (goLeft && gameObject.transform.position.x > -6.32f)
+        if (goLeft && gameObject.transform.position.x > -8.5f && !FireLine.isLeftLine)
         {
             gameObject.transform.Translate(-speed, 0, 0);
         }
@@ -146,22 +146,25 @@ public class clawControl : MonoBehaviour
 
         if (goDown || goLeft || goRight || !clawsOpen)
         {
-            if (goDown)
+            if (goDown && !FireLine.isDownLine)
             {
-                if (gameObject.transform.position.y > -3.0f && gameObject.transform.position.x > -1.95f)
+                // y축의 제한을 키보드와 동일하게 -3.0f로 설정
+                if (gameObject.transform.position.y > -3.0f)
                 {
                     gameObject.transform.Translate(0, -speed, 0);
                 }
             }
-            if (goLeft)
+            if (goLeft && !FireLine.isLeftLine)
             {
-                if (gameObject.transform.position.x > -6.32f && gameObject.transform.position.y > 2.9f)
+                // x축의 제한을 키보드와 동일하게 -6.32f로 설정
+                if (gameObject.transform.position.x > -8.5f)
                 {
                     gameObject.transform.Translate(-speed, 0, 0);
                 }
             }
             if (goRight)
             {
+                // x축의 제한을 키보드와 동일하게 6f로 설정
                 if (gameObject.transform.position.x < 6f)
                 {
                     gameObject.transform.Translate(speed, 0, 0);
