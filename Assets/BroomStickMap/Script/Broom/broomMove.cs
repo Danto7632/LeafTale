@@ -143,12 +143,17 @@ public class broomMove : MonoBehaviour {
         isMoveAllow = false;
         rb.velocity = Vector2.zero;
 
-        yield return StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
+        minY = -11f;
 
-        StartCoroutine(BlinkPlayer());
+        // 2초 동안 회전하면서 (0, -8)로 이동
+        yield return StartCoroutine(spinPlayer());
 
-        yield return new WaitForSeconds(0.7f);
+        // 깜빡이면서 (0, -3.5)로 이동
+        rb.position = new Vector2(0, -8);
 
+        yield return StartCoroutine(BlinkPlayer());
+
+        minY = -3.5f;
         isMoveAllow = true;
 
         yield return new WaitForSeconds(0.8f);
@@ -158,9 +163,12 @@ public class broomMove : MonoBehaviour {
     }
 
     IEnumerator BlinkPlayer() {
-        float blinkDuration = 1.5f;
+        float blinkDuration = 0.8f; // 깜빡거리는 시간 0.5초로 설정
         float blinkInterval = 0.1f;
         float blinkTimer = 0.0f;
+
+        // MoveSmoothly로 (0, -3.5)로 이동하면서 깜빡거림
+        StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3.5f), blinkDuration));
 
         while (blinkTimer < blinkDuration) {
             sp.enabled = !sp.enabled;
@@ -172,6 +180,30 @@ public class broomMove : MonoBehaviour {
 
         sp.enabled = true;
     }
+
+    IEnumerator spinPlayer() {
+        float spinDuration = 2.0f; // 2초 동안 회전
+        float spinInterval = 4f;
+        float elapsed = 0.0f;
+
+        Vector2 startPosition = rb.position; // 현재 위치
+        Vector2 targetPosition = new Vector2(rb.position.x, -8); // 최종 목표 위치
+
+        while (elapsed < spinDuration) {
+            // 회전
+            transform.Rotate(0, 0, spinInterval * 360 * Time.deltaTime);
+        
+            // 이동
+            float t = elapsed / spinDuration;
+            rb.position = Vector2.Lerp(startPosition, targetPosition, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.Rotate(0, 0, 0); // 회전 초기화
+        rb.position = targetPosition; // 최종 위치 설정
+    }   
 
     IEnumerator MoveSmoothly(Vector2 startPosition, Vector2 targetPosition, float duration) {
         float elapsed = 0f;
