@@ -76,7 +76,7 @@ public class broomMove : MonoBehaviour {
         wristMovementText = GameObject.Find("WristMovementText").GetComponent<Text>();
         timer = GameObject.Find("Time");
 
-        moveSpeed = 8f;
+        moveSpeed = 12f;
 
         isHit = false;
         isGameOver = false;
@@ -84,7 +84,7 @@ public class broomMove : MonoBehaviour {
 
         minX = -6.5f;
         maxX = 6.5f;
-        minY = -3f;
+        minY = -3.5f;
         maxY = 3f;
 
         leapProvider = FindObjectOfType<LeapServiceProvider>();
@@ -202,6 +202,7 @@ public class broomMove : MonoBehaviour {
 
     void OnUpdateFrame(Frame frame) {
         if (frame.Hands.Count > 0) { //사용자가 손을 인식하고 있는지
+            isLeapOn = true;
             hand = frame.Hands[0]; // 인식한 손 중 맨 처음에 인식한 손 하나를 hand변수에 참조
 
             if (IsPointingPose(hand)) { //인식한 손이 가르키는 손동작을 하고 있는지 확인
@@ -220,8 +221,6 @@ public class broomMove : MonoBehaviour {
                         explainText.enabled = false;
 
                         StartCoroutine(RunGame());
-
-                        isLeapOn = true;
                     }
                 }
             }
@@ -236,6 +235,7 @@ public class broomMove : MonoBehaviour {
         }
         else {
             rb.velocity = Vector2.zero;
+            isLeapOn = false;
         }
 
         if (Input.GetKeyDown(KeyCode.P) && !isLeapOn) {
