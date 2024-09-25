@@ -1,290 +1,185 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEngine.UI;
-using Leap;
-using Leap.Unity;
+using UnityEngine.SceneManagement; // SceneManager
+using TMPro; // TMP_Text
+using UnityEngine.Networking; // UnityWebRequest
+using System; // DateTime
 
-public class GameClear : MonoBehaviour {
-    public LeapServiceProvider leapProvider;
-    public Hand hand;
-
+public class GameClear : MonoBehaviour
+{
     public RectTransform pos;
-
     public TMP_Text textScore;
     public string text;
     public bool clear;
     public bool isPointing;
+    public bool isNext; // isNext 변수를 추가
 
     private string postUrl;
-    private string getUrl;
-    private Scene scene;
-    private string currentGameId;
-    private int beforeScore = -1;
-    private int transScore;
 
-    public float elapsedTime;
-    public float pointingStartTime;
-
-    public UnityEngine.UI.Image gaugeImage;
-
-    [System.Serializable]
-    public class GetData
+    private void Start()
     {
-        public string gameId;
-        public int gameScore;
-        public string gameDate;
-    }
-
-    [System.Serializable]
-    public class GetDataArray
-    {
-        public GetData[] scores;
-    }
-
-    [System.Serializable]
-    public class PostData
-    {
-        public string gameId;
-        public string memberId;
-        public int gameScore;
-        public string gameDate;
-
-        // `gameDate`를 DateTime으로 변환하는 메서드
-        public DateTime GetGameDate()
-        {
-            return DateTime.Parse(gameDate);
-        }
-
-        // `gameDate`를 설정하는 메서드
-        public void SetGameDate(DateTime date)
-        {
-            gameDate = date.ToString("yyyy-MM-dd");
-        }
-    }
-
-
-    public string sceneName;
-    public bool isNext;
-
-    void Start() {
         textScore = GameObject.Find("GameScore").GetComponent<TMP_Text>();
         pos = GetComponent<RectTransform>();
 
         pos.anchoredPosition = new Vector2(0, 10000);
-
         clear = false;
 
-        postUrl = "http://43.203.0.69:8080/api/Pmdata/score";
-        getUrl = "http://43.203.0.69:8080/api/games/member/{0}/game/{1}";
-
-        scene = SceneManager.GetActiveScene();
-
-        leapProvider = FindObjectOfType<LeapServiceProvider>();
-        leapProvider.OnUpdateFrame += OnUpdateFrame;
-
-        isPointing = false;
-        elapsedTime = 0f;
-
-        isNext = false;
+        postUrl = "http://43.203.0.69:8080/api/Pmdata/score"; // Post URL 설정
     }
 
-    void Update() {
-        if(clear && Input.GetKeyDown("p")) {
-            if(StoryOrStage.instance == null) {
+    private void Update()
+    {
+        // P 키를 눌렀을 때 씬 전환
+        if (clear && Input.GetKeyDown(KeyCode.P))
+        {
+            if (StoryOrStage.instance == null)
+            {
                 SceneManager.LoadScene("StageSelect");
             }
-            else if(StoryOrStage.instance.currentMode == "stage") {
+            else if (StoryOrStage.instance.currentMode == "stage")
+            {
                 SceneManager.LoadScene("StageSelect");
-            } 
-            else if(StoryOrStage.instance.currentMode == "story") {
+            }
+            else if (StoryOrStage.instance.currentMode == "story")
+            {
                 storyOrder();
             }
         }
     }
 
-    void OnUpdateFrame(Frame frame) {
-        if (frame.Hands.Count > 0 && isNext) {
-            hand = frame.Hands[0];
-            if(IsPointingPose(hand)) {
-                if (!isPointing) {
-                    pointingStartTime = Time.time;
-                    isPointing = true;
-                }
-                else {
-                    elapsedTime = Time.time - pointingStartTime;
-
-                    if (gaugeImage != null) {
-                        gaugeImage.fillAmount = Mathf.Clamp01(elapsedTime / 3f);
-                    }
-
-                    if (elapsedTime > 3f && clear) {
-                        isNext = false;
-                        if(StoryOrStage.instance == null) {
-                            SceneManager.LoadScene("StageSelect");
-                        }
-                        else if(StoryOrStage.instance.currentMode == "stage") {
-                            SceneManager.LoadScene("StageSelect");
-                        } 
-                        else if(StoryOrStage.instance.currentMode == "story") {
-                            storyOrder();
-                        }
-                    }
-                }
-            }
-            else {
-                if (gaugeImage != null) {
-                    elapsedTime = 0f;
-                    gaugeImage.fillAmount = 0f;
-                    isPointing = false;
-                }
-            }
-        }
-    }
-
-    public void storyOrder() {
-        Debug.Log(sceneName + "의 클리어 후 스토리...");
-
-        StoryOrStage.instance.nextStory = sceneName;
-        SceneManager.LoadScene("StoryPage");
-    }
-
-    public void Clear(int score) {
-        isNext = true;
+    public void Clear(int score)
+    {
+        isNext = true; // 게임 클리어 시 isNext를 true로 설정
         pos.anchoredPosition = new Vector2(0, 0);
         text = "your score is " + score.ToString();
         textScore.text = text;
         clear = true;
 
-        // 게임 종류에 따라 gameId 지정
-        if (scene.name == "platformScene")
-            currentGameId = "G001";
-        else if (scene.name == "BroomstickScene")
-            currentGameId = "G002";
-        else if (scene.name == "RhythmScene")
-            currentGameId = "G003";
-        else if (scene.name == "test")
-            currentGameId = "G004";
-        else if (scene.name == "ClawMachineScenes")
-            currentGameId = "G005";
+        // 게임 종류에 따라 gameId 지정 및 점수, 플래그 저장
+        if (SceneManager.GetActiveScene().name == "platformScene")
+        {
+            StoryOrStage.instance.G001Cleared = true;
+            StoryOrStage.instance.G001Score = score;
+            Debug.Log("G001 Cleared");
+        }
+        else if (SceneManager.GetActiveScene().name == "BroomstickScene")
+        {
+            StoryOrStage.instance.G002Cleared = true;
+            StoryOrStage.instance.G002Score = score;
+            Debug.Log("G002 Cleared");
+        }
+        else if (SceneManager.GetActiveScene().name == "RhythmScene")
+        {
+            StoryOrStage.instance.G003Cleared = true;
+            StoryOrStage.instance.G003Score = score;
+            Debug.Log("G003 Cleared");
+        }
+        else if (SceneManager.GetActiveScene().name == "test")
+        {
+            StoryOrStage.instance.G004Cleared = true;
+            StoryOrStage.instance.G004Score = score;
+            Debug.Log("G004 Cleared");
+        }
+        else if (SceneManager.GetActiveScene().name == "ClawMachineScenes")
+        {
+            StoryOrStage.instance.G005Cleared = true;
+            StoryOrStage.instance.G005Score = score;
+            Debug.Log("G005 Cleared");
+        }
 
-        // 암호화해서 로컬 저장한 memberId 불러옴
+        // 모든 게임 클리어 상태 로그 출력
+        LogGameClearStatus();
+
         string playerId = Login.LoadEncryptedData("userID");
 
-        sceneName = scene.name;
-
-        StartCoroutine(ProcessScore(playerId, currentGameId, score));
-
-    }
-
-    // api 통신을 통해 저장된 해당 게임의 점수를 가져오고 방금 클리어한 게임 스코어와 비교해
-    // 현재 스코어가 더 크면 api post 통신으로 score 저장
-    IEnumerator ProcessScore(string cplayerId, string pgameId, int pscore)
-    {
-        // api 통신을 통해 저장된 해당 게임의 점수를 가져오는 코루틴 실행
-        yield return StartCoroutine(GetScore(cplayerId, pgameId));
-
-        // 방금 클리어한 게임 스코어와 비교해 현재 스코어가 더 크면 api post 통신으로 score 저장
-        if (beforeScore < pscore)
+        // 모든 게임이 클리어되었을 때만 점수 전송
+        if (StoryOrStage.instance.AllGamesCleared())
         {
-           StartCoroutine(ScoreSave(currentGameId, pscore));
+            StartCoroutine(SaveAllScores());
+            // 점수 전송 후에 모든 점수 초기화 및 플래그 초기화 고민중
         }
     }
 
-    IEnumerator GetScore(string cmemberId, string pgameId)
+    void LogGameClearStatus()
     {
-        string url = string.Format(getUrl, cmemberId, pgameId);
-
-        // UnityWebRequest Get 요청 생성
-        UnityWebRequest www = UnityWebRequest.Get(url);
-
-        // 요청 전송
-        yield return www.SendWebRequest();
-
-        // 응답 대기
-        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-        {
-            // 연결 오류 시 응답 처리
-            print(www.downloadHandler.text);
-            Debug.Log("Response Code: " + www.responseCode);
-            Debug.Log("Request Error: " + www.error);
-        }
-        else // 정상 연결되었을 시 응답 처리
-        {
-            // JSON 데이터를 파싱하여 GameScore 배열로 변환
-            string json = www.downloadHandler.text;
-            string jsonData = JsonUtility.ToJson(json);
-
-            Debug.Log("Response Code: " + www.responseCode);
-            Debug.Log("Response: " + json);
-
-            // JSON 배열을 감싸는 형식으로 변환
-            string wrappedJson = "{\"scores\":" + json + "}";
-
-            // JSON 데이터에서 GameScore 객체 배열로 변환
-            GetDataArray wrapper = JsonUtility.FromJson<GetDataArray>(wrappedJson);
-
-            foreach (var score in wrapper.scores) 
-            {
-                // 받아온 게임 데이터 중 오늘 날짜랑 같은 데이터가 있는지 확인해서 전역변수로 저장
-                if(DateTime.Parse(score.gameDate) == DateTime.Now.Date)
-                {
-                    Debug.Log("Game Id: " + score.gameId);
-                    Debug.Log("Game Score: " + score.gameScore);
-                    Debug.Log("Game Date: " + score.gameDate);
-                    beforeScore = score.gameScore;
-                }
-            }
-        }
+        Debug.Log($"Game Clear Status: \n" +
+                  $"G001 Cleared: {StoryOrStage.instance.G001Cleared}, Score: {StoryOrStage.instance.G001Score}\n" +
+                  $"G002 Cleared: {StoryOrStage.instance.G002Cleared}, Score: {StoryOrStage.instance.G002Score}\n" +
+                  $"G003 Cleared: {StoryOrStage.instance.G003Cleared}, Score: {StoryOrStage.instance.G003Score}\n" +
+                  $"G004 Cleared: {StoryOrStage.instance.G004Cleared}, Score: {StoryOrStage.instance.G004Score}\n" +
+                  $"G005 Cleared: {StoryOrStage.instance.G005Cleared}, Score: {StoryOrStage.instance.G005Score}");
     }
 
-    IEnumerator ScoreSave(string pgameId, int pscore)
+    IEnumerator SaveAllScores()
     {
-        // API 통신으로 보낼 데이터 객체 생성
+        yield return ScoreSave(StoryOrStage.instance.G001Score, StoryOrStage.instance.G002Score, StoryOrStage.instance.G003Score, StoryOrStage.instance.G004Score, StoryOrStage.instance.G005Score);
+        Debug.Log("All scores posted successfully.");
+    }
+
+    IEnumerator ScoreSave(int score1, int score2, int score3, int score4, int score5)
+    {
         var scoreData = new PostData
         {
-            gameId = pgameId,
             memberId = Login.LoadEncryptedData("userID"),
-            gameScore = pscore,
+            gameScore1 = score1,
+            gameScore2 = score2,
+            gameScore3 = score3,
+            gameScore4 = score4,
+            gameScore5 = score5,
         };
 
-        scoreData.SetGameDate(DateTime.Now.Date);
-
-        // 객체를 JSON 데이터로 변환
         string jsonData = JsonUtility.ToJson(scoreData);
-
-        // JSON 데이터를 UTF-8 인코딩된 바이트 배열로 변환
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-
-        // UnityWebRequest 생성 및 설정 (해당 API url에 POST 방식으로 게임 데이터 전송)
         UnityWebRequest www = new UnityWebRequest(postUrl, UnityWebRequest.kHttpVerbPOST);
         www.uploadHandler = new UploadHandlerRaw(bodyRaw);
         www.downloadHandler = new DownloadHandlerBuffer();
         www.SetRequestHeader("Content-Type", "application/json");
 
-        // 요청 전송
         yield return www.SendWebRequest();
 
-        // 응답 대기
         if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            // 연결 오류 시 응답 처리
-            print(www.downloadHandler.text);
-            Debug.Log("Response Code: " + www.responseCode);
-            Debug.Log("Request Error: " + www.error);
+            Debug.Log("Error: " + www.error);
         }
         else
         {
-            // 정상 연결되었을 시 응답 처리
+            Debug.Log("Score post complete! Response: " + www.downloadHandler.text);
+
             Debug.Log("Response Code: " + www.responseCode);
-            Debug.Log("Response: " + www.downloadHandler.text);
         }
     }
 
+    void storyOrder()
+    {
+        // 스토리 순서에 따른 씬 전환 로직
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        Debug.Log(sceneName + "의 클리어 후 스토리...");
+        if (sceneName == "BroomstickScene")
+        {
+            SceneManager.LoadScene("platformScene");
+        }
+        else if (sceneName == "platformScene")
+        {
+            SceneManager.LoadScene("RhythmScene");
+        }
+        else if (sceneName == "RhythmScene")
+        {
+            SceneManager.LoadScene("test");
+        }
+        else if (sceneName == "test")
+        {
+            SceneManager.LoadScene("ClawMachineScenes");
+        }
+        else if (sceneName == "ClawMachineScenes")
+        {
+            Debug.Log("모두 클리어");
+            SceneManager.LoadScene("EndGame");
+        }
+    }
+
+    /*
     bool IsPointingPose(Hand hand) {
         foreach (Finger finger in hand.Fingers) {
             if (finger.Type == Finger.FingerType.TYPE_INDEX) {
@@ -297,4 +192,16 @@ public class GameClear : MonoBehaviour {
         
         return true;
     }
+    */
+}
+
+[System.Serializable]
+public class PostData
+{
+    public string memberId;
+    public int gameScore1;
+    public int gameScore2;
+    public int gameScore3;
+    public int gameScore4;
+    public int gameScore5;
 }
