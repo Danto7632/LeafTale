@@ -56,7 +56,7 @@ public class broomMove : MonoBehaviour {
     [Header("Text")]
     public GameObject explainPanel;
     public TMP_Text explainText;
-    public Text leapOnText;
+    public TMP_Text leapOnText;
 
     [Header("Timer")]
     GameObject timer;
@@ -89,7 +89,7 @@ public class broomMove : MonoBehaviour {
 
         leapProvider = FindObjectOfType<LeapServiceProvider>();
 
-        leapOnText = GameObject.Find("leapOnText").GetComponent<Text>();
+        leapOnText = GameObject.Find("leapOnText").GetComponent<TMP_Text>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
 
         isLeapOn = false;

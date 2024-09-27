@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d9f6a9a56b69543af8ea6ef0e3e42938
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Chilgok_kyb
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 730fd0fb96728494ea0e5bbad5140778, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

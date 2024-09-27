@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7fcba6d136dfd4edbaa00c94380871fd
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Chilgok_Kaj
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 66d8955d8d4894dc7b1d06ff316100cc, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
