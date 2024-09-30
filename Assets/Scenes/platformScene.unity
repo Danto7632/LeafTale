@@ -4381,7 +4381,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 517192189467299277, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 517192189467299277, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 781827455628758878, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_fontAsset
@@ -4483,7 +4487,7 @@ PrefabInstance:
     - target: {fileID: 3221157628717439474, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1d928152616ae42cd9a44a90e47178aa, type: 3}
+      objectReference: {fileID: 21300000, guid: 43b7a292dc2ba4be3814aded3fac383d, type: 3}
     - target: {fileID: 3221157628717439474, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 0.22
@@ -4587,7 +4591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4850663067617089999, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 133.5
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 4968593858646647290, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4886,7 +4890,7 @@ PrefabInstance:
     - target: {fileID: 9144162078447496561, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1d928152616ae42cd9a44a90e47178aa, type: 3}
+      objectReference: {fileID: 21300000, guid: 43b7a292dc2ba4be3814aded3fac383d, type: 3}
     m_RemovedComponents:
     - {fileID: 7180704213107232888, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
     m_RemovedGameObjects:

@@ -245,7 +245,7 @@ public class broomMove : MonoBehaviour {
                 } //특정 손동작을 인식한 시간을 저장
                 else {
                     elapsedTime = Time.time - pointingStartTime;
-                    StartBar.ChangeHealthBarAmount(elapsedTime / 3);
+                    StartBar.ChangeHealthBarAmount(elapsedTime);
 
                     if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
                         leapOnText.enabled = false;
