@@ -4478,8 +4478,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3221157628717439474, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3221157628717439474, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1d928152616ae42cd9a44a90e47178aa, type: 3}
     - target: {fileID: 3221157628717439474, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 0.22
@@ -4875,6 +4879,14 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9144162078447496561, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144162078447496561, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1d928152616ae42cd9a44a90e47178aa, type: 3}
     m_RemovedComponents:
     - {fileID: 7180704213107232888, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
     m_RemovedGameObjects:
