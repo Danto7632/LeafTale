@@ -2132,7 +2132,6 @@ GameObject:
   - component: {fileID: 1470326073}
   - component: {fileID: 1470326075}
   - component: {fileID: 1470326074}
-  - component: {fileID: 1470326076}
   m_Layer: 5
   m_Name: EndImagePosition
   m_TagString: Untagged
@@ -2180,7 +2179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1959538554, guid: 8ee3617d4a287024ca9c9c3ce3a757be, type: 3}
+  m_Sprite: {fileID: 1714153717, guid: fe3efe204943c45f389875659057d615, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2198,19 +2197,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470326072}
   m_CullTransparentMesh: 1
---- !u!114 &1470326076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470326072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2306d0988acf46258552832589b2740, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blinkDuration: 0
 --- !u!1 &1488318355
 GameObject:
   m_ObjectHideFlags: 0
