@@ -11,6 +11,7 @@ public class dragonAni : MonoBehaviour {
     public bool isExit;
 
     public Animator anim;
+    public playerAni playerani;
 
     public Vector3 targetPosition;
     public float moveDuration = 2.0f;
@@ -19,6 +20,7 @@ public class dragonAni : MonoBehaviour {
 
     public void Start() {
         anim = GetComponent<Animator>();
+        playerani = GameObject.Find("Player").GetComponent<playerAni>();
 
         isIdle = false;
         isAttack = false;
@@ -47,6 +49,7 @@ public class dragonAni : MonoBehaviour {
     }
 
     public IEnumerator dragonWin() {
+        StartCoroutine(playerani.hit2Play());
         isIdle = false;
         isAttack = true;
 
@@ -57,11 +60,12 @@ public class dragonAni : MonoBehaviour {
     }
 
     public IEnumerator dragonLose() {
+        StartCoroutine(playerani.playerWin());
         Debug.Log("Die dragon");
         isDie = true;
         isIdle = false;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.7f);
 
         Destroy(this.gameObject);
     }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class wolfAni : MonoBehaviour {
     public Enemeymanager enemeymanager;
 
+    public playerAni playerani;
+
     public bool isIdle;
     public bool isAttack;
     public bool isDie;
@@ -22,6 +24,8 @@ public class wolfAni : MonoBehaviour {
     public void Start() {
         enemeymanager = transform.parent.GetComponent<Enemeymanager>();
         anim = GetComponent<Animator>();
+
+        playerani = GameObject.Find("Player").GetComponent<playerAni>();
 
         isIdle = false;
         isAttack = false;
@@ -50,6 +54,7 @@ public class wolfAni : MonoBehaviour {
     }
 
     public IEnumerator wolfWin() {
+        StartCoroutine(playerani.hit1Play());
         isIdle = false;
         isAttack = true;
 
@@ -77,6 +82,10 @@ public class wolfAni : MonoBehaviour {
     }
 
     public IEnumerator wolfLose() {
+        StartCoroutine(playerani.playerWin());
+
+        yield return new WaitForSeconds(0.7f);
+
         isDie = true;
         isIdle = false;
 

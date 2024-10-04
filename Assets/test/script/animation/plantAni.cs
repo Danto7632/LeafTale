@@ -13,6 +13,7 @@ public class plantAni : MonoBehaviour {
     public bool isExit;
 
     public Animator anim;
+    public playerAni playerani;
 
     public Vector3 targetPosition;
     public float moveDuration = 2.0f;
@@ -21,6 +22,7 @@ public class plantAni : MonoBehaviour {
 
     public void Start() {
         enemeymanager = transform.parent.GetComponent<Enemeymanager>();
+        playerani = GameObject.Find("Player").GetComponent<playerAni>();
 
         anim = GetComponent<Animator>();
 
@@ -51,6 +53,7 @@ public class plantAni : MonoBehaviour {
     }
 
     public IEnumerator plantWin() {
+        StartCoroutine(playerani.hit2Play());
         isIdle = false;
         isAttack = true;
 
@@ -78,6 +81,10 @@ public class plantAni : MonoBehaviour {
     }
 
     public IEnumerator plantLose() {
+        StartCoroutine(playerani.playerWin());
+        
+        yield return new WaitForSeconds(0.7f);
+
         isDie = true;
         isIdle = false;
 

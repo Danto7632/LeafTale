@@ -72,6 +72,7 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
+                targetPosition.y = wolfEnemey.transform.position.y;
                 wolfEnemey.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             }
             else {
@@ -84,6 +85,7 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
+                targetPosition.y = plantEnemey.transform.position.y;
                 plantEnemey.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             }
             else {
@@ -96,6 +98,7 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
+                targetPosition.y = dragonEnemey.transform.position.y;
                 dragonEnemey.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             }
             else {
