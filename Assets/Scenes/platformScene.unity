@@ -4927,6 +4927,18 @@ PrefabInstance:
       propertyPath: gaugeImage
       value: 
       objectReference: {fileID: 5730738777501415387}
+    - target: {fileID: 6124676771691989697, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124676771691989697, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124676771691989697, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 6233508963281979051, guid: ef2884910891f452ebb8811d6025f82f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
