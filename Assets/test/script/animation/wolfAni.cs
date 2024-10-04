@@ -82,6 +82,8 @@ public class wolfAni : MonoBehaviour {
 
         yield return new WaitForSeconds(1.3f);
 
+        enemeymanager.secondEnemey();
+
         Destroy(this.gameObject);
     }
 

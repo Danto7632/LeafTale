@@ -76,7 +76,7 @@ public class ShapeSelector : MonoBehaviour {
     }
 
     IEnumerator endDelay() {
-        yield return new WaitForSeconds(2.333f);
+        yield return new WaitForSeconds(3f);
 
         GameObject.Find("GameManage").GetComponent<GameManager>().EndGame(0, 0);
     }

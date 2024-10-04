@@ -59,10 +59,11 @@ public class dragonAni : MonoBehaviour {
     }
 
     public IEnumerator dragonLose() {
+        Debug.Log("Die dragon");
         isDie = true;
         isIdle = false;
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(3f);
 
         Destroy(this.gameObject);
     }
