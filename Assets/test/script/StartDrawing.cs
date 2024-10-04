@@ -10,6 +10,8 @@ using Leap.Unity;
 public class StartDrawing : MonoBehaviour {
     private LeapServiceProvider leapProvider;
 
+    public ShapeSelector shapeSelector;
+
     public Hand hand;
     public bool isLeapOn;
 
@@ -22,6 +24,8 @@ public class StartDrawing : MonoBehaviour {
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
+
+        shapeSelector = GameObject.Find("ShapeSelector").GetComponent<ShapeSelector>();
 
         isDone = false;
     }
@@ -63,8 +67,8 @@ public class StartDrawing : MonoBehaviour {
 
     void RunGame() {
         DrawingGame.isBtnClicked = true;
-        Debug.Log("시작");
         isDone = true;
+        shapeSelector.gameStart();
         Destroy(gameObject);
     }
 

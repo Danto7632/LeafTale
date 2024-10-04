@@ -30,6 +30,8 @@ public class GameClear : MonoBehaviour {
     public float elapsedTime;
     public float pointingStartTime;
 
+    public UnityEngine.UI.Image gaugeImage;
+
     [System.Serializable]
     public class GetData
     {
@@ -65,11 +67,15 @@ public class GameClear : MonoBehaviour {
         }
     }
 
+
+    public string sceneName;
+    public bool isNext;
+
     void Start() {
         textScore = GameObject.Find("GameScore").GetComponent<TMP_Text>();
         pos = GetComponent<RectTransform>();
 
-        pos.anchoredPosition = new Vector2(0, 1000);
+        pos.anchoredPosition = new Vector2(0, 10000);
 
         clear = false;
 
@@ -83,33 +89,85 @@ public class GameClear : MonoBehaviour {
 
         isPointing = false;
         elapsedTime = 0f;
+
+        isNext = false;
     }
 
     void Update() {
-        if(clear && Input.GetKeyDown("p")) SceneManager.LoadScene("StageSelect");
+        if(clear && Input.GetKeyDown("p")) {
+            if(StoryOrStage.instance == null) {
+                SceneManager.LoadScene("StageSelect");
+            }
+            else if(StoryOrStage.instance.currentMode == "stage") {
+                SceneManager.LoadScene("StageSelect");
+            } 
+            else if(StoryOrStage.instance.currentMode == "story") {
+                storyOrder();
+            }
+        }
     }
 
     void OnUpdateFrame(Frame frame) {
-        if (frame.Hands.Count > 0) {
+        if (frame.Hands.Count > 0 && isNext) {
             hand = frame.Hands[0];
             if(IsPointingPose(hand)) {
                 if (!isPointing) {
                     pointingStartTime = Time.time;
-
                     isPointing = true;
                 }
                 else {
                     elapsedTime = Time.time - pointingStartTime;
 
-                    if (elapsedTime > 3f && clear) {
-                        // SceneManager.LoadScene("StageSelect");
+                    if (gaugeImage != null) {
+                        gaugeImage.fillAmount = Mathf.Clamp01(elapsedTime / 3f);
                     }
+
+                    if (elapsedTime > 3f && clear) {
+                        isNext = false;
+                        if(StoryOrStage.instance == null) {
+                            SceneManager.LoadScene("StageSelect");
+                        }
+                        else if(StoryOrStage.instance.currentMode == "stage") {
+                            SceneManager.LoadScene("StageSelect");
+                        } 
+                        else if(StoryOrStage.instance.currentMode == "story") {
+                            storyOrder();
+                        }
+                    }
+                }
+            }
+            else {
+                if (gaugeImage != null) {
+                    elapsedTime = 0f;
+                    gaugeImage.fillAmount = 0f;
+                    isPointing = false;
                 }
             }
         }
     }
 
+    public void storyOrder() {
+        Debug.Log(sceneName + "의 클리어 후 스토리...");
+        if (sceneName == "BroomstickScene") {
+            SceneManager.LoadScene("platformScene");
+        }
+        else if (sceneName == "platformScene") {
+            SceneManager.LoadScene("RhythmScene");
+        }
+        else if (sceneName == "RhythmScene") {
+            SceneManager.LoadScene("test");
+        }
+        else if (sceneName == "test") {
+            SceneManager.LoadScene("ClawMachineScenes");
+        }
+        else if (sceneName == "ClawMachineScenes") {
+            Debug.Log("모두 클리어");
+            SceneManager.LoadScene("EndGame");
+        }
+    }
+
     public void Clear(int score) {
+        isNext = true;
         pos.anchoredPosition = new Vector2(0, 0);
         text = "your score is " + score.ToString();
         textScore.text = text;
@@ -122,9 +180,15 @@ public class GameClear : MonoBehaviour {
             currentGameId = "G002";
         else if (scene.name == "RhythmScene")
             currentGameId = "G003";
+        else if (scene.name == "test")
+            currentGameId = "G004";
+        else if (scene.name == "ClawMachineScenes")
+            currentGameId = "G005";
 
         // 암호화해서 로컬 저장한 memberId 불러옴
         string playerId = Login.LoadEncryptedData("userID");
+
+        sceneName = scene.name;
 
         StartCoroutine(ProcessScore(playerId, currentGameId, score));
 
