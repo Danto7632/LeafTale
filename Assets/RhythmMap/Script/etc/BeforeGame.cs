@@ -47,7 +47,7 @@ public class BeforeGame : MonoBehaviour {
                 }
                 else {
                     elapsedTime = Time.time - pointingStartTime;
-                    StartBar.ChangeHealthBarAmount(elapsedTime / 3);
+                    StartBar.ChangeHealthBarAmount(elapsedTime);
 
                     if (elapsedTime > 3f) {
                         BeforeGameStartText.enabled = false;

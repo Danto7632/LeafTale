@@ -24,7 +24,7 @@ public class SpawnPointManager : MonoBehaviour {
                         cat.transform.localScale = cat.newScale;
                         cat.isFacingRight = true;
                     }
-                    other.transform.position = new Vector2(-18f, 4f);
+                    other.transform.position = new Vector2(-15f, 4f);
                     break;
 
                 case 1 :

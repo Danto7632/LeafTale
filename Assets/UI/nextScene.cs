@@ -20,6 +20,8 @@ public class nextScene : MonoBehaviour {
 
     public string nextSceneName;
 
+    public LeapMotionFlip leapMotionFlip;
+
     void Start() {
         ResetGauge();
 
@@ -32,6 +34,8 @@ public class nextScene : MonoBehaviour {
 
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
+
+        leapMotionFlip = GameObject.Find("LeapMotionManager").GetComponent<LeapMotionFlip>();
     }
 
     void Update() {
@@ -45,7 +49,7 @@ public class nextScene : MonoBehaviour {
                 UpdateGauge(elapsedTime);
 
                 if (elapsedTime > 3f && nextSceneName != null) {
-                    SceneManager.LoadScene(nextSceneName);
+                    leapMotionFlip.moveScene();
                 }
             }
         }
@@ -69,9 +73,9 @@ public class nextScene : MonoBehaviour {
                 else {
                     elapsedTime = Time.time - pointingStartTime;
                     UpdateGauge(elapsedTime);
-
-                    if (elapsedTime > 3f && nextSceneName != null) {
-                        SceneManager.LoadScene(nextSceneName);
+                    
+                    if(elapsedTime > 3f && nextSceneName != null) {
+                        leapMotionFlip.moveScene();
                     }
                 }
             }
