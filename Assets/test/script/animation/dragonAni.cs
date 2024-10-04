@@ -50,12 +50,10 @@ public class dragonAni : MonoBehaviour {
         isIdle = false;
         isAttack = true;
 
-        yield return new WaitForSeconds(2.333f);
+        yield return new WaitForSeconds(2.3f);
 
         isAttack = false;
         isIdle = true;
-
-        Destroy(this.gameObject);
     }
 
     public IEnumerator dragonLose() {
@@ -82,11 +80,5 @@ public class dragonAni : MonoBehaviour {
         anim.SetBool("isIdle", isIdle);
         anim.SetBool("isDie", isDie);
         anim.SetBool("isWalk", isWalk);
-    }
-
-    public void FlipObject() {
-        Vector3 scale = transform.localScale;
-        scale.x *= -1; // X 축 스케일을 반전
-        transform.localScale = scale;
     }
 }
