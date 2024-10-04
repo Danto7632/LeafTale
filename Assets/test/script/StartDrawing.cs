@@ -11,6 +11,7 @@ public class StartDrawing : MonoBehaviour {
     private LeapServiceProvider leapProvider;
 
     public ShapeSelector shapeSelector;
+    public Enemeymanager enemeymanager;
 
     public Hand hand;
     public bool isLeapOn;
@@ -26,6 +27,7 @@ public class StartDrawing : MonoBehaviour {
         leapProvider.OnUpdateFrame += OnUpdateFrame;
 
         shapeSelector = GameObject.Find("ShapeSelector").GetComponent<ShapeSelector>();
+        enemeymanager = GameObject.Find("AnimationManager").GetComponent<Enemeymanager>();
 
         isDone = false;
     }
@@ -69,6 +71,7 @@ public class StartDrawing : MonoBehaviour {
         DrawingGame.isBtnClicked = true;
         isDone = true;
         shapeSelector.gameStart();
+        enemeymanager.startEnemey();
         Destroy(gameObject);
     }
 

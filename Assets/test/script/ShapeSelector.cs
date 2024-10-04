@@ -69,9 +69,16 @@ public class ShapeSelector : MonoBehaviour {
                 startTimer.text = "Done";
                 gameTimer.text = drawingGame.sumScore.ToString();
                 GameManager.instance.AddScore((int)(drawingGame.sumScore / 3f));
-                GameObject.Find("GameManage").GetComponent<GameManager>().EndGame(0, 0);
+                StartCoroutine(endDelay());
+                
             }
         }
+    }
+
+    IEnumerator endDelay() {
+        yield return new WaitForSeconds(2.333f);
+
+        GameObject.Find("GameManage").GetComponent<GameManager>().EndGame(0, 0);
     }
 
     IEnumerator delayStage() {

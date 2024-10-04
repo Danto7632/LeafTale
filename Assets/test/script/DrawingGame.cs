@@ -23,6 +23,7 @@ public class DrawingGame : MonoBehaviour
 
     public LineRenderer referenceShape; // 참조 모양 (원 또는 사각형)
     public LineRenderer playerDrawing;  // 플레이어가 그린 모양
+    public Enemeymanager enemeymanager;
     public TMP_Text resultText;         // 정확도를 표시할 TextMeshPro 텍스트
 
     public int circleMaxPoints = 100;   // 원을 그릴 때 최대 점의 수
@@ -63,6 +64,7 @@ public class DrawingGame : MonoBehaviour
         handCollider = handVisualizer.GetComponent<CircleCollider2D>();
 
         shapeSelector = GameObject.Find("ShapeSelector").GetComponent<ShapeSelector>();
+        enemeymanager = GameObject.Find("AnimationManager").GetComponent<Enemeymanager>();
 
         maxScore = 0f;
         sumScore = 0f;
@@ -116,6 +118,7 @@ public class DrawingGame : MonoBehaviour
             if(countdownTimer <= 0) {
                 shapeSelector.nextStage(false);
                 sumScore += maxScore;
+                enemeymanager.isTimerOver = true;
             }
             else {
                 if(maxScore <= accuracy * 100f) {
@@ -191,6 +194,7 @@ public class DrawingGame : MonoBehaviour
                     if(accuracy * 100f >= 90f) {
                         sumScore += 100f;
                         shapeSelector.nextStage(false);
+                        enemeymanager.isPlayerWin = true;
                     }
                 }
             }
@@ -296,6 +300,7 @@ public class DrawingGame : MonoBehaviour
             starPoints[i * 2 + 1] = new Vector3(innerX, innerY, 0) + center; // Inner points
         }
         starPoints[points * 2] = starPoints[0]; // Close the star
+
         return starPoints;
     }
 
