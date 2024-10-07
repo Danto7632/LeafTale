@@ -53,7 +53,8 @@ public class plantAni : MonoBehaviour {
     }
 
     public IEnumerator plantWin() {
-        StartCoroutine(playerani.hit2Play());
+        StartCoroutine(playerani.hit2Play(0.6f));
+
         isIdle = false;
         isAttack = true;
 

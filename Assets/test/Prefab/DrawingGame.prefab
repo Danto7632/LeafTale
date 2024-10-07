@@ -44,10 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fca8f4f9d624652bacb185da204b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handVisualizerPrefab: {fileID: 5784611527443199244, guid: 5ef35a26dfb394bb6874bea852ab0d35, type: 3}
+  shapeBtns: []
+  handCollider: {fileID: 0}
   referenceShape: {fileID: 0}
   playerDrawing: {fileID: 0}
+  enemeymanager: {fileID: 0}
   resultText: {fileID: 0}
-  circleShape: []
-  squareShape: []
-  starShape: []
-  handVisualizerPrefab: {fileID: 5784611527443199244, guid: 5ef35a26dfb394bb6874bea852ab0d35, type: 3}
+  circleMaxPoints: 100
+  squareMaxPoints: 50
+  starMaxPoints: 150
+  playerPoints: []
+  shapeSelector: {fileID: 0}
+  countdownTimer: 0
+  maxScore: 0
+  sumScore: 0
+  accuracy: 0
+  minLimitMouse: {x: -7.5, y: -1.55, z: 0}
+  maxLimitMouse: {x: 7.5, y: 4.15, z: 0}
+  minLimitLeap: {x: -7.5, y: -1.55, z: 0}
+  maxLimitLeap: {x: 7.5, y: 4.15, z: 0}
+  minLimit: {x: -7.5, y: -1.55, z: 0}
+  maxLimit: {x: 7.5, y: 4.15, z: 0}

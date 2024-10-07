@@ -1,8 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemeymanager : MonoBehaviour {
+    public LineRenderer playerDrawing;
+    public LineRenderer referenceShape;
+
+    public TMP_Text startText;
+
     public wolfAni wolfani;
     public plantAni plantani;
     public dragonAni dragonani;
@@ -33,6 +39,9 @@ public class Enemeymanager : MonoBehaviour {
         wolfani = wolfEnemey.GetComponent<wolfAni>();
         plantani = plantEnemey.GetComponent<plantAni>();
         dragonani = dragonEnemey.GetComponent<dragonAni>();
+        playerDrawing = GameObject.Find("PlayerDrawing").GetComponent<LineRenderer>();
+        referenceShape = GameObject.Find("ReferenceShape").GetComponent<LineRenderer>();
+        startText = GameObject.Find("StartTimer").GetComponent<TMP_Text>();
 
         startPosition = wolfEnemey.transform.position;
         targetPosition = new Vector3(4.5f, wolfEnemey.transform.position.y, 0);
@@ -85,7 +94,7 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
-                targetPosition.y = plantEnemey.transform.position.y;
+                targetPosition.y = -3.32f;
                 plantEnemey.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             }
             else {
@@ -98,11 +107,11 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
-                targetPosition.y = dragonEnemey.transform.position.y;
-                dragonEnemey.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+                targetPosition.y = -2.0f;
+                dragonEnemey.transform.position = Vector3.Lerp(startPosition, new Vector3(5.3f, targetPosition.y, 0), elapsedTime / duration);
             }
             else {
-                dragonEnemey.transform.position = targetPosition;
+                dragonEnemey.transform.position = new Vector3(5.3f, -2.0f, 0);
                 isDragonStart = false;
             }
         }
@@ -121,6 +130,10 @@ public class Enemeymanager : MonoBehaviour {
                 isTimerOver = false;
             }
             stageNum++;
+            playerDrawing.gameObject.SetActive(false);
+            referenceShape.gameObject.SetActive(false);
+            startText.gameObject.SetActive(true);
+            startText.text = "Fail....";
         }
         else if(isPlayerWin) {
             if(stageNum == 1) {
@@ -136,6 +149,10 @@ public class Enemeymanager : MonoBehaviour {
                 isPlayerWin = false;
             }
             stageNum++;
+            playerDrawing.gameObject.SetActive(false);
+            referenceShape.gameObject.SetActive(false);
+            startText.gameObject.SetActive(true);
+            startText.text = "Complete!";
         }
     }
 }

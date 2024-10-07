@@ -34,7 +34,7 @@ public class playerAni : MonoBehaviour {
     }
 
     public IEnumerator hit1Play() {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.35f);
 
         isIdle = false;
         ishit1 = true;
@@ -45,8 +45,8 @@ public class playerAni : MonoBehaviour {
         ishit1 = false;
     }
 
-    public IEnumerator hit2Play() {
-        yield return new WaitForSeconds(0.45f);
+    public IEnumerator hit2Play(float delay) {
+        yield return new WaitForSeconds(delay);
         
         isIdle = false;
         ishit2 = true;

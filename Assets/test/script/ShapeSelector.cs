@@ -8,6 +8,7 @@ public class ShapeSelector : MonoBehaviour {
 
     public TMP_Text startTimer;
     public TMP_Text gameTimer;
+    public Image backGround;
 
     public LineRenderer referenceShape;
     public LineRenderer playerDrawing;
@@ -21,6 +22,7 @@ public class ShapeSelector : MonoBehaviour {
 
     private void Start() {
         drawingGame = GameObject.Find("DrawingGame").GetComponent<DrawingGame>();
+        backGround = GameObject.Find("backGround").GetComponent<Image>();
 
         drawingGame.resultText.gameObject.SetActive(false);
         referenceShape.gameObject.SetActive(false);
@@ -29,16 +31,19 @@ public class ShapeSelector : MonoBehaviour {
         isPlaying = false;
 
         shapeCount = 0;
+
+        backGround.gameObject.SetActive(false);
     }
 
     public void gameStart() {
         startTimer = GameObject.Find("StartTimer").GetComponent<TMP_Text>();
         gameTimer = GameObject.Find("GameTimer").GetComponent<TMP_Text>();
-
+        
         nextStage(true);
     }
 
     public void nextStage(bool isFirst) {
+        backGround.gameObject.SetActive(true);
         // 중복 실행 방지
         if (stageTimerCoroutine != null) {
             StopCoroutine(stageTimerCoroutine);
@@ -54,12 +59,10 @@ public class ShapeSelector : MonoBehaviour {
         }
         else {
             if (shapeCount < 3) {
-                drawingGame.resultText.text = "Complete!";
                 drawingGame.accuracy = 0f;
                 StartCoroutine(delayStage());
             }
             else {
-                referenceShape.gameObject.SetActive(false);
                 playerDrawing.gameObject.SetActive(false);
                 startTimer.gameObject.SetActive(true);
                 gameTimer.gameObject.SetActive(false);

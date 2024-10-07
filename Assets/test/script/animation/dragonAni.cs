@@ -49,7 +49,7 @@ public class dragonAni : MonoBehaviour {
     }
 
     public IEnumerator dragonWin() {
-        StartCoroutine(playerani.hit2Play());
+        StartCoroutine(playerani.hit2Play(1.3f));
         isIdle = false;
         isAttack = true;
 
@@ -61,11 +61,10 @@ public class dragonAni : MonoBehaviour {
 
     public IEnumerator dragonLose() {
         StartCoroutine(playerani.playerWin());
-        Debug.Log("Die dragon");
         isDie = true;
         isIdle = false;
 
-        yield return new WaitForSeconds(2.7f);
+        yield return new WaitForSeconds(2.4f);
 
         Destroy(this.gameObject);
     }

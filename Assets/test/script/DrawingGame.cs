@@ -42,6 +42,12 @@ public class DrawingGame : MonoBehaviour
     public float sumScore;
 
     public float accuracy;
+
+    public Vector3 minLimitMouse = new Vector3(-7.5f, -1.55f, 0); // Updated mouse minimum position
+    public Vector3 maxLimitMouse = new Vector3(7.5f, 4.15f, 0);  // Updated mouse maximum position
+
+    public Vector3 minLimitLeap = new Vector3(-7.5f, -1.55f, 0);   // Updated Leap Motion minimum position
+    public Vector3 maxLimitLeap = new Vector3(7.5f, 4.15f, 0);  // Updated Leap Motion maximum position
     
     private void Start()
     {
@@ -68,6 +74,11 @@ public class DrawingGame : MonoBehaviour
 
         maxScore = 0f;
         sumScore = 0f;
+
+        minLimitMouse = new Vector3(-7.5f, -1.55f, 0);
+        maxLimitMouse = new Vector3(7.5f, 4.15f, 0);
+        minLimitLeap = new Vector3(-7.5f, -1.55f, 0);
+        maxLimitLeap = new Vector3(7.5f, 4.15f, 0);
     }
 
     private void Update()
@@ -79,7 +90,7 @@ public class DrawingGame : MonoBehaviour
                 playerPoints.Clear();
                 playerDrawing.positionCount = 0;
                 isDrawing = true;
-            }   
+            } 
 
             if (Input.GetMouseButton(0) && isDrawing) // 마우스 왼쪽 버튼을 누르고 있을 때
             {
@@ -88,6 +99,9 @@ public class DrawingGame : MonoBehaviour
                 {
                     Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     mousePos.z = 0; // 2D 게임이므로 Z 축을 0으로 고정
+                
+                    mousePos.x = Mathf.Clamp(mousePos.x, minLimit.x, maxLimit.x); // X 좌표 제한
+                    mousePos.y = Mathf.Clamp(mousePos.y, minLimit.y, maxLimit.y); // Y 좌표 제한
 
                     // 플레이어가 마우스를 움직이면 새로운 점을 추가
                     if (playerPoints.Count == 0 || Vector3.Distance(playerPoints[playerPoints.Count - 1], mousePos) > 0.01f)
@@ -104,10 +118,11 @@ public class DrawingGame : MonoBehaviour
                 isDrawing = false;
                 accuracy = CalculateAccuracy();
                 resultText.gameObject.SetActive(true);
-                resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
+                resultText.text = (accuracy * 100).ToString("F2") + "%";
                 if(accuracy * 100f >= 90f && countdownTimer > 0) {
                     shapeSelector.nextStage(false);
                     sumScore += 100f;
+                    enemeymanager.isPlayerWin = true;
                 }
             }
 
@@ -131,8 +146,8 @@ public class DrawingGame : MonoBehaviour
         }
     }
 
-    public Vector3 minLimit = new Vector3(-8, -4.5f, 0); // 최소 위치
-    public Vector3 maxLimit = new Vector3(8, 4.5f, 0);  // 최대 위치
+    public Vector3 minLimit = new Vector3(-7.5f, -1.55f, 0); // 최소 위치
+    public Vector3 maxLimit = new Vector3(7.5f, 4.15f, 0); // 최대 위치
 
     private void OnUpdateFrame(Frame frame) {
         if (frame.Hands.Count > 0 && isBtnClicked && shapeSelector.isPlaying) // 손이 화면에 있을 때
@@ -155,8 +170,8 @@ public class DrawingGame : MonoBehaviour
             handVisualizer.SetActive(true);
 
             // X, Y, Z 좌표를 개별적으로 제한
-            screenPosition.x = Mathf.Clamp(screenPosition.x, -8, 8);
-            screenPosition.y = Mathf.Clamp(screenPosition.y, -4.5f, 4.5f);
+            screenPosition.x = Mathf.Clamp(screenPosition.x, minLimit.x, maxLimit.x); // X 좌표 제한
+            screenPosition.y = Mathf.Clamp(screenPosition.y, minLimit.y, maxLimit.y); // Y 좌표 제한
 
             if(IsFist(primaryHand)) {
                 handVisualizer.transform.position = new Vector3(0, 0, 0);
@@ -190,7 +205,7 @@ public class DrawingGame : MonoBehaviour
                     isDrawing = false;
                     accuracy = CalculateAccuracy();
                     resultText.gameObject.SetActive(true);
-                    resultText.text = "Accuracy: " + (accuracy * 100f).ToString("F2") + "%";
+                    resultText.text = (accuracy * 100f).ToString("F2") + "%";
                     if(accuracy * 100f >= 90f) {
                         sumScore += 100f;
                         shapeSelector.nextStage(false);
@@ -200,6 +215,8 @@ public class DrawingGame : MonoBehaviour
             }
             if(countdownTimer <= 0) {
                 shapeSelector.nextStage(false);
+                sumScore += maxScore;
+                enemeymanager.isTimerOver = true;
             }
             else {
                 if(maxScore <= accuracy * 100f) {
@@ -211,24 +228,25 @@ public class DrawingGame : MonoBehaviour
         {
             // 손이 감지되지 않을 때 시각화 비활성화
             handVisualizer.SetActive(false);
-            // isInitialPositionSet 재설정 코드 제거
         }
     }
 
     public void SetReferenceShape(Shape shape)
     {
+        Vector3 center = new Vector3(0, 1, 0);
+
         switch (shape)
         {
             case Shape.Circle:
-                SetReferenceShape(CreateCircle(Vector3.zero, 3f, 100));
+                SetReferenceShape(CreateCircle(center, 2.5f, 100));
                 maxPoints = circleMaxPoints; // 원에 대한 최대 점 수 설정
                 break;
             case Shape.Square:
-                SetReferenceShape(CreateSquare(Vector3.zero, 5f));
+                SetReferenceShape(CreateSquare(center, 5f));
                 maxPoints = squareMaxPoints; // 사각형에 대한 최대 점 수 설정
                 break;
             case Shape.Star:
-                SetReferenceShape(CreateStar(Vector3.zero, 3f, 5));
+                SetReferenceShape(CreateStar(center, 3f, 5));
                 maxPoints = starMaxPoints; // 별에 대한 최대 점 수 설정
                 break;
         }
