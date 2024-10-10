@@ -71,7 +71,7 @@ public class GameStart : MonoBehaviour {
     }
 
     void Update() {
-        if(!isGameStart && Input.GetKeyDown(KeyCode.P)) {
+        if(!isGameStart && Input.GetKeyDown(KeyCode.L)) {
             BeforeGameStartText.enabled = false;
             explainPanel.gameObject.SetActive(false);
             startTimer_Platform.StartCountdown();

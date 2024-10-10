@@ -31,7 +31,7 @@ public class GameClear : MonoBehaviour
     private void Update()
     {
         // P 키를 눌렀을 때 씬 전환
-        if (clear && Input.GetKeyDown(KeyCode.P))
+        if (clear && Input.GetKeyDown(KeyCode.M))
         {
             if (StoryOrStage.instance == null)
             {
@@ -156,26 +156,29 @@ public class GameClear : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
 
         Debug.Log(sceneName + "의 클리어 후 스토리...");
-        if (sceneName == "BroomstickScene")
+        if (sceneName == "ClawMachineScenes") {
+            StoryOrStage.instance.nextStory = "ClawMachineScenes";
+            SceneManager.LoadScene("StoryPage");
+        }
+        else if (sceneName == "BroomstickScene")
         {
-            SceneManager.LoadScene("platformScene");
+            StoryOrStage.instance.nextStory = "BroomstickScene";
+            SceneManager.LoadScene("StoryPage");
         }
         else if (sceneName == "platformScene")
         {
-            SceneManager.LoadScene("RhythmScene");
+            StoryOrStage.instance.nextStory = "platformScene";
+            SceneManager.LoadScene("StoryPage");
         }
         else if (sceneName == "RhythmScene")
         {
-            SceneManager.LoadScene("test");
+            StoryOrStage.instance.nextStory = "RhythmScene";
+            SceneManager.LoadScene("StoryPage");
         }
         else if (sceneName == "test")
         {
-            SceneManager.LoadScene("ClawMachineScenes");
-        }
-        else if (sceneName == "ClawMachineScenes")
-        {
-            Debug.Log("모두 클리어");
-            SceneManager.LoadScene("EndGame");
+            StoryOrStage.instance.nextStory = "test";
+            SceneManager.LoadScene("StoryPage");
         }
     }
 

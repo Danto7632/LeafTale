@@ -31,11 +31,11 @@ public class LeapMotionFlip : MonoBehaviour {
         books = new GameObject[6];
 
         books[0] = GameObject.Find("ExplainPage");
-        books[1] = GameObject.Find("BroomPage");
+        books[1] = GameObject.Find("ClawPage");
         books[2] = GameObject.Find("PlatformPage");
         books[3] = GameObject.Find("RhythmPage");
         books[4] = GameObject.Find("MagiccirclePage");
-        books[5] = GameObject.Find("ClawPage");
+        books[5] = GameObject.Find("BroomPage");
 
         for(int i = 0; i < 6; i++) {
             books[i].SetActive(false);

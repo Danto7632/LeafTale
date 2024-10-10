@@ -155,6 +155,7 @@ public class broomMove : MonoBehaviour {
 
         minY = -3.5f;
         isMoveAllow = true;
+        transform.Rotate(0, 0, 0);
 
         yield return new WaitForSeconds(0.8f);
 
@@ -270,7 +271,7 @@ public class broomMove : MonoBehaviour {
             isLeapOn = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && !isLeapOn) {
+        if (Input.GetKeyDown(KeyCode.L) && !isLeapOn) {
             leapOnText.enabled = false;
             explainPanel.gameObject.SetActive(false);
             explainText.enabled = false;

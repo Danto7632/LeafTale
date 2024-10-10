@@ -61,7 +61,7 @@ public class StartDrawing : MonoBehaviour {
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.P) && !isLeapOn) {
+            if (Input.GetKeyDown(KeyCode.L) && !isLeapOn) {
                 RunGame();
             } //립모션이 아닌 키보드로 플레이하는 경우 P키를 눌러 시작
         }

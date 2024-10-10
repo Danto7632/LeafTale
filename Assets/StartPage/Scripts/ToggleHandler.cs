@@ -23,6 +23,18 @@ public class ToggleHandler : MonoBehaviour
         }
     }
 
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.LeftArrow)) {
+            stageToggle.isOn = true;
+            storyToggle.isOn = false;
+        }
+
+        else if(Input.GetKeyDown(KeyCode.RightArrow) ){
+            storyToggle.isOn = true;
+            stageToggle.isOn = false;
+        }
+    }
+
     void OnStageToggleChanged(bool isOn)
     {
         if (isOn)

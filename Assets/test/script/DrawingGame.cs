@@ -126,7 +126,7 @@ public class DrawingGame : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.P)) {
+            if (Input.GetKeyDown(KeyCode.L)) {
                 DrawPerfectShape();
             }
 

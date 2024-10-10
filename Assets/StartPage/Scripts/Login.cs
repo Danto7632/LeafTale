@@ -35,11 +35,30 @@ public class Login : MonoBehaviour {
         public string password;
     }
 
+    public static bool isAlreadyLogin;
+
     void Start()
     {
         url = "http://43.203.0.69:8080/api/login";
         mainCamera = Camera.main;
         isFadingOut = false;
+
+        string savedId = LoadEncryptedData("userID");
+        string savedPassword = LoadEncryptedData("userPassword");
+
+        if (!string.IsNullOrEmpty(savedId) && !string.IsNullOrEmpty(savedPassword)) {
+            isAlreadyLogin = true; 
+            
+            idInput.text = savedId; // ID 필드에 자동으로 입력
+            pwInput.text = savedPassword; // 비밀번호 필드에 자동으로 입력 (선택적)
+
+            // 자동으로 로그인 시도 (원하는 경우)
+            StartCoroutine(AccountLogin());
+
+        }
+        else {
+            isAlreadyLogin = false;
+        }
     }
 
     void Update() {
@@ -103,7 +122,8 @@ public class Login : MonoBehaviour {
                 loginFail.gameObject.SetActive(false);
                 // 아이디 암호화해서 로컬 저장하는 사용자 지정 함수 (점수 데이터 전송할 때 같이 전송하기 위함)
                 SaveEncryptedData("userID", idInput.text); 
-
+                SaveEncryptedData("userPassword", pwInput.text); // 비밀번호도 저장
+                
                 loginPanel.SetActive(false);
                 rank.SetActive(true);
                 pressStart.SetActive(true);

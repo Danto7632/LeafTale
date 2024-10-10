@@ -59,7 +59,7 @@ public class StartClaw : MonoBehaviour {
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.P) && !isLeapOn) {
+            if (Input.GetKeyDown(KeyCode.L) && !isLeapOn) {
                 RunGame();
             }
         }
