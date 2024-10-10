@@ -7,6 +7,9 @@ public class PatternSpawner : MonoBehaviour
     public GameObject RightNode;
     public GameObject LeftNode;
 
+    public static int leftNodeCount = 0;
+    public static int rightNodeCount = 0;
+
     // Right와 Left의 임의 패턴 설정
     public List<int> RightPattern;
     public List<int> LeftPattern;
@@ -33,6 +36,24 @@ public class PatternSpawner : MonoBehaviour
     private Vector2 rightSpawnPosition = new Vector2(25, 0);
     private Vector2 leftSpawnPosition = new Vector2(-25, 0);
 
+    void Awake()
+    {
+        // 패턴 초기화 (테스트용)
+        RightPattern = new List<int> { 1, 0, 3, 2, 3, 0, 3, 3, 2, 1, 0, 1 };
+        LeftPattern = new List<int> { 3, 1, 2, 0, 3, 2, 2, 1, 3, 2, 1, 0 };
+
+        foreach(int item in RightPattern)
+        {
+            if (item != 0)
+                rightNodeCount++;
+        }
+
+        foreach (int item in LeftPattern)
+        {
+            if (item != 0)
+                leftNodeCount++;
+        }
+    }
     void Start()
     {
         // 딕셔너리 초기화
@@ -49,10 +70,6 @@ public class PatternSpawner : MonoBehaviour
             {2, ScissorLeftPrefab},
             {3, RockLeftPrefab}
         };
-
-        // 패턴 초기화 (테스트용)
-        RightPattern = new List<int> { 1, 0, 3, 2, 3, 0, 3, 3, 2, 1, 0, 1};
-        LeftPattern = new List<int> { 3, 1, 2, 0, 3, 2, 2, 1, 3, 2, 1, 0 };
 
         // 오브젝트 한 번에 생성
         SpawnObjects(RightPattern, RightNode.transform, ref rightSpawnPosition, 5, rightPrefabNames);

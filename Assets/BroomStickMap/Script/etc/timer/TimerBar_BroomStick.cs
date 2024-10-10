@@ -21,9 +21,9 @@ public class TimerBar_BroomStick : MonoBehaviour {
 
         timerBar.fillAmount = 1;
 
-        time_subtract = 7;
-        time_add = 5;
-        maxTime = 60f;
+        time_subtract = 5; //7
+        time_add = 3; //5
+        maxTime = 30f; //60
         timeLeft = maxTime;
         timeLast = 0f;
 

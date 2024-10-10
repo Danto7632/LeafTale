@@ -8,13 +8,9 @@ public class RhythmScore : MonoBehaviour
     public GameObject RightNode;
     public GameObject Clear;
 
-    public int leftNodeCount;
-    public int rightNodeCount;
     public int allNodeCount;
     public int allNode;
     public int score;
-
-    private PatternSpawner patternSpawner;
 
     void Start()
     {
@@ -22,30 +18,10 @@ public class RhythmScore : MonoBehaviour
         RightNode = GameObject.Find("RightNode");
         Clear = GameObject.Find("GameClear");
 
-        patternSpawner = GameObject.Find("PatternSpawner").GetComponent<PatternSpawner>();
-
-        leftNodeCount = CountValidNodes(patternSpawner.LeftPattern);
-        rightNodeCount = CountValidNodes(patternSpawner.RightPattern);
-
-        allNodeCount = leftNodeCount + rightNodeCount;
+        allNodeCount = PatternSpawner.rightNodeCount + PatternSpawner.leftNodeCount;
         allNode = allNodeCount;
         score = 0;
-        
-        allNode = 18;
-        allNodeCount = 18;
-    }
 
-    int CountValidNodes(List<int> pattern)
-    {
-        int count = 0;
-        foreach (int value in pattern)
-        {
-            if (value != 0)
-            {
-                count++;
-            }
-        }
-        return count;
     }
 
     public void NodeHit(int addScore)
