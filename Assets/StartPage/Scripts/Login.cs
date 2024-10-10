@@ -36,6 +36,8 @@ public class Login : MonoBehaviour {
         public string password;
     }
 
+    public static bool isAlreadyLogin;
+
     void Start()
     {
         url = "http://43.203.0.69:8080/api/login";
@@ -122,6 +124,7 @@ public class Login : MonoBehaviour {
                 loginFail.gameObject.SetActive(false);
                 // 아이디 암호화해서 로컬 저장하는 사용자 지정 함수 (점수 데이터 전송할 때 같이 전송하기 위함)
                 SaveEncryptedData("userID", idInput.text); 
+                SaveEncryptedData("userPassword", pwInput.text); // 비밀번호도 저장
 
                 loginPanel.SetActive(false);
                 rank.SetActive(true);
