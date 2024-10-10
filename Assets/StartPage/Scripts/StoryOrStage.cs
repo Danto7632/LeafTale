@@ -6,6 +6,12 @@ public class StoryOrStage : MonoBehaviour
 {
     public static StoryOrStage instance { get; private set; }
 
+    public bool isClawGood = false;
+    public bool isBroomGood = false;
+    public bool isPlatGood = false;
+    public bool isRhythmGood = false;
+    public bool isMagicGood = false;
+
     public string currentMode;
     public string nextStory;
 

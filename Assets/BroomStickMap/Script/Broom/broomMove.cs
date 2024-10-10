@@ -60,6 +60,7 @@ public class broomMove : MonoBehaviour {
 
     [Header("Timer")]
     GameObject timer;
+    public int plusTimerNum;
     public static float elapsedTime;
 
     void Awake() {
@@ -97,6 +98,7 @@ public class broomMove : MonoBehaviour {
         leapOnText.enabled = true;
 
         totalWristMovement = 0f;
+        plusTimerNum = 0;
     }
 
     void Update() {
@@ -134,6 +136,7 @@ public class broomMove : MonoBehaviour {
 
         if(other.gameObject.CompareTag("PlusTimer") && !isHit) {
             timer.GetComponent<TimerBar_BroomStick>().timeLeft += timer.GetComponent<TimerBar_BroomStick>().time_add;
+            plusTimerNum++;
         }
     }
 
@@ -220,6 +223,13 @@ public class broomMove : MonoBehaviour {
     }
 
     public void GameOver() {
+        if(plusTimerNum == 3) {
+            StoryOrStage.instance.isBroomGood = true;
+        }
+        else {
+            StoryOrStage.instance.isBroomGood = false;
+        }
+        
         isGameOver = true;
         isMoveAllow = false;
 

@@ -23,6 +23,7 @@ public class Login : MonoBehaviour {
     public TMP_Text loginFail;
 
     private bool isFadingOut;
+    public static bool isNotToggle;
     private string url;
     
     private static readonly byte[] key = Encoding.UTF8.GetBytes("Id28e3PsN258b1R4");
@@ -35,14 +36,11 @@ public class Login : MonoBehaviour {
         public string password;
     }
 
-    public static bool isAlreadyLogin;
-
     void Start()
     {
         url = "http://43.203.0.69:8080/api/login";
         mainCamera = Camera.main;
         isFadingOut = false;
-
         string savedId = LoadEncryptedData("userID");
         string savedPassword = LoadEncryptedData("userPassword");
 
@@ -59,6 +57,8 @@ public class Login : MonoBehaviour {
         else {
             isAlreadyLogin = false;
         }
+
+        isNotToggle = false;
     }
 
     void Update() {
@@ -122,8 +122,7 @@ public class Login : MonoBehaviour {
                 loginFail.gameObject.SetActive(false);
                 // 아이디 암호화해서 로컬 저장하는 사용자 지정 함수 (점수 데이터 전송할 때 같이 전송하기 위함)
                 SaveEncryptedData("userID", idInput.text); 
-                SaveEncryptedData("userPassword", pwInput.text); // 비밀번호도 저장
-                
+
                 loginPanel.SetActive(false);
                 rank.SetActive(true);
                 pressStart.SetActive(true);
@@ -176,6 +175,7 @@ public class Login : MonoBehaviour {
     }
 
     IEnumerator anima(float duration, float x, float y, float size) {
+        isNotToggle = true;
         float elapsedTime = 0f;
         float initialSize = mainCamera.orthographicSize;
         Vector3 initialPosition = mainCamera.transform.position;

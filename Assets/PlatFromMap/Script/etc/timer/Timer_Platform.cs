@@ -52,6 +52,7 @@ public class Timer_Platform : MonoBehaviour {
 
             if (time <= 0) {
                 time = 0;
+                StoryOrStage.instance.isPlatGood = false;
                 gameOverText.text = "게임 오버";
                 currentTime = (int)time;
 

@@ -39,6 +39,12 @@ public class RhythmScore : MonoBehaviour
     {
         float finScore;
         finScore = score * (100.0F / (allNode * 2.0F));
+        if(finScore >= 80) {
+            StoryOrStage.instance.isRhythmGood = true;
+        }
+        else {
+            StoryOrStage.instance.isRhythmGood = false;
+        }
         Clear.GetComponent<GameClear>().Clear((int)(finScore));
     }
 }
