@@ -133,7 +133,7 @@ public class Enemeymanager : MonoBehaviour {
             playerDrawing.gameObject.SetActive(false);
             referenceShape.gameObject.SetActive(false);
             startText.gameObject.SetActive(true);
-            startText.text = "Fail....";
+            startText.text = "Fail...."; 
         }
         else if(isPlayerWin) {
             if(stageNum == 1) {
