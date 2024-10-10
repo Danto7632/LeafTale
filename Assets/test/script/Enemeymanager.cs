@@ -46,6 +46,8 @@ public class Enemeymanager : MonoBehaviour {
         stageNum = 1;
         isTimerOver = false;
         isPlayerWin = false;
+
+        StoryOrStage.instance.isMagicGood = true;
     }
 
 
@@ -110,7 +112,7 @@ public class Enemeymanager : MonoBehaviour {
         if(isTimerOver) {
             if(stageNum == 1) {
                 StartCoroutine(wolfani.wolfWin());
-                isTimerOver = false;
+                isTimerOver = false;    
             }
             else if(stageNum == 2) {
                 StartCoroutine(plantani.plantWin());
@@ -121,6 +123,14 @@ public class Enemeymanager : MonoBehaviour {
                 isTimerOver = false;
             }
             stageNum++;
+<<<<<<< Updated upstream
+=======
+            playerDrawing.gameObject.SetActive(false);
+            referenceShape.gameObject.SetActive(false);
+            startText.gameObject.SetActive(true);
+            startText.text = "Fail....";
+            StoryOrStage.instance.isMagicGood = false;
+>>>>>>> Stashed changes
         }
         else if(isPlayerWin) {
             if(stageNum == 1) {

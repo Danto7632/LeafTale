@@ -142,6 +142,12 @@ public class Book : MonoBehaviour {
         {
             UpdateBook();
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("현재 페이지 수: " + TotalPageCount);
+            Debug.Log("현재 페이지 인덱스: " + currentPage);
+        }
     }
     public void UpdateBook()
     {
