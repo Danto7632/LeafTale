@@ -210,7 +210,6 @@ public class catMove : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("EndZone")) {
-            StoryOrStage.instance.isPlatGood = true;
             isMoveAllow = false;
             isGameOver = true;
             rb.velocity = Vector2.zero;

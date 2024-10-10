@@ -23,7 +23,6 @@ public class Login : MonoBehaviour {
     public TMP_Text loginFail;
 
     private bool isFadingOut;
-    public static bool isNotToggle;
     private string url;
     
     private static readonly byte[] key = Encoding.UTF8.GetBytes("Id28e3PsN258b1R4");
@@ -41,28 +40,6 @@ public class Login : MonoBehaviour {
         url = "http://43.203.0.69:8080/api/login";
         mainCamera = Camera.main;
         isFadingOut = false;
-<<<<<<< Updated upstream
-=======
-
-        string savedId = LoadEncryptedData("userID");
-        string savedPassword = LoadEncryptedData("userPassword");
-
-        if (!string.IsNullOrEmpty(savedId) && !string.IsNullOrEmpty(savedPassword)) {
-            isAlreadyLogin = true; 
-            
-            idInput.text = savedId; // ID 필드에 자동으로 입력
-            pwInput.text = savedPassword; // 비밀번호 필드에 자동으로 입력 (선택적)
-
-            // 자동으로 로그인 시도 (원하는 경우)
-            StartCoroutine(AccountLogin());
-
-        }
-        else {
-            isAlreadyLogin = false;
-        }
-
-        isNotToggle = false;
->>>>>>> Stashed changes
     }
 
     void Update() {
@@ -179,7 +156,6 @@ public class Login : MonoBehaviour {
     }
 
     IEnumerator anima(float duration, float x, float y, float size) {
-        isNotToggle = true;
         float elapsedTime = 0f;
         float initialSize = mainCamera.orthographicSize;
         Vector3 initialPosition = mainCamera.transform.position;

@@ -42,7 +42,6 @@ public class powerBar : MonoBehaviour
         }
         else
         {
-            StoryOrStage.instance.isClawGood = false;
             power.fillAmount = 0;
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);

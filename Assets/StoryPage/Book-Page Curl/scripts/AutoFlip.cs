@@ -29,12 +29,7 @@ public class AutoFlip : MonoBehaviour {
     public void FlipRightPage()
     {
         if (isFlipping) return;
-<<<<<<< Updated upstream
         if (ControledBook.currentPage >= ControledBook.TotalPageCount) return;
-=======
-        if (ControledBook.currentPage >= ControledBook.TotalPageCount - 1) return;
-
->>>>>>> Stashed changes
         isFlipping = true;
         float frameTime = PageFlipTime / AnimationFramesCount;
         float xc = (ControledBook.EndBottomRight.x + ControledBook.EndBottomLeft.x) / 2;

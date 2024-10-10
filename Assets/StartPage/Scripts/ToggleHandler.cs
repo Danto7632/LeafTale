@@ -23,29 +23,9 @@ public class ToggleHandler : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
-=======
-    void Update() {
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && !Login.isNotToggle) {
-            stageToggle.isOn = true;
-            storyToggle.isOn = false;
-        }
-
-        else if(Input.GetKeyDown(KeyCode.RightArrow) && !Login.isNotToggle){
-            storyToggle.isOn = true;
-            stageToggle.isOn = false;
-        }
-
-        if(Login.isNotToggle) {
-            storyToggle.interactable = false;
-            stageToggle.interactable = false;
-        }
-    }
-
->>>>>>> Stashed changes
     void OnStageToggleChanged(bool isOn)
     {
-        if (isOn && !Login.isNotToggle)
+        if (isOn)
         {
             StoryOrStage.instance.currentMode = "stage";
             storyToggle.isOn = false; // Story 체크박스는 해제
@@ -54,7 +34,7 @@ public class ToggleHandler : MonoBehaviour
 
     void OnStoryToggleChanged(bool isOn)
     {
-        if (isOn && !Login.isNotToggle)
+        if (isOn)
         {
             StoryOrStage.instance.currentMode = "story";
             stageToggle.isOn = false; // Stage 체크박스는 해제
