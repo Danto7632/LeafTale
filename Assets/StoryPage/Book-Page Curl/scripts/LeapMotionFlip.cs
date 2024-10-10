@@ -17,7 +17,7 @@ public class LeapMotionFlip : MonoBehaviour {
     bool isPointing;
     float pointingStartTime;
 
-    public GameObject[] books = new GameObject[6];
+    public GameObject[] books;
 
 
     void Start() {
@@ -28,7 +28,7 @@ public class LeapMotionFlip : MonoBehaviour {
 
         swipeDistanceThreshold = 3f;
 
-        books = new GameObject[6];
+        books = new GameObject[11];
 
         books[0] = GameObject.Find("ExplainPage");
         books[1] = GameObject.Find("ClawPage");
@@ -37,7 +37,13 @@ public class LeapMotionFlip : MonoBehaviour {
         books[4] = GameObject.Find("MagiccirclePage");
         books[5] = GameObject.Find("BroomPage");
 
-        for(int i = 0; i < 6; i++) {
+        books[6] = GameObject.Find("ClawPage_Fail");
+        books[7] = GameObject.Find("PlatformPage_Fail");
+        books[8] = GameObject.Find("RhythmPage_Fail");
+        books[9] = GameObject.Find("MagiccirclePage_Fail");
+        books[10] = GameObject.Find("BroomPage_Fail");
+
+        for(int i = 0; i < 11; i++) {
             books[i].SetActive(false);
         }
 
@@ -53,29 +59,60 @@ public class LeapMotionFlip : MonoBehaviour {
                     break;
 
                 case "ClawMachineScenes" :
-                    books[1].SetActive(true);
-                    autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                    if(!StoryOrStage.instance.isClawGood) {
+                        books[6].SetActive(true);
+                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
+                    else {
+                        books[1].SetActive(true);
+                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
                     break;
 
                 case "platformScene" :
-                    books[2].SetActive(true);
-                    autoFlip = books[2].transform.Find("Book").GetComponent<AutoFlip>();
+                    if(!StoryOrStage.instance.isPlatGood) {
+                        books[7].SetActive(true);
+                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
+                    else {
+                        books[2].SetActive(true);
+                        autoFlip = books[2].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
                     break;
 
                 case "RhythmScene" :
-                    books[3].SetActive(true);
-                    autoFlip = books[3].transform.Find("Book").GetComponent<AutoFlip>();
+                    if(!StoryOrStage.instance.isRhythmGood) {
+                        books[8].SetActive(true);
+                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
+                    else {
+                        books[3].SetActive(true);
+                        autoFlip = books[3].transform.Find("Book").GetComponent<AutoFlip>();
+                    }     
                     break;
 
                 case "test" :
-                    books[4].SetActive(true);   
-                    autoFlip = books[4].transform.Find("Book").GetComponent<AutoFlip>();
+                    if(!StoryOrStage.instance.isMagicGood) {
+                        books[9].SetActive(true);
+                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
+                    else {
+                        books[4].SetActive(true);   
+                        autoFlip = books[4].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
                     break;
 
                 case "BroomstickScene" :
-                    books[5].SetActive(true);
-                    autoFlip = books[5].transform.Find("Book").GetComponent<AutoFlip>();
+                    if(!StoryOrStage.instance.isBroomGood) {
+                        books[10].SetActive(true);
+                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
+                    else {
+                        books[5].SetActive(true);
+                        autoFlip = books[5].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
                     break;
+
             } 
         }
     }

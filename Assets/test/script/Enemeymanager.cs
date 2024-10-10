@@ -55,6 +55,8 @@ public class Enemeymanager : MonoBehaviour {
         stageNum = 1;
         isTimerOver = false;
         isPlayerWin = false;
+
+        StoryOrStage.instance.isMagicGood = true;
     }
 
 
@@ -130,10 +132,12 @@ public class Enemeymanager : MonoBehaviour {
                 isTimerOver = false;
             }
             stageNum++;
+
             playerDrawing.gameObject.SetActive(false);
             referenceShape.gameObject.SetActive(false);
             startText.gameObject.SetActive(true);
             startText.text = "Fail....";
+            StoryOrStage.instance.isMagicGood = false;
         }
         else if(isPlayerWin) {
             if(stageNum == 1) {
