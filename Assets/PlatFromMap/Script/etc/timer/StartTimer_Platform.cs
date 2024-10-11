@@ -45,6 +45,7 @@ public class StartTimer_Platform : MonoBehaviour {
         }
 
         timerText.text = "GO!";
+        psm.startSound.Play();
         cat.isMoveAllow = true;
 
         yield return new WaitForSeconds(0.5f);

@@ -61,7 +61,6 @@ public class GameStart : MonoBehaviour {
                         BeforeGameStartText.enabled = false;
                         startTimer_Platform.StartCountdown();
                         timer_Platform.timerStart();
-                        psm.startSound.Play();
                         psm.chargedSound.Stop();
                         isGameStart = true;
                     }
@@ -81,7 +80,6 @@ public class GameStart : MonoBehaviour {
             explainPanel.gameObject.SetActive(false);
             startTimer_Platform.StartCountdown();
             timer_Platform.timerStart();
-            psm.startSound.Play();
             isGameStart = true;
         }
     }
