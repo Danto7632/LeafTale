@@ -43,24 +43,4 @@ public class ToggleHandler : MonoBehaviour
             stageToggle.interactable = false;
         }
     }
-
-    void OnStageToggleChanged(bool isOn)
-    {
-        if (isOn && !Login.isNotToggle)
-        {
-            StoryOrStage.instance.currentMode = "stage";
-            storyToggle.isOn = false; // Story 체크박스는 해제
-            changedSound.Play();
-        }
-    }
-
-    void OnStoryToggleChanged(bool isOn)
-    {
-        if (isOn && !Login.isNotToggle)
-        {
-            StoryOrStage.instance.currentMode = "story";
-            stageToggle.isOn = false; // Stage 체크박스는 해제
-            changedSound.Play();
-        }
-    }
 }
