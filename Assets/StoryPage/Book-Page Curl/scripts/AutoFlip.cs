@@ -12,14 +12,19 @@ public class AutoFlip : MonoBehaviour {
     public int AnimationFramesCount;
     bool isFlipping = false;
 
+    public flipSoundManager fsm;
+
     void Start () {
         AutoStartFlip = false;
-        AnimationFramesCount = 300;
+        AnimationFramesCount = 400;
         if (!ControledBook)
             ControledBook = GetComponent<Book>();
         if (AutoStartFlip)
             StartFlipping();
         ControledBook.OnFlip.AddListener(new UnityEngine.Events.UnityAction(PageFlipped));
+
+
+        fsm = GameObject.Find("SoundManager").GetComponent<flipSoundManager>();
     }
 
     void PageFlipped() {
@@ -32,9 +37,10 @@ public class AutoFlip : MonoBehaviour {
 
     public void FlipRightPage() {
         if (isFlipping) return;
-        if (ControledBook.currentPage >= ControledBook.TotalPageCount) return;
-
+        if (ControledBook.currentPage == ControledBook.TotalPageCount - 1) return;
+        
         isFlipping = true;
+        fsm.flipSound.Play();
         StartCoroutine(FlipPage(true));
     }
 
@@ -43,6 +49,7 @@ public class AutoFlip : MonoBehaviour {
         if (ControledBook.currentPage <= 0) return;
 
         isFlipping = true;
+        fsm.flipSound.Play();
         StartCoroutine(FlipPage(false));
     }
 
@@ -98,5 +105,7 @@ public class AutoFlip : MonoBehaviour {
                 }
                 break;
         }
+
+        PageFlipped();
     }
 }

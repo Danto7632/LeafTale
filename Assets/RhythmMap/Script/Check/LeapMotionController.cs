@@ -15,11 +15,18 @@ public class LeapMotionController : MonoBehaviour {
     public bool isPalmR;
     public bool isScissorsR;
 
+    private bool previousFistL, previousPalmL, previousScissorsL;
+    private bool previousFistR, previousPalmR, previousScissorsR;
+
+    public rhythmSoundManager rsm;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
 
         tileL = GameObject.FindWithTag("tileCheckL").GetComponent<TileCheckL>();
         tileR = GameObject.FindWithTag("tileCheckR").GetComponent<TileCheckR>();
+
+        rsm = GameObject.Find("SoundManager").GetComponent<rhythmSoundManager>();
 
         isFistL = false;
         isFistR = false;
@@ -29,6 +36,14 @@ public class LeapMotionController : MonoBehaviour {
 
         isFistL = false;
         isFistR = false;
+
+        previousFistL = isFistL;
+        previousPalmL = isPalmL;
+        previousScissorsL = isScissorsL;
+
+        previousFistR = isFistR;
+        previousPalmR = isPalmR;
+        previousScissorsR = isScissorsR;
     }
 
     void Update() {
@@ -80,6 +95,8 @@ public class LeapMotionController : MonoBehaviour {
             if (isPalmR) tileR.getLeap("PAPER");
             if (isScissorsR) tileR.getLeap("SCISSOR");
         }
+
+        changeSound();
     }
 
     void DetectLeftHandPose(Hand hand) {
@@ -143,4 +160,24 @@ public class LeapMotionController : MonoBehaviour {
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
     } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
+
+
+    void changeSound() {
+        if (isFistL != previousFistL || isPalmL != previousPalmL || isScissorsL != previousScissorsL) {
+            rsm.changeSound.Play();
+        }
+
+        if (isFistR != previousFistR || isPalmR != previousPalmR || isScissorsR != previousScissorsR) {
+            rsm.changeSound.Play();
+        }
+
+        // 현재 손동작 상태를 이전 상태로 저장
+        previousFistL = isFistL;
+        previousPalmL = isPalmL;
+        previousScissorsL = isScissorsL;
+
+        previousFistR = isFistR;
+        previousPalmR = isPalmR;
+        previousScissorsR = isScissorsR;
+    }
 }

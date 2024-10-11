@@ -19,6 +19,8 @@ public class Timer_Platform : MonoBehaviour {
     public bool overFlag;
     public bool clearFlag;
 
+    public platSoundManager psm;
+
     void Awake() {
         catStatus = GameObject.FindWithTag("Player").GetComponent<catMove>();
 
@@ -33,6 +35,8 @@ public class Timer_Platform : MonoBehaviour {
         timeText[0] = GameObject.Find("Min").GetComponent<TMP_Text>();
         timeText[1] = GameObject.Find("Sec").GetComponent<TMP_Text>();
         gameOverText = GameObject.Find("Colon").GetComponent<TMP_Text>();
+
+        psm = GameObject.Find("SoundManager").GetComponent<platSoundManager>();
 
         timeText[0].text = "02";
         timeText[1].text = "00";
@@ -52,6 +56,9 @@ public class Timer_Platform : MonoBehaviour {
 
             if (time <= 0) {
                 time = 0;
+                if(StoryOrStage.instance != null) {
+                    StoryOrStage.instance.isPlatGood = false;
+                }
                 gameOverText.text = "게임 오버";
                 currentTime = (int)time;
 
@@ -78,6 +85,7 @@ public class Timer_Platform : MonoBehaviour {
             currentTime = (int)time;
 
             if (clearFlag) {
+                psm.endSound.Play();
                 GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(currentTime, maxTime);
                 clearFlag = false;
             }

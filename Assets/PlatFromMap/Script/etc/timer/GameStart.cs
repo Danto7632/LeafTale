@@ -21,6 +21,8 @@ public class GameStart : MonoBehaviour {
 
     public static float elapsedTime;
 
+    public platSoundManager psm;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -30,6 +32,8 @@ public class GameStart : MonoBehaviour {
         BeforeGameStartText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
         startTimer_Platform = GameObject.Find("StartTimer").GetComponent<StartTimer_Platform>();
         timer_Platform = GameObject.Find("Canvas").GetComponent<Timer_Platform>();
+
+        psm = GameObject.Find("SoundManager").GetComponent<platSoundManager>();
 
         isGameStart = false;    
     }
@@ -45,7 +49,7 @@ public class GameStart : MonoBehaviour {
             if (IsPointingPose(hand)) {
                 if (!isPointing) {
                     pointingStartTime = Time.time;
-
+                    psm.chargedSound.Play();
                     isPointing = true;
                 }
                 else {
@@ -57,6 +61,8 @@ public class GameStart : MonoBehaviour {
                         BeforeGameStartText.enabled = false;
                         startTimer_Platform.StartCountdown();
                         timer_Platform.timerStart();
+                        psm.startSound.Play();
+                        psm.chargedSound.Stop();
                         isGameStart = true;
                     }
                 }
@@ -64,7 +70,6 @@ public class GameStart : MonoBehaviour {
             else {
                 elapsedTime = 0f;
                 isPointing = false;
-
                 StartBar.ChangeHealthBarAmount(elapsedTime);
             }
         }
@@ -76,6 +81,7 @@ public class GameStart : MonoBehaviour {
             explainPanel.gameObject.SetActive(false);
             startTimer_Platform.StartCountdown();
             timer_Platform.timerStart();
+            psm.startSound.Play();
             isGameStart = true;
         }
     }

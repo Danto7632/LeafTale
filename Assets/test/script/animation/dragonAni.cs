@@ -18,6 +18,8 @@ public class dragonAni : MonoBehaviour {
     private Vector3 startPosition;
     private float elapsedTime = 0f;
 
+    public magicSoundManager msm;
+
     public void Start() {
         anim = GetComponent<Animator>();
         playerani = GameObject.Find("Player").GetComponent<playerAni>();
@@ -30,6 +32,8 @@ public class dragonAni : MonoBehaviour {
         isExit = false;
 
         startPosition = transform.position;
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
     public void Update() {
@@ -52,6 +56,8 @@ public class dragonAni : MonoBehaviour {
         StartCoroutine(playerani.hit2Play(1.3f));
         isIdle = false;
         isAttack = true;
+
+        StartCoroutine(attackDelay());
 
         yield return new WaitForSeconds(2.3f);
 
@@ -83,5 +89,11 @@ public class dragonAni : MonoBehaviour {
         anim.SetBool("isIdle", isIdle);
         anim.SetBool("isDie", isDie);
         anim.SetBool("isWalk", isWalk);
+    }
+
+    IEnumerator attackDelay() {
+        yield return new WaitForSeconds(1.0f);
+
+        msm.dragonSound.Play();
     }
 }

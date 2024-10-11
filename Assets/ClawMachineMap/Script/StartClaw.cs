@@ -21,11 +21,15 @@ public class StartClaw : MonoBehaviour {
 
     public bool isDone;
 
+    public clawSoundManager csm;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
 
         claw = GameObject.Find("Claw").GetComponent<clawControl>();
+
+        csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
 
         isDone = false;
     }
@@ -38,6 +42,7 @@ public class StartClaw : MonoBehaviour {
                 if (IsPointingPose(hand)) { //인식한 손이 가르키는 손동작을 하고 있는지 확인
                     if (!isPointing) {
                         pointingStartTime = Time.time;
+                        csm.chargeSound.Play();
 
                         isPointing = true;
                     } //특정 손동작을 인식한 시간을 저장
@@ -47,6 +52,7 @@ public class StartClaw : MonoBehaviour {
 
                         if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
                             isLeapOn = true;
+                            csm.chargeSound.Stop();
                             RunGame();
                         }
                     }
@@ -54,7 +60,6 @@ public class StartClaw : MonoBehaviour {
                 else {
                     elapsedTime = 0f;
                     isPointing = false;
-
                     StartBar.ChangeHealthBarAmount(elapsedTime);
                 }
             }
@@ -66,6 +71,7 @@ public class StartClaw : MonoBehaviour {
     }
 
     void RunGame() {
+        csm.startSound.Play();
         DrawingGame.isBtnClicked = true;
         claw.isStart = true;
         claw.powerBar.gameObject.SetActive(true);

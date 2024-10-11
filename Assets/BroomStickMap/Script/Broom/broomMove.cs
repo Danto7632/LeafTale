@@ -39,6 +39,7 @@ public class broomMove : MonoBehaviour {
     public StartTimer_BroomStick onTimer;
     public EnemySpawn enemySpawn;
     public TimerSpawn timerSpawn;
+    public broomSoundManager bsm;
 
     [Header("Player_Condition")]
     public bool isHit;
@@ -60,6 +61,7 @@ public class broomMove : MonoBehaviour {
 
     [Header("Timer")]
     GameObject timer;
+    public int plusTimerNum;
     public static float elapsedTime;
 
     void Awake() {
@@ -75,6 +77,8 @@ public class broomMove : MonoBehaviour {
         explainText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
         wristMovementText = GameObject.Find("WristMovementText").GetComponent<Text>();
         timer = GameObject.Find("Time");
+
+        bsm = GameObject.Find("SoundManager").GetComponent<broomSoundManager>();
 
         moveSpeed = 12f;
 
@@ -97,6 +101,7 @@ public class broomMove : MonoBehaviour {
         leapOnText.enabled = true;
 
         totalWristMovement = 0f;
+        plusTimerNum = 0;
     }
 
     void Update() {
@@ -130,10 +135,13 @@ public class broomMove : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("BroomEnemy") && !isHit) {
             StartCoroutine(hitDelay());
+            bsm.FallingSound.Play();
         }
 
         if(other.gameObject.CompareTag("PlusTimer") && !isHit) {
             timer.GetComponent<TimerBar_BroomStick>().timeLeft += timer.GetComponent<TimerBar_BroomStick>().time_add;
+            plusTimerNum++;
+            bsm.itemPickSound.Play();
         }
     }
 
@@ -155,7 +163,7 @@ public class broomMove : MonoBehaviour {
 
         minY = -3.5f;
         isMoveAllow = true;
-        transform.Rotate(0, 0, 0);
+        transform.eulerAngles = new Vector3(0, 0, 0);
 
         yield return new WaitForSeconds(0.8f);
 
@@ -201,8 +209,6 @@ public class broomMove : MonoBehaviour {
             elapsed += Time.deltaTime;
             yield return null;
         }
-
-        transform.Rotate(0, 0, 0); // 회전 초기화
         rb.position = targetPosition; // 최종 위치 설정
     }   
 
@@ -220,6 +226,15 @@ public class broomMove : MonoBehaviour {
     }
 
     public void GameOver() {
+        if(StoryOrStage.instance != null) {
+            if(plusTimerNum == 3) {
+                StoryOrStage.instance.isBroomGood = true;
+            }
+            else {
+                StoryOrStage.instance.isBroomGood = false;
+            }
+        }
+        
         isGameOver = true;
         isMoveAllow = false;
 
@@ -243,12 +258,14 @@ public class broomMove : MonoBehaviour {
                     pointingStartTime = Time.time;
 
                     isPointing = true;
+                    bsm.chargeSound.Play();
                 } //특정 손동작을 인식한 시간을 저장
                 else {
                     elapsedTime = Time.time - pointingStartTime;
                     StartBar.ChangeHealthBarAmount(elapsedTime);
 
                     if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
+                        bsm.chargeSound.Stop();
                         leapOnText.enabled = false;
                         explainPanel.gameObject.SetActive(false);
                         explainText.enabled = false;
@@ -260,7 +277,6 @@ public class broomMove : MonoBehaviour {
             else {
                 elapsedTime = 0f;
                 isPointing = false;
-
                 StartBar.ChangeHealthBarAmount(elapsedTime);
             }
 

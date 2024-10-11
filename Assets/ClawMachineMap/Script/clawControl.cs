@@ -22,6 +22,8 @@ public class clawControl : MonoBehaviour
 
     public Hand hand;
 
+    public clawSoundManager csm;
+
     void Awake()
     {
         powerBar = GameObject.Find("powerValue");
@@ -42,6 +44,8 @@ public class clawControl : MonoBehaviour
         clawsOpen = true;
         gameOver = false;
         isLeapOn = false;
+
+        csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
     }
 
     // Update is called once per frame
@@ -176,15 +180,19 @@ public class clawControl : MonoBehaviour
     // 클로의 동작을 처리하는 함수
     void HandleClawMovement()
     {
+        bool isMoving = false; // 클로가 움직이는지 여부를 저장할 변수
+
         if (clawsOpen)
         {
             if (Lclaw.transform.eulerAngles.z > 300)
             {
                 Lclaw.transform.Rotate(0, 0, -0.5f);
+                isMoving = true; // 클로가 움직임
             }
             if (Rclaw.transform.eulerAngles.z < 60)
             {
                 Rclaw.transform.Rotate(0, 0, 0.5f);
+                isMoving = true; // 클로가 움직임
             }
         }
         else
@@ -192,18 +200,46 @@ public class clawControl : MonoBehaviour
             if (Lclaw.transform.eulerAngles.z < 353)
             {
                 Lclaw.transform.Rotate(0, 0, 1f);
+                isMoving = true; // 클로가 움직임
             }
             if (Rclaw.transform.eulerAngles.z > 6)
             {
                 Rclaw.transform.Rotate(0, 0, -1f);
+                isMoving = true; // 클로가 움직임
+            }
+        }   
+
+        // 클로가 위로 움직이는 경우도 추가
+        if (gameObject.transform.position.y < 3.5f) // 클로가 위로 올라갈 수 있는 최대 Y 위치
+        {
+            gameObject.transform.Translate(0, speed - 0.005f, 0); // 위로 이동
+            isMoving = true; // 클로가 움직임
+        }
+
+        // 이동 방향에 따라 powerBar 사용
+        if (goLeft || goRight || goDown || (gameObject.transform.position.y < 3.5f))
+        {
+            powerBar.GetComponent<powerBar>().usePower();
+            isMoving = true; // 이동이 발생했으므로 클로가 움직임
+        }
+
+        // 소리 재생 또는 정지 처리
+        if (isMoving)
+        {
+            if (!csm.clawSound.isPlaying) // 소리가 재생 중이지 않은 경우
+            {
+                csm.clawSound.Play(); // 소리 재생
             }
         }
-        
-
-        if(goLeft || goRight || goDown) {
-            powerBar.GetComponent<powerBar>().usePower();
+        else
+        {
+            if (csm.clawSound.isPlaying) // 소리가 재생 중인 경우
+            {
+                csm.clawSound.Stop(); // 소리 정지
+            }
         }
     }
+            
 
     // Leap Motion으로부터 손 데이터를 업데이트하는 함수
     void OnUpdateFrame(Frame frame)

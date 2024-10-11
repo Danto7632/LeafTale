@@ -18,6 +18,8 @@ public class ClawClear : MonoBehaviour
     GameObject sVegetable;
     GameObject box;
     SpriteRenderer targetVS;
+
+    public clawSoundManager csm;
     
     void Awake()
     {
@@ -69,6 +71,8 @@ public class ClawClear : MonoBehaviour
             targetVS.color = new Color(0.3f, 0.3f, 0.3f, 1);
         }
         Debug.Log("ClawClear ����");
+
+        csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
     }
 
     // Update is called once per frame
@@ -76,11 +80,16 @@ public class ClawClear : MonoBehaviour
     {
         if(clearCount == 3)
         {
+            if(StoryOrStage.instance != null) {
+                StoryOrStage.instance.isClawGood = true;
+            }
             clawScore = clawScore * 100.0f / 90.0f;
             Debug.Log(clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
+            csm.endSound.Play();
+            csm.clawSound.Stop();
             clearCount++;
         }
     }
@@ -113,6 +122,7 @@ public class ClawClear : MonoBehaviour
             }
             clawScore += vPoint;
             clearCount++;
+            csm.itemGoodSound.Play();
         }
         else
         {
@@ -122,6 +132,7 @@ public class ClawClear : MonoBehaviour
             {
                 clawScore = 0;
             }
+            csm.itemFailSound.Play();
         }
         Destroy(enterObj);
     }

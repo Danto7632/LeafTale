@@ -31,6 +31,8 @@ public class Enemeymanager : MonoBehaviour {
     private Vector3 startPosition;
     private float elapsedTime = 0f;
 
+    public magicSoundManager msm;
+
     public void Start() {
         wolfEnemey = GameObject.Find("wolf");
         plantEnemey = GameObject.Find("plant");
@@ -55,6 +57,12 @@ public class Enemeymanager : MonoBehaviour {
         stageNum = 1;
         isTimerOver = false;
         isPlayerWin = false;
+
+        if(StoryOrStage.instance != null) {
+            StoryOrStage.instance.isMagicGood = true;
+        }
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
 
@@ -130,10 +138,15 @@ public class Enemeymanager : MonoBehaviour {
                 isTimerOver = false;
             }
             stageNum++;
+
             playerDrawing.gameObject.SetActive(false);
             referenceShape.gameObject.SetActive(false);
             startText.gameObject.SetActive(true);
             startText.text = "Fail....";
+            if(StoryOrStage.instance != null) {
+                StoryOrStage.instance.isMagicGood = false;
+            }
+            msm.drawFailSound.Play();
         }
         else if(isPlayerWin) {
             if(stageNum == 1) {
@@ -153,6 +166,7 @@ public class Enemeymanager : MonoBehaviour {
             referenceShape.gameObject.SetActive(false);
             startText.gameObject.SetActive(true);
             startText.text = "Complete!";
+            msm.drawGoodSound.Play();
         }
     }
 }

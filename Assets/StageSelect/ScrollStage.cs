@@ -26,6 +26,9 @@ public class ScrollStage : MonoBehaviour {
 
     public UnityEngine.UI.Image gaugeImage;
 
+    public AudioSource flipSound;
+    public AudioSource selectSound;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -48,12 +51,19 @@ public class ScrollStage : MonoBehaviour {
             pos[i] = distance * i;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow)) scroll_pos = Mathf.Min(scroll_pos + distance, 1f);
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) scroll_pos = Mathf.Max(scroll_pos - distance, 0f);
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            scroll_pos = Mathf.Min(scroll_pos + distance, 1f);
+            flipSound.Play();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            scroll_pos = Mathf.Max(scroll_pos - distance, 0f);
+            flipSound.Play();
+        }
 
-        if (Input.GetMouseButton(0)) scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
-
-        if (Input.GetMouseButton(0)) scroll_pos = scrollbar.GetComponent<Scrollbar>().value;
+        if (Input.GetMouseButton(0)) {
+            selectSound.Play();
+            scroll_pos = scrollbar.GetComponent<Scrollbar>().value; 
+        }
 
         else {
             for(int i = 0; i< pos.Length; i++) {
@@ -104,7 +114,9 @@ public class ScrollStage : MonoBehaviour {
                     pointingStartTime = Time.time;
                 }
                 else if (Time.time - pointingStartTime > 3f) {
+                    selectSound.Play();
                     GoStage.SelectLevel();
+                    
                 }
                 UpdateGauge(Time.time - pointingStartTime);
             }
@@ -128,10 +140,12 @@ public class ScrollStage : MonoBehaviour {
 
                     if (distance > swipeDistanceThreshold) {
                         if (currentHandPos.x > prevHandPos.x) {
+                            flipSound.Play();
                             Debug.Log("Right Swipe detected!");
                             scroll_pos = Mathf.Max(scroll_pos - stageDistance, 0f);
                         }
                         else if (currentHandPos.x < prevHandPos.x) {
+                            flipSound.Play();
                             Debug.Log("Left Swipe detected!");
                             scroll_pos = Mathf.Min(scroll_pos + stageDistance, 1f);
                         }

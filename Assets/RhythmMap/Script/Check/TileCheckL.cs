@@ -27,6 +27,8 @@ public class TileCheckL : MonoBehaviour {
     public RaycastHit2D[] isTileCheck = new RaycastHit2D[3];
     public Vector2[] tileRayVec = new Vector2[3];
 
+    public rhythmSoundManager rsm;
+
     public void Awake() {
         theCombo = FindObjectOfType<ComboManager>();
         score = GameObject.Find("GameManager");
@@ -38,6 +40,8 @@ public class TileCheckL : MonoBehaviour {
         tileRayVec[0] = new Vector2(-1.5f, 1f);
         tileRayVec[1] = new Vector2(-1.0f, 1f);
         tileRayVec[2] = new Vector2(-0.2f, 1f);
+
+        rsm = GameObject.Find("SoundManager").GetComponent<rhythmSoundManager>();
     }
 
     public void getLeap(string hands) {
@@ -79,6 +83,7 @@ public class TileCheckL : MonoBehaviour {
             if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer == LayerMask.NameToLayer(layerName)) {
                 switch(i) {
                     case 0 :
+                        rsm.goodSound.Play();
                         theCombo.IncreaseCombo();
                         greatText.SetActive(true);
                         noteEffect.SetActive(true);
@@ -87,6 +92,7 @@ public class TileCheckL : MonoBehaviour {
                         break;
                         
                     case 1 :
+                        rsm.sosoSound.Play();
                         theCombo.IncreaseCombo();
                         sosoText.SetActive(true);
                         noteEffect.SetActive(true);
@@ -111,6 +117,7 @@ public class TileCheckL : MonoBehaviour {
             else if(isTileCheck[i].collider != null && isTileCheck[i].collider.gameObject.layer != LayerMask.NameToLayer(layerName) && i == 2) {
                 score.GetComponent<RhythmScore>().NodeHit(0);
                 theCombo.ResetCombo();
+                rsm.failSound.Play();
                 failText.SetActive(true);
                 Destroy(isTileCheck[i].collider.gameObject);
             }

@@ -23,6 +23,7 @@ public class catMove : MonoBehaviour {
     public SpriteRenderer sp;
     public CapsuleCollider2D capsule2D;
     public Animator anim;
+    public platSoundManager psm;
 
     [Header("Player_Condition")]
     public RaycastHit2D[] isGroundeds;
@@ -66,6 +67,7 @@ public class catMove : MonoBehaviour {
         UDText = GameObject.Find("UDText").GetComponent<Text>();
         FlipText = GameObject.Find("FlipText").GetComponent<Text>();
         ClapText = GameObject.Find("ClapText").GetComponent<Text>();
+        psm = GameObject.Find("SoundManager").GetComponent<platSoundManager>();
 
         anim.SetBool("isGround", true);
 
@@ -110,7 +112,7 @@ public class catMove : MonoBehaviour {
             if (IsPatternComplete()) {
                 if(isFacingRight) rb.velocity = new Vector2(accelForce, rb.velocity.y);
                 else if(!isFacingRight) rb.velocity = new Vector2(-accelForce, rb.velocity.y);
-
+                psm.moveSound.Play();
                 keyPresses.Clear();
             }
         }
@@ -174,7 +176,10 @@ public class catMove : MonoBehaviour {
     }
 
     void Jump() {
-        if(isGrounded && Input.GetButtonDown("Jump") && isMoveAllow) rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        if(isGrounded && Input.GetButtonDown("Jump") && isMoveAllow) {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            psm.jumpSound.Play();
+        }
     }
 
     void Flip() {
@@ -184,6 +189,7 @@ public class catMove : MonoBehaviour {
 
             transform.localScale = newScale;
             isFacingRight = false;
+            psm.flipSound.Play();
         }
         else if(!isFacingRight && Input.GetKeyDown(KeyCode.RightArrow) && isMoveAllow) {
             newScale = transform.localScale;
@@ -191,6 +197,7 @@ public class catMove : MonoBehaviour {
 
             transform.localScale = newScale;
             isFacingRight = true;
+            psm.flipSound.Play();
         }
     }
 
@@ -210,6 +217,9 @@ public class catMove : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("EndZone")) {
+            if(StoryOrStage.instance != null) {
+                StoryOrStage.instance.isPlatGood = true;
+            }
             isMoveAllow = false;
             isGameOver = true;
             rb.velocity = Vector2.zero;
@@ -219,11 +229,13 @@ public class catMove : MonoBehaviour {
             isMoveAllow = false;
             rb.velocity = Vector2.zero;
             StartCoroutine(spawnDelay());
+            psm.spawnSound.Play();
         }
         
         if(other.gameObject.CompareTag("Coin")) {
             GameManager.instance.AddScore(2);
             other.gameObject.SetActive(false);
+            psm.coinSound.Play();
         }
     }
 
@@ -279,6 +291,7 @@ public class catMove : MonoBehaviour {
 
                                 // 위아래 움직임 카운트를 증가시킴
                                 UDCount++;
+                                psm.moveSound.Play();
                             }
                         }
 
@@ -300,6 +313,7 @@ public class catMove : MonoBehaviour {
 
                             // 위아래 움직임 카운트를 증가시킴
                             UDCount++;
+                            psm.moveSound.Play();
                         }
 
                         // 오른손 비활성화
@@ -332,6 +346,7 @@ public class catMove : MonoBehaviour {
                         // 객체에게 점프 속도를 부여
                         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                         isHandFlipped = true; // 손이 뒤집힌 상태로 설정
+                        psm.jumpSound.Play();
                         FlipCount++; // 뒤집기 횟수 증가
                     }
                     // 손바닥이 아래를 향하고 있고 손이 뒤집힌 상태인 경우
@@ -391,6 +406,7 @@ public class catMove : MonoBehaviour {
 
                 // 객체의 수평 속도를 0으로 설정하여 정지
                 rb.velocity = new Vector2(0, rb.velocity.y);
+                psm.flipSound.Play();
                 ClapCount++; // 박수 횟수 증가
 
                 isClapDetected = true; // 박수 인식 상태로 설정

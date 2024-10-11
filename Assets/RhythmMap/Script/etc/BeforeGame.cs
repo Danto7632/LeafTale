@@ -19,6 +19,8 @@ public class BeforeGame : MonoBehaviour {
     
     public static float elapsedTime;
 
+    public rhythmSoundManager rsm;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -29,6 +31,8 @@ public class BeforeGame : MonoBehaviour {
         elapsedTime = 0f;
         
         isGameStart = false;
+
+        rsm = GameObject.Find("SoundManager").GetComponent<rhythmSoundManager>();
     }
 
     void OnDestroy() {
@@ -43,6 +47,7 @@ public class BeforeGame : MonoBehaviour {
                 if (!isPointing) {
                     pointingStartTime = Time.time;
 
+                    rsm.chargedSound.Play();
                     isPointing = true;
                 }
                 else {
@@ -52,8 +57,9 @@ public class BeforeGame : MonoBehaviour {
                     if (elapsedTime > 3f) {
                         BeforeGameStartText.enabled = false;
                         explainPanel.gameObject.SetActive(false);
-
+                        rsm.chargedSound.Stop();
                         isGameStart = true;
+                        rsm.startSound.Play();
                         Debug.Log("Game started!");
                     }
                 }
@@ -61,7 +67,6 @@ public class BeforeGame : MonoBehaviour {
             else {
                 elapsedTime = 0f;
                 isPointing = false;
-
                 StartBar.ChangeHealthBarAmount(elapsedTime);
             }
         }
@@ -74,6 +79,8 @@ public class BeforeGame : MonoBehaviour {
                 explainPanel.gameObject.SetActive(false);
 
                 isGameStart = true;
+
+                rsm.startSound.Play();
             }
         }
     }

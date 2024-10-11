@@ -21,6 +21,8 @@ public class wolfAni : MonoBehaviour {
     private Vector3 startPosition;
     private float elapsedTime = 0f;
 
+    public magicSoundManager msm;
+
     public void Start() {
         enemeymanager = transform.parent.GetComponent<Enemeymanager>();
         anim = GetComponent<Animator>();
@@ -35,6 +37,8 @@ public class wolfAni : MonoBehaviour {
         isExit = false;
 
         startPosition = transform.position;
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
     public void Update() {
@@ -57,6 +61,8 @@ public class wolfAni : MonoBehaviour {
         StartCoroutine(playerani.hit1Play());
         isIdle = false;
         isAttack = true;
+
+        StartCoroutine(attackDelay());
 
         yield return new WaitForSeconds(1f);
 
@@ -116,5 +122,11 @@ public class wolfAni : MonoBehaviour {
         Vector3 scale = transform.localScale;
         scale.x *= -1; // X 축 스케일을 반전
         transform.localScale = scale;
+    }
+
+    public IEnumerator attackDelay() {
+        yield return new WaitForSeconds(0.5f);
+
+        msm.wolfSound.Play();
     }
 }

@@ -22,6 +22,8 @@ public class StartDrawing : MonoBehaviour {
 
     public bool isDone;
 
+    public magicSoundManager msm;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -30,6 +32,8 @@ public class StartDrawing : MonoBehaviour {
         enemeymanager = GameObject.Find("AnimationManager").GetComponent<Enemeymanager>();
 
         isDone = false;
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
     void OnUpdateFrame(Frame frame) {
@@ -40,7 +44,7 @@ public class StartDrawing : MonoBehaviour {
                 if (IsPointingPose(hand)) { //인식한 손이 가르키는 손동작을 하고 있는지 확인
                     if (!isPointing) {
                         pointingStartTime = Time.time;
-
+                        msm.chargedSound.Play();
                         isPointing = true;
                     } //특정 손동작을 인식한 시간을 저장
                     else {
@@ -49,6 +53,7 @@ public class StartDrawing : MonoBehaviour {
 
                         if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
                             isLeapOn = true;
+                            msm.chargedSound.Stop();
                             RunGame();
                         }
                     }
@@ -56,7 +61,6 @@ public class StartDrawing : MonoBehaviour {
                 else {
                     elapsedTime = 0f;
                     isPointing = false;
-
                     StartBar.ChangeHealthBarAmount(elapsedTime);
                 }
             }
@@ -68,6 +72,7 @@ public class StartDrawing : MonoBehaviour {
     }
 
     void RunGame() {
+        msm.startSound.Play();
         DrawingGame.isBtnClicked = true;
         isDone = true;
         shapeSelector.gameStart();

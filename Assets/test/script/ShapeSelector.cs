@@ -20,6 +20,8 @@ public class ShapeSelector : MonoBehaviour {
 
     private Coroutine stageTimerCoroutine;
 
+    public magicSoundManager msm;
+
     private void Start() {
         drawingGame = GameObject.Find("DrawingGame").GetComponent<DrawingGame>();
         backGround = GameObject.Find("backGround").GetComponent<Image>();
@@ -33,6 +35,8 @@ public class ShapeSelector : MonoBehaviour {
         shapeCount = 0;
 
         backGround.gameObject.SetActive(false);
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
     public void gameStart() {
@@ -81,6 +85,7 @@ public class ShapeSelector : MonoBehaviour {
     IEnumerator endDelay() {
         yield return new WaitForSeconds(3f);
 
+        msm.endSound.Play();
         GameObject.Find("GameManage").GetComponent<GameManager>().EndGame(0, 0);
     }
 
@@ -129,6 +134,7 @@ public class ShapeSelector : MonoBehaviour {
 
         while (countdown >= 0) {
             startTimer.text = countdown.ToString(); // 텍스트 업데이트
+            msm.timerCountSound.Play();
             yield return new WaitForSeconds(1f);    // 1초 대기
             countdown--;
         }
@@ -139,6 +145,7 @@ public class ShapeSelector : MonoBehaviour {
 
         while (drawingGame.countdownTimer >= 0) {
             gameTimer.text = drawingGame.countdownTimer.ToString(); // 텍스트 업데이트
+
             yield return new WaitForSeconds(1f);    // 1초 대기
             drawingGame.countdownTimer--;
         }

@@ -15,6 +15,9 @@ public class Timer_BroomStick : MonoBehaviour {
 
     public bool isStartTimer;
 
+    public broomSoundManager bsm;
+    
+
     void Start() {
         timeText = new TMP_Text[2];
 
@@ -23,6 +26,8 @@ public class Timer_BroomStick : MonoBehaviour {
         timeText[0] = GameObject.Find("Min").GetComponent<TMP_Text>();
         timeText[1] = GameObject.Find("Sec").GetComponent<TMP_Text>();
         gameOverText = GameObject.Find("Colon").GetComponent<TMP_Text>();
+
+        bsm = GameObject.Find("SoundManager").GetComponent<broomSoundManager>();
 
         timeText[0].text = "02";
         timeText[1].text = "06";
@@ -41,6 +46,9 @@ public class Timer_BroomStick : MonoBehaviour {
                 time = 0;
                 gameOverText.text = "게임 오버";
 
+                bsm.endSound.Play();
+                bsm.flyingSound.Stop();
+
                 timeText[0].enabled = false;
                 timeText[1].enabled = false;
             }
@@ -53,6 +61,9 @@ public class Timer_BroomStick : MonoBehaviour {
                 broomStatus.isGameClear = true;
 
                 gameOverText.text = "게임 클리어";
+
+                bsm.endSound.Play();
+                bsm.flyingSound.Stop();
             }
             else if(!broomStatus.isGameOver && time > 0) {
                 time -= Time.deltaTime;
@@ -68,6 +79,7 @@ public class Timer_BroomStick : MonoBehaviour {
 
     IEnumerator delayTimer() {
         yield return new WaitForSeconds(5f);
+    
 
         if (timeText != null && timeText.Length >= 2 && gameOverText != null) {
             timeText[0].enabled = true;
@@ -77,6 +89,7 @@ public class Timer_BroomStick : MonoBehaviour {
     }
 
     public void StartTimer() {
+        Debug.Log("StartTimer");
         StartCoroutine(delayTimer());
     }
 }

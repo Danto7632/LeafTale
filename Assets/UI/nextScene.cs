@@ -22,6 +22,8 @@ public class nextScene : MonoBehaviour {
 
     public LeapMotionFlip leapMotionFlip;
 
+    public flipSoundManager fsm;
+
     void Start() {
         ResetGauge();
 
@@ -36,12 +38,15 @@ public class nextScene : MonoBehaviour {
         leapProvider.OnUpdateFrame += OnUpdateFrame;
 
         leapMotionFlip = GameObject.Find("LeapMotionManager").GetComponent<LeapMotionFlip>();
+
+        fsm = GameObject.Find("SoundManager").GetComponent<flipSoundManager>();
     }
 
     void Update() {
         if (Input.GetKey(KeyCode.P)) {
             if (!isPressingP) {
                 pressingStartTime = Time.time;
+                fsm.chargedSound.Play();
                 isPressingP = true;
             }
             else {
@@ -49,11 +54,14 @@ public class nextScene : MonoBehaviour {
                 UpdateGauge(elapsedTime);
 
                 if (elapsedTime > 3f && nextSceneName != null) {
+                    fsm.selectSound.Play();
+                     fsm.chargedSound.Stop();
                     leapMotionFlip.moveScene();
                 }
             }
         }
         else {
+
             if (isPressingP) {
                 ResetGauge();
                 isPressingP = false;
@@ -75,6 +83,7 @@ public class nextScene : MonoBehaviour {
                     UpdateGauge(elapsedTime);
                     
                     if(elapsedTime > 3f && nextSceneName != null) {
+                        fsm.selectSound.Play();
                         leapMotionFlip.moveScene();
                     }
                 }
