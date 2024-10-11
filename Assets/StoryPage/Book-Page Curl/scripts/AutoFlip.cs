@@ -16,7 +16,7 @@ public class AutoFlip : MonoBehaviour {
 
     void Start () {
         AutoStartFlip = false;
-        AnimationFramesCount = 300;
+        AnimationFramesCount = 400;
         if (!ControledBook)
             ControledBook = GetComponent<Book>();
         if (AutoStartFlip)
