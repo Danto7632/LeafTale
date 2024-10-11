@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 288445aaeee49d849b9eac7e57cb7810, type: 3}
+  m_Sprite: {fileID: 21300000, guid: beefe143fd055cb4e8de0c2b2b2264c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 288445aaeee49d849b9eac7e57cb7810, type: 3}
+  m_Sprite: {fileID: 21300000, guid: beefe143fd055cb4e8de0c2b2b2264c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1019,7 +1019,7 @@ MonoBehaviour:
     Back-End Developer]\r\nKim Ho-gyeom\r\nKim Gyu-han\r\nHan Min-jeong\r\n\r\n[Game
     Developer]\r\nKim In-seong\r\nSim Ki-june\r\nKim Min-ji\r\nSeo Yun-jeong\r\n\r\n\r\n\r\n<Game
     Resources Reference>\r\n\r\nBDragon1727\r\nCreativeKind\r\nEssssam\r\nBow.Pixel\r\nTrixie\r\nAbdullah
-    Aldandarawy\r\n\r\n\r\n\r\n<Technology Stack>\r\n\r\nReact\r\nJava Script\r\nTypescript\r\nChart.js\r\nTailwind
+    Aldandarawy\r\nSciGho\n\r\n\r\n\r\n<Technology Stack>\r\n\r\nReact\r\nJava Script\r\nTypescript\r\nChart.js\r\nTailwind
     CSS\r\n\r\nAmazon Web Services\r\nMySQL\r\nSpring Boot\r\nSwagger\r\n\r\nUnity\r\nC#\r\nLeap
     Motion SDK\r\n\r\nPhotoshop\r\nFigma\r\nAseprite\r\nClip Studio Paint\r\n\r\nGit\r\nGitHub\r\nNotion\r\n\r\n\r\n\r\n<Special
     Thanks>\r\n\r\nDongyang Mire University\r\nJung Suk-yong professor\r\nLee Hee-jin 
