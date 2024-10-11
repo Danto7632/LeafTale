@@ -53,7 +53,7 @@ public class dragonAni : MonoBehaviour {
     }
 
     public IEnumerator dragonWin() {
-        StartCoroutine(playerani.hit2Play(1.3f));
+        StartCoroutine(playerani.hit2Play(1.5f));
         isIdle = false;
         isAttack = true;
 

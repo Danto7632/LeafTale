@@ -28,20 +28,23 @@ public class LeapMotionFlip : MonoBehaviour {
 
         swipeDistanceThreshold = 3f;
 
-        books = new GameObject[11];
+        books = new GameObject[13];
 
         books[0] = GameObject.Find("ExplainPage");
         books[1] = GameObject.Find("ClawPage");
         books[2] = GameObject.Find("PlatformPage");
         books[3] = GameObject.Find("RhythmPage");
-        books[4] = GameObject.Find("MagiccirclePage");
+        books[4] = GameObject.Find("MagiccirclePage_GoodEnd");
         books[5] = GameObject.Find("BroomPage");
 
         books[6] = GameObject.Find("ClawPage_Fail");
         books[7] = GameObject.Find("PlatformPage_Fail");
         books[8] = GameObject.Find("RhythmPage_Fail");
-        books[9] = GameObject.Find("MagiccirclePage_Fail");
+        books[9] = GameObject.Find("MagiccirclePage_Fail_GoodEnd");
         books[10] = GameObject.Find("BroomPage_Fail");
+
+        books[11] = GameObject.Find("MagiccirclePage_NormalEnd");
+        books[12] = GameObject.Find("MagiccirclePage_Fail_NormalEnd");
 
         for(int i = 0; i < 11; i++) {
             books[i].SetActive(false);
@@ -92,13 +95,21 @@ public class LeapMotionFlip : MonoBehaviour {
                     break;
 
                 case "test" :
-                    if(StoryOrStage.instance.clearCount < 3) {
+                    if(StoryOrStage.instance.clearCount < 3 && !StoryOrStage.instance.isMagicGood) {
                         books[9].SetActive(true);
                         autoFlip = books[9].transform.Find("Book").GetComponent<AutoFlip>();
                     }
-                    else {
+                    else if(StoryOrStage.instance.clearCount >= 3 && StoryOrStage.instance.isMagicGood){
                         books[4].SetActive(true);   
                         autoFlip = books[4].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
+                    else if(StoryOrStage.instance.clearCount < 3 && StoryOrStage.instance.isMagicGood) {
+                        books[11].SetActive(true);   
+                        autoFlip = books[11].transform.Find("Book").GetComponent<AutoFlip>();
+                    }
+                    else if(StoryOrStage.instance.clearCount < 3 && !StoryOrStage.instance.isMagicGood) {
+                        books[12].SetActive(true);   
+                        autoFlip = books[12].transform.Find("Book").GetComponent<AutoFlip>();
                     }
                     break;
 

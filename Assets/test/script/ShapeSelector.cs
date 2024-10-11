@@ -93,15 +93,6 @@ public class ShapeSelector : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 
         msm.endSound.Play();
-        if(StoryOrStage.instance != null) {
-            if(Enemeymanager.countEnemy >= 2) {
-                StoryOrStage.instance.isMagicGood = true;
-                StoryOrStage.instance.clearCount++;
-            }
-            else {
-                StoryOrStage.instance.isMagicGood = false;
-            }
-        }
         GameObject.Find("GameManage").GetComponent<GameManager>().EndGame(0, 0);
     }
 

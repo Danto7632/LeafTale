@@ -32,7 +32,6 @@ public class Enemeymanager : MonoBehaviour {
     private float elapsedTime = 0f;
 
     public magicSoundManager msm;
-    public static int countEnemy;
 
     public void Start() {
         wolfEnemey = GameObject.Find("wolf");
@@ -60,8 +59,6 @@ public class Enemeymanager : MonoBehaviour {
         isPlayerWin = false;
 
         msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
-
-        countEnemy = 0;
     }
 
 
@@ -101,7 +98,8 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
-                targetPosition.y = 1.74f;
+                targetPosition.x = 5.05f;
+                targetPosition.y = -1.75f;
                 plantEnemey.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             }
             else {
@@ -114,11 +112,11 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
-                targetPosition.y = 2.34f;
-                dragonEnemey.transform.position = Vector3.Lerp(startPosition, new Vector3(5.3f, targetPosition.y, 0), elapsedTime / duration);
+                targetPosition.y = -2.01f;
+                dragonEnemey.transform.position = Vector3.Lerp(startPosition, new Vector3(5.4f, targetPosition.y, 0), elapsedTime / duration);
             }
             else {
-                dragonEnemey.transform.position = new Vector3(5.3f, 2.34f, 0);
+                dragonEnemey.transform.position = new Vector3(5.4f, -2.01f, 0);
                 isDragonStart = false;
             }
         }
@@ -135,6 +133,9 @@ public class Enemeymanager : MonoBehaviour {
             else {
                 StartCoroutine(dragonani.dragonWin());
                 isTimerOver = false;
+                if(StoryOrStage.instance != null) {
+                    StoryOrStage.instance.isMagicGood = true;
+                }
             }
             stageNum++;
 
@@ -148,17 +149,17 @@ public class Enemeymanager : MonoBehaviour {
             if(stageNum == 1) {
                 StartCoroutine(wolfani.wolfLose());
                 isPlayerWin = false;
-                countEnemy++;
             }
             else if(stageNum == 2) {
                 StartCoroutine(plantani.plantLose());
                 isPlayerWin = false;
-                countEnemy++;
             }
             else {
                 StartCoroutine(dragonani.dragonLose());
                 isPlayerWin = false;
-                countEnemy++;
+                if(StoryOrStage.instance != null) {
+                    StoryOrStage.instance.isMagicGood = false;
+                }
             }
             stageNum++;
             playerDrawing.gameObject.SetActive(false);
