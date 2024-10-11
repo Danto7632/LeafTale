@@ -45,6 +45,7 @@ public class RhythmScore : MonoBehaviour
         finScore = score * (100.0F / (allNode * 2.0F));
         if(finScore >= 80 && StoryOrStage.instance != null) {
             StoryOrStage.instance.isRhythmGood = true;
+            StoryOrStage.instance.clearCount++;
         }
         else if(finScore < 80 && StoryOrStage.instance != null) {
             StoryOrStage.instance.isRhythmGood = false;

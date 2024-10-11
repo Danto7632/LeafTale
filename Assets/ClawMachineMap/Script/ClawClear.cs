@@ -83,6 +83,7 @@ public class ClawClear : MonoBehaviour
         {
             if (StoryOrStage.instance != null) {
                 StoryOrStage.instance.isClawGood = true;
+                StoryOrStage.instance.clearCount++;
             }
             clawScore = clawScore * 100.0f / 90.0f;
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);

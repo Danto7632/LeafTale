@@ -48,7 +48,6 @@ public class powerBar : MonoBehaviour
             }
             power.fillAmount = 0;
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
-            Debug.Log("erre");
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
         }

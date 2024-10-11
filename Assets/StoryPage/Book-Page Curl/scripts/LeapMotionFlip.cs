@@ -92,7 +92,7 @@ public class LeapMotionFlip : MonoBehaviour {
                     break;
 
                 case "test" :
-                    if(!StoryOrStage.instance.isMagicGood) {
+                    if(StoryOrStage.instance.clearCount < 3) {
                         books[9].SetActive(true);
                         autoFlip = books[9].transform.Find("Book").GetComponent<AutoFlip>();
                     }

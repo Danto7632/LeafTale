@@ -44,6 +44,15 @@ public class TimerBar_BroomStick : MonoBehaviour {
                 GameObject.Find("Player").GetComponent<broomMove>().GameOver();
                 
                 broom_score = (int)(timeLast * (100 / (maxTime + (time_add * 3))));
+                if(StoryOrStage.instance != null) {
+                    if(broom_score >= 80) {
+                        StoryOrStage.instance.isBroomGood = true;
+                        StoryOrStage.instance.clearCount++;
+                    }
+                    else {
+                        StoryOrStage.instance.isBroomGood = false;
+                    }
+                }
                 GameObject.Find("GameClear").GetComponent<GameClear>().Clear(broom_score);
                 flag = false;
             }

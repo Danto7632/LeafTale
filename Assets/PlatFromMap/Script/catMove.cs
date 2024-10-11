@@ -219,6 +219,7 @@ public class catMove : MonoBehaviour {
         if(other.gameObject.CompareTag("EndZone")) {
             if(StoryOrStage.instance != null) {
                 StoryOrStage.instance.isPlatGood = true;
+                StoryOrStage.instance.clearCount++;
             }
             isMoveAllow = false;
             isGameOver = true;

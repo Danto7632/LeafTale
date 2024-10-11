@@ -32,6 +32,7 @@ public class Enemeymanager : MonoBehaviour {
     private float elapsedTime = 0f;
 
     public magicSoundManager msm;
+    public static int countEnemy;
 
     public void Start() {
         wolfEnemey = GameObject.Find("wolf");
@@ -58,11 +59,9 @@ public class Enemeymanager : MonoBehaviour {
         isTimerOver = false;
         isPlayerWin = false;
 
-        if(StoryOrStage.instance != null) {
-            StoryOrStage.instance.isMagicGood = true;
-        }
-
         msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
+
+        countEnemy = 0;
     }
 
 
@@ -102,7 +101,7 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
-                targetPosition.y = -3.32f;
+                targetPosition.y = 1.74f;
                 plantEnemey.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             }
             else {
@@ -115,11 +114,11 @@ public class Enemeymanager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime < duration) {
-                targetPosition.y = -2.0f;
+                targetPosition.y = 2.34f;
                 dragonEnemey.transform.position = Vector3.Lerp(startPosition, new Vector3(5.3f, targetPosition.y, 0), elapsedTime / duration);
             }
             else {
-                dragonEnemey.transform.position = new Vector3(5.3f, -2.0f, 0);
+                dragonEnemey.transform.position = new Vector3(5.3f, 2.34f, 0);
                 isDragonStart = false;
             }
         }
@@ -143,23 +142,23 @@ public class Enemeymanager : MonoBehaviour {
             referenceShape.gameObject.SetActive(false);
             startText.gameObject.SetActive(true);
             startText.text = "Fail....";
-            if(StoryOrStage.instance != null) {
-                StoryOrStage.instance.isMagicGood = false;
-            }
             msm.drawFailSound.Play();
         }
         else if(isPlayerWin) {
             if(stageNum == 1) {
                 StartCoroutine(wolfani.wolfLose());
                 isPlayerWin = false;
+                countEnemy++;
             }
             else if(stageNum == 2) {
                 StartCoroutine(plantani.plantLose());
                 isPlayerWin = false;
+                countEnemy++;
             }
             else {
                 StartCoroutine(dragonani.dragonLose());
                 isPlayerWin = false;
+                countEnemy++;
             }
             stageNum++;
             playerDrawing.gameObject.SetActive(false);
