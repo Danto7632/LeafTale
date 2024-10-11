@@ -48,6 +48,8 @@ public class DrawingGame : MonoBehaviour
 
     public Vector3 minLimitLeap = new Vector3(-7.5f, -1.55f, 0);   // Updated Leap Motion minimum position
     public Vector3 maxLimitLeap = new Vector3(7.5f, 4.15f, 0);  // Updated Leap Motion maximum position
+
+    public magicSoundManager msm;
     
     private void Start()
     {
@@ -79,6 +81,8 @@ public class DrawingGame : MonoBehaviour
         maxLimitMouse = new Vector3(7.5f, 4.15f, 0);
         minLimitLeap = new Vector3(-7.5f, -1.55f, 0);
         maxLimitLeap = new Vector3(7.5f, 4.15f, 0);
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
     private void Update()
@@ -104,8 +108,11 @@ public class DrawingGame : MonoBehaviour
                     mousePos.y = Mathf.Clamp(mousePos.y, minLimit.y, maxLimit.y); // Y 좌표 제한
 
                     // 플레이어가 마우스를 움직이면 새로운 점을 추가
-                    if (playerPoints.Count == 0 || Vector3.Distance(playerPoints[playerPoints.Count - 1], mousePos) > 0.01f)
+                    if (playerPoints.Count == 0 || Vector3.Distance(playerPoints[playerPoints.Count - 1], mousePos) > 0.05f)
                     {
+                        if(!msm.drawSound.isPlaying) {
+                            msm.drawSound.Play();
+                        }
                         playerPoints.Add(mousePos);
                         playerDrawing.positionCount = playerPoints.Count;
                         playerDrawing.SetPositions(playerPoints.ToArray());
@@ -115,6 +122,7 @@ public class DrawingGame : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0)) // 마우스를 놓을 때
             {
+                msm.drawSound.Stop();
                 isDrawing = false;
                 accuracy = CalculateAccuracy();
                 resultText.gameObject.SetActive(true);
@@ -191,6 +199,9 @@ public class DrawingGame : MonoBehaviour
                 }
 
                 playerPoints.Add(screenPosition);
+                if(!msm.drawSound.isPlaying) {
+                    msm.drawSound.Play();
+                }
                 playerDrawing.positionCount = playerPoints.Count;
                 Vector3[] playerPositions = playerPoints.Select(p => new Vector3(p.x, p.y, 0)).ToArray();
                 playerDrawing.SetPositions(playerPositions);

@@ -12,10 +12,14 @@ public class StartTimer_Platform : MonoBehaviour {
     public int countdownValue;
     public float timer;
     public float interval;
+    
+    public platSoundManager psm;
 
     public void Awake() {
         cat = GameObject.FindWithTag("Player").GetComponent<catMove>();
         timerText = GameObject.Find("StartTimer").GetComponent<TMP_Text>();
+
+        psm = GameObject.Find("SoundManager").GetComponent<platSoundManager>();
 
         countdownValue = 5;
         timer = 0f;
@@ -34,6 +38,7 @@ public class StartTimer_Platform : MonoBehaviour {
         while (countdownValue > 0) {
             timerText.text = countdownValue.ToString();
 
+            psm.timerCountSound.Play();
             yield return new WaitForSeconds(interval);
 
             countdownValue--;

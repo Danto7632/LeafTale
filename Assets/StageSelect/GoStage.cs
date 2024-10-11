@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GoStage : MonoBehaviour {
+
     public static void SelectLevel() {
+
         switch (ScrollStage.btnIndex) {
             case 0 :
                 SceneManager.LoadScene("BroomstickScene");

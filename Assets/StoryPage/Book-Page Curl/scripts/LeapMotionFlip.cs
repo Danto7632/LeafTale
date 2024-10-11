@@ -61,7 +61,7 @@ public class LeapMotionFlip : MonoBehaviour {
                 case "ClawMachineScenes" :
                     if(!StoryOrStage.instance.isClawGood) {
                         books[6].SetActive(true);
-                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                        autoFlip = books[6].transform.Find("Book").GetComponent<AutoFlip>();
                     }
                     else {
                         books[1].SetActive(true);
@@ -72,7 +72,7 @@ public class LeapMotionFlip : MonoBehaviour {
                 case "platformScene" :
                     if(!StoryOrStage.instance.isPlatGood) {
                         books[7].SetActive(true);
-                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                        autoFlip = books[7].transform.Find("Book").GetComponent<AutoFlip>();
                     }
                     else {
                         books[2].SetActive(true);
@@ -83,7 +83,7 @@ public class LeapMotionFlip : MonoBehaviour {
                 case "RhythmScene" :
                     if(!StoryOrStage.instance.isRhythmGood) {
                         books[8].SetActive(true);
-                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                        autoFlip = books[8].transform.Find("Book").GetComponent<AutoFlip>();
                     }
                     else {
                         books[3].SetActive(true);
@@ -94,7 +94,7 @@ public class LeapMotionFlip : MonoBehaviour {
                 case "test" :
                     if(!StoryOrStage.instance.isMagicGood) {
                         books[9].SetActive(true);
-                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                        autoFlip = books[9].transform.Find("Book").GetComponent<AutoFlip>();
                     }
                     else {
                         books[4].SetActive(true);   
@@ -105,7 +105,7 @@ public class LeapMotionFlip : MonoBehaviour {
                 case "BroomstickScene" :
                     if(!StoryOrStage.instance.isBroomGood) {
                         books[10].SetActive(true);
-                        autoFlip = books[1].transform.Find("Book").GetComponent<AutoFlip>();
+                        autoFlip = books[10].transform.Find("Book").GetComponent<AutoFlip>();
                     }
                     else {
                         books[5].SetActive(true);

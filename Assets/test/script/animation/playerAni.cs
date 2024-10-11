@@ -10,6 +10,8 @@ public class playerAni : MonoBehaviour {
 
     public Animator anim;
 
+    public magicSoundManager msm;
+
     public void Start() {
         anim = GetComponent<Animator>();
 
@@ -17,6 +19,8 @@ public class playerAni : MonoBehaviour {
         isAttack = false;
         ishit1 = false;
         ishit2 = false;
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
     public void Update() {
@@ -26,6 +30,8 @@ public class playerAni : MonoBehaviour {
     public IEnumerator playerWin() {
         isAttack = true;
         isIdle = false;
+
+        StartCoroutine(attackSoundDelay());
 
         yield return new WaitForSeconds(1.9f);
 
@@ -39,6 +45,8 @@ public class playerAni : MonoBehaviour {
         isIdle = false;
         ishit1 = true;
 
+        msm.hitSound.Play();
+
         yield return new WaitForSeconds(0.5f);
 
         isIdle = true;
@@ -51,6 +59,8 @@ public class playerAni : MonoBehaviour {
         isIdle = false;
         ishit2 = true;
 
+        msm.hitSound.Play();
+
         yield return new WaitForSeconds(1f);
 
         isIdle = true;
@@ -62,5 +72,11 @@ public class playerAni : MonoBehaviour {
         anim.SetBool("isIdle", isIdle);
         anim.SetBool("ishit1", ishit1);
         anim.SetBool("ishit2", ishit2);
+    }
+
+    IEnumerator attackSoundDelay() {
+        yield return new WaitForSeconds(0.5f);
+
+        msm.attackSound.Play();
     }
 }

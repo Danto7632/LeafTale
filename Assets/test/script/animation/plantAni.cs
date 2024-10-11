@@ -20,6 +20,8 @@ public class plantAni : MonoBehaviour {
     private Vector3 startPosition;
     private float elapsedTime = 0f;
 
+    public magicSoundManager msm;
+
     public void Start() {
         enemeymanager = transform.parent.GetComponent<Enemeymanager>();
         playerani = GameObject.Find("Player").GetComponent<playerAni>();
@@ -34,6 +36,8 @@ public class plantAni : MonoBehaviour {
         isExit = false;
 
         startPosition = transform.position;
+
+        msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
     }
 
     public void Update() {
@@ -57,6 +61,8 @@ public class plantAni : MonoBehaviour {
 
         isIdle = false;
         isAttack = true;
+
+        msm.plantSound.Play();
 
         yield return new WaitForSeconds(1.4f);
 

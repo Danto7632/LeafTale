@@ -12,22 +12,25 @@ public class GameClear : MonoBehaviour
     public TMP_Text textScore;
     public string text;
     public bool clear;
-    public bool isNext;
+    public bool isPointing;
+    public bool isNext; // isNext 변수를 추가
+
     private string postUrl;
-    private string postUrl2;
 
     private void Start()
     {
         textScore = GameObject.Find("GameScore").GetComponent<TMP_Text>();
         pos = GetComponent<RectTransform>();
+
         pos.anchoredPosition = new Vector2(0, 10000);
         clear = false;
-        postUrl = "http://43.203.0.69:8080/api/Pmdata/score";
-        postUrl2 = "http://43.203.0.69:8080/api/games/singleGame";
+
+        postUrl = "http://43.203.0.69:8080/api/Pmdata/score"; // Post URL 설정
     }
 
     private void Update()
     {
+        // P 키를 눌렀을 때 씬 전환
         if (clear && Input.GetKeyDown(KeyCode.M))
         {
             if (StoryOrStage.instance == null)
@@ -47,63 +50,54 @@ public class GameClear : MonoBehaviour
 
     public void Clear(int score)
     {
-        isNext = true;
+        isNext = true; // 게임 클리어 시 isNext를 true로 설정
         pos.anchoredPosition = new Vector2(0, 0);
         text = "your score is " + score.ToString();
         textScore.text = text;
         clear = true;
 
-        string gameId = ""; // gameId를 저장할 변수
+        // 게임 종류에 따라 gameId 지정 및 점수, 플래그 저장
         if (SceneManager.GetActiveScene().name == "platformScene")
         {
             StoryOrStage.instance.G001Cleared = true;
             StoryOrStage.instance.G001Score = score;
-            gameId = "G001"; // platformScene -> G001
             Debug.Log("G001 Cleared");
         }
         else if (SceneManager.GetActiveScene().name == "BroomstickScene")
         {
             StoryOrStage.instance.G002Cleared = true;
             StoryOrStage.instance.G002Score = score;
-            gameId = "G002"; // BroomstickScene -> G002
             Debug.Log("G002 Cleared");
         }
         else if (SceneManager.GetActiveScene().name == "RhythmScene")
         {
             StoryOrStage.instance.G003Cleared = true;
             StoryOrStage.instance.G003Score = score;
-            gameId = "G003"; // RhythmScene -> G003
             Debug.Log("G003 Cleared");
         }
         else if (SceneManager.GetActiveScene().name == "test")
         {
             StoryOrStage.instance.G004Cleared = true;
             StoryOrStage.instance.G004Score = score;
-            gameId = "G004"; // test -> G004
             Debug.Log("G004 Cleared");
         }
         else if (SceneManager.GetActiveScene().name == "ClawMachineScenes")
         {
             StoryOrStage.instance.G005Cleared = true;
             StoryOrStage.instance.G005Score = score;
-            gameId = "G005"; // ClawMachineScenes -> G005
             Debug.Log("G005 Cleared");
         }
 
+        // 모든 게임 클리어 상태 로그 출력
         LogGameClearStatus();
 
         string playerId = Login.LoadEncryptedData("userID");
 
-        // 플래그에 따라 데이터 전송 형식 결정
-        if (StoryOrStage.instance.currentMode == "stage")
+        // 모든 게임이 클리어되었을 때만 점수 전송
+        if (StoryOrStage.instance.AllGamesCleared())
         {
-            // stage 모드일 때는 현재 클리어한 게임만 전송
-            StartCoroutine(SaveStageScore(gameId, score));
-        }
-        else if (StoryOrStage.instance.currentMode == "story" && StoryOrStage.instance.AllGamesCleared())
-        {
-            // story 모드일 때는 모든 게임이 클리어되었을 때만 전송
             StartCoroutine(SaveAllScores());
+            // 점수 전송 후에 모든 점수 초기화 및 플래그 초기화 고민중
         }
     }
 
@@ -121,35 +115,6 @@ public class GameClear : MonoBehaviour
     {
         yield return ScoreSave(StoryOrStage.instance.G001Score, StoryOrStage.instance.G002Score, StoryOrStage.instance.G003Score, StoryOrStage.instance.G004Score, StoryOrStage.instance.G005Score);
         Debug.Log("All scores posted successfully.");
-    }
-
-    IEnumerator SaveStageScore(string gId, int gScore)
-    {
-        var scoreData = new StagePostData
-        {
-            memberId = Login.LoadEncryptedData("userID"),
-            gameId = gId,
-            gameScore = gScore
-        };
-
-        string jsonData = JsonUtility.ToJson(scoreData);
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-        UnityWebRequest www = new UnityWebRequest(postUrl2, UnityWebRequest.kHttpVerbPOST);
-        www.uploadHandler = new UploadHandlerRaw(bodyRaw);
-        www.downloadHandler = new DownloadHandlerBuffer();
-        www.SetRequestHeader("Content-Type", "application/json");
-
-        yield return www.SendWebRequest();
-
-        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-        {
-            Debug.Log("Error: " + www.error);
-        }
-        else
-        {
-            Debug.Log("Score post complete! Response: " + www.downloadHandler.text);
-            Debug.Log("Response Code: " + www.responseCode);
-        }
     }
 
     IEnumerator ScoreSave(int score1, int score2, int score3, int score4, int score5)
@@ -180,16 +145,18 @@ public class GameClear : MonoBehaviour
         else
         {
             Debug.Log("Score post complete! Response: " + www.downloadHandler.text);
+
             Debug.Log("Response Code: " + www.responseCode);
         }
     }
 
     void storyOrder()
     {
+        // 스토리 순서에 따른 씬 전환 로직
         string sceneName = SceneManager.GetActiveScene().name;
 
-        if (sceneName == "ClawMachineScenes")
-        {
+        Debug.Log(sceneName + "의 클리어 후 스토리...");
+        if (sceneName == "ClawMachineScenes") {
             StoryOrStage.instance.nextStory = "ClawMachineScenes";
             SceneManager.LoadScene("StoryPage");
         }
@@ -214,14 +181,21 @@ public class GameClear : MonoBehaviour
             SceneManager.LoadScene("StoryPage");
         }
     }
-}
 
-[System.Serializable]
-public class StagePostData
-{
-    public string memberId;
-    public string gameId;
-    public int gameScore;
+    /*
+    bool IsPointingPose(Hand hand) {
+        foreach (Finger finger in hand.Fingers) {
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
+                if (!finger.IsExtended) return false;
+            }
+            else {
+                if (finger.IsExtended) return false;
+            }
+        }
+        
+        return true;
+    }
+    */
 }
 
 [System.Serializable]

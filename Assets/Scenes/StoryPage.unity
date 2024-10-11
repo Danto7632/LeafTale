@@ -224,6 +224,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!222 &3752915
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -427,6 +428,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!222 &34572999
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -546,6 +548,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!1 &50174589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,6 +1102,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 175044749}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &175044749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2627,6 +2631,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!1 &313474449
 GameObject:
   m_ObjectHideFlags: 0
@@ -3574,6 +3579,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 20
+  fsm: {fileID: 0}
 --- !u!1 &450674042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4338,6 +4344,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!1 &608613967
 GameObject:
   m_ObjectHideFlags: 0
@@ -5899,6 +5906,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 822097599}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &822097599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6238,6 +6246,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 850277326}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &850277326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7238,6 +7247,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!1 &1066755411
 GameObject:
   m_ObjectHideFlags: 0
@@ -7552,6 +7562,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!222 &1092844173
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8772,6 +8783,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 1292168605}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &1292168605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9097,6 +9109,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 1347537310}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &1347537310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10810,6 +10823,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!222 &1500369304
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11772,6 +11786,344 @@ RectTransform:
   m_AnchoredPosition: {x: 70.597, y: -101.54}
   m_SizeDelta: {x: 600, y: 1381.6654}
   m_Pivot: {x: 1, y: 0.21712928}
+--- !u!1 &1676864500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1676864501}
+  - component: {fileID: 1676864503}
+  - component: {fileID: 1676864502}
+  - component: {fileID: 1676864504}
+  - component: {fileID: 1676864505}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1676864501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676864500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1676864502
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676864500}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 31bd22e99cc874cc5aa4d1479910ccdd, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1676864503
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676864500}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b2855f914fa2c4cb3a6d73f5171d25b8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1676864504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676864500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7e6decdecf845f98980742bf05592d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipSound: {fileID: 1676864503}
+  selectSound: {fileID: 1676864502}
+  chargedSound: {fileID: 1676864505}
+--- !u!82 &1676864505
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676864500}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0a259173a64644dae912940d8e69220f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1685130025
 GameObject:
   m_ObjectHideFlags: 0
@@ -12164,6 +12516,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 1706151766}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &1706151766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12524,6 +12877,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!1 &1749382234
 GameObject:
   m_ObjectHideFlags: 0
@@ -13781,6 +14135,7 @@ MonoBehaviour:
   AutoStartFlip: 1
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+  fsm: {fileID: 0}
 --- !u!222 &1907322648
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13848,6 +14203,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 1913154324}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &1913154324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14586,6 +14942,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 1988942611}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &1988942611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14805,6 +15162,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 2064476963}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &2064476963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15115,6 +15473,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 2095701259}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &2095701259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15576,6 +15935,7 @@ MonoBehaviour:
   gaugeImage: {fileID: 2125066876}
   nextSceneName: 
   leapMotionFlip: {fileID: 0}
+  fsm: {fileID: 0}
 --- !u!114 &2125066876
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,10 +13,13 @@ public class StartTimer_BroomStick : MonoBehaviour {
     private float timer;
     private float interval;
 
-    public void Awake() {
+    public broomSoundManager bsm;
+
+    public void Awake() {   
         timerText = GameObject.Find("StartTimer").GetComponent<TMP_Text>();
         timerBar = GameObject.Find("Time").GetComponent<TimerBar_BroomStick>();
         broom =  GameObject.FindWithTag("Player").GetComponent<broomMove>();
+        bsm = GameObject.Find("SoundManager").GetComponent<broomSoundManager>();
 
         timerText.enabled = false;
 
@@ -37,12 +40,16 @@ public class StartTimer_BroomStick : MonoBehaviour {
         while (countdownValue > 0) {
             timerText.text = countdownValue.ToString();
 
+            bsm.timerCountSound.Play();
+            
             yield return new WaitForSeconds(interval);
 
             countdownValue--;
         }
 
         timerText.text = "GO!";
+        bsm.startSound.Play();
+
         broom.isMoveAllow = true;
         timerBar.StartCoroutine(timerBar.StartTimer());
 
