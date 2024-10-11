@@ -28,6 +28,7 @@ public class ScrollStage : MonoBehaviour {
 
     public AudioSource flipSound;
     public AudioSource selectSound;
+    public AudioSource chargedSound;
 
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
@@ -111,6 +112,7 @@ public class ScrollStage : MonoBehaviour {
             if (IsPointingPose(hand)) {
                 if (!isPointing) {
                     isPointing = true;
+                    chargedSound.Play();
                     pointingStartTime = Time.time;
                 }
                 else if (Time.time - pointingStartTime > 3f) {
@@ -123,6 +125,7 @@ public class ScrollStage : MonoBehaviour {
             else {
                 ResetGauge();
                 isPointing = false;
+                chargedSound.Stop();
             }
 
             for (int i = 0; i < pos.Length; i++) {

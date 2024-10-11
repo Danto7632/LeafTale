@@ -13,7 +13,6 @@ public class powerBar : MonoBehaviour
     float powerLeft;
     public float powerUsing;
 
-    public GameObject Manager;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +26,6 @@ public class powerBar : MonoBehaviour
         powerUsing = 0.003f;
 
         clawClear = GameObject.Find("box").GetComponent<ClawClear>();
-
-        Manager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -50,8 +47,9 @@ public class powerBar : MonoBehaviour
                 StoryOrStage.instance.isClawGood = false;
             }
             power.fillAmount = 0;
-            Manager.GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
-            Manager.GetComponent<GameManager>().EndGame(0, 0);
+            GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
+            Debug.Log("erre");
+            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
         }
     }

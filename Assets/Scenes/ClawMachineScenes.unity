@@ -6945,7 +6945,6 @@ MonoBehaviour:
   clawClear: {fileID: 0}
   maxPower: 0
   powerUsing: 0
-  Manager: {fileID: 0}
 --- !u!1 &1051924277
 GameObject:
   m_ObjectHideFlags: 0
@@ -7025,7 +7024,6 @@ MonoBehaviour:
   clawClear: {fileID: 0}
   maxPower: 0
   powerUsing: 0
-  Manager: {fileID: 0}
 --- !u!212 &1051924281
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8715,7 +8713,7 @@ GameObject:
   - component: {fileID: 1334675766}
   - component: {fileID: 1334675765}
   m_Layer: 5
-  m_Name: GameManager
+  m_Name: canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

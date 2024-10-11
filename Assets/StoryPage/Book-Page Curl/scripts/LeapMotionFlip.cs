@@ -196,7 +196,7 @@ public class LeapMotionFlip : MonoBehaviour {
                 break;
 
             case "test" :
-                SceneManager.LoadScene("EndGame");
+                SceneManager.LoadScene("EndingCredit");
                 break;
         }
     }

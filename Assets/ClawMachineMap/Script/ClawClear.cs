@@ -84,13 +84,12 @@ public class ClawClear : MonoBehaviour
                 StoryOrStage.instance.isClawGood = true;
             }
             clawScore = clawScore * 100.0f / 90.0f;
-            Debug.Log(clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
             csm.endSound.Play();
             csm.clawSound.Stop();
-            clearCount++;
+            clearCount = 4;
         }
     }
 

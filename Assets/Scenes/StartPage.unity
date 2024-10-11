@@ -1711,6 +1711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageToggle: {fileID: 1853941261}
   storyToggle: {fileID: 722994793}
+  changedSound: {fileID: 852407852}
 --- !u!82 &852407852
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1721,7 +1722,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 43114aef55d334c7189f51b0247e9ec0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
