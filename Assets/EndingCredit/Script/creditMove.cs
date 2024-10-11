@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class creditMove : MonoBehaviour
 {
@@ -61,5 +62,13 @@ public class creditMove : MonoBehaviour
         {
             gameObject.transform.Translate(0, speed, 0);
         }
+        else
+        {
+            Invoke("goBackToStart", 3.0f);
+        }
+    }
+    void goBackToStart()
+    {
+        SceneManager.LoadScene("StartPage");
     }
 }

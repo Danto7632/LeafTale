@@ -37,7 +37,6 @@ public class ClawClear : MonoBehaviour
         wvPoint = 20.0f;
         clearCount = 0;
 
-        //���� ä�� �̱� 1~9
         vNumber[0] = Random.Range(1, 10);
         vNumber[1] = Random.Range(1, 10);
         vNumber[2] = Random.Range(1, 10);
@@ -58,13 +57,11 @@ public class ClawClear : MonoBehaviour
             vNumber[2] = Random.Range(1, 10);
         }
 
-        //����ä�� ����
         for(int i = 0; i < 3; i++)
         {
             sVegetable = vegetables.transform.GetChild(vNumber[i] - 1).gameObject;
-            Debug.Log($"{i+1}.n vegetable : {vNumber[i]},{sVegetable.name}"); //�ܼ�
+            Debug.Log($"{i+1}.n vegetable : {vNumber[i]},{sVegetable.name}");
 
-            //�̹��� ����
             sVegetable.tag = "targetV";
             targetVS = box.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();
             targetVS.sprite = sVegetable.GetComponent<SpriteRenderer>().sprite;
@@ -72,13 +69,11 @@ public class ClawClear : MonoBehaviour
         }
 
         csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
-        Debug.Log($"{vNumber[0]},{vNumber[1]},{vNumber[2]}");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"{vNumber[0]},{vNumber[1]},{vNumber[2]}");
         if (clearCount == 3)
         {
             if (StoryOrStage.instance != null) {
@@ -115,7 +110,6 @@ public class ClawClear : MonoBehaviour
         {
             for(int i=0; i < 3; i++)
             {
-                Debug.Log($"{vNumber[0]},{vNumber[1]},{vNumber[2]}");
                 Debug.Log($"{objName.Substring(objName.Length - 1)}, {vNumber[i]}");
                 if (int.Parse(objName.Substring(objName.Length - 1)) == vNumber[i])
                 {
