@@ -6,11 +6,9 @@ public class ToggleHandler : MonoBehaviour
     public Toggle stageToggle;
     public Toggle storyToggle;
 
-    public AudioSource changedSound;
-
     void Start()
     {
-        // 체크박스 상태 변경 이벤트에 메서드 연결
+        // Toggle 이벤트에 메소드 연결
         stageToggle.onValueChanged.AddListener(OnStageToggleChanged);
         storyToggle.onValueChanged.AddListener(OnStoryToggleChanged);
 
@@ -18,27 +16,26 @@ public class ToggleHandler : MonoBehaviour
         if (stageToggle.isOn)
         {
             StoryOrStage.instance.currentMode = "stage";
+            StoryOrStage.instance.modeFlag = 0;  // 스테이지 모드
         }
         else if (storyToggle.isOn)
         {
             StoryOrStage.instance.currentMode = "story";
+            StoryOrStage.instance.modeFlag = 1;  // 스토리 모드
         }
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && !Login.isNotToggle) {
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && !Login.isNotToggle) {
             stageToggle.isOn = true;
             storyToggle.isOn = false;
-            changedSound.Play();
         }
-
-        else if(Input.GetKeyDown(KeyCode.RightArrow) && !Login.isNotToggle){
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && !Login.isNotToggle){
             storyToggle.isOn = true;
             stageToggle.isOn = false;
-            changedSound.Play();
         }
 
-        if(Login.isNotToggle) {
+        if (Login.isNotToggle) {
             storyToggle.interactable = false;
             stageToggle.interactable = false;
         }
@@ -49,8 +46,8 @@ public class ToggleHandler : MonoBehaviour
         if (isOn && !Login.isNotToggle)
         {
             StoryOrStage.instance.currentMode = "stage";
-            storyToggle.isOn = false; // Story 체크박스는 해제
-            changedSound.Play();
+            StoryOrStage.instance.modeFlag = 0;  // 스테이지 모드
+            storyToggle.isOn = false;
         }
     }
 
@@ -59,8 +56,8 @@ public class ToggleHandler : MonoBehaviour
         if (isOn && !Login.isNotToggle)
         {
             StoryOrStage.instance.currentMode = "story";
-            stageToggle.isOn = false; // Stage 체크박스는 해제
-            changedSound.Play();
+            StoryOrStage.instance.modeFlag = 1;  // 스토리 모드
+            stageToggle.isOn = false;
         }
     }
 }
