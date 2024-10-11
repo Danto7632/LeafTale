@@ -14,6 +14,7 @@ public class GameClear : MonoBehaviour
     public bool clear;
     public bool isNext;
     private string postUrl;
+    private string postUrl2;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class GameClear : MonoBehaviour
         pos.anchoredPosition = new Vector2(0, 10000);
         clear = false;
         postUrl = "http://43.203.0.69:8080/api/Pmdata/score";
+        postUrl2 = "http://43.203.0.69:8080/api/games/singleGame";
     }
 
     private void Update()
@@ -132,7 +134,7 @@ public class GameClear : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(scoreData);
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-        UnityWebRequest www = new UnityWebRequest(postUrl, UnityWebRequest.kHttpVerbPOST);
+        UnityWebRequest www = new UnityWebRequest(postUrl2, UnityWebRequest.kHttpVerbPOST);
         www.uploadHandler = new UploadHandlerRaw(bodyRaw);
         www.downloadHandler = new DownloadHandlerBuffer();
         www.SetRequestHeader("Content-Type", "application/json");
