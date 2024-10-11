@@ -30,6 +30,8 @@ public class StoryOrStage : MonoBehaviour
     // 스토리와 스테이지 모드를 구분하는 플래그 추가
     public int modeFlag = 0;
 
+    public int clearCount = 0;
+
     private void Awake()
     {
         // Singleton 인스턴스 설정
