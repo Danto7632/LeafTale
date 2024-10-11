@@ -27,22 +27,40 @@ public class StoryOrStage : MonoBehaviour
     public int G004Score = 0;
     public int G005Score = 0;
 
+    // 스토리와 스테이지 모드를 구분하는 플래그 추가
+    public int modeFlag = 0;
+
     private void Awake()
     {
-        // 싱글턴 인스턴스 설정
+        // Singleton 인스턴스 설정
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 간에도 유지
+            DontDestroyOnLoad(gameObject); // 씬 변경 시 오브젝트가 파괴되지 않도록 설정
         }
         else
         {
-            Destroy(gameObject); // 이미 인스턴스가 존재하면 이 객체는 파괴
+            Destroy(gameObject); // 중복 인스턴스가 생성되면 파괴
         }
     }
 
     public bool AllGamesCleared()
     {
         return G001Cleared && G002Cleared && G003Cleared && G004Cleared && G005Cleared;
+    }
+
+    public void ResetGameStatus()
+    {
+        G001Cleared = false;
+        G002Cleared = false;
+        G003Cleared = false;
+        G004Cleared = false;
+        G005Cleared = false;
+        
+        G001Score = 0;
+        G002Score = 0;
+        G003Score = 0;
+        G004Score = 0;
+        G005Score = 0;
     }
 }
