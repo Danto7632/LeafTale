@@ -20,6 +20,8 @@ public class dragonAni : MonoBehaviour {
 
     public magicSoundManager msm;
 
+    public GameObject dragonHit;
+
     public void Start() {
         anim = GetComponent<Animator>();
         playerani = GameObject.Find("Player").GetComponent<playerAni>();
@@ -69,6 +71,8 @@ public class dragonAni : MonoBehaviour {
         StartCoroutine(playerani.playerWin());
         isDie = true;
         isIdle = false;
+
+        Instantiate(dragonHit, new Vector3(0, 0, 0), Quaternion.identity);
 
         yield return new WaitForSeconds(2.4f);
 

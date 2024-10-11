@@ -613,6 +613,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   moveDuration: 2
   msm: {fileID: 0}
+  dragonHit: {fileID: 8672448776384068898, guid: a2604d0acb6bb4f608cf340ead312eb8, type: 3}
 --- !u!61 &144313829
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -822,9 +823,9 @@ MonoBehaviour:
   wolfani: {fileID: 0}
   plantani: {fileID: 0}
   dragonani: {fileID: 0}
-  plantEnemey: {fileID: 0}
-  wolfEnemey: {fileID: 0}
-  dragonEnemey: {fileID: 0}
+  plantEnemey: {fileID: 3784438233354442669, guid: 2826374d2219e46d4b33761751057367, type: 3}
+  wolfEnemey: {fileID: 8672448776384068898, guid: a2604d0acb6bb4f608cf340ead312eb8, type: 3}
+  dragonEnemey: {fileID: 596448878276994387, guid: 667d20e2fc7d442b8a7a855bb27e2096, type: 3}
   isWolfStart: 0
   isPlantStart: 0
   isDragonStart: 0
@@ -2189,6 +2190,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   moveDuration: 2
   msm: {fileID: 0}
+  wolfHit: {fileID: 8672448776384068898, guid: a2604d0acb6bb4f608cf340ead312eb8, type: 3}
 --- !u!61 &829469980
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3205,6 +3207,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   moveDuration: 2
   msm: {fileID: 0}
+  plantHit: {fileID: 8672448776384068898, guid: a2604d0acb6bb4f608cf340ead312eb8, type: 3}
 --- !u!61 &1184712127
 BoxCollider2D:
   m_ObjectHideFlags: 0

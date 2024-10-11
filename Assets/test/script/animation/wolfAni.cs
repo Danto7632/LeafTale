@@ -23,6 +23,8 @@ public class wolfAni : MonoBehaviour {
 
     public magicSoundManager msm;
 
+    public GameObject wolfHit;
+
     public void Start() {
         enemeymanager = transform.parent.GetComponent<Enemeymanager>();
         anim = GetComponent<Animator>();
@@ -89,6 +91,8 @@ public class wolfAni : MonoBehaviour {
 
     public IEnumerator wolfLose() {
         StartCoroutine(playerani.playerWin());
+
+        Instantiate(wolfHit, new Vector3(0, 0, 0), Quaternion.identity);
 
         yield return new WaitForSeconds(0.7f);
 

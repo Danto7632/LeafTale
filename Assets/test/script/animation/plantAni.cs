@@ -22,6 +22,8 @@ public class plantAni : MonoBehaviour {
 
     public magicSoundManager msm;
 
+    public GameObject plantHit;
+
     public void Start() {
         enemeymanager = transform.parent.GetComponent<Enemeymanager>();
         playerani = GameObject.Find("Player").GetComponent<playerAni>();
@@ -89,6 +91,8 @@ public class plantAni : MonoBehaviour {
 
     public IEnumerator plantLose() {
         StartCoroutine(playerani.playerWin());
+
+        Instantiate(plantHit, new Vector3(0, 0, 0), Quaternion.identity);
         
         yield return new WaitForSeconds(0.7f);
 
