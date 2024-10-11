@@ -8,7 +8,6 @@ public class ShapeSelector : MonoBehaviour {
 
     public TMP_Text startTimer;
     public TMP_Text gameTimer;
-    public Image backGround;
 
     public LineRenderer referenceShape;
     public LineRenderer playerDrawing;
@@ -22,9 +21,12 @@ public class ShapeSelector : MonoBehaviour {
 
     public magicSoundManager msm;
 
+    public GameObject CircleMagic;
+    public GameObject SquareMagic;
+    public GameObject StarMagic;
+
     private void Start() {
         drawingGame = GameObject.Find("DrawingGame").GetComponent<DrawingGame>();
-        backGround = GameObject.Find("backGround").GetComponent<Image>();
 
         drawingGame.resultText.gameObject.SetActive(false);
         referenceShape.gameObject.SetActive(false);
@@ -34,9 +36,15 @@ public class ShapeSelector : MonoBehaviour {
 
         shapeCount = 0;
 
-        backGround.gameObject.SetActive(false);
-
         msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
+
+        CircleMagic = GameObject.Find("CircleMagic");
+        SquareMagic = GameObject.Find("SquareMagic");
+        StarMagic = GameObject.Find("StarMagic");
+
+        CircleMagic.SetActive(false);
+        SquareMagic.SetActive(false);
+        StarMagic.SetActive(false);
     }
 
     public void gameStart() {
@@ -47,12 +55,11 @@ public class ShapeSelector : MonoBehaviour {
     }
 
     public void nextStage(bool isFirst) {
-        backGround.gameObject.SetActive(true);
         // 중복 실행 방지
         if (stageTimerCoroutine != null) {
             StopCoroutine(stageTimerCoroutine);
             stageTimerCoroutine = null;
-        }
+        }        
 
         isPlaying = false;
         if (isFirst) {
@@ -86,6 +93,15 @@ public class ShapeSelector : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 
         msm.endSound.Play();
+        if(StoryOrStage.instance != null) {
+            if(Enemeymanager.countEnemy >= 2) {
+                StoryOrStage.instance.isMagicGood = true;
+                StoryOrStage.instance.clearCount++;
+            }
+            else {
+                StoryOrStage.instance.isMagicGood = false;
+            }
+        }
         GameObject.Find("GameManage").GetComponent<GameManager>().EndGame(0, 0);
     }
 
@@ -111,6 +127,10 @@ public class ShapeSelector : MonoBehaviour {
 
         isPlaying = false;
 
+        CircleMagic.SetActive(false);
+        SquareMagic.SetActive(false);
+        StarMagic.SetActive(false);
+
         yield return new WaitForSeconds(3f);
 
         // 중복 실행 방지
@@ -125,6 +145,16 @@ public class ShapeSelector : MonoBehaviour {
         gameTimer.gameObject.SetActive(true);
 
         isPlaying = true;
+
+        if(shapeCount == 1) {
+            CircleMagic.SetActive(true);
+        }
+        else if(shapeCount == 2) {
+            SquareMagic.SetActive(true);
+        }
+        else if(shapeCount == 3){
+            StarMagic.SetActive(true);
+        }
 
         drawingGame.SetReferenceShape(shape);
     }

@@ -226,15 +226,6 @@ public class broomMove : MonoBehaviour {
     }
 
     public void GameOver() {
-        if(StoryOrStage.instance != null) {
-            if(plusTimerNum == 3) {
-                StoryOrStage.instance.isBroomGood = true;
-            }
-            else {
-                StoryOrStage.instance.isBroomGood = false;
-            }
-        }
-        
         isGameOver = true;
         isMoveAllow = false;
 

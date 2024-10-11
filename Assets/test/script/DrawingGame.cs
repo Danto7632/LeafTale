@@ -59,7 +59,7 @@ public class DrawingGame : MonoBehaviour
         SetLineRendererSortingOrder(playerDrawing, 1);
 
         // 초기 도형 색상 설정
-        SetLineRendererColor(referenceShape, Color.blue); // 초기 도형 색상 파란색
+        SetLineRendererColor(referenceShape, Color.white); // 초기 도형 색상 파란색
 
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;

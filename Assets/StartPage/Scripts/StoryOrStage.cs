@@ -27,6 +27,8 @@ public class StoryOrStage : MonoBehaviour
     public int G004Score = 0;
     public int G005Score = 0;
 
+    public int clearCount = 0;
+
     private void Awake()
     {
         // 싱글턴 인스턴스 설정
