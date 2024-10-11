@@ -10,9 +10,6 @@ public class ToggleHandler : MonoBehaviour
 
     void Start()
     {
-        // 체크박스 상태 변경 이벤트에 메서드 연결
-        stageToggle.onValueChanged.AddListener(OnStageToggleChanged);
-        storyToggle.onValueChanged.AddListener(OnStoryToggleChanged);
 
         // 초기 상태 설정
         if (stageToggle.isOn)
