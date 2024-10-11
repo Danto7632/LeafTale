@@ -10,6 +10,9 @@ public class ToggleHandler : MonoBehaviour
 
     void Start()
     {
+        // 체크박스 상태 변경 이벤트에 메서드 연결
+        stageToggle.onValueChanged.AddListener(OnStageToggleChanged);
+        storyToggle.onValueChanged.AddListener(OnStoryToggleChanged);
 
         // 초기 상태 설정
         if (stageToggle.isOn)
@@ -38,6 +41,26 @@ public class ToggleHandler : MonoBehaviour
         if(Login.isNotToggle) {
             storyToggle.interactable = false;
             stageToggle.interactable = false;
+        }
+    }
+
+    void OnStageToggleChanged(bool isOn)
+    {
+        if (isOn && !Login.isNotToggle)
+        {
+            StoryOrStage.instance.currentMode = "stage";
+            storyToggle.isOn = false; // Story 체크박스는 해제
+            changedSound.Play();
+        }
+    }
+
+    void OnStoryToggleChanged(bool isOn)
+    {
+        if (isOn && !Login.isNotToggle)
+        {
+            StoryOrStage.instance.currentMode = "story";
+            stageToggle.isOn = false; // Stage 체크박스는 해제
+            changedSound.Play();
         }
     }
 }
