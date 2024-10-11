@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16558421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.55, y: -0.36, z: 0.09949522}
+  m_LocalPosition: {x: -3.42, y: -2.32, z: 0.09949522}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1486,7 +1486,7 @@ GameObject:
   - component: {fileID: 228388838}
   - component: {fileID: 228388841}
   m_Layer: 0
-  m_Name: Square (5)
+  m_Name: trigerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2180,7 +2180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292761211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.78, y: -1.95, z: 0.09949522}
+  m_LocalPosition: {x: -1.54, y: -1.82, z: 0.09949522}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3968,7 +3968,6 @@ GameObject:
   - component: {fileID: 655636701}
   - component: {fileID: 655636700}
   - component: {fileID: 655636704}
-  - component: {fileID: 655636705}
   m_Layer: 13
   m_Name: box
   m_TagString: Untagged
@@ -4101,7 +4100,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655636698}
   m_BodyType: 1
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -4119,25 +4118,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &655636705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655636698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7804db5fb64f241868e66807642ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clawScore: 0
-  maxScore: 0
-  vPoint: 0
-  sPoint: 0
-  wvPoint: 0
-  clearCount: 0
-  csm: {fileID: 0}
 --- !u!4 &665317470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3810146313072661609, guid: c0b956cf56ab71a4496f3a7422b790ae, type: 3}
@@ -10445,7 +10425,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613972989}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
