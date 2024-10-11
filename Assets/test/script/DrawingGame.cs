@@ -26,9 +26,9 @@ public class DrawingGame : MonoBehaviour
     public Enemeymanager enemeymanager;
     public TMP_Text resultText;         // 정확도를 표시할 TextMeshPro 텍스트
 
-    public int circleMaxPoints = 100;   // 원을 그릴 때 최대 점의 수
-    public int squareMaxPoints = 50;    // 사각형을 그릴 때 최대 점의 수
-    public int starMaxPoints = 150;     // 별을 그릴 때 최대 점의 수
+    public int circleMaxPoints = 300;   // 원을 그릴 때 최대 점의 수
+    public int squareMaxPoints = 200;    // 사각형을 그릴 때 최대 점의 수
+    public int starMaxPoints = 250;     // 별을 그릴 때 최대 점의 수
 
     public List<Vector3> playerPoints = new List<Vector3>(); // 플레이어가 그린 점들
     private bool isDrawing = false; // 그리기 중 여부
