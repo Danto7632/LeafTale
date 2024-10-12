@@ -6923,6 +6923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clawClear: {fileID: 0}
+  csm: {fileID: 0}
   maxPower: 0
   powerUsing: 0
 --- !u!1 &1051924277
@@ -7002,6 +7003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clawClear: {fileID: 0}
+  csm: {fileID: 0}
   maxPower: 0
   powerUsing: 0
 --- !u!212 &1051924281
@@ -10411,7 +10413,7 @@ GameObject:
   - component: {fileID: 1613972990}
   - component: {fileID: 1613972992}
   - component: {fileID: 1613972991}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
