@@ -47,8 +47,13 @@ public class powerBar : MonoBehaviour
                 StoryOrStage.instance.isClawGood = false;
             }
             power.fillAmount = 0;
-            GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
-            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
+            if(clawClear != null) {
+                GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
+                GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
+            }
+            else {
+                Debug.Log("Error");
+            }
             clawControl.gameOver = true;
         }
     }
