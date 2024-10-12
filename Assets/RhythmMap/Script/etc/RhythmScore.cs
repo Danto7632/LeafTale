@@ -25,7 +25,6 @@ public class RhythmScore : MonoBehaviour
         allNodeCount = PatternSpawner.rightNodeCount + PatternSpawner.leftNodeCount;
         allNode = allNodeCount;
         score = 0;
-
     }
 
     public void NodeHit(int addScore)
