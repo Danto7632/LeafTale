@@ -36,6 +36,9 @@ public class powerBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(clawControl.gameOver == true) {
+            csm.clawSound.Stop();
+        }
     }
 
     public void usePower()
@@ -56,7 +59,6 @@ public class powerBar : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
             csm.endSound.Play();
-            csm.clawSound.Stop();
         }
     }
 }
