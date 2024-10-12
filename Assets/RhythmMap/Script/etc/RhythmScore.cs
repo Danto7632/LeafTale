@@ -22,8 +22,8 @@ public class RhythmScore : MonoBehaviour
 
         rsm = GameObject.Find("SoundManager").GetComponent<rhythmSoundManager>();
 
-        allNodeCount = PatternSpawner.rightNodeCount + PatternSpawner.leftNodeCount;
-        allNode = allNodeCount;
+        allNodeCount = 19; //PatternSpawner.rightNodeCount + PatternSpawner.leftNodeCount; //고칠부분
+        allNode = 19; //allNodeCount; //고칠부분
         score = 0;
     }
 
