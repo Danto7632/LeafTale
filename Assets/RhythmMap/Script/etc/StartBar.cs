@@ -29,8 +29,10 @@ public class StartBar : MonoBehaviour {
 
     private static void UpdateEndImagePosition(float fillAmount) {
         // -150에서 150까지 비율에 따라 보간
-        float endImagePosition = Mathf.Lerp(-150f, targetPosition, fillAmount); 
-        endImageTransform.anchoredPosition = new Vector2(endImagePosition, endImageTransform.anchoredPosition.y);
+        if(endImageTransform != null) {
+            float endImagePosition = Mathf.Lerp(-150f, targetPosition, fillAmount); 
+            endImageTransform.anchoredPosition = new Vector2(endImagePosition, endImageTransform.anchoredPosition.y);
+        }
     }
 
     // 호출할 메서드 추가: 목표 위치로 애니메이션
