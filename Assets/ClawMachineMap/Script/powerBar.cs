@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class powerBar : MonoBehaviour
 {
     Image power;
 
     public ClawClear clawClear;
 
+    public clawSoundManager csm;
+
     public float maxPower;
     float powerLeft;
     public float powerUsing;
+    
 
 
     // Start is called before the first frame update
@@ -25,12 +29,16 @@ public class powerBar : MonoBehaviour
         powerLeft = maxPower;
         powerUsing = 0.003f;
 
-        clawClear = GameObject.Find("box").GetComponent<ClawClear>();
+        clawClear = GameObject.Find("trigerArea").GetComponent<ClawClear>();
+        csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(clawControl.gameOver == true) {
+            csm.clawSound.Stop();
+        }
     }
 
     public void usePower()
@@ -50,6 +58,7 @@ public class powerBar : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
+            csm.endSound.Play();
         }
     }
 }

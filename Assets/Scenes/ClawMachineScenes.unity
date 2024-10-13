@@ -6923,6 +6923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clawClear: {fileID: 0}
+  csm: {fileID: 0}
   maxPower: 0
   powerUsing: 0
 --- !u!1 &1051924277
@@ -7002,6 +7003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clawClear: {fileID: 0}
+  csm: {fileID: 0}
   maxPower: 0
   powerUsing: 0
 --- !u!212 &1051924281
@@ -10411,7 +10413,7 @@ GameObject:
   - component: {fileID: 1613972990}
   - component: {fileID: 1613972992}
   - component: {fileID: 1613972991}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13806,6 +13808,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5920778306479314899, guid: d8452e1b3a973443c8664e678128335e, type: 3}
+      propertyPath: clawBgm
+      value: 
+      objectReference: {fileID: 7392842472612284244}
     - target: {fileID: 6546121118362803718, guid: d8452e1b3a973443c8664e678128335e, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -13815,3 +13821,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8452e1b3a973443c8664e678128335e, type: 3}
+--- !u!82 &7392842472612284244 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5574872542071126838, guid: d8452e1b3a973443c8664e678128335e, type: 3}
+  m_PrefabInstance: {fileID: 7392842472612284243}
+  m_PrefabAsset: {fileID: 0}

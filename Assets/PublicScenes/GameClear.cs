@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement; // SceneManager
 using TMPro; // TMP_Text
 using UnityEngine.Networking; // UnityWebRequest
 using System; // DateTime
+using Leap;
+using Leap.Unity;
 
 public class GameClear : MonoBehaviour
 {
+
+    private LeapServiceProvider leapProvider;
+
     public RectTransform pos;
     public TMP_Text textScore;
     public string text;
@@ -24,6 +29,9 @@ public class GameClear : MonoBehaviour
         clear = false;
         postUrl = "http://43.203.0.69:8080/api/Pmdata/score";
         postUrl2 = "http://43.203.0.69:8080/api/games/singleGame";
+
+        leapProvider = FindObjectOfType<LeapServiceProvider>();
+        leapProvider.OnUpdateFrame += OnUpdateFrame;
     }
 
     private void Update()
@@ -41,6 +49,38 @@ public class GameClear : MonoBehaviour
             else if (StoryOrStage.instance.currentMode == "story")
             {
                 storyOrder();
+            }
+        }
+    }
+
+    public bool isPointing;
+    public float pointingStartTime = 0f;
+    public float elapsedTime = 0f;
+
+    void OnUpdateFrame(Frame frame) {
+        if(clear) {
+            if (frame.Hands.Count > 0) { //사용자가 손을 인식하고 있는지
+                Hand hand = frame.Hands[0]; // 인식한 손 중 맨 처음에 인식한 손 하나를 hand변수에 참조
+
+                if (IsPointingPose(hand)) { //인식한 손이 가르키는 손동작을 하고 있는지 확인
+                    if (!isPointing) {
+                        pointingStartTime = Time.time;
+
+                        isPointing = true;
+                    } //특정 손동작을 인식한 시간을 저장
+                    else {
+                        elapsedTime = Time.time - pointingStartTime;
+
+                        if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
+                            storyOrder();
+                        }
+                    }
+                }
+                else {
+                    elapsedTime = 0f;
+                    isPointing = false;
+                    StartBar.ChangeHealthBarAmount(elapsedTime);
+                }
             }
         }
     }
@@ -213,6 +253,20 @@ public class GameClear : MonoBehaviour
             StoryOrStage.instance.nextStory = "test";
             SceneManager.LoadScene("StoryPage");
         }
+    }
+
+
+    bool IsPointingPose(Hand hand) {
+        foreach (Finger finger in hand.Fingers) { //손의 손가락을 모두 가져와 반복문 실행
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
+                if (!finger.IsExtended) return false;
+            } //검지가 펴져있지 않다면 false를 반환
+            else {
+                if (finger.IsExtended) return false;
+            } //검지를 제외한 다른 손가락이 펴져있다면 false를 반환
+        }
+        
+        return true; //검지만 펴져있다면 true를 반환
     }
 }
 
