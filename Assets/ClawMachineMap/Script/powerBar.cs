@@ -54,7 +54,9 @@ public class powerBar : MonoBehaviour
             if(StoryOrStage.instance != null) {
                 StoryOrStage.instance.isClawGood = false;
             }
-            power.fillAmount = 0;
+            if(power != null) {
+                power.fillAmount = 0;
+            }
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawClear.clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;

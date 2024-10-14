@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Game Clear!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
-  m_sharedMaterial: {fileID: 6028403922861178144, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7c87f9f8b6355484cb7ff46e9d4d9640, type: 2}
+  m_sharedMaterial: {fileID: 6789737621019445219, guid: 7c87f9f8b6355484cb7ff46e9d4d9640, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7de2112ad879940629c042b23ba7ef93, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 43b7a292dc2ba4be3814aded3fac383d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -287,6 +287,86 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5039363335117501629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5974851469846703472}
+  - component: {fileID: 5435058495598545579}
+  - component: {fileID: 6237384321658274098}
+  m_Layer: 5
+  m_Name: WristMovementText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5974851469846703472
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039363335117501629}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8921876570816891265}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -254}
+  m_SizeDelta: {x: 380, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5435058495598545579
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039363335117501629}
+  m_CullTransparentMesh: 1
+--- !u!114 &6237384321658274098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039363335117501629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 78031afbb174b49f9ab249a54f807120, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "(      ) \uB97C \uC778\uC2DD\uD558\uC5EC \uAC8C\uC784 \uC9C4\uD589"
 --- !u!1 &7301839945862717883
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,8 +435,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
-  m_sharedMaterial: {fileID: 6028403922861178144, guid: 606950c652da0463c9b0d38cda80ed4a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7c87f9f8b6355484cb7ff46e9d4d9640, type: 2}
+  m_sharedMaterial: {fileID: 6789737621019445219, guid: 7c87f9f8b6355484cb7ff46e9d4d9640, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -386,7 +466,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -422,6 +502,158 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8118288868754446022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7857033726030146955}
+  - component: {fileID: 1979668421751762879}
+  - component: {fileID: 8677517103655135079}
+  m_Layer: 5
+  m_Name: SceneGuage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7857033726030146955
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8118288868754446022}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8921876570816891265}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 728, y: -262.79}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1979668421751762879
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8118288868754446022}
+  m_CullTransparentMesh: 1
+--- !u!114 &8677517103655135079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8118288868754446022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ba674bba9059c45af8f0f520289de004, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8566001901748804285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8697879633244376196}
+  - component: {fileID: 2042952275355561025}
+  - component: {fileID: 7591484161326868956}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8697879633244376196
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566001901748804285}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8921876570816891265}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -230, y: -254}
+  m_SizeDelta: {x: 82.4233, y: 82.4233}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2042952275355561025
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566001901748804285}
+  m_CullTransparentMesh: 1
+--- !u!114 &7591484161326868956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566001901748804285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7969431eab596412eaeec501a5dc9515, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8897207537567935158
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,13 +681,16 @@ RectTransform:
   m_GameObject: {fileID: 8897207537567935158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7169127480776386065}
   - {fileID: 5204903568083165720}
   - {fileID: 3558698639875564897}
   - {fileID: 5112501922024241633}
+  - {fileID: 5974851469846703472}
+  - {fileID: 8697879633244376196}
+  - {fileID: 7857033726030146955}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -476,254 +711,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95a5fc0bb824734d9b67629aa2c8eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leapProvider: {fileID: 0}
-  hand:
-    FrameId: 0
-    Id: 0
-    Fingers:
-    - bones:
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      Type: 0
-      Id: 0
-      HandId: 0
-      TipPosition: {x: 0, y: 0, z: 0}
-      Direction: {x: 0, y: 0, z: 0}
-      Width: 0
-      Length: 0
-      IsExtended: 0
-      TimeVisible: 0
-    - bones:
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      Type: 0
-      Id: 0
-      HandId: 0
-      TipPosition: {x: 0, y: 0, z: 0}
-      Direction: {x: 0, y: 0, z: 0}
-      Width: 0
-      Length: 0
-      IsExtended: 0
-      TimeVisible: 0
-    - bones:
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      Type: 0
-      Id: 0
-      HandId: 0
-      TipPosition: {x: 0, y: 0, z: 0}
-      Direction: {x: 0, y: 0, z: 0}
-      Width: 0
-      Length: 0
-      IsExtended: 0
-      TimeVisible: 0
-    - bones:
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      Type: 0
-      Id: 0
-      HandId: 0
-      TipPosition: {x: 0, y: 0, z: 0}
-      Direction: {x: 0, y: 0, z: 0}
-      Width: 0
-      Length: 0
-      IsExtended: 0
-      TimeVisible: 0
-    - bones:
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      - PrevJoint: {x: 0, y: 0, z: 0}
-        NextJoint: {x: 0, y: 0, z: 0}
-        Center: {x: 0, y: 0, z: 0}
-        Direction: {x: 0, y: 0, z: 0}
-        Length: 0
-        Width: 0
-        Type: -1
-        Rotation: {x: 0, y: 0, z: 0, w: 0}
-      Type: 0
-      Id: 0
-      HandId: 0
-      TipPosition: {x: 0, y: 0, z: 0}
-      Direction: {x: 0, y: 0, z: 0}
-      Width: 0
-      Length: 0
-      IsExtended: 0
-      TimeVisible: 0
-    PalmPosition: {x: 0, y: 0, z: 0}
-    PalmVelocity: {x: 0, y: 0, z: 0}
-    PalmNormal: {x: 0, y: 0, z: 0}
-    Direction: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    GrabStrength: 0
-    PinchStrength: 0
-    PinchDistance: 0
-    PalmWidth: 0
-    StabilizedPalmPosition: {x: 0, y: 0, z: 0}
-    WristPosition: {x: 0, y: 0, z: 0}
-    TimeVisible: 0
-    Confidence: 0
-    IsLeft: 0
-    Arm:
-      PrevJoint: {x: 0, y: 0, z: 0}
-      NextJoint: {x: 0, y: 0, z: 0}
-      Center: {x: 0, y: 0, z: 0}
-      Direction: {x: 0, y: 0, z: 0}
-      Length: 0
-      Width: 0
-      Type: -1
-      Rotation: {x: 0, y: 0, z: 0, w: 0}
   pos: {fileID: 0}
   textScore: {fileID: 0}
   text: 
   clear: 0
-  isPointing: 0
-  elapsedTime: 0
-  pointingStartTime: 0
-  gaugeImage: {fileID: 3945387336760323433}
-  sceneName: 
   isNext: 0
+  gaugeImage: {fileID: 8677517103655135079}
+  isPointing: 0
+  pointingStartTime: 0
+  elapsedTime: 0
 --- !u!222 &1752879630513169149
 CanvasRenderer:
   m_ObjectHideFlags: 0

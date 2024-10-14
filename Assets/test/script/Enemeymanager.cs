@@ -149,10 +149,12 @@ public class Enemeymanager : MonoBehaviour {
             if(stageNum == 1) {
                 StartCoroutine(wolfani.wolfLose());
                 isPlayerWin = false;
+                GameManager.instance.AddScore(10);
             }
             else if(stageNum == 2) {
                 StartCoroutine(plantani.plantLose());
                 isPlayerWin = false;
+                GameManager.instance.AddScore(10);
             }
             else {
                 StartCoroutine(dragonani.dragonLose());
@@ -160,6 +162,7 @@ public class Enemeymanager : MonoBehaviour {
                 if(StoryOrStage.instance != null) {
                     StoryOrStage.instance.isMagicGood = true;
                 }
+                GameManager.instance.AddScore(80);
             }
             stageNum++;
             playerDrawing.gameObject.SetActive(false);

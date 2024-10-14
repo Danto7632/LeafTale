@@ -24,7 +24,9 @@ public class StartBar : MonoBehaviour {
         UpdateEndImagePosition(fillAmount); // fillAmount를 사용하여 위치 결정
 
         // fillAmount에 따라 health bar의 활성화 여부 결정
-        barImage.enabled = fillAmount > 0f && fillAmount < 1f;
+        if(barImage != null) {
+            barImage.enabled = fillAmount > 0f && fillAmount < 1f;
+        }
     }
 
     private static void UpdateEndImagePosition(float fillAmount) {
