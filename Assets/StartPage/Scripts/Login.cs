@@ -127,7 +127,7 @@ public class Login : MonoBehaviour {
                 SaveEncryptedData("userPassword", pwInput.text); // 비밀번호도 저장
 
                 loginPanel.SetActive(false);
-                rank.SetActive(true);
+                rank.SetActive(false);
                 pressStart.SetActive(true);
                 StartCoroutine(BlinkText());
             }

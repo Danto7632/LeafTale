@@ -24,8 +24,6 @@ public class AutoFlip : MonoBehaviour {
         AnimationFramesCount = 400;
         if (!ControledBook)
             ControledBook = GetComponent<Book>();
-        if (AutoStartFlip)
-            StartFlipping();
         ControledBook.OnFlip.AddListener(new UnityEngine.Events.UnityAction(PageFlipped));
 
         fsm = GameObject.Find("SoundManager").GetComponent<flipSoundManager>();
@@ -68,7 +66,7 @@ public class AutoFlip : MonoBehaviour {
 
     public void FlipLeftPage() {
         if (isFlipping) return;
-        if (ControledBook.currentPage <= 0) return;
+        if (ControledBook.currentPage <= 1) return;
 
         isFlipping = true;
         fsm.flipSound.Play();

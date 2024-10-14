@@ -69,6 +69,7 @@ public class Book : MonoBehaviour {
 
     void Start()
     {
+        currentPage = 1;
         if (!canvas) canvas=GetComponentInParent<Canvas>();
         if (!canvas) Debug.LogError("Book should be a child to canvas");
 
@@ -94,7 +95,6 @@ public class Book : MonoBehaviour {
 
         ShadowLTR.rectTransform.sizeDelta = new Vector2(pageWidth, shadowPageHeight);
         ShadowLTR.rectTransform.pivot = new Vector2(0, (pageWidth / 2) / shadowPageHeight);
-
     }
 
     private void CalcCurlCriticalPoints()
