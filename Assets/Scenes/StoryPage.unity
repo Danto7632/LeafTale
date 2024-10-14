@@ -584,7 +584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -674,7 +674,7 @@ Canvas:
   m_GameObject: {fileID: 79799863}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -686,7 +686,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &79799866
 MonoBehaviour:
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6df9f4e863eff47b6b20a6cbec39e71d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1678,7 +1678,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 767e6b48f272044dd9c707b8a95dfab5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1848,7 +1848,7 @@ Canvas:
   m_GameObject: {fileID: 250030902}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1860,7 +1860,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &250030905
 MonoBehaviour:
@@ -1960,7 +1960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2196,7 +2196,7 @@ Canvas:
   m_GameObject: {fileID: 262687623}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2208,7 +2208,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &262687626
 MonoBehaviour:
@@ -2849,7 +2849,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ad7d8144b045440bf8ec914b7f003c9c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3474,7 +3474,7 @@ Canvas:
   m_GameObject: {fileID: 363648009}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -3486,7 +3486,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &363648012
 MonoBehaviour:
@@ -3586,7 +3586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4081,7 +4081,7 @@ Canvas:
   m_GameObject: {fileID: 422432331}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -4093,7 +4093,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &422432334
 MonoBehaviour:
@@ -4891,7 +4891,7 @@ Canvas:
   m_GameObject: {fileID: 531760649}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -4903,7 +4903,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &541797246
 GameObject:
@@ -5160,7 +5160,7 @@ Canvas:
   m_GameObject: {fileID: 608613967}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -5172,7 +5172,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &608613971
 RectTransform:
@@ -5899,7 +5899,7 @@ Canvas:
   m_GameObject: {fileID: 697130362}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -5911,7 +5911,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &697130365
 MonoBehaviour:
@@ -6167,7 +6167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8a443c54abda2e1438f99922302520fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c76dcfa3912a8864f990e75a8fbae56f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6514,7 +6514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6584,7 +6584,7 @@ Canvas:
   m_GameObject: {fileID: 770903906}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -6596,7 +6596,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &770903909
 MonoBehaviour:
@@ -6696,7 +6696,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7016,7 +7016,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6df9f4e863eff47b6b20a6cbec39e71d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8161,7 +8161,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9826,7 +9826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9972,7 +9972,7 @@ Canvas:
   m_GameObject: {fileID: 1273375858}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -9984,7 +9984,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1273375861
 MonoBehaviour:
@@ -10660,7 +10660,7 @@ Canvas:
   m_GameObject: {fileID: 1300265426}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -10672,7 +10672,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1300265429
 MonoBehaviour:
@@ -11063,7 +11063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d042107c82ecc41baa8b900f7f52a43c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11539,7 +11539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 05b8712f2d33241c0a1493789fc30505, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12626,7 +12626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d905f3ab8dfb64699a16634fb70f5fbc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13026,7 +13026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d042107c82ecc41baa8b900f7f52a43c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13477,7 +13477,7 @@ Canvas:
   m_GameObject: {fileID: 1613495728}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -13489,7 +13489,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1613495731
 MonoBehaviour:
@@ -13903,7 +13903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 26169f0fc48f64cf29db2fb2b6b38b4a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13993,7 +13993,7 @@ Canvas:
   m_GameObject: {fileID: 1667561024}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -14005,7 +14005,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1667561027
 MonoBehaviour:
@@ -14936,7 +14936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15006,7 +15006,7 @@ Canvas:
   m_GameObject: {fileID: 1772179883}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -15018,7 +15018,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1772179886
 MonoBehaviour:
@@ -16092,7 +16092,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16447,7 +16447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fdbb83d3e69a0435ab8554c325c61a8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16543,7 +16543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16810,7 +16810,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16962,7 +16962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17129,7 +17129,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f1bce45623207403e82cbc93ba668d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d96911039d3946248bb407644e08551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18269,7 +18269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 57692f8290d594b938a48be2470ed4c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae587f6596c6c4a678be650aa36dad29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
