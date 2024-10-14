@@ -134,7 +134,7 @@ public class Enemeymanager : MonoBehaviour {
                 StartCoroutine(dragonani.dragonWin());
                 isTimerOver = false;
                 if(StoryOrStage.instance != null) {
-                    StoryOrStage.instance.isMagicGood = true;
+                    StoryOrStage.instance.isMagicGood = false;
                 }
             }
             stageNum++;
@@ -158,7 +158,7 @@ public class Enemeymanager : MonoBehaviour {
                 StartCoroutine(dragonani.dragonLose());
                 isPlayerWin = false;
                 if(StoryOrStage.instance != null) {
-                    StoryOrStage.instance.isMagicGood = false;
+                    StoryOrStage.instance.isMagicGood = true;
                 }
             }
             stageNum++;

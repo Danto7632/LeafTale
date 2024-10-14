@@ -46,7 +46,7 @@ public class LeapMotionFlip : MonoBehaviour {
         books[11] = GameObject.Find("MagiccirclePage_NormalEnd");
         books[12] = GameObject.Find("MagiccirclePage_Fail_NormalEnd");
 
-        for(int i = 0; i < 11; i++) {
+        for(int i = 0; i < 13; i++) {
             books[i].SetActive(false);
         }
 
