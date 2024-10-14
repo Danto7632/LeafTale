@@ -57,6 +57,11 @@ public class creditMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("p") == true) //skip credit
+        {
+            SceneManager.LoadScene("StartPage");
+        }
+
         //credit move
         if (gameObject.transform.position.y < 45.5f)
         {
@@ -64,7 +69,7 @@ public class creditMove : MonoBehaviour
         }
         else
         {
-            Invoke("goBackToStart", 3.0f);
+            Invoke("goBackToStart", 2.5f);
         }
     }
     void goBackToStart()
