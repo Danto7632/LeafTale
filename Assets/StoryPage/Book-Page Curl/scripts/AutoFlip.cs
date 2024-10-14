@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Book))]
 public class AutoFlip : MonoBehaviour {
@@ -14,6 +16,9 @@ public class AutoFlip : MonoBehaviour {
 
     public flipSoundManager fsm;
 
+    public Text targetText;
+    public Image targetImage;
+
     void Start () {
         AutoStartFlip = false;
         AnimationFramesCount = 400;
@@ -23,8 +28,25 @@ public class AutoFlip : MonoBehaviour {
             StartFlipping();
         ControledBook.OnFlip.AddListener(new UnityEngine.Events.UnityAction(PageFlipped));
 
-
         fsm = GameObject.Find("SoundManager").GetComponent<flipSoundManager>();
+
+        targetImage = GameObject.Find("Image").GetComponent<Image>();
+        targetText = GameObject.Find("WristMovementText").GetComponent<Text>();
+    }
+
+    void Update() {
+        if(ControledBook.currentPage == ControledBook.TotalPageCount - 1) {
+            StartCoroutine(FadeInOutLoop());
+        }
+        else {
+            Color imageColor = targetImage.color;
+            imageColor.a = 0f;
+            targetImage.color = imageColor;
+
+            Color textColor = targetText.color;
+            textColor.a = 0f;
+            targetText.color = textColor;
+        }
     }
 
     void PageFlipped() {
@@ -107,5 +129,50 @@ public class AutoFlip : MonoBehaviour {
         }
 
         PageFlipped();
+    }
+
+    private IEnumerator FadeInOutLoop()
+    {
+        while (true)
+        {
+            // 투명도를 0%에서 100%로 올림
+            yield return StartCoroutine(FadeTo(1f, 1f));
+            // 투명도를 100%에서 0%로 내림
+            yield return StartCoroutine(FadeTo(0f, 1f));
+        }
+    }
+
+    private IEnumerator FadeTo(float targetAlpha, float duration)
+    {
+        float startAlpha = targetImage != null ? targetImage.color.a : targetText.color.a;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+            SetTransparency(alpha);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // 마지막 알파 값을 정확히 설정
+        SetTransparency(targetAlpha);
+    }
+
+    private void SetTransparency(float alpha)
+    {
+        if (targetImage != null)
+        {
+            Color imageColor = targetImage.color;
+            imageColor.a = Mathf.Clamp01(alpha);
+            targetImage.color = imageColor;
+        }
+
+        if (targetText != null)
+        {
+            Color textColor = targetText.color;
+            textColor.a = Mathf.Clamp01(alpha);
+            targetText.color = textColor;
+        }
     }
 }
