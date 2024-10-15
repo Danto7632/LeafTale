@@ -265,7 +265,7 @@ public class broomMove : MonoBehaviour {
                 StartBar.ChangeHealthBarAmount(elapsedTime);
             }
 
-            DetectHandTilt();
+            DetectHandTilt(hand);
         }
         else {
             rb.velocity = Vector2.zero;
