@@ -84,7 +84,7 @@ public class clawControl : MonoBehaviour
             gameObject.transform.Translate(-speed, 0, 0);
         }
         // right
-        if (goRight && gameObject.transform.position.x < 6f)
+        if (goRight && gameObject.transform.position.x < 6f && !FireLine.isRightLine)
         {   
             gameObject.transform.Translate(speed, 0, 0);
         }
@@ -166,7 +166,7 @@ public class clawControl : MonoBehaviour
                     gameObject.transform.Translate(-speed, 0, 0);
                 }
             }
-            if (goRight)
+            if (goRight && !FireLine.isRightLine)
             {
                 // x축의 제한을 키보드와 동일하게 6f로 설정
                 if (gameObject.transform.position.x < 6f)
