@@ -22,6 +22,8 @@ public class GameClear : MonoBehaviour
     private string postUrl;
     private string postUrl2;
 
+    public AudioSource chargeSound;
+
     public UnityEngine.UI.Image gaugeImage;
 
     private void Start()
@@ -72,6 +74,7 @@ public class GameClear : MonoBehaviour
                         pointingStartTime = Time.time;
 
                         isPointing = true;
+                        chargeSound.Play();
                     } //특정 손동작을 인식한 시간을 저장
                     else {
                         elapsedTime = Time.time - pointingStartTime;
@@ -88,6 +91,8 @@ public class GameClear : MonoBehaviour
                                 storyOrder();
                             }
                         }
+
+                        chargeSound.Stop();
                     }
                 }
                 else {
