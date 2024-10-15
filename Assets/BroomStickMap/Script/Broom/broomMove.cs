@@ -222,7 +222,6 @@ public class broomMove : MonoBehaviour {
     public void GameOver() {
         isGameOver = true;
         isMoveAllow = false;
-        moveSpeed = 0f;
 
         StartCoroutine(MoveSmoothly(rb.position, new Vector2(0, -3), 0.3f));
 

@@ -48,6 +48,7 @@ public class Timer_BroomStick : MonoBehaviour {
 
                 bsm.endSound.Play();
                 bsm.flyingSound.Stop();
+                broomStatus.moveSpeed = 0f;
 
                 timeText[0].enabled = false;
                 timeText[1].enabled = false;
