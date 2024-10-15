@@ -22,10 +22,6 @@ public class broomMove : MonoBehaviour {
     public bool isPointing;
     public float pointingStartTime;
 
-    [Header("Wrist Movement Tracking")]
-    public float totalWristMovement;
-    public Text wristMovementText;
-
     [Header("Player_Status")]
     public float horiaontalInput;
     public float verticalInput;
@@ -75,7 +71,6 @@ public class broomMove : MonoBehaviour {
         timerSpawn = GameObject.Find("TimerSpawn").GetComponent<TimerSpawn>();
         explainPanel = GameObject.Find("ExplainPanel");
         explainText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
-        wristMovementText = GameObject.Find("WristMovementText").GetComponent<Text>();
         timer = GameObject.Find("Time");
 
         bsm = GameObject.Find("SoundManager").GetComponent<broomSoundManager>();
@@ -99,8 +94,7 @@ public class broomMove : MonoBehaviour {
         isLeapOn = false;
         isFirstGameStart = false;
         leapOnText.enabled = true;
-
-        totalWristMovement = 0f;
+        
         plusTimerNum = 0;
     }
 
@@ -304,8 +298,6 @@ public class broomMove : MonoBehaviour {
 
             if (palmNormal.x > 0.3f || palmNormal.x < -0.3f) { //손바닥의 좌우 기울기를 확인하여 특정 각도 이상 넘어가면 각도의 값을 저장
                 horizonLeapSpeed = palmNormal.x;
-                totalWristMovement += Math.Abs(palmNormal.x) / 100f;
-                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}"; //기울기에 따라 점수가 추가
             }
             else {
                 horizonLeapSpeed = 0f;
@@ -314,8 +306,6 @@ public class broomMove : MonoBehaviour {
 
             if (palmNormal.z > 0.3f || palmNormal.z < -0.3f) { //손바닥의 상하 기울기를 확인하여 특정 각도 이상 넘어가면 각도의 값을 저장
                 verticalLeapSpeed = palmNormal.z;
-                totalWristMovement += Math.Abs(palmNormal.z) / 100f;
-                wristMovementText.text = $"Wrist Movement: {(int)totalWristMovement}"; //기울기에 따라 점수가 추가
             }
             else {
                 verticalLeapSpeed = 0f;
