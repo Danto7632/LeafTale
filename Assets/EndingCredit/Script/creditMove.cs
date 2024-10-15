@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using EasyTransition;
 
 public class creditMove : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class creditMove : MonoBehaviour
         endingPictures = this.transform.Find("endings").gameObject;
 
         //change ending pictures
-        if(StoryOrStage.instance == null)
+        if (StoryOrStage.instance == null)
         {
             Debug.Log("StoryOrStage does not exist");
         }
@@ -59,7 +60,7 @@ public class creditMove : MonoBehaviour
     {
         if (Input.GetKeyDown("p") == true) //skip credit
         {
-            SceneManager.LoadScene("StartPage");
+            goBackToStart();
         }
 
         //credit move
@@ -74,6 +75,6 @@ public class creditMove : MonoBehaviour
     }
     void goBackToStart()
     {
-        SceneManager.LoadScene("StartPage");
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene("StartPage");
     }
 }
