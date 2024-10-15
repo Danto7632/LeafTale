@@ -90,9 +90,10 @@ public class GameClear : MonoBehaviour
                             else if (StoryOrStage.instance.currentMode == "story") {
                                 storyOrder();
                             }
+
+                            chargeSound.Stop();
                         }
 
-                        chargeSound.Stop();
                     }
                 }
                 else {

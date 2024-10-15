@@ -99,7 +99,7 @@ public class broomMove : MonoBehaviour {
     }
 
     void Update() {
-        if(!isLeapOn && isGameClear) {
+        if(!isLeapOn) {
             lineControl();
         }
 
@@ -265,7 +265,12 @@ public class broomMove : MonoBehaviour {
                 StartBar.ChangeHealthBarAmount(elapsedTime);
             }
 
-            DetectHandTilt(hand);
+            if(!isGameClear) {
+                DetectHandTilt(hand);
+            }
+            else {
+                rb.velocity = Vector2.zero;
+            }
         }
         else {
             rb.velocity = Vector2.zero;
