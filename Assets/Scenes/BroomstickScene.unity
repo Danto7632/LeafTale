@@ -2985,6 +2985,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 782215315}
     m_Modifications:
+    - target: {fileID: 5039363335117501629, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
+      propertyPath: m_Name
+      value: WristMovementText_incanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 8897207537567935158, guid: 79da18063aae30e49abed0e560e9e28f, type: 3}
       propertyPath: m_Name
       value: GameClear

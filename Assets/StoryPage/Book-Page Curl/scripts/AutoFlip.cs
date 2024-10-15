@@ -29,7 +29,7 @@ public class AutoFlip : MonoBehaviour {
         fsm = GameObject.Find("SoundManager").GetComponent<flipSoundManager>();
 
         targetImage = GameObject.Find("Image").GetComponent<Image>();
-        targetText = GameObject.Find("WristMovementText").GetComponent<Text>();
+        targetText = GameObject.Find("WristMovementText_incanvas").GetComponent<Text>();
 
         targetText.text = "(      ) 를 인식하여 게임 진행";
     }
