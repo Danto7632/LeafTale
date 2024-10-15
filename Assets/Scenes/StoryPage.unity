@@ -6046,7 +6046,7 @@ GameObject:
   - component: {fileID: 723783261}
   - component: {fileID: 723783260}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6519,7 +6519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fdbb83d3e69a0435ab8554c325c61a8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 510e3455e77374ba99c27db1c7180eed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
