@@ -44,6 +44,31 @@ public class StoryOrStage : MonoBehaviour
         {
             Destroy(gameObject); // 중복 인스턴스가 생성되면 파괴
         }
+
+        isClawGood = false;
+        isBroomGood = false;
+        isPlatGood = false;
+        isRhythmGood = false;
+        isMagicGood = false;
+
+        G001Cleared = false;
+        G002Cleared = false;
+        G003Cleared = false;
+        G004Cleared = false;
+        G005Cleared = false;
+
+        G001Score = 0;
+        G002Score = 0;
+        G003Score = 0;
+        G004Score = 0;
+        G005Score = 0;
+        modeFlag = 0;
+
+        clearCount = 0;
+    }
+
+    void Start() {
+        Application.targetFrameRate = 60;
     }
 
     public bool AllGamesCleared()
