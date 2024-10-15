@@ -614,7 +614,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &67724999
 MonoBehaviour:
@@ -1649,6 +1649,7 @@ MonoBehaviour:
   sPoint: 0
   wvPoint: 0
   clearCount: 0
+  failCount: 0
   csm: {fileID: 0}
 --- !u!1 &234791439
 GameObject:
@@ -6922,6 +6923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43952fb2fc7351844ae6fd5fd0d656e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  power: {fileID: 0}
   clawClear: {fileID: 0}
   csm: {fileID: 0}
   maxPower: 0
@@ -7002,6 +7004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43952fb2fc7351844ae6fd5fd0d656e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  power: {fileID: 0}
   clawClear: {fileID: 0}
   csm: {fileID: 0}
   maxPower: 0
@@ -7571,6 +7574,7 @@ GameObject:
   - component: {fileID: 1135912674}
   - component: {fileID: 1135912673}
   - component: {fileID: 1135912672}
+  - component: {fileID: 1135912675}
   m_Layer: 5
   m_Name: ExplainPanel
   m_TagString: Untagged
@@ -7656,6 +7660,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135912670}
   m_CullTransparentMesh: 1
+--- !u!223 &1135912675
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135912670}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
 --- !u!1 &1175640454
 GameObject:
   m_ObjectHideFlags: 0
