@@ -39,8 +39,7 @@ public class clawControl : MonoBehaviour
         Rclaw = GameObject.Find("clawRight").GetComponent<Rigidbody2D>();
         Lclaw = GameObject.Find("clawLeft").GetComponent<Rigidbody2D>();
         machine = gameObject.GetComponent<Rigidbody2D>();
-
-        powerBar.gameObject.SetActive(false);
+        
         clawsOpen = true;
         gameOver = false;
         isLeapOn = false;
