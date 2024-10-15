@@ -717,7 +717,7 @@ MonoBehaviour:
   text: 
   clear: 0
   isNext: 0
-  chargeSound: {fileID: 0}
+  chargeSound: {fileID: 2084814492266649422}
   gaugeImage: {fileID: 8677517103655135079}
   isPointing: 0
   pointingStartTime: 0
