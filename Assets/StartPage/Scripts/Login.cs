@@ -65,8 +65,8 @@ public class Login : MonoBehaviour {
 
     void Update() {
         if (StoryOrStage.instance != null) {
-            if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == "story") StartCoroutine(LoadSceneAfterDelay("StoryPage", 3f));
-            if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == "stage") StartCoroutine(LoadSceneAfterDelay("StageSelect", 3f));
+            if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == "story") LoadSceneAfterDelay("StoryPage");
+            if (pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == "stage") LoadSceneAfterDelay("StageSelect");
             
             if(pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == null) {
                 Debug.Log("Select Story OR Stage");
@@ -166,41 +166,11 @@ public class Login : MonoBehaviour {
         }
     }
 
-    IEnumerator LoadSceneAfterDelay(string sceneName, float delay) {
+    void LoadSceneAfterDelay(string sceneName) {
         pressStart.SetActive(false);
-
-        yield return StartCoroutine(anima(delay / 3, -1f, -1f, 4f));
-        yield return StartCoroutine(anima(delay / 3, 2f, 1f, 3f));
-        yield return StartCoroutine(anima(delay / 3, -1f, -1f, 2f));
 
         StoryOrStage.instance.nextStory = "Explain";
         SceneManager.LoadScene(sceneName);
-    }
-
-    IEnumerator anima(float duration, float x, float y, float size) {
-        isNotToggle = true;
-        float elapsedTime = 0f;
-        float initialSize = mainCamera.orthographicSize;
-        Vector3 initialPosition = mainCamera.transform.position;
-
-        float targetSize = size;
-        Vector3 targetPosition = new Vector3(x, y, initialPosition.z);
-
-        while (elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / duration;
-
-            float shakeAmount = 0.03f;
-            Vector3 shakeOffset = new Vector3(UnityEngine.Random.Range(-shakeAmount, shakeAmount), UnityEngine.Random.Range(-shakeAmount, shakeAmount), 0);
-
-            mainCamera.orthographicSize = Mathf.Lerp(initialSize, targetSize, t);
-            mainCamera.transform.position = Vector3.Lerp(initialPosition, targetPosition, t) + shakeOffset;
-
-            yield return null;
-        }
-
-        mainCamera.orthographicSize = targetSize;
-        mainCamera.transform.position = targetPosition;
     }
 
     public static void SaveEncryptedData(string keyName, string data) // 아이디 암호화해서 저장

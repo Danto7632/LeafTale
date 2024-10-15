@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 106730660}
   - component: {fileID: 106730659}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 114166811}
   - component: {fileID: 114166810}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1733,7 +1733,7 @@ GameObject:
   - component: {fileID: 249376434}
   - component: {fileID: 249376433}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4736,7 +4736,7 @@ GameObject:
   - component: {fileID: 517711916}
   - component: {fileID: 517711915}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8040,7 +8040,7 @@ GameObject:
   - component: {fileID: 995746169}
   - component: {fileID: 995746168}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9709,7 +9709,7 @@ GameObject:
   - component: {fileID: 1233844135}
   - component: {fileID: 1233844134}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11244,7 +11244,7 @@ GameObject:
   - component: {fileID: 1369904241}
   - component: {fileID: 1369904240}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12192,7 +12192,7 @@ GameObject:
   - component: {fileID: 1448940639}
   - component: {fileID: 1448940638}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12529,7 +12529,7 @@ GameObject:
   - component: {fileID: 1480670182}
   - component: {fileID: 1480670181}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13085,7 +13085,7 @@ GameObject:
   - component: {fileID: 1586358662}
   - component: {fileID: 1586358661}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15550,7 +15550,7 @@ GameObject:
   - component: {fileID: 1824491036}
   - component: {fileID: 1824491035}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16697,7 +16697,7 @@ GameObject:
   - component: {fileID: 1963821478}
   - component: {fileID: 1963821477}
   m_Layer: 5
-  m_Name: WristMovementText
+  m_Name: WristMovementText_incanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
