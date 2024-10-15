@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class powerBar : MonoBehaviour
 {
-    Image power;
+    public Image power;
 
     public ClawClear clawClear;
 
