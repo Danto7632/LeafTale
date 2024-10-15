@@ -18,13 +18,17 @@ public class StartBar : MonoBehaviour {
 
     public static void ChangeHealthBarAmount(float elapsedTime) {
         float fillAmount = elapsedTime / animationDuration; // elapsedTime을 애니메이션 지속 시간으로 나누기
-        barImage.fillAmount = fillAmount;
+        if(barImage != null) {
+             barImage.fillAmount = fillAmount;
+        }
 
         // EndImage 위치 업데이트
         UpdateEndImagePosition(fillAmount); // fillAmount를 사용하여 위치 결정
 
         // fillAmount에 따라 health bar의 활성화 여부 결정
-        barImage.enabled = fillAmount > 0f && fillAmount < 1f;
+        if(barImage != null) {
+            barImage.enabled = fillAmount > 0f && fillAmount < 1f;
+        }
     }
 
     private static void UpdateEndImagePosition(float fillAmount) {

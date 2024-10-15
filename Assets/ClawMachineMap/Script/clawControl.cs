@@ -39,8 +39,7 @@ public class clawControl : MonoBehaviour
         Rclaw = GameObject.Find("clawRight").GetComponent<Rigidbody2D>();
         Lclaw = GameObject.Find("clawLeft").GetComponent<Rigidbody2D>();
         machine = gameObject.GetComponent<Rigidbody2D>();
-
-        powerBar.gameObject.SetActive(false);
+        
         clawsOpen = true;
         gameOver = false;
         isLeapOn = false;
@@ -84,7 +83,7 @@ public class clawControl : MonoBehaviour
             gameObject.transform.Translate(-speed, 0, 0);
         }
         // right
-        if (goRight && gameObject.transform.position.x < 6f)
+        if (goRight && gameObject.transform.position.x < 6f && !FireLine.isRightLine)
         {   
             gameObject.transform.Translate(speed, 0, 0);
         }
@@ -166,7 +165,7 @@ public class clawControl : MonoBehaviour
                     gameObject.transform.Translate(-speed, 0, 0);
                 }
             }
-            if (goRight)
+            if (goRight && !FireLine.isRightLine)
             {
                 // x축의 제한을 키보드와 동일하게 6f로 설정
                 if (gameObject.transform.position.x < 6f)

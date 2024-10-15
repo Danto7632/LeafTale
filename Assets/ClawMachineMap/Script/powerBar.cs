@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class powerBar : MonoBehaviour
 {
-    Image power;
+    public Image power;
 
     public ClawClear clawClear;
 
@@ -22,6 +22,12 @@ public class powerBar : MonoBehaviour
     void Start()
     {
         power = GetComponent<Image>();
+
+        if (power == null)
+        {
+            Debug.LogError("Image component is missing on the GameObject. Please add an Image component.");
+            return;
+        }
 
         power.fillAmount = 1;
 

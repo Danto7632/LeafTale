@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement; // SceneManager
 using TMPro; // TMP_Text
 using UnityEngine.Networking; // UnityWebRequest
@@ -21,6 +22,10 @@ public class GameClear : MonoBehaviour
     private string postUrl;
     private string postUrl2;
 
+    public AudioSource chargeSound;
+
+    public UnityEngine.UI.Image gaugeImage;
+
     private void Start()
     {
         textScore = GameObject.Find("GameScore").GetComponent<TMP_Text>();
@@ -32,6 +37,8 @@ public class GameClear : MonoBehaviour
 
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
+
+        ResetGauge();
     }
 
     private void Update()
@@ -67,21 +74,47 @@ public class GameClear : MonoBehaviour
                         pointingStartTime = Time.time;
 
                         isPointing = true;
+                        chargeSound.Play();
                     } //특정 손동작을 인식한 시간을 저장
                     else {
                         elapsedTime = Time.time - pointingStartTime;
 
-                        if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
-                            storyOrder();
+                        UpdateGauge(elapsedTime);
+                        if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행
+                           if (StoryOrStage.instance == null) {
+                                SceneManager.LoadScene("StageSelect");
+                            }
+                            else if (StoryOrStage.instance.currentMode == "stage") {
+                                SceneManager.LoadScene("StageSelect");
+                            }
+                            else if (StoryOrStage.instance.currentMode == "story") {
+                                storyOrder();
+                            }
+
+                            chargeSound.Stop();
                         }
+
                     }
                 }
                 else {
+                    ResetGauge();
                     elapsedTime = 0f;
                     isPointing = false;
                     StartBar.ChangeHealthBarAmount(elapsedTime);
                 }
             }
+        }
+    }
+
+    void UpdateGauge(float time) {
+        if (gaugeImage != null) {
+            gaugeImage.fillAmount = Mathf.Clamp01(time / 3f);
+        }
+    }
+
+    void ResetGauge() {
+        if (gaugeImage != null) {
+            gaugeImage.fillAmount = 0f;
         }
     }
 

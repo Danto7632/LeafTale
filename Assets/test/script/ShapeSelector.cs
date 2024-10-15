@@ -82,7 +82,6 @@ public class ShapeSelector : MonoBehaviour {
                 drawingGame.playerDrawing.positionCount = 0;
                 startTimer.text = "Done";
                 gameTimer.text = drawingGame.sumScore.ToString();
-                GameManager.instance.AddScore((int)(drawingGame.sumScore / 3f));
                 StartCoroutine(endDelay());
                 
             }
