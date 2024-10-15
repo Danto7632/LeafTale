@@ -23,6 +23,12 @@ public class powerBar : MonoBehaviour
     {
         power = GetComponent<Image>();
 
+        if (power == null)
+        {
+            Debug.LogError("Image component is missing on the GameObject. Please add an Image component.");
+            return;
+        }
+
         power.fillAmount = 1;
 
         maxPower = 60f;
