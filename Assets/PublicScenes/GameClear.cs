@@ -78,7 +78,15 @@ public class GameClear : MonoBehaviour
 
                         UpdateGauge(elapsedTime);
                         if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행
-                            storyOrder();
+                           if (StoryOrStage.instance == null) {
+                                SceneManager.LoadScene("StageSelect");
+                            }
+                            else if (StoryOrStage.instance.currentMode == "stage") {
+                                SceneManager.LoadScene("StageSelect");
+                            }
+                            else if (StoryOrStage.instance.currentMode == "story") {
+                                storyOrder();
+                            }
                         }
                     }
                 }
