@@ -94,12 +94,12 @@ public class broomMove : MonoBehaviour {
         isLeapOn = false;
         isFirstGameStart = false;
         leapOnText.enabled = true;
-        
+
         plusTimerNum = 0;
     }
 
     void Update() {
-        if(!isLeapOn) {
+        if(!isLeapOn && isGameClear) {
             lineControl();
         }
 
