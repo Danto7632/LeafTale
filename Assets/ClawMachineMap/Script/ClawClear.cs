@@ -13,6 +13,7 @@ public class ClawClear : MonoBehaviour
     public double sPoint;
     public double wvPoint;
     public int clearCount;
+    public int failCount;
 
     GameObject vegetables;
     GameObject sVegetable;
@@ -36,6 +37,7 @@ public class ClawClear : MonoBehaviour
         sPoint = 3.0f;
         wvPoint = 20.0f;
         clearCount = 0;
+        failCount = 2;
 
         vNumber[0] = Random.Range(1, 10);
         vNumber[1] = Random.Range(1, 10);
@@ -77,8 +79,13 @@ public class ClawClear : MonoBehaviour
         if (clearCount == 3)
         {
             if (StoryOrStage.instance != null) {
-                StoryOrStage.instance.isClawGood = true;
-                StoryOrStage.instance.clearCount++;
+                if(failCount <= 0) {
+                    StoryOrStage.instance.isClawGood = false;
+                }
+                else {
+                    StoryOrStage.instance.isClawGood = true;
+                    StoryOrStage.instance.clearCount++;
+                }
             }
             clawScore = clawScore * 100.0f / 90.0f;
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);
@@ -128,6 +135,7 @@ public class ClawClear : MonoBehaviour
                 clawScore = 0;
             }
             csm.itemFailSound.Play();
+            failCount--;
         }
         Destroy(enterObj);
     }
