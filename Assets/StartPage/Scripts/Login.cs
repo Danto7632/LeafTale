@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
+using EasyTransition;
 
 public class Login : MonoBehaviour {
     private TMP_Text pressStartText;
@@ -174,7 +175,12 @@ public class Login : MonoBehaviour {
         yield return StartCoroutine(anima(delay / 3, -1f, -1f, 2f));
 
         StoryOrStage.instance.nextStory = "Explain";
-        SceneManager.LoadScene(sceneName);
+        goBackToStart(sceneName);
+    }
+
+    void goBackToStart(string sceneName)
+    {
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
     }
 
     IEnumerator anima(float duration, float x, float y, float size) {

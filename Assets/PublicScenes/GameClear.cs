@@ -8,6 +8,7 @@ using UnityEngine.Networking; // UnityWebRequest
 using System; // DateTime
 using Leap;
 using Leap.Unity;
+using EasyTransition;
 
 public class GameClear : MonoBehaviour
 {
@@ -47,11 +48,11 @@ public class GameClear : MonoBehaviour
         {
             if (StoryOrStage.instance == null)
             {
-                SceneManager.LoadScene("StageSelect");
+                changeScene_B("StageSelect");
             }
             else if (StoryOrStage.instance.currentMode == "stage")
             {
-                SceneManager.LoadScene("StageSelect");
+                changeScene_B("StageSelect");
             }
             else if (StoryOrStage.instance.currentMode == "story")
             {
@@ -82,10 +83,10 @@ public class GameClear : MonoBehaviour
                         UpdateGauge(elapsedTime);
                         if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행
                            if (StoryOrStage.instance == null) {
-                                SceneManager.LoadScene("StageSelect");
+                                changeScene_B("StageSelect");
                             }
                             else if (StoryOrStage.instance.currentMode == "stage") {
-                                SceneManager.LoadScene("StageSelect");
+                                changeScene_B("StageSelect");
                             }
                             else if (StoryOrStage.instance.currentMode == "story") {
                                 storyOrder();
@@ -264,28 +265,34 @@ public class GameClear : MonoBehaviour
         if (sceneName == "ClawMachineScenes")
         {
             StoryOrStage.instance.nextStory = "ClawMachineScenes";
-            SceneManager.LoadScene("StoryPage");
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "BroomstickScene")
         {
             StoryOrStage.instance.nextStory = "BroomstickScene";
-            SceneManager.LoadScene("StoryPage");
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "platformScene")
         {
             StoryOrStage.instance.nextStory = "platformScene";
-            SceneManager.LoadScene("StoryPage");
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "RhythmScene")
         {
             StoryOrStage.instance.nextStory = "RhythmScene";
-            SceneManager.LoadScene("StoryPage");
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "test")
         {
             StoryOrStage.instance.nextStory = "test";
-            SceneManager.LoadScene("StoryPage");
+            changeScene_B("StoryPage");
         }
+    }
+
+    //scene change
+    void changeScene_B(string sceneName)
+    {
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
     }
 
 

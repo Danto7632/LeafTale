@@ -4,6 +4,7 @@ using UnityEngine;
 using Leap;
 using Leap.Unity;
 using UnityEngine.SceneManagement;
+using EasyTransition;
 
 public class LeapMotionFlip : MonoBehaviour {
     private LeapServiceProvider leapProvider;
@@ -179,6 +180,16 @@ public class LeapMotionFlip : MonoBehaviour {
         }
     }
 
+    //scene change
+    void changeScene_S(string sceneName)
+    {
+        GameObject.Find("LoadScene_S").GetComponent<DemoLoadScene>().LoadScene(sceneName);
+    }
+    void changeScene_B(string sceneName)
+    {
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
+    }
+
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
     } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
@@ -187,27 +198,27 @@ public class LeapMotionFlip : MonoBehaviour {
         Debug.Log(StoryOrStage.instance.nextStory);
         switch(StoryOrStage.instance.nextStory) {
             case "Explain" :
-                SceneManager.LoadScene("ClawMachineScenes");
+                changeScene_S("ClawMachineScenes");
                 break;
 
             case "ClawMachineScenes" :
-                SceneManager.LoadScene("BroomstickScene");
+                changeScene_S("BroomstickScene");
                 break;
 
             case "BroomstickScene" :
-                SceneManager.LoadScene("platformScene");
+                changeScene_S("platformScene");
                 break;
 
             case "platformScene" :
-                SceneManager.LoadScene("RhythmScene");
+                changeScene_S("RhythmScene");
                 break;
 
             case "RhythmScene" :
-                SceneManager.LoadScene("test");
+                changeScene_S("test");
                 break;
 
             case "test" :
-                SceneManager.LoadScene("EndingCredit");
+                changeScene_B("EndingCredit");
                 break;
         }
     }
