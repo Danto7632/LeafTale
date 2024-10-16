@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
-using EasyTransition;
 
 public class Login : MonoBehaviour {
     private TMP_Text pressStartText;
@@ -171,12 +170,7 @@ public class Login : MonoBehaviour {
         pressStart.SetActive(false);
 
         StoryOrStage.instance.nextStory = "Explain";
-        goBackToStart(sceneName);
-    }
-
-    void goBackToStart(string sceneName)
-    {
-        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public static void SaveEncryptedData(string keyName, string data) // 아이디 암호화해서 저장
