@@ -14,7 +14,7 @@ public class clawControl : MonoBehaviour
     public bool clawsOpen;
     public bool goDown, goLeft, goRight;
     Rigidbody2D Rclaw, Lclaw, machine;
-    float speed = 0.01f;
+    float speed;
     public static bool gameOver;
     public bool isLeapOn;
 
@@ -39,12 +39,14 @@ public class clawControl : MonoBehaviour
         Rclaw = GameObject.Find("clawRight").GetComponent<Rigidbody2D>();
         Lclaw = GameObject.Find("clawLeft").GetComponent<Rigidbody2D>();
         machine = gameObject.GetComponent<Rigidbody2D>();
-        
+
         clawsOpen = true;
         gameOver = false;
         isLeapOn = false;
 
         csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
+
+        speed = 0.1f;
     }
 
     // Update is called once per frame
@@ -75,7 +77,7 @@ public class clawControl : MonoBehaviour
         // down
         if (goDown && gameObject.transform.position.y > -3.0f && !FireLine.isDownLine)
         {
-            gameObject.transform.Translate(0, -speed, 0);
+            gameObject.transform.Translate(0, -speed * 3f, 0);
         }
         // left
         if (goLeft && gameObject.transform.position.x > -8.5f && !FireLine.isLeftLine)

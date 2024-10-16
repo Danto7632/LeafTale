@@ -67,6 +67,10 @@ public class StoryOrStage : MonoBehaviour
         clearCount = 0;
     }
 
+    public void Start() {
+        Application.targetFrameRate = 60;
+    }
+
     public bool AllGamesCleared()
     {
         return G001Cleared && G002Cleared && G003Cleared && G004Cleared && G005Cleared;
