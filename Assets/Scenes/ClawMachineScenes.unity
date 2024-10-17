@@ -1649,6 +1649,7 @@ MonoBehaviour:
   sPoint: 0
   wvPoint: 0
   clearCount: 0
+  failCount: 0
   csm: {fileID: 0}
 --- !u!1 &234791439
 GameObject:
@@ -5474,7 +5475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938762188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 4, z: 0}
+  m_LocalPosition: {x: -7, y: 3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6922,6 +6923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43952fb2fc7351844ae6fd5fd0d656e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  power: {fileID: 0}
   clawClear: {fileID: 0}
   csm: {fileID: 0}
   maxPower: 0
@@ -7002,6 +7004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43952fb2fc7351844ae6fd5fd0d656e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  power: {fileID: 0}
   clawClear: {fileID: 0}
   csm: {fileID: 0}
   maxPower: 0
