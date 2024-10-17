@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Background1
+  - Background2
+  - Background3
+  - Background4
+  - SpawnZone
+  - Trap
+  - EndZone
+  - BroomEnemy
+  - RockTile
+  - PaperTile
+  - ScissorTile
+  - tileCheck
+  - tileCheckL
+  - tileCheckR
+  - PlusTimer
+  - soil
+  - targetV
+  - Coin
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Ground
+  - Enemy
+  - PhysicalHands
+  - PhysicalHandsReset
+  - PaperTile
+  - RockTile
+  - ScissorsTile
+  - Box
+  - Veg
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 431162985
+    locked: 0
+  - name: Trap
+    uniqueID: 2565100531
+    locked: 0
+  - name: Ground
+    uniqueID: 2871876803
+    locked: 0
+  - name: Player
+    uniqueID: 323323361
+    locked: 0
