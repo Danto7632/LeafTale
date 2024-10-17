@@ -19,6 +19,8 @@ public class LeapMotionFlip : MonoBehaviour {
     float pointingStartTime;
 
     public GameObject[] books;
+    public TransitionSettings transition_B;
+    public TransitionSettings transition_R;
 
 
     void Start() {
@@ -180,16 +182,6 @@ public class LeapMotionFlip : MonoBehaviour {
         }
     }
 
-    //scene change
-    void changeScene_S(string sceneName)
-    {
-        GameObject.Find("LoadScene_S").GetComponent<DemoLoadScene>().LoadScene(sceneName);
-    }
-    void changeScene_B(string sceneName)
-    {
-        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
-    }
-
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
     } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
@@ -198,27 +190,27 @@ public class LeapMotionFlip : MonoBehaviour {
         Debug.Log(StoryOrStage.instance.nextStory);
         switch(StoryOrStage.instance.nextStory) {
             case "Explain" :
-                changeScene_S("ClawMachineScenes");
+                TransitionManager.Instance().Transition("ClawMachineScenes", transition_R, 0);
                 break;
 
             case "ClawMachineScenes" :
-                changeScene_S("BroomstickScene");
+                TransitionManager.Instance().Transition("BroomstickScene", transition_R, 0);
                 break;
 
             case "BroomstickScene" :
-                changeScene_S("platformScene");
+                TransitionManager.Instance().Transition("platformScene", transition_R, 0);
                 break;
 
             case "platformScene" :
-                changeScene_S("RhythmScene");
+                TransitionManager.Instance().Transition("RhythmScene", transition_R, 0);
                 break;
 
             case "RhythmScene" :
-                changeScene_S("test");
+                TransitionManager.Instance().Transition("test", transition_R, 0);
                 break;
 
             case "test" :
-                changeScene_B("EndingCredit");
+                TransitionManager.Instance().Transition("EndingCredit", transition_B, 0);
                 break;
         }
     }

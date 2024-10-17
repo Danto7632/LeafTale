@@ -719,6 +719,7 @@ MonoBehaviour:
   isNext: 0
   chargeSound: {fileID: 2084814492266649422}
   gaugeImage: {fileID: 8677517103655135079}
+  transition_B: {fileID: 11400000, guid: b577ec7af0d48c34a9d31ce17f830a8d, type: 2}
   isPointing: 0
   pointingStartTime: 0
   elapsedTime: 0

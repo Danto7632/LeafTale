@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using EasyTransition;
+
 
 namespace EasyTransition
 {
-
+    
     public class TransitionManager : MonoBehaviour
-    {        
+    {
+
         [SerializeField] private GameObject transitionTemplate;
 
         private bool runningTransition;
@@ -57,15 +60,30 @@ namespace EasyTransition
         /// <param name="startDelay">The delay before the transition starts.</param>
         public void Transition(string sceneName, TransitionSettings transition, float startDelay)
         {
-            if (transition == null || runningTransition)
+            if (transition == null /*|| runningTransition */)
             {
                 Debug.LogError("You have to assing a transition.");
+                Debug.LogError(transition.name);
+                Debug.Log(runningTransition);
                 return;
             }
 
-            runningTransition = true;
+            /*runningTransition = true;*/
             StartCoroutine(Timer(sceneName, startDelay, transition));
         }
+        //public void Transition(string sceneName, TransitionSettings transition, float startDelay)
+        //{
+        //    if (transition == null || runningTransition )
+        //    {
+        //        Debug.LogError("You have to assing a transition.");
+        //        Debug.LogError(transition.name);
+        //        Debug.Log(runningTransition);
+        //        return;
+        //    }
+
+        //    runningTransition = true;
+        //    StartCoroutine(Timer(sceneName, startDelay, transition));
+        //}
 
         /// <summary>
         /// Loads the new Scene with a transition.
@@ -96,6 +114,7 @@ namespace EasyTransition
 
         IEnumerator Timer(string sceneName, float startDelay, TransitionSettings transitionSettings)
         {
+            Debug.Log("start Timer function");
             yield return new WaitForSecondsRealtime(startDelay);
 
             onTransitionBegin?.Invoke();
@@ -110,13 +129,15 @@ namespace EasyTransition
             yield return new WaitForSecondsRealtime(transitionTime);
 
             onTransitionCutPointReached?.Invoke();
-
-
             SceneManager.LoadScene(sceneName);
 
             yield return new WaitForSecondsRealtime(transitionSettings.destroyTime);
 
             onTransitionEnd?.Invoke();
+
+            Debug.Log("WHY!!!!!!!!!");
+            runningTransition = false;
+            Debug.Log(runningTransition);
         }
 
         IEnumerator Timer(int sceneIndex, float startDelay, TransitionSettings transitionSettings)
