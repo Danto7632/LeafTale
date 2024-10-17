@@ -26,8 +26,6 @@ public class GameClear : MonoBehaviour
 
     public UnityEngine.UI.Image gaugeImage;
 
-    public TransitionSettings transition_B;
-
     private void Start()
     {
         textScore = GameObject.Find("GameScore").GetComponent<TMP_Text>();
@@ -49,11 +47,11 @@ public class GameClear : MonoBehaviour
         {
             if (StoryOrStage.instance == null)
             {
-                TransitionManager.Instance().Transition("StageSelect", transition_B, 0);
+                changeScene_B("StageSelect");
             }
             else if (StoryOrStage.instance.currentMode == "stage")
             {
-                TransitionManager.Instance().Transition("StageSelect", transition_B, 0);
+                changeScene_B("StageSelect");
             }
             else if (StoryOrStage.instance.currentMode == "story")
             {
@@ -84,10 +82,10 @@ public class GameClear : MonoBehaviour
                         UpdateGauge(elapsedTime);
                         if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행
                            if (StoryOrStage.instance == null) {
-                                TransitionManager.Instance().Transition("StageSelect", transition_B, 0);
+                                changeScene_B("StageSelect");
                             }
                             else if (StoryOrStage.instance.currentMode == "stage") {
-                                TransitionManager.Instance().Transition("StageSelect", transition_B, 0);
+                                changeScene_B("StageSelect");
                             }
                             else if (StoryOrStage.instance.currentMode == "story") {
                                 storyOrder();
@@ -266,28 +264,34 @@ public class GameClear : MonoBehaviour
         if (sceneName == "ClawMachineScenes")
         {
             StoryOrStage.instance.nextStory = "ClawMachineScenes";
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "BroomstickScene")
         {
             StoryOrStage.instance.nextStory = "BroomstickScene";
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "platformScene")
         {
             StoryOrStage.instance.nextStory = "platformScene";
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "RhythmScene")
         {
             StoryOrStage.instance.nextStory = "RhythmScene";
+            changeScene_B("StoryPage");
         }
         else if (sceneName == "test")
         {
             StoryOrStage.instance.nextStory = "test";
+            changeScene_B("StoryPage");
         }
-        else
-        {
-            Debug.LogError("GameClear storyOrder Error");
-        }
-        TransitionManager.Instance().Transition("StoryPage", transition_B, 0);
+    }
+
+    //scene change
+    void changeScene_B(string sceneName)
+    {
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
     }
 
 

@@ -10,7 +10,6 @@ public class creditMove : MonoBehaviour
     GameObject endingPictures;
     int endingCount = 0;
     public float speed = 0.004f;
-    public TransitionSettings transition_B;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +60,7 @@ public class creditMove : MonoBehaviour
     {
         if (Input.GetKeyDown("p") == true) //skip credit
         {
-            TransitionManager.Instance().Transition("StartPage", transition_B, 0);
+            goBackToStart();
         }
 
         //credit move
@@ -73,5 +72,9 @@ public class creditMove : MonoBehaviour
         {
             Invoke("goBackToStart", 2.5f);
         }
+    }
+    void goBackToStart()
+    {
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene("StartPage");
     }
 }

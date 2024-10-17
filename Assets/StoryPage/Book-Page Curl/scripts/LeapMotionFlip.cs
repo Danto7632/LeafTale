@@ -18,8 +18,6 @@ public class LeapMotionFlip : MonoBehaviour {
     float pointingStartTime;
 
     public GameObject[] books;
-    public TransitionSettings transition_B;
-    public TransitionSettings transition_R;
 
 
     void Start() {
@@ -181,6 +179,16 @@ public class LeapMotionFlip : MonoBehaviour {
         }
     }
 
+    //scene change
+    void changeScene_S(string sceneName)
+    {
+        GameObject.Find("LoadScene_S").GetComponent<DemoLoadScene>().LoadScene(sceneName);
+    }
+    void changeScene_B(string sceneName)
+    {
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
+    }
+
     bool IsFist(Hand hand) {
         return hand.GrabStrength > 0.9f;
     } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
@@ -189,27 +197,27 @@ public class LeapMotionFlip : MonoBehaviour {
         Debug.Log(StoryOrStage.instance.nextStory);
         switch(StoryOrStage.instance.nextStory) {
             case "Explain" :
-                TransitionManager.Instance().Transition("ClawMachineScenes", transition_R, 0);
+                changeScene_S("ClawMachineScenes");
                 break;
 
             case "ClawMachineScenes" :
-                TransitionManager.Instance().Transition("BroomstickScene", transition_R, 0);
+                changeScene_S("BroomstickScene");
                 break;
 
             case "BroomstickScene" :
-                TransitionManager.Instance().Transition("platformScene", transition_R, 0);
+                changeScene_S("platformScene");
                 break;
 
             case "platformScene" :
-                TransitionManager.Instance().Transition("RhythmScene", transition_R, 0);
+                changeScene_S("RhythmScene");
                 break;
 
             case "RhythmScene" :
-                TransitionManager.Instance().Transition("test", transition_R, 0);
+                changeScene_S("test");
                 break;
 
             case "test" :
-                TransitionManager.Instance().Transition("EndingCredit", transition_B, 0);
+                changeScene_B("EndingCredit");
                 break;
         }
     }

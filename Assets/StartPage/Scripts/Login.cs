@@ -30,8 +30,6 @@ public class Login : MonoBehaviour {
     private static readonly byte[] key = Encoding.UTF8.GetBytes("Id28e3PsN258b1R4");
     private static readonly byte[] iv = Encoding.UTF8.GetBytes("D5oC29U1v94eBp7m");
 
-    public TransitionSettings transition_B;
-
     [System.Serializable]
     public class LoginData
     {
@@ -173,7 +171,12 @@ public class Login : MonoBehaviour {
         pressStart.SetActive(false);
 
         StoryOrStage.instance.nextStory = "Explain";
-        TransitionManager.Instance().Transition(sceneName, transition_B, 0);
+        goBackToStart(sceneName);
+    }
+
+    void goBackToStart(string sceneName)
+    {
+        GameObject.Find("LoadScene_B").GetComponent<DemoLoadScene>().LoadScene(sceneName);
     }
 
     public static void SaveEncryptedData(string keyName, string data) // 아이디 암호화해서 저장
