@@ -187,12 +187,12 @@ public class clawControl : MonoBehaviour
         {
             if (Lclaw.transform.eulerAngles.z > 300)
             {
-                Lclaw.transform.Rotate(0, 0, -5f * Time.deltaTime);
+                Lclaw.transform.Rotate(0, 0, -0.5f);
                 isMoving = true; // 클로가 움직임
             }
             if (Rclaw.transform.eulerAngles.z < 60)
             {
-                Rclaw.transform.Rotate(0, 0, 5f * Time.deltaTime);
+                Rclaw.transform.Rotate(0, 0, 0.5f);
                 isMoving = true; // 클로가 움직임
             }
         }
@@ -200,12 +200,12 @@ public class clawControl : MonoBehaviour
         {
             if (Lclaw.transform.eulerAngles.z < 353)
             {
-                Lclaw.transform.Rotate(0, 0, 2.5f * Time.deltaTime);
+                Lclaw.transform.Rotate(0, 0, 0.25f);
                 isMoving = true; // 클로가 움직임
             }
             if (Rclaw.transform.eulerAngles.z > 6)
             {
-                Rclaw.transform.Rotate(0, 0, -2.5f * Time.deltaTime);
+                Rclaw.transform.Rotate(0, 0, -0.25f);
                 isMoving = true; // 클로가 움직임
             }
         }   
