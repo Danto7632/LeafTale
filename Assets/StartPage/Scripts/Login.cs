@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
-using EasyTransition;
 
 public class Login : MonoBehaviour {
     private TMP_Text pressStartText;

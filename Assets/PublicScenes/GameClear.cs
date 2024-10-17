@@ -8,7 +8,6 @@ using UnityEngine.Networking; // UnityWebRequest
 using System; // DateTime
 using Leap;
 using Leap.Unity;
-using EasyTransition;
 
 public class GameClear : MonoBehaviour
 {

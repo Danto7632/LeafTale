@@ -12,7 +12,7 @@ public class PlusTime : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         broomStatus = GameObject.FindWithTag("Player").GetComponent<broomMove>();
 
-        moveSpeed = 8f;
+        moveSpeed = 4f;
     }
 
     void Update() {

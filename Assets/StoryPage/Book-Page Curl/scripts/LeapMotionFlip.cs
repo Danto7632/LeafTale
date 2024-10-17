@@ -4,7 +4,6 @@ using UnityEngine;
 using Leap;
 using Leap.Unity;
 using UnityEngine.SceneManagement;
-using EasyTransition;
 
 public class LeapMotionFlip : MonoBehaviour {
     private LeapServiceProvider leapProvider;
