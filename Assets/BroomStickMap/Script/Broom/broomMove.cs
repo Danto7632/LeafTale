@@ -288,6 +288,8 @@ public class broomMove : MonoBehaviour {
     }
 
     IEnumerator RunGame() {
+        isGameStart = true;
+        
         yield return new WaitForSeconds(1.0f);
 
         if (!isFirstGameStart) {
