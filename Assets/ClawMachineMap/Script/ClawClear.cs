@@ -99,7 +99,7 @@ public class ClawClear : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
             csm.endSound.Play();
-            clearCount = 4;
+            failCount = -1;
         }
     }
 
