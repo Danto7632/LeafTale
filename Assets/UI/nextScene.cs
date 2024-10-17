@@ -55,7 +55,7 @@ public class nextScene : MonoBehaviour {
 
                 if (elapsedTime > 3f && nextSceneName != null) {
                     fsm.selectSound.Play();
-                     fsm.chargedSound.Stop();
+                    fsm.chargedSound.Stop();
                     leapMotionFlip.moveScene();
                 }
             }
@@ -77,6 +77,7 @@ public class nextScene : MonoBehaviour {
                 if (!isPointing) {
                     pointingStartTime = Time.time;
                     isPointing = true;
+                    fsm.chargedSound.Play();
                 }
                 else {
                     elapsedTime = Time.time - pointingStartTime;
@@ -84,6 +85,7 @@ public class nextScene : MonoBehaviour {
                     
                     if(elapsedTime > 3f && nextSceneName != null) {
                         fsm.selectSound.Play();
+                        fsm.chargedSound.Stop();
                         leapMotionFlip.moveScene();
                     }
                 }

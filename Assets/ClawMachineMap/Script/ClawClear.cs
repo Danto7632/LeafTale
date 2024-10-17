@@ -79,15 +79,22 @@ public class ClawClear : MonoBehaviour
         if (clearCount == 3)
         {
             if (StoryOrStage.instance != null) {
-                if(failCount <= 0) {
-                    StoryOrStage.instance.isClawGood = false;
-                }
-                else {
-                    StoryOrStage.instance.isClawGood = true;
-                    StoryOrStage.instance.clearCount++;
-                }
+                StoryOrStage.instance.isClawGood = true;
+                StoryOrStage.instance.clearCount++;
             }
             clawScore = clawScore * 100.0f / 90.0f;
+            GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);
+            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
+            clawControl.gameOver = true;
+            csm.endSound.Play();
+            clearCount = 4;
+        }
+
+        if(failCount == 0) {
+            if (StoryOrStage.instance != null) {
+                StoryOrStage.instance.isClawGood = false;
+            }
+            clawScore = 0.0f;
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;

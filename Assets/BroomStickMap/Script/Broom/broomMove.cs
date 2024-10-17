@@ -42,6 +42,7 @@ public class broomMove : MonoBehaviour {
     public bool isMoveAllow;
     public bool isGameOver;
     public bool isGameClear;
+    public bool isGameStart;
     public Vector2 moveDirection;
 
     [Header("Movement_Limits")]
@@ -79,6 +80,7 @@ public class broomMove : MonoBehaviour {
 
         isHit = false;
         isGameOver = false;
+        isGameStart = false;
         isGameClear = false;
 
         minX = -6.5f;
@@ -238,31 +240,33 @@ public class broomMove : MonoBehaviour {
             isLeapOn = true;
             hand = frame.Hands[0]; // 인식한 손 중 맨 처음에 인식한 손 하나를 hand변수에 참조
 
-            if (IsPointingPose(hand)) { //인식한 손이 가르키는 손동작을 하고 있는지 확인
-                if (!isPointing) {
-                    pointingStartTime = Time.time;
+            if(!isGameStart) {
+                if (IsPointingPose(hand)) { //인식한 손이 가르키는 손동작을 하고 있는지 확인
+                    if (!isPointing) {
+                        pointingStartTime = Time.time;
 
-                    isPointing = true;
-                    bsm.chargeSound.Play();
-                } //특정 손동작을 인식한 시간을 저장
-                else {
-                    elapsedTime = Time.time - pointingStartTime;
-                    StartBar.ChangeHealthBarAmount(elapsedTime);
+                        isPointing = true;
+                        bsm.chargeSound.Play();
+                    } //특정 손동작을 인식한 시간을 저장
+                    else {
+                        elapsedTime = Time.time - pointingStartTime;
+                        StartBar.ChangeHealthBarAmount(elapsedTime);
 
-                    if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
-                        bsm.chargeSound.Stop();
-                        leapOnText.enabled = false;
-                        explainPanel.gameObject.SetActive(false);
-                        explainText.enabled = false;
+                        if (elapsedTime > 3f) { //특정 손동작이 3초 이상 지속되는지 확인 후 게임 실행ㅇ
+                            bsm.chargeSound.Stop();
+                            leapOnText.enabled = false;
+                            explainPanel.gameObject.SetActive(false);
+                            explainText.enabled = false;
 
-                        StartCoroutine(RunGame());
+                            StartCoroutine(RunGame());
+                        }
                     }
                 }
-            }
-            else {
-                elapsedTime = 0f;
-                isPointing = false;
-                StartBar.ChangeHealthBarAmount(elapsedTime);
+                else {
+                    elapsedTime = 0f;
+                    isPointing = false;
+                    StartBar.ChangeHealthBarAmount(elapsedTime);
+                }
             }
 
             if(isMoveAllow) {
