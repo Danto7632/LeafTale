@@ -682,6 +682,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 25fcb852806473c4c9156db47ef0bd7d, type: 3}
   speed: 0.0035
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1001 &913475485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -743,6 +744,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e3d5c485847d044b654bcc7e8a8d8d, type: 3}
+=======
+>>>>>>> parent of cc155b7 (Change Scene Fix)
 =======
 >>>>>>> parent of cc155b7 (Change Scene Fix)
 --- !u!1 &1084378391
@@ -1468,7 +1471,10 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of cc155b7 (Change Scene Fix)
 --- !u!1001 &3093147498747296638
 PrefabInstance:
   m_ObjectHideFlags: 0

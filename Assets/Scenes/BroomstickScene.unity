@@ -1268,7 +1268,11 @@ RectTransform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1001 &876737787
+=======
+--- !u!1001 &829153897
+>>>>>>> parent of cc155b7 (Change Scene Fix)
 =======
 --- !u!1001 &829153897
 >>>>>>> parent of cc155b7 (Change Scene Fix)
@@ -1279,6 +1283,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
 <<<<<<< HEAD
     - target: {fileID: 6895647761386089284, guid: d6e3d5c485847d044b654bcc7e8a8d8d, type: 3}
       propertyPath: m_RootOrder
@@ -1328,6 +1333,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionManager
 =======
+=======
+>>>>>>> parent of cc155b7 (Change Scene Fix)
     - target: {fileID: 2837615020076629608, guid: 058b53485592028478b2b10b9c6bb24c, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1375,6 +1382,9 @@ PrefabInstance:
     - target: {fileID: 6909078132674690229, guid: 058b53485592028478b2b10b9c6bb24c, type: 3}
       propertyPath: m_Name
       value: LoadScene_B
+<<<<<<< HEAD
+>>>>>>> parent of cc155b7 (Change Scene Fix)
+=======
 >>>>>>> parent of cc155b7 (Change Scene Fix)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1382,7 +1392,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_SourcePrefab: {fileID: 100100000, guid: d6e3d5c485847d044b654bcc7e8a8d8d, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 058b53485592028478b2b10b9c6bb24c, type: 3}
+>>>>>>> parent of cc155b7 (Change Scene Fix)
 =======
   m_SourcePrefab: {fileID: 100100000, guid: 058b53485592028478b2b10b9c6bb24c, type: 3}
 >>>>>>> parent of cc155b7 (Change Scene Fix)
