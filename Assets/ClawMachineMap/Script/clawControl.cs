@@ -90,7 +90,7 @@ public class clawControl : MonoBehaviour
             gameObject.transform.Translate(speed * Time.deltaTime, 0, 0);
         }
 
-        if (gameObject.transform.position.y < 3.5f && !goDown)
+        if (gameObject.transform.position.y < 3.0f && !goDown)
         {
             gameObject.transform.Translate(0, speed * Time.deltaTime, 0);
         }
@@ -143,7 +143,7 @@ public class clawControl : MonoBehaviour
         // goLeft, goRight, goDown 값에 따라 이동
         if (!goDown)
         {
-            if (gameObject.transform.position.y < 3.5f)
+            if (gameObject.transform.position.y < 4f)
             {
                 gameObject.transform.Translate(0, speed * Time.deltaTime, 0);
             }
@@ -211,7 +211,7 @@ public class clawControl : MonoBehaviour
         }   
 
         // 클로가 위로 움직이는 경우도 추가
-        if (gameObject.transform.position.y < 3.5f && !goDown) // 클로가 위로 올라갈 수 있는 최대 Y 위치
+        if (gameObject.transform.position.y < 4f && !goDown) // 클로가 위로 올라갈 수 있는 최대 Y 위치
         {
             gameObject.transform.Translate(0, speed * Time.deltaTime, 0); // 위로 이동
             isMoving = true; // 클로가 움직임

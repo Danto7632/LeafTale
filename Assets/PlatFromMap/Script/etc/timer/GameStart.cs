@@ -60,6 +60,9 @@ public class GameStart : MonoBehaviour {
                         explainPanel.gameObject.SetActive(false);
                         BeforeGameStartText.enabled = false;
                         startTimer_Platform.StartCountdown();
+                        if(timer_Platform == null) {
+                            timer_Platform = GameObject.Find("Canvas").GetComponent<Timer_Platform>();
+                        }
                         timer_Platform.timerStart();
                         psm.chargedSound.Stop();
                         isGameStart = true;
@@ -79,6 +82,9 @@ public class GameStart : MonoBehaviour {
             BeforeGameStartText.enabled = false;
             explainPanel.gameObject.SetActive(false);
             startTimer_Platform.StartCountdown();
+            if(timer_Platform == null) {
+                timer_Platform = GameObject.Find("Canvas").GetComponent<Timer_Platform>();
+            }
             timer_Platform.timerStart();
             isGameStart = true;
         }
