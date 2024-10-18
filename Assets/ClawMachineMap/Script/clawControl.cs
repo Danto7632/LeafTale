@@ -156,7 +156,7 @@ public class clawControl : MonoBehaviour
                 // y축의 제한을 키보드와 동일하게 -3.0f로 설정
                 if (gameObject.transform.position.y > -3.0f)
                 {
-                    gameObject.transform.Translate(0, -speed, 0);
+                    gameObject.transform.Translate(0, -speed * Time.deltaTime, 0);
                 }
             }
             if (goLeft && !FireLine.isLeftLine)
@@ -164,7 +164,7 @@ public class clawControl : MonoBehaviour
                 // x축의 제한을 키보드와 동일하게 -6.32f로 설정
                 if (gameObject.transform.position.x > -8.5f)
                 {
-                    gameObject.transform.Translate(-speed, 0, 0);
+                    gameObject.transform.Translate(-speed * Time.deltaTime, 0, 0);
                 }
             }
             if (goRight && !FireLine.isRightLine)
@@ -172,7 +172,7 @@ public class clawControl : MonoBehaviour
                 // x축의 제한을 키보드와 동일하게 6f로 설정
                 if (gameObject.transform.position.x < 3.6f)
                 {
-                    gameObject.transform.Translate(speed, 0, 0);
+                    gameObject.transform.Translate(speed * Time.deltaTime, 0, 0);
                 }
             }
         }
