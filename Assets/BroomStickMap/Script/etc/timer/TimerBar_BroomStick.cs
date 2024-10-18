@@ -21,9 +21,9 @@ public class TimerBar_BroomStick : MonoBehaviour {
 
         timerBar.fillAmount = 1;
 
-        time_subtract = 5; //7
+        time_subtract = 3; //7
         time_add = 3; //5
-        maxTime = 30f; //60
+        maxTime = 20f; //60
         timeLeft = maxTime;
         timeLast = 0f;
 
@@ -45,7 +45,7 @@ public class TimerBar_BroomStick : MonoBehaviour {
                 
                 broom_score = (int)(timeLast * (100 / (maxTime + (time_add * 3))));
                 if(StoryOrStage.instance != null) {
-                    if(broom_score >= 80) {
+                    if(broom_score >= 70) {
                         StoryOrStage.instance.isBroomGood = true;
                         StoryOrStage.instance.clearCount++;
                     }
