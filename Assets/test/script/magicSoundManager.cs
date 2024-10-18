@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class magicSoundManager : MonoBehaviour {
+
+    public AudioSource drawBgm;
     public AudioSource drawSound;
     public AudioSource drawGoodSound;
     public AudioSource drawFailSound;
