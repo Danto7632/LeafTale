@@ -94,7 +94,7 @@ public class ClawClear : MonoBehaviour
             if (StoryOrStage.instance != null) {
                 StoryOrStage.instance.isClawGood = false;
             }
-            clawScore = 0.0f;
+            //clawScore = 0.0f;
             GameObject.Find("GameManager").GetComponent<GameManager>().AddScore((int)clawScore);
             GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(0, 0);
             clawControl.gameOver = true;
