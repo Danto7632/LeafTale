@@ -38,7 +38,7 @@ public class DrawingGame : MonoBehaviour
 
     public int countdownTimer;
 
-    public float maxScore;
+    public static float maxScore;
     public float sumScore;
 
     public float accuracy;

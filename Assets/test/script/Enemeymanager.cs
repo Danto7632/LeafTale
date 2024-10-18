@@ -125,15 +125,21 @@ public class Enemeymanager : MonoBehaviour {
             if(stageNum == 1) {
                 StartCoroutine(wolfani.wolfWin());
                 isTimerOver = false;
+                GameManager.instance.AddScore((int)(DrawingGame.maxScore * 0.2));
+                DrawingGame.maxScore = 0;
             }
             else if(stageNum == 2) {
                 StartCoroutine(plantani.plantWin());
                 isTimerOver = false;
+                GameManager.instance.AddScore((int)(DrawingGame.maxScore * 0.3));
+                DrawingGame.maxScore = 0;
             }
             else {
                 StartCoroutine(dragonani.dragonWin());
                 isTimerOver = false;
-                if(StoryOrStage.instance != null) {
+                GameManager.instance.AddScore((int)(DrawingGame.maxScore * 0.5));
+                DrawingGame.maxScore = 0;
+                if (StoryOrStage.instance != null) {
                     StoryOrStage.instance.isMagicGood = false;
                 }
             }
@@ -149,12 +155,12 @@ public class Enemeymanager : MonoBehaviour {
             if(stageNum == 1) {
                 StartCoroutine(wolfani.wolfLose());
                 isPlayerWin = false;
-                GameManager.instance.AddScore(10);
+                GameManager.instance.AddScore(25);
             }
             else if(stageNum == 2) {
                 StartCoroutine(plantani.plantLose());
                 isPlayerWin = false;
-                GameManager.instance.AddScore(10);
+                GameManager.instance.AddScore(25);
             }
             else {
                 StartCoroutine(dragonani.dragonLose());
@@ -163,7 +169,7 @@ public class Enemeymanager : MonoBehaviour {
                     StoryOrStage.instance.isMagicGood = true;
                     StoryOrStage.instance.clearCount++;
                 }
-                GameManager.instance.AddScore(80);
+                GameManager.instance.AddScore(50);
             }
             stageNum++;
             playerDrawing.gameObject.SetActive(false);
