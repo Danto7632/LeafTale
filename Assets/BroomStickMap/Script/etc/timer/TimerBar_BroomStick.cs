@@ -23,7 +23,7 @@ public class TimerBar_BroomStick : MonoBehaviour {
 
         time_subtract = 3; //7
         time_add = 3; //5
-        maxTime = 20f; //60
+        maxTime = 25f; //60
         timeLeft = maxTime;
         timeLast = 0f;
 
