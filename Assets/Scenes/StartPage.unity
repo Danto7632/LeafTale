@@ -1449,6 +1449,7 @@ MonoBehaviour:
   rank: {fileID: 25907440}
   pressStart: {fileID: 257827842}
   loginPanel: {fileID: 1474716182}
+  MainTitle: {fileID: 0}
   idInput: {fileID: 732180536}
   pwInput: {fileID: 2128501353}
   loginButton: {fileID: 224894292}

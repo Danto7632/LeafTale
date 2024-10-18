@@ -15,9 +15,13 @@ public class Login : MonoBehaviour {
 
     public GameObject rank;
     public GameObject pressStart;
+    public GameObject backGroundPanel;
+
+    public Animator backAni;
 
     [Header("Login")]
     public GameObject loginPanel;
+    public GameObject MainTitle;
     public TMP_InputField idInput;
     public TMP_InputField pwInput;
     public UnityEngine.UI.Button loginButton;
@@ -43,6 +47,9 @@ public class Login : MonoBehaviour {
 
     void Start()
     {
+        MainTitle = GameObject.Find("MainTitle");
+        backGroundPanel = GameObject.Find("Background");
+        backAni = backGroundPanel.GetComponent<Animator>();
         url = "http://43.203.0.69:8080/api/login";
         mainCamera = Camera.main;
         isFadingOut = false;
@@ -64,6 +71,8 @@ public class Login : MonoBehaviour {
         }
 
         isNotToggle = false;
+
+        backAni.enabled = false;
     }
 
     void Update() {
@@ -170,10 +179,12 @@ public class Login : MonoBehaviour {
     }
 
     void LoadSceneAfterDelay(string sceneName) {
+        backAni.enabled = true;
         pressStart.SetActive(false);
 
+        MainTitle.SetActive(false);
         StoryOrStage.instance.nextStory = "Explain";
-        TransitionManager.Instance().Transition(sceneName, transition_B, 0);
+        TransitionManager.Instance().Transition(sceneName, transition_B, 1.917f);
     }
 
     public static void SaveEncryptedData(string keyName, string data) // 아이디 암호화해서 저장
