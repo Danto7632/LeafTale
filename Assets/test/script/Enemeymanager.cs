@@ -161,6 +161,7 @@ public class Enemeymanager : MonoBehaviour {
                 isPlayerWin = false;
                 if(StoryOrStage.instance != null) {
                     StoryOrStage.instance.isMagicGood = true;
+                    StoryOrStage.instance.clearCount++;
                 }
                 GameManager.instance.AddScore(80);
             }

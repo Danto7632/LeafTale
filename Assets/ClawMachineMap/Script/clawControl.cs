@@ -46,7 +46,7 @@ public class clawControl : MonoBehaviour
 
         csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
 
-        speed = 0.1f;
+        speed = 5f;
     }
 
     // Update is called once per frame
@@ -77,22 +77,22 @@ public class clawControl : MonoBehaviour
         // down
         if (goDown && gameObject.transform.position.y > -3.0f && !FireLine.isDownLine)
         {
-            gameObject.transform.Translate(0, -speed * 3f, 0);
+            gameObject.transform.Translate(0, -speed * Time.deltaTime, 0);
         }
         // left
         if (goLeft && gameObject.transform.position.x > -8.5f && !FireLine.isLeftLine)
         {
-            gameObject.transform.Translate(-speed, 0, 0);
+            gameObject.transform.Translate(-speed * Time.deltaTime, 0, 0);
         }
         // right
-        if (goRight && gameObject.transform.position.x < 6f && !FireLine.isRightLine)
+        if (goRight && gameObject.transform.position.x < 3.6f && !FireLine.isRightLine)
         {   
-            gameObject.transform.Translate(speed, 0, 0);
+            gameObject.transform.Translate(speed * Time.deltaTime, 0, 0);
         }
 
         if (gameObject.transform.position.y < 3.5f && !goDown)
         {
-            gameObject.transform.Translate(0, speed - .005f, 0);
+            gameObject.transform.Translate(0, speed * Time.deltaTime, 0);
         }
     }
 
@@ -145,7 +145,7 @@ public class clawControl : MonoBehaviour
         {
             if (gameObject.transform.position.y < 3.5f)
             {
-                gameObject.transform.Translate(0, speed - .005f, 0);
+                gameObject.transform.Translate(0, speed * Time.deltaTime, 0);
             }
         }
 
@@ -170,7 +170,7 @@ public class clawControl : MonoBehaviour
             if (goRight && !FireLine.isRightLine)
             {
                 // x축의 제한을 키보드와 동일하게 6f로 설정
-                if (gameObject.transform.position.x < 6f)
+                if (gameObject.transform.position.x < 3.6f)
                 {
                     gameObject.transform.Translate(speed, 0, 0);
                 }
@@ -211,9 +211,9 @@ public class clawControl : MonoBehaviour
         }   
 
         // 클로가 위로 움직이는 경우도 추가
-        if (gameObject.transform.position.y < 3.5f) // 클로가 위로 올라갈 수 있는 최대 Y 위치
+        if (gameObject.transform.position.y < 3.5f && !goDown) // 클로가 위로 올라갈 수 있는 최대 Y 위치
         {
-            gameObject.transform.Translate(0, speed - 0.005f, 0); // 위로 이동
+            gameObject.transform.Translate(0, speed * Time.deltaTime, 0); // 위로 이동
             isMoving = true; // 클로가 움직임
         }
 
