@@ -184,7 +184,7 @@ public class Login : MonoBehaviour {
 
         MainTitle.SetActive(false);
         StoryOrStage.instance.nextStory = "Explain";
-        TransitionManager.Instance().Transition(sceneName, transition_B, 1.917f);
+        TransitionManager.Instance().Transition(sceneName, transition_B, 2f);
     }
 
     public static void SaveEncryptedData(string keyName, string data) // 아이디 암호화해서 저장
