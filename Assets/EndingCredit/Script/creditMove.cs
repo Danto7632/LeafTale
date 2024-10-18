@@ -61,7 +61,7 @@ public class creditMove : MonoBehaviour
     {
         if (Input.GetKeyDown("p") == true) //skip credit
         {
-            TransitionManager.Instance().Transition("StartPage", transition_B, 0);
+            goBackToStart();
         }
 
         //credit move
@@ -73,5 +73,9 @@ public class creditMove : MonoBehaviour
         {
             Invoke("goBackToStart", 2.5f);
         }
+    }
+    void goBackToStart()
+    {
+        TransitionManager.Instance().Transition("StartPage", transition_B, 0);
     }
 }
