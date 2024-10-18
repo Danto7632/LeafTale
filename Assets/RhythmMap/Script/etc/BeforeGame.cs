@@ -60,6 +60,7 @@ public class BeforeGame : MonoBehaviour {
                         rsm.chargedSound.Stop();
                         isGameStart = true;
                         rsm.startSound.Play();
+                        rsm.rhythmBgm.Play();
                         Debug.Log("Game started!");
                     }
                 }
@@ -81,6 +82,7 @@ public class BeforeGame : MonoBehaviour {
                 isGameStart = true;
 
                 rsm.startSound.Play();
+                rsm.rhythmBgm.Play();
             }
         }
     }

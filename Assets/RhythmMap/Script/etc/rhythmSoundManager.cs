@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class rhythmSoundManager : MonoBehaviour {
+
+    public AudioSource rhythmBgm;
     public AudioSource goodSound;
     public AudioSource sosoSound;
     public AudioSource failSound;
