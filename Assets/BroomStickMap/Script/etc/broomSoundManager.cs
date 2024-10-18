@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class broomSoundManager : MonoBehaviour {
+
+    public AudioSource broomBgm;
     public AudioSource flyingSound;
     public AudioSource itemPickSound;
     public AudioSource FallingSound;
