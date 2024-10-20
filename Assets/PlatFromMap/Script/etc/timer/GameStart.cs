@@ -13,6 +13,7 @@ public class GameStart : MonoBehaviour {
 
     public GameObject explainPanel;
     public TMP_Text BeforeGameStartText;
+    private TMP_Text gameEndingText;
 
     public float pointingStartTime;
 
@@ -30,12 +31,18 @@ public class GameStart : MonoBehaviour {
         explainPanel = GameObject.Find("ExplainPanel");
 
         BeforeGameStartText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
+        gameEndingText = GameObject.Find("GoodEnding_Text").GetComponent<TMP_Text>();
         startTimer_Platform = GameObject.Find("StartTimer").GetComponent<StartTimer_Platform>();
         timer_Platform = GameObject.Find("Canvas").GetComponent<Timer_Platform>();
 
         psm = GameObject.Find("SoundManager").GetComponent<platSoundManager>();
 
-        isGameStart = false;    
+        isGameStart = false;
+
+        if (StoryOrStage.instance.modeFlag == 0) // 스토리모드일 때만 시작창에 굿엔딩 조건 명시
+        {
+            gameEndingText.enabled = false;
+        }
     }
 
     void OnDestroy() {
