@@ -11,6 +11,7 @@ public class BeforeGame : MonoBehaviour {
 
     private GameObject explainPanel;
     public TMP_Text BeforeGameStartText;
+    private TMP_Text gameEndingText;
 
     public static bool isGameStart;
 
@@ -27,12 +28,18 @@ public class BeforeGame : MonoBehaviour {
 
         explainPanel = GameObject.Find("ExplainPanel");
         BeforeGameStartText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
+        gameEndingText = GameObject.Find("GoodEnding_Text").GetComponent<TMP_Text>();
 
         elapsedTime = 0f;
         
         isGameStart = false;
 
         rsm = GameObject.Find("SoundManager").GetComponent<rhythmSoundManager>();
+
+        if (StoryOrStage.instance.modeFlag == 0) // 스토리모드일 때만 시작창에 굿엔딩 조건 명시
+        {
+            gameEndingText.enabled = false;
+        }
     }
 
     void OnDestroy() {

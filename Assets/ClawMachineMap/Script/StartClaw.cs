@@ -23,6 +23,8 @@ public class StartClaw : MonoBehaviour {
 
     public clawSoundManager csm;
 
+    private TMP_Text gameEndingText;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -31,7 +33,14 @@ public class StartClaw : MonoBehaviour {
 
         csm = GameObject.Find("SoundManager").GetComponent<clawSoundManager>();
 
+        gameEndingText = GameObject.Find("GoodEnding_Text").GetComponent<TMP_Text>();
+
         isDone = false;
+
+        if (StoryOrStage.instance.modeFlag == 0) // 스토리모드일 때만 시작창에 굿엔딩 조건 명시
+        {
+            gameEndingText.enabled = false;
+        }
     }
 
     void OnUpdateFrame(Frame frame) {

@@ -36,6 +36,10 @@ public class Login : MonoBehaviour {
 
     public TransitionSettings transition_B;
 
+    private bool isTransitionTriggered = false;
+
+    public string nextSceneName;
+
     [System.Serializable]
     public class LoginData
     {
@@ -73,6 +77,8 @@ public class Login : MonoBehaviour {
         isNotToggle = false;
 
         backAni.enabled = false;
+
+        isTransitionTriggered = false;
     }
 
     void Update() {
@@ -83,6 +89,13 @@ public class Login : MonoBehaviour {
             if(pressStart.activeSelf == true && Input.GetMouseButtonDown(0) && StoryOrStage.instance.currentMode == null) {
                 Debug.Log("Select Story OR Stage");
             }
+        }
+
+        if (backAni != null && backAni.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f && !isTransitionTriggered)
+        {
+            // 애니메이션이 끝났고 트랜지션이 아직 실행되지 않았을 때
+            isTransitionTriggered = true;
+            TransitionManager.Instance().Transition(nextSceneName, transition_B, 0);
         }
     }
     // 로그인 버튼 누르면 API 통신으로 로그인 진행되는 코루틴 실행 
@@ -184,7 +197,8 @@ public class Login : MonoBehaviour {
 
         MainTitle.SetActive(false);
         StoryOrStage.instance.nextStory = "Explain";
-        TransitionManager.Instance().Transition(sceneName, transition_B, 2f);
+
+        nextSceneName = sceneName;
     }
 
     public static void SaveEncryptedData(string keyName, string data) // 아이디 암호화해서 저장

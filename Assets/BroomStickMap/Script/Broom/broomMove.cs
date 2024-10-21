@@ -55,6 +55,7 @@ public class broomMove : MonoBehaviour {
     public GameObject explainPanel;
     public TMP_Text explainText;
     public TMP_Text leapOnText;
+    private TMP_Text gameEndingText;
 
     [Header("Timer")]
     GameObject timer;
@@ -72,6 +73,7 @@ public class broomMove : MonoBehaviour {
         timerSpawn = GameObject.Find("TimerSpawn").GetComponent<TimerSpawn>();
         explainPanel = GameObject.Find("ExplainPanel");
         explainText = GameObject.Find("ExplainText").GetComponent<TMP_Text>();
+        gameEndingText = GameObject.Find("GoodEnding_Text").GetComponent<TMP_Text>();
         timer = GameObject.Find("Time");
 
         bsm = GameObject.Find("SoundManager").GetComponent<broomSoundManager>();
@@ -98,6 +100,11 @@ public class broomMove : MonoBehaviour {
         leapOnText.enabled = true;
 
         plusTimerNum = 0;
+        
+        if(StoryOrStage.instance.modeFlag == 0) // 스토리모드일 때만 시작창에 굿엔딩 조건 명시
+        {
+            gameEndingText.enabled = false;
+        }
     }
 
     void Update() {

@@ -24,6 +24,8 @@ public class StartDrawing : MonoBehaviour {
 
     public magicSoundManager msm;
 
+    private TMP_Text gameEndingText;
+
     void Start() {
         leapProvider = FindObjectOfType<LeapServiceProvider>();
         leapProvider.OnUpdateFrame += OnUpdateFrame;
@@ -34,6 +36,13 @@ public class StartDrawing : MonoBehaviour {
         isDone = false;
 
         msm = GameObject.Find("SoundManager").GetComponent<magicSoundManager>();
+
+        gameEndingText = GameObject.Find("GoodEnding_Text").GetComponent<TMP_Text>();
+
+        if (StoryOrStage.instance.modeFlag == 0) // 스토리모드일 때만 시작창에 굿엔딩 조건 명시
+        {
+            gameEndingText.enabled = false;
+        }
     }
 
     void OnUpdateFrame(Frame frame) {
