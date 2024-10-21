@@ -18,5 +18,7 @@ public class GoBackToStart : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
             TransitionManager.Instance().Transition("StartPage", transition_B, 0);
+        if (Input.GetKeyDown(KeyCode.C))
+            TransitionManager.Instance().Transition("EndingCredit", transition_B, 0);
     }
 }
