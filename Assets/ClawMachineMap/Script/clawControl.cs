@@ -270,7 +270,6 @@ public class clawControl : MonoBehaviour
         }
     }
 
-    // 손바닥 기울기를 감지하고 이동 방향을 설정하는 함수
     void DetectHandTilt(Hand hand)
     {
         Vector3 palmNormal = hand.PalmNormal; // 손바닥의 기울기를 3D 벡터로 가져옴
@@ -303,9 +302,7 @@ public class clawControl : MonoBehaviour
         }
     }
 
-    // 주먹이 쥐어졌는지 확인하는 함수
-    bool IsFist(Hand hand)
-    {
-        return hand.GrabStrength > 0.9f;
+    bool IsFist(Hand hand) {
+        return hand.GrabStrength > 0.9f; //손의 쥐기 강도가 0.9f 이상이라면 주먹으로 판단하고 true를 반환
     }
 }

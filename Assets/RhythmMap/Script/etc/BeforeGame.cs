@@ -36,7 +36,7 @@ public class BeforeGame : MonoBehaviour {
 
         rsm = GameObject.Find("SoundManager").GetComponent<rhythmSoundManager>();
 
-        if (StoryOrStage.instance.modeFlag == 0) // ���丮����� ���� ����â�� �¿��� ���� ����
+        if (StoryOrStage.instance.modeFlag == 0) // ���丮����� ���� ����â�� �¿��� ���� ����
         {
             gameEndingText.enabled = false;
         }
@@ -95,14 +95,15 @@ public class BeforeGame : MonoBehaviour {
     }
 
     bool IsPointingPose(Hand hand) {
-        foreach (Finger finger in hand.Fingers) {
-            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
-                if (!finger.IsExtended) return false;
+        foreach (Finger finger in hand.Fingers) { //감지된 손의 손가락을 모두 순회합니다
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) { //감지된 손가락 중 검지손가락인지 확인합니다
+                if (!finger.IsExtended) return false; //만약 검지 손가락이 펴져있지 않다면 (IsExtended = false) false를 반환합니다
             }
             else {
-                if (finger.IsExtended) return false;
+                if (finger.IsExtended) return false; //검지 이외의 손가락이 펴져있다면 false를 반환합니다
             }
         }
-        return true;
+        
+        return true; //펴진 손가락이 검지 뿐이라면 true를 반환합니다
     }
 }

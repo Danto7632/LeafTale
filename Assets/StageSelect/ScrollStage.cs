@@ -101,13 +101,13 @@ public class ScrollStage : MonoBehaviour {
     }
 
     void OnUpdateFrame(Frame frame) {
-        if (frame.Hands.Count > 0) {
-            Hand hand = frame.Hands[0];
+        if (frame.Hands.Count > 0) { //감지된 손이 하나 이상 있는지 확인합니다
+            Hand hand = frame.Hands[0]; //감지된 손 중 가장 처음으로 인식된 손을 가져옵니다
 
-            Vector3 currentHandPos = hand.PalmPosition;
+            Vector3 currentHandPos = hand.PalmPosition; //손바닥 중앙의 위치를 벡터값으로 저장합니다
 
             pos = new float[transform.childCount];
-            float stageDistance = 1f / (pos.Length - 1f);
+            float stageDistance = 1f / (pos.Length - 1f); //현재 스테이지의 개수에 따라서 각 스테이지 간의 위치를 계산합니다
 
             if (IsPointingPose(hand)) {
                 if (!isPointing) {
@@ -126,31 +126,31 @@ public class ScrollStage : MonoBehaviour {
                 ResetGauge();
                 isPointing = false;
                 chargedSound.Stop();
-            }
+            } //사용자가 가르키는 손동작을 3초 이상 하고 있다면 지금 스테이지의 게임을 실행합니다
 
             for (int i = 0; i < pos.Length; i++) {
                 pos[i] = stageDistance * i;
             }
 
-            if (IsFist(hand)) {
-                if (!isFisting) {
+            if (IsFist(hand)) { //사용자가 주먹을 쥔 상태인지 확인합니다
+                if (!isFisting) { //처음으로 주먹을 쥔 경우 현재 손과 위치를 설정합니다
                     isFisting = true;
                     prevHand = hand;
                     prevHandPos = currentHandPos;
                 }
-                else {
+                else { //주먹을 쥔 상태가 계속될 경우 손의 이동거리를 계산하여 특정 거리를 초과 한다면 이동하는 방향에 따라 스크롤 동작을 수행합니다
                     float distance = Vector3.Distance(prevHandPos, currentHandPos);
 
-                    if (distance > swipeDistanceThreshold) {
-                        if (currentHandPos.x > prevHandPos.x) {
+                    if (distance > swipeDistanceThreshold) { //특정 거리 초과 했는지 검사
+                        if (currentHandPos.x > prevHandPos.x) { //오른쪽으로 이동했을 시
                             flipSound.Play();
                             Debug.Log("Right Swipe detected!");
-                            scroll_pos = Mathf.Max(scroll_pos - stageDistance, 0f);
+                            scroll_pos = Mathf.Max(scroll_pos - stageDistance, 0f); //스테이지를 스크롤
                         }
-                        else if (currentHandPos.x < prevHandPos.x) {
+                        else if (currentHandPos.x < prevHandPos.x) { //왼쪽으로 이동했을 시
                             flipSound.Play();
                             Debug.Log("Left Swipe detected!");
-                            scroll_pos = Mathf.Min(scroll_pos + stageDistance, 1f);
+                            scroll_pos = Mathf.Min(scroll_pos + stageDistance, 1f); //스테이지를 스크롤
                         }
 
                         prevHand = hand;
@@ -165,19 +165,20 @@ public class ScrollStage : MonoBehaviour {
     }
 
     bool IsFist(Hand hand) {
-        return hand.GrabStrength > 0.9f;
-    } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
+        return hand.GrabStrength > 0.9f; //손의 쥐기 강도가 0.9f 이상이라면 주먹으로 판단하고 true를 반환
+    }
 
     bool IsPointingPose(Hand hand) {
-        foreach (Finger finger in hand.Fingers) {
-            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
-                if (!finger.IsExtended) return false;
+        foreach (Finger finger in hand.Fingers) { //감지된 손의 손가락을 모두 순회합니다
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) { //감지된 손가락 중 검지손가락인지 확인합니다
+                if (!finger.IsExtended) return false; //만약 검지 손가락이 펴져있지 않다면 (IsExtended = false) false를 반환합니다
             }
             else {
-                if (finger.IsExtended) return false;
+                if (finger.IsExtended) return false; //검지 이외의 손가락이 펴져있다면 false를 반환합니다
             }
         }
-        return true;
+        
+        return true; //펴진 손가락이 검지 뿐이라면 true를 반환합니다
     }
 
     void UpdateGauge(float time) {

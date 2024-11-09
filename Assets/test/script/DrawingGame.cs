@@ -177,11 +177,11 @@ public class DrawingGame : MonoBehaviour
             // 손 위치 시각화 (2D 오브젝트로)
             handVisualizer.SetActive(true);
 
-            // X, Y, Z 좌표를 개별적으로 제한
+            // X, Y좌표를 개별적으로 제한
             screenPosition.x = Mathf.Clamp(screenPosition.x, minLimit.x, maxLimit.x); // X 좌표 제한
             screenPosition.y = Mathf.Clamp(screenPosition.y, minLimit.y, maxLimit.y); // Y 좌표 제한
 
-            if(IsFist(primaryHand)) {
+            if(IsFist(primaryHand)) { //주먹을 쥔다면 다시 중앙으로 위치를 초기화
                 handVisualizer.transform.position = new Vector3(0, 0, 0);
                 initialHandPosition = leapHandPosition;
             }
@@ -189,7 +189,7 @@ public class DrawingGame : MonoBehaviour
                 handVisualizer.transform.position = screenPosition;
             }
 
-            if (IsPointingPose(primaryHand)) // 주먹을 쥐고 있을 때
+            if (IsPointingPose(primaryHand)) //가르키는 손동작을 하고 있을 때
             {
                 if (!isDrawing)
                 {
@@ -204,13 +204,13 @@ public class DrawingGame : MonoBehaviour
                 }
                 playerDrawing.positionCount = playerPoints.Count;
                 Vector3[] playerPositions = playerPoints.Select(p => new Vector3(p.x, p.y, 0)).ToArray();
-                playerDrawing.SetPositions(playerPositions);
+                playerDrawing.SetPositions(playerPositions); //위치에 따라 선을 그리는 코드
             }
-            else // 주먹을 풀었을 때
+            else //가르키는 손동작, 주먹을 쥔 손동작이 아닐 때
             {
                 isDrawing = false;
 
-                // playerPoints가 비어있지 않을 때만 CalculateAccuracy 호출
+                // playerPoints가 비어있지 않을 때만 CalculateAccuracy 호출하여 그림의 정확도 판별
                 if (playerPoints.Count > 0)
                 {
                     isDrawing = false;
@@ -233,7 +233,7 @@ public class DrawingGame : MonoBehaviour
                 if(maxScore <= accuracy * 100f) {
                     maxScore = accuracy * 100f;
                 }
-            }
+            } //정확도에 따라 클리어 여부 계산
         }
         else
         {
@@ -396,19 +396,19 @@ public class DrawingGame : MonoBehaviour
     }
 
     bool IsPointingPose(Hand hand) {
-        foreach (Finger finger in hand.Fingers) { //손의 손가락을 모두 가져와 반복문 실행
-            if (finger.Type == Finger.FingerType.TYPE_INDEX) {
-                if (!finger.IsExtended) return false;
-            } //검지가 펴져있지 않다면 false를 반환
+        foreach (Finger finger in hand.Fingers) { //감지된 손의 손가락을 모두 순회합니다
+            if (finger.Type == Finger.FingerType.TYPE_INDEX) { //감지된 손가락 중 검지손가락인지 확인합니다
+                if (!finger.IsExtended) return false; //만약 검지 손가락이 펴져있지 않다면 (IsExtended = false) false를 반환합니다
+            }
             else {
-                if (finger.IsExtended) return false;
-            } //검지를 제외한 다른 손가락이 펴져있다면 false를 반환
+                if (finger.IsExtended) return false; //검지 이외의 손가락이 펴져있다면 false를 반환합니다
+            }
         }
         
-        return true; //검지만 펴져있다면 true를 반환
+        return true; //펴진 손가락이 검지 뿐이라면 true를 반환합니다
     }
 
     bool IsFist(Hand hand) {
-        return hand.GrabStrength > 0.9f;
-    } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
+        return hand.GrabStrength > 0.9f; //손의 쥐기 강도가 0.9f 이상이라면 주먹으로 판단하고 true를 반환
+    }
 }

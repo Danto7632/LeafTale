@@ -79,8 +79,8 @@ public class LeapMotionAim : MonoBehaviour {
     }
 
     bool IsFist(Hand hand) {
-        return hand.GrabStrength > 0.9f;
-    } //손의 쥐기 강도를 감지하여 주먹을 쥐었는지 감지하여 true를 반환하는 함수
+        return hand.GrabStrength > 0.9f; //손의 쥐기 강도가 0.9f 이상이라면 주먹으로 판단하고 true를 반환
+    }
 
     Vector3 LeapToUnityPosition(Vector3 leapPosition) {
         float unityX = Map(leapPosition.x, leapMinX, leapMaxX, unityMinX, unityMaxX);
