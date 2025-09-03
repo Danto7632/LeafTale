@@ -17,47 +17,97 @@ LeafTale은 컴퓨터 비전 AI 센서인 **LeapMotion**을 활용하여 손의 
 
 ---
 
+## 🎬 데모 영상
+
+<div align="center">
+
+[![손동작과 함께하는 게임 플레이](https://img.youtube.com/vi/Lk9xxMedmyE/0.jpg)](https://youtu.be/Lk9xxMedmyE)
+
+**🎮 [손동작과 함께하는 게임 플레이](https://youtu.be/Lk9xxMedmyE)**
+
+[![게임 화면 모음](https://img.youtube.com/vi/eUpXLGqR8mU/0.jpg)](https://youtu.be/eUpXLGqR8mU)
+
+**🖥️ [5개 재활 게임 화면 모음](https://youtu.be/eUpXLGqR8mU)**
+
+[![Unity 개발 화면](https://img.youtube.com/vi/ppTftjDRrrs/0.jpg)](https://youtu.be/ppTftjDRrrs)
+
+**⚙️ [Unity 개발 화면](https://youtu.be/ppTftjDRrrs)**
+
+</div>
+
+---
+
 ## 🎮 게임 소개
 
 ### 1. 🧙‍♂️ 날아라 빗자루! (BroomstickScene)
-![빗자루 게임](Assets/StageSelect/Resource/select_broom.png)
+<img src="Assets/StageSelect/Resource/select_broom.png" width="200" alt="빗자루 게임">
 
 **손목 가동범위 및 유연성 개선**
 - **조작법**: 손바닥 기울기로 빗자루 조종
-- **목표**: 떨어지는 장애물 피하기, 아이템 획득
+- **목표**: 떨어지는 장애물 피하기, 아이템 획득  
 - **재활 효과**: 손목 회전 운동, 미세 조정 능력 향상
 
+**주요 게임 에셋**:
+
+| 플레이어 | 적 캐릭터들 |
+|----------|-------------|
+| <img src="Assets/BroomStickMap/Resource/Player/Player.png" width="50" alt="빗자루 플레이어"> | <img src="Assets/BroomStickMap/Resource/Enemy/bird1.png" width="40" alt="새 적1"> <img src="Assets/BroomStickMap/Resource/Enemy/bird2.png" width="40" alt="새 적2"> <img src="Assets/BroomStickMap/Resource/Enemy/bird3.png" width="40" alt="새 적3"> |
+
 ### 2. 🐱 달려라 고양이! (platformScene)
-![고양이 게임](Assets/StageSelect/Resource/select_runningcat.png)
+<img src="Assets/StageSelect/Resource/select_runningcat.png" width="200" alt="고양이 게임">
 
 **손가락 민첩성 및 협응력 훈련**
 - **조작법**: 손뒤집기(점프), 박수(방향전환), 상하운동(가속)
 - **목표**: 플랫폼을 점프하며 골인지점 도달
 - **재활 효과**: 손가락 독립성, 양손 협응력 개발
 
+**주요 게임 에셋**:
+
+| 아이템 | 환경 요소 |
+|--------|-----------|
+| <img src="Assets/PlatFromMap/Resource/Map/MagicStick.png" width="35" alt="마법 지팡이"> <img src="Assets/PlatFromMap/Resource/Object/coin_gold.png" width="25" alt="골드 코인"> | <img src="Assets/PlatFromMap/Resource/Map/cloud.png" width="45" alt="구름"> <img src="Assets/PlatFromMap/Resource/Map/star.png" width="25" alt="별"> |
+
 ### 3. 🎵 울려라 오케스트라! (RhythmScene)
-![오케스트라 게임](Assets/StageSelect/Resource/select_orchestra.png)
+<img src="Assets/StageSelect/Resource/select_orchestra.png" width="200" alt="오케스트라 게임">
 
 **손동작 정확성 및 반응속도 향상**
 - **조작법**: 가위바위보 손동작으로 리듬 매칭
 - **목표**: 떨어지는 노트에 맞춰 정확한 손동작 수행
 - **재활 효과**: 손가락 개별 제어, 반응속도 개선
 
+**주요 게임 에셋**:
+
+| 캐릭터 | 노트 타입들 |
+|--------|-------------|
+| <img src="Assets/RhythmMap/Resource/Map/Player-piano.png" width="50" alt="피아노 캐릭터"> | <img src="Assets/RhythmMap/Resource/Note/RockLeft.png" width="35" alt="주먹 노트"> <img src="Assets/RhythmMap/Resource/Note/PaperLeft.png" width="35" alt="보 노트"> <img src="Assets/RhythmMap/Resource/Note/ScissorLeft.png" width="35" alt="가위 노트"> |
+
 ### 4. 🖊️ 그려라 마법진! (test)
-![마법진 게임](Assets/StageSelect/Resource/select_magic.png)
+<img src="Assets/StageSelect/Resource/select_magic.png" width="200" alt="마법진 게임">
 
 **정밀한 손동작 제어 및 집중력 향상**
 - **조작법**: 손 위치로 커서 조종하여 도형 그리기
 - **목표**: 주어진 도형(원, 사각형, 별)을 정확히 따라 그리기
 - **재활 효과**: 정밀 운동 제어, 손-눈 협응력 강화
 
+**주요 게임 에셋**:
+
+| 캐릭터 | 그리기 도형들 |
+|--------|---------------|
+| <img src="Assets/test/Resource/maincha/stop/main1.png" width="50" alt="마법사 캐릭터"> | <img src="Assets/test/Resource/magicSquare/Circle.png" width="40" alt="원 도형"> <img src="Assets/test/Resource/magicSquare/Square.png" width="40" alt="사각형 도형"> <img src="Assets/test/Resource/magicSquare/Star.png" width="40" alt="별 도형"> |
+
 ### 5. 🥕 뽑아라 마법채소! (ClawMachineScenes)
-![클로우 게임](Assets/StageSelect/Resource/select_claw.png)
+<img src="Assets/StageSelect/Resource/select_claw.png" width="200" alt="클로우 게임">
 
 **손 쥐기 힘 조절 및 3차원 공간 인식**
 - **조작법**: 손바닥 기울기(이동) + 주먹 쥐기(집기)
 - **목표**: 클로우를 조종하여 채소 뽑기
 - **재활 효과**: 쥐기 힘 조절, 3차원 공간 감각 개발
+
+**주요 게임 에셋**:
+
+| 채소 아이템들 |
+|---------------|
+| <img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240829_190732631.png" width="50" alt="당근"> <img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240829_193757229.png" width="50" alt="양파"> <img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240902_111037623.png" width="50" alt="브로콜리"> |
 
 ---
 
@@ -251,56 +301,6 @@ void DetectHandPose(Hand hand) {
 
 ---
 
-## 🔧 개발자 가이드
-
-### 새로운 게임 추가하기
-1. **씬 생성**: `Assets/Scenes/`에 새 씬 파일 생성
-2. **스크립트 작성**: LeapMotion 손동작 인식 로직 구현
-3. **UI 설정**: 게임별 UI 및 사운드 추가
-4. **씬 등록**: `GoStage.cs`에 새 게임 케이스 추가
-
-### LeapMotion 디버깅
-```csharp
-// 손 감지 상태 확인
-void OnUpdateFrame(Frame frame) {
-    Debug.Log($"Hands detected: {frame.Hands.Count}");
-    
-    if (frame.Hands.Count > 0) {
-        Hand hand = frame.Hands[0];
-        Debug.Log($"Palm position: {hand.PalmPosition}");
-        Debug.Log($"Grab strength: {hand.GrabStrength}");
-    }
-}
-```
-
-### 성능 최적화 팁
-- LeapMotion 업데이트는 `OnUpdateFrame`에서만 처리
-- 불필요한 손동작 계산은 조건문으로 제한
-- 오브젝트 풀링으로 메모리 사용량 최적화
-
----
-
-## 🐛 문제 해결
-
-### 일반적인 문제들
-
-**Q: LeapMotion이 손을 인식하지 못해요**
-- LeapMotion Control Panel에서 센서 상태 확인
-- 조명이 충분한 환경에서 테스트
-- 손이 센서 인식 범위(20-60cm) 내에 있는지 확인
-
-**Q: 게임이 느리게 실행돼요**
-- Unity Profiler로 성능 병목 확인
-- Quality Settings에서 해상도 및 그래픽 품질 조정
-- LeapMotion 업데이트 빈도 최적화
-
-**Q: 손동작 인식이 부정확해요**
-- 각 게임별 임계값 조정 (`GrabStrength`, `PalmNormal` 등)
-- 캘리브레이션 기능 추가 고려
-- 사용자별 개인차를 고려한 설정 제공
-
----
-
 ## 👥 개발팀
 
 | 역할 | 이름 | GitHub | 담당 업무 |
@@ -309,21 +309,6 @@ void OnUpdateFrame(Frame frame) {
 | **LeapMotion 개발** | 심기준 | [@potato1028](https://github.com/potato1028) | 핸드 트래킹, 동작 인식 |
 | **게임 디자인** | 서윤정 | [@SeoYunJoung](https://github.com/SeoYunJoung) | UI/UX, 게임 밸런싱 |
 | **게임 디자인** | 김민지 | [@dalsaemi](https://github.com/dalsaemi) | 아트 리소스, 애니메이션 |
-
----
-
-## 📝 라이센스
-
-이 프로젝트는 MIT 라이센스 하에 있습니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
----
-
-## 🔗 관련 링크
-
-- **서비스 페이지**: [http://43.203.0.69:8081/](http://43.203.0.69:8081/)
-- **데모 영상**: [YouTube 플레이리스트](https://youtu.be/Lk9xxMedmyE)
-- **LeapMotion SDK**: [Ultraleap Developer](https://developer.leapmotion.com/)
-- **Unity Documentation**: [Unity Manual](https://docs.unity3d.com/)
 
 ---
 
