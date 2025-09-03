@@ -51,94 +51,61 @@ LeafTale은 컴퓨터 비전 AI 센서인 **LeapMotion**을 활용하여 손의 
 
 ## 🎮 게임 소개
 
-### 1. 🧙‍♂️ 날아라 빗자루! (BroomstickScene)
-<img src="Assets/StageSelect/Resource/select_broom.png" width="200" alt="빗자루 게임">
-
-**손목 가동범위 및 유연성 개선**
-
-**주요 게임 에셋**:
-
-| 플레이어 | 적 캐릭터들 |
-|----------|-------------|
-| <img src="Assets/BroomStickMap/Resource/Player/Player.png" width="80" alt="빗자루 플레이어"> | <img src="Assets/BroomStickMap/Resource/Enemy/bird1.png" width="70" alt="새 적1"> <img src="Assets/BroomStickMap/Resource/Enemy/bird2.png" width="70" alt="새 적2"> <img src="Assets/BroomStickMap/Resource/Enemy/bird3.png" width="70" alt="새 적3"> |
-
-### 2. 🐱 달려라 고양이! (platformScene)
-<img src="Assets/StageSelect/Resource/select_runningcat.png" width="200" alt="고양이 게임">
-
-**손가락 민첩성 및 협응력 훈련**
-
-**주요 게임 에셋**:
-
-| 아이템 | 환경 요소 |
-|--------|-----------|
-| <img src="Assets/PlatFromMap/Resource/Map/MagicStick.png" width="60" alt="마법 지팡이"> <img src="Assets/PlatFromMap/Resource/Object/coin_gold.png" width="50" alt="골드 코인"> | <img src="Assets/PlatFromMap/Resource/Map/cloud.png" width="80" alt="구름"> <img src="Assets/PlatFromMap/Resource/Map/star.png" width="50" alt="별"> |
-
-### 3. 🎵 울려라 오케스트라! (RhythmScene)
-<img src="Assets/StageSelect/Resource/select_orchestra.png" width="200" alt="오케스트라 게임">
-
-**손동작 정확성 및 반응속도 향상**
-
-**주요 게임 에셋**:
-
-| 캐릭터 | 노트 타입들 |
-|--------|-------------|
-| <img src="Assets/RhythmMap/Resource/Map/Player-piano.png" width="80" alt="피아노 캐릭터"> | <img src="Assets/RhythmMap/Resource/Note/RockLeft.png" width="60" alt="주먹 노트"> <img src="Assets/RhythmMap/Resource/Note/PaperLeft.png" width="60" alt="보 노트"> <img src="Assets/RhythmMap/Resource/Note/ScissorLeft.png" width="60" alt="가위 노트"> |
-
-### 4. 🖊️ 그려라 마법진! (test)
-<img src="Assets/StageSelect/Resource/select_magic.png" width="200" alt="마법진 게임">
-
-**정밀한 손동작 제어 및 집중력 향상**
-
-**주요 게임 에셋**:
-
-| 캐릭터 | 그리기 도형들 |
-|--------|---------------|
-| <img src="Assets/test/Resource/maincha/stop/main1.png" width="80" alt="마법사 캐릭터"> | <img src="Assets/test/Resource/magicSquare/Circle.png" width="70" alt="원 도형"> <img src="Assets/test/Resource/magicSquare/Square.png" width="70" alt="사각형 도형"> <img src="Assets/test/Resource/magicSquare/Star.png" width="70" alt="별 도형"> |
-
-### 5. 🥕 뽑아라 마법채소! (ClawMachineScenes)
-<img src="Assets/StageSelect/Resource/select_claw.png" width="200" alt="클로우 게임">
-
-**손 쥐기 힘 조절 및 3차원 공간 인식**
-
-**주요 게임 에셋**:
-
-| 채소 아이템들 |
-|---------------|
-| <img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240829_190732631.png" width="80" alt="당근"> <img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240829_193757229.png" width="80" alt="양파"> <img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240902_111037623.png" width="80" alt="브로콜리"> |
-
-### 6. 🎬 엔딩 크레딧 (EndingCredit)
-<img src="Assets/EndingCredit/Resource/creditBackground.png" width="200" alt="엔딩 크레딧">
-
-**게임 완료 후 결과 화면**
-
-**주요 게임 에셋**:
-
-| 엔딩 화면들 |
-|-------------|
-| <img src="Assets/EndingCredit/Resource/EndingPng/ending_goodEnding.png" width="100" alt="굿엔딩"> <img src="Assets/EndingCredit/Resource/EndingPng/ending_normalEnding.png" width="100" alt="노말엔딩"> <img src="Assets/EndingCredit/Resource/creditFrame.png" width="80" alt="크레딧 프레임"> |
+| 게임 | 설명 | 주요 에셋 |
+|------|------|-----------|
+| **🧙‍♂️ 날아라 빗자루!**<br/><img src="Assets/StageSelect/Resource/select_broom.png" width="150" alt="빗자루 게임"><br/>**손목 가동범위 및 유연성 개선** | • 손바닥 기울기로 빗자루 조종<br/>• 떨어지는 장애물 피하기<br/>• 아이템 획득으로 시간 연장<br/>• 손목 회전 운동 효과 | <img src="Assets/BroomStickMap/Resource/Player/Player.png" width="60" alt="플레이어"><br/><img src="Assets/BroomStickMap/Resource/Enemy/bird1.png" width="50" alt="새1"><br/><img src="Assets/BroomStickMap/Resource/Enemy/bird2.png" width="50" alt="새2"> |
+| **🐱 달려라 고양이!**<br/><img src="Assets/StageSelect/Resource/select_runningcat.png" width="150" alt="고양이 게임"><br/>**손가락 민첩성 및 협응력 훈련** | • 손뒤집기로 점프<br/>• 박수로 방향전환<br/>• 상하운동으로 가속<br/>• 양손 협응력 개발 | <img src="Assets/PlatFromMap/Resource/Map/MagicStick.png" width="50" alt="지팡이"><br/><img src="Assets/PlatFromMap/Resource/Object/coin_gold.png" width="40" alt="코인"><br/><img src="Assets/PlatFromMap/Resource/Map/cloud.png" width="60" alt="구름"> |
+| **🎵 울려라 오케스트라!**<br/><img src="Assets/StageSelect/Resource/select_orchestra.png" width="150" alt="오케스트라 게임"><br/>**손동작 정확성 및 반응속도 향상** | • 가위바위보 손동작<br/>• 리듬에 맞춘 매칭<br/>• 좌우 손 독립 인식<br/>• 반응속도 개선 | <img src="Assets/RhythmMap/Resource/Map/Player-piano.png" width="60" alt="피아노"><br/><img src="Assets/RhythmMap/Resource/Note/RockLeft.png" width="45" alt="주먹"><br/><img src="Assets/RhythmMap/Resource/Note/PaperLeft.png" width="45" alt="보"> |
+| **🖊️ 그려라 마법진!**<br/><img src="Assets/StageSelect/Resource/select_magic.png" width="150" alt="마법진 게임"><br/>**정밀한 손동작 제어 및 집중력 향상** | • 손 위치로 커서 조종<br/>• 도형 따라 그리기<br/>• 정확도 측정<br/>• 손-눈 협응력 강화 | <img src="Assets/test/Resource/maincha/stop/main1.png" width="60" alt="마법사"><br/><img src="Assets/test/Resource/magicSquare/Circle.png" width="50" alt="원"><br/><img src="Assets/test/Resource/magicSquare/Square.png" width="50" alt="사각형"> |
+| **🥕 뽑아라 마법채소!**<br/><img src="Assets/StageSelect/Resource/select_claw.png" width="150" alt="클로우 게임"><br/>**손 쥐기 힘 조절 및 3차원 공간 인식** | • 손바닥 기울기로 이동<br/>• 주먹 쥐기로 집기<br/>• 3D 공간 제어<br/>• 쥐기 힘 조절 훈련 | <img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240829_190732631.png" width="60" alt="당근"><br/><img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240829_193757229.png" width="60" alt="양파"><br/><img src="Assets/ClawMachineMap/Resource/KakaoTalk_20240902_111037623.png" width="60" alt="브로콜리"> |
+| **🎬 엔딩 크레딧**<br/><img src="Assets/EndingCredit/Resource/creditBackground.png" width="150" alt="엔딩 크레딧"><br/>**게임 완료 후 결과 화면** | • 게임별 성과 표시<br/>• 재활 진행도 분석<br/>• 개선 사항 제안<br/>• 동기 부여 메시지 | <img src="Assets/EndingCredit/Resource/EndingPng/ending_goodEnding.png" width="70" alt="굿엔딩"><br/><img src="Assets/EndingCredit/Resource/EndingPng/ending_normalEnding.png" width="70" alt="노말엔딩"> |
 
 ---
 
-## 🛠️ 기술 스택
+## 🛠️ 기술 스택 (게임 개발 파트)
 
-### 개발 환경
-- **Unity**: 2022.3.x LTS
-- **C#**: .NET Framework 4.8
-- **LeapMotion SDK**: Ultraleap Tracking 5.2+
-
-### 주요 라이브러리
-- **Leap Motion Unity SDK**: 손동작 추적
+### 🎮 게임 개발
+- **Unity**: 2022.3.x LTS - 게임 엔진
+- **C#**: .NET Framework 4.8 - 프로그래밍 언어
+- **LeapMotion SDK**: Ultraleap Tracking 5.2+ - 손동작 추적
 - **EasyTransitions**: 씬 전환 효과
 - **TextMeshPro**: UI 텍스트 렌더링
 - **Unity Audio**: 사운드 시스템
 
-### 플랫폼 지원
+### 🎨 디자인
+- **Photoshop**: 이미지 편집 및 UI 디자인
+- **Figma**: UI/UX 프로토타이핑
+- **Aseprite**: 픽셀 아트 및 스프라이트 애니메이션
+- **Clip Studio Paint**: 일러스트 및 캐릭터 디자인
+
+### 🔧 버전 관리 및 협업 툴
+- **Git**: 소스코드 버전 관리
+- **GitHub**: 코드 저장소 및 협업
+- **Notion**: 프로젝트 문서화 및 일정 관리
+
+### 💻 플랫폼 지원
 - **Windows**: DirectX 11/12
 - **macOS**: Metal API
-- **개발 권장 사양**: 
-  - LeapMotion Controller 연결
-  - Unity 2022.3.x 이상
-  - RAM 8GB 이상
+- **개발 권장 사양**: LeapMotion Controller, Unity 2022.3.x+, RAM 8GB+
+
+---
+
+## 📊 프로젝트 프레젠테이션
+
+### 📋 프레젠테이션 자료
+
+| 슬라이드 | 이미지 링크 |
+|----------|-------------|
+| **프로젝트 소개** | ![슬라이드1](https://github.com/user-attachments/assets/d24e6f60-1bb9-421f-8a3c-1a85ce7ca571) |
+| **문제 정의** | ![슬라이드2](https://github.com/user-attachments/assets/02bc0929-52e6-41ce-a83e-28113363b8a6) |
+| **솔루션 제안** | ![슬라이드3](https://github.com/user-attachments/assets/106144a5-4b6d-4f4c-bdb5-534289ac72df) |
+| **기술 스택** | ![슬라이드4](https://github.com/user-attachments/assets/dae54b40-036c-4bf2-9b1a-2dd86aa487a5) |
+| **게임 소개** | ![슬라이드5](https://github.com/user-attachments/assets/13845ece-69e7-49e4-ba13-5612282b926c) |
+| **시스템 구조** | ![슬라이드6](https://github.com/user-attachments/assets/915925e1-d7fc-4fc4-8f4e-0bf06d3f946b) |
+| **개발 과정** | ![슬라이드7](https://github.com/user-attachments/assets/3560fdcb-8795-452a-ae3d-c5fef95b1b1e) |
+| **기대 효과** | ![슬라이드8](https://github.com/user-attachments/assets/119f8bbc-f544-4486-9ba9-1f36e8245b54) |
+| **팀 구성** | ![슬라이드9](https://github.com/user-attachments/assets/9725bebe-74d1-43d7-a424-36c06d16fa01) |
+| **향후 계획** | ![슬라이드10](https://github.com/user-attachments/assets/62b26449-c852-4929-838a-7d796c8b0ca0) |
 
 ---
 
