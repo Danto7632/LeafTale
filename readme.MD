@@ -1,5 +1,5 @@
 # 🖐 LeafTale - Unity 게임 개발 파트
-
+## [게임파트가 아닌 leaf_tale 서비스소개 readme](https://github.com/2024-dmu-expo-el/leaf_tale)
 > **손 재활 및 발달 플랫폼의 Unity 게임 클라이언트**  
 > LeapMotion 센서를 활용한 실시간 손동작 인식 기반 재활 게임
 
